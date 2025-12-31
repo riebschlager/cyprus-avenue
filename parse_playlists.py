@@ -28,8 +28,12 @@ def extract_artist_from_title_and_description(title, description):
     # Pattern: "The legendary Artist Name" or "Artist Name is back" or "Singer-songwriter Artist Name's"
     if description:
         desc_patterns = [
+            r'[\u201c"][^""\u201d]+,[\u201d"]\s+([A-Z][a-zA-Z\s\.&]+?)(?:\s+through|\s+is|\s+has)',  # "The Boss," Bruce Springsteen
             r'(?:The legendary|Legendary)\s+([A-Z][a-zA-Z\s\.&]+?)(?:\s+is|\s+has|\s+was)',
             r'(?:The great|great)\s+([A-Z][a-zA-Z\s\.&]+?)(?:\s+got|\s+is|\s+has|\s+was)',  # "The great Jimi Hendrix"
+            r'(?:genius|talent)\s+of\s+([A-Z][a-zA-Z\s\.&]+?),',  # "genius of Ray Charles,"
+            r'the music of\s+([A-Z][a-zA-Z\s\.&]+?)(?:\s+inspired|\s+is|\s+on)',  # "the music of Sly and the Family Stone"
+            r'It\'s\s+([A-Z][a-zA-Z\s\.&]+?)\s+on\s+this\s+edition',  # "It's Sly and the Family Stone on this edition"
             r'^([A-Z][a-zA-Z\s\.&]+?)\s+is back',
             r'(?:Singer-songwriter|Singer/songwriter)\s+([A-Z][a-zA-Z\s\.&]+?)(?:\'s|\s+is|\s+has)',
             r'Singer\s+([A-Z][a-zA-Z\s\.&]+?),',  # "Singer Van Morrison,"
@@ -42,8 +46,8 @@ def extract_artist_from_title_and_description(title, description):
                 artist = re.sub(r'\s+(is|has|was|got)$', '', artist)
                 return artist
 
-    # Pattern: "Artist Name: Album Name" - extract artist before colon
-    match = re.match(r'^([A-Z][a-zA-Z\s\.&]+?):\s+.+$', title)
+    # Pattern: "Artist Name- Album Name" or "Artist Name: Album Name" - extract artist before separator
+    match = re.match(r'^([A-Z][a-zA-Z\s\.&]+?)[-:]\s+.+$', title)
     if match:
         return match.group(1).strip()
 
