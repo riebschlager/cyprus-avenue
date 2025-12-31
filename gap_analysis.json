@@ -1,0 +1,76 @@
+{
+  "discovered": [
+    {
+      "title": "Country Legend Marty Stuart Sings About Saturday Night Sunday Morning",
+      "date": "2015-03-18",
+      "url": "https://www.kcur.org/show/up-to-date/2015-03-18/country-legend-marty-stuart-sings-about-saturday-night-sunday-morning"
+    },
+    {
+      "title": "The Beatles 12 Greatest Hits",
+      "date": "2014-02-01",
+      "url": "https://www.kcur.org/arts-life/2014-02-01/the-beatles-12-greatest-hits"
+    },
+    {
+      "title": "Ballads By Rockers Vol 2 35Th Anniversary Edition",
+      "date": "2013-08-10",
+      "url": "https://www.kcur.org/music-shows/2013-08-10/ballads-by-rockers-vol-2-35th-anniversary-edition"
+    },
+    {
+      "title": "Marty Stuart Redux Encore",
+      "date": "2013-07-13",
+      "url": "https://www.kcur.org/music-shows/2013-07-13/marty-stuart-redux-encore"
+    },
+    {
+      "title": "Jimmy And Bob",
+      "date": "2013-07-06",
+      "url": "https://www.kcur.org/music-shows/2013-07-06/jimmy-and-bob"
+    },
+    {
+      "title": "Rhythm To The Rhythms Vol Iii 2003 2004",
+      "date": "2013-06-29",
+      "url": "https://www.kcur.org/music-shows/2013-06-29/rhythm-to-the-rhythms-vol-iii-2003-2004"
+    },
+    {
+      "title": "Marty Stuart Redux",
+      "date": "2013-06-22",
+      "url": "https://www.kcur.org/music-shows/2013-06-22/marty-stuart-redux"
+    }
+  ],
+  "missing": [
+    {
+      "title": "Country Legend Marty Stuart Sings About Saturday Night Sunday Morning",
+      "date": "2015-03-18",
+      "url": "https://www.kcur.org/show/up-to-date/2015-03-18/country-legend-marty-stuart-sings-about-saturday-night-sunday-morning"
+    },
+    {
+      "title": "The Beatles 12 Greatest Hits",
+      "date": "2014-02-01",
+      "url": "https://www.kcur.org/arts-life/2014-02-01/the-beatles-12-greatest-hits"
+    },
+    {
+      "title": "Ballads By Rockers Vol 2 35Th Anniversary Edition",
+      "date": "2013-08-10",
+      "url": "https://www.kcur.org/music-shows/2013-08-10/ballads-by-rockers-vol-2-35th-anniversary-edition"
+    },
+    {
+      "title": "Marty Stuart Redux Encore",
+      "date": "2013-07-13",
+      "url": "https://www.kcur.org/music-shows/2013-07-13/marty-stuart-redux-encore"
+    },
+    {
+      "title": "Jimmy And Bob",
+      "date": "2013-07-06",
+      "url": "https://www.kcur.org/music-shows/2013-07-06/jimmy-and-bob"
+    },
+    {
+      "title": "Rhythm To The Rhythms Vol Iii 2003 2004",
+      "date": "2013-06-29",
+      "url": "https://www.kcur.org/music-shows/2013-06-29/rhythm-to-the-rhythms-vol-iii-2003-2004"
+    },
+    {
+      "title": "Marty Stuart Redux",
+      "date": "2013-06-22",
+      "url": "https://www.kcur.org/music-shows/2013-06-22/marty-stuart-redux"
+    }
+  ]
+}
