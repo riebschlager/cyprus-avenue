@@ -162,6 +162,14 @@ def parse_playlist_file(filepath):
         line = re.sub(r'^\d+\.\s*', '', line)
 
         # Try to parse artist - song patterns
+        # Pattern 0: Artist: "Song" (colon separator with quotes)
+        match = re.match(r'^(.+?):\s*["\u201c](.+?)["\u201d]', line)
+        if match:
+            artist = match.group(1).strip()
+            song = match.group(2).strip()
+            tracks.append({"artist": artist, "song": song})
+            continue
+
         # Pattern 1: Artist - "Song"
         match = re.match(r'^(.+?)\s*[-–—]\s*["\u201c](.+?)["\u201d]', line)
         if match:
