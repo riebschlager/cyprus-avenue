@@ -9,7 +9,16 @@
       "Bash(npm create:*)",
       "Bash(npm install:*)",
       "Bash(npx tailwindcss:*)",
-      "Bash(npm run dev:*)"
+      "Bash(npm run dev:*)",
+      "Bash(for json in json/individual/*.json)",
+      "Bash(do )",
+      "Bash(basename=\"$json##*/\")",
+      "Bash(basename=\"$basename%.json\")",
+      "Bash(if [ ! -f \"archive/txt/$basename.txt\" ])",
+      "Bash(then )",
+      "Bash(echo:*)",
+      "Bash(fi)",
+      "Bash(done)"
     ]
   }
 }

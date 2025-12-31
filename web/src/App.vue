@@ -1,15 +1,24 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { usePlaylists } from './composables/usePlaylists'
 import PlaylistList from './components/PlaylistList.vue'
 import SearchBar from './components/SearchBar.vue'
 import StatsPanel from './components/StatsPanel.vue'
+import TracksView from './components/TracksView.vue'
 
-const { loading, error, searchQuery, filteredPlaylists, stats, fetchPlaylists } = usePlaylists()
+type View = 'playlists' | 'tracks'
+
+const currentView = ref<View>('playlists')
+
+const { loading, error, playlists, searchQuery, filteredPlaylists, stats, fetchPlaylists } = usePlaylists()
 
 onMounted(() => {
   fetchPlaylists()
 })
+
+const setView = (view: View) => {
+  currentView.value = view
+}
 </script>
 
 <template>
@@ -20,6 +29,34 @@ onMounted(() => {
         <p class="mt-2 text-sm text-gray-600">
           Browse playlists from KCUR's Cyprus Avenue radio show
         </p>
+
+        <!-- Navigation Tabs -->
+        <div class="mt-6 border-b border-gray-200">
+          <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+            <button
+              @click="setView('playlists')"
+              :class="[
+                currentView === 'playlists'
+                  ? 'border-blue-500 text-blue-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
+                'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm'
+              ]"
+            >
+              Playlists
+            </button>
+            <button
+              @click="setView('tracks')"
+              :class="[
+                currentView === 'tracks'
+                  ? 'border-blue-500 text-blue-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
+                'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm'
+              ]"
+            >
+              All Tracks
+            </button>
+          </nav>
+        </div>
       </div>
     </header>
 
@@ -33,14 +70,22 @@ onMounted(() => {
       </div>
 
       <div v-else>
-        <StatsPanel :stats="stats" />
+        <!-- Playlists View -->
+        <div v-if="currentView === 'playlists'">
+          <StatsPanel :stats="stats" />
 
-        <div class="mt-8">
-          <SearchBar v-model="searchQuery" />
+          <div class="mt-8">
+            <SearchBar v-model="searchQuery" />
+          </div>
+
+          <div class="mt-8">
+            <PlaylistList :playlists="filteredPlaylists" :search-query="searchQuery" />
+          </div>
         </div>
 
-        <div class="mt-8">
-          <PlaylistList :playlists="filteredPlaylists" :search-query="searchQuery" />
+        <!-- Tracks View -->
+        <div v-else-if="currentView === 'tracks'">
+          <TracksView :playlists="playlists" />
         </div>
       </div>
     </main>
