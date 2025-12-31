@@ -1655,6 +1655,96 @@
     "trackName": "Life's Railway to Heaven (feat. Marty Stuart, Sheryl Crow & Carl Jackson)",
     "confidence": "medium"
   },
+  "Leonard Cohen|Slow": {
+    "spotifyId": "5I2EVhgVWV0CElpY07bU5h",
+    "spotifyUrl": "https://open.spotify.com/track/5I2EVhgVWV0CElpY07bU5h",
+    "previewUrl": null,
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b27329821bfa53efcf9f467e3118",
+    "artistName": "Leonard Cohen",
+    "trackName": "Slow",
+    "confidence": "high"
+  },
+  "Leonard Cohen|Almost Like The Blues": {
+    "spotifyId": "0nlNtWasNLQRXBhAh06jvl",
+    "spotifyUrl": "https://open.spotify.com/track/0nlNtWasNLQRXBhAh06jvl",
+    "previewUrl": null,
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b27329821bfa53efcf9f467e3118",
+    "artistName": "Leonard Cohen",
+    "trackName": "Almost Like the Blues",
+    "confidence": "high"
+  },
+  "Leonard Cohen|Everybody Knows": {
+    "spotifyId": "60s0QWaOZ2UTzqdIHBCt3x",
+    "spotifyUrl": "https://open.spotify.com/track/60s0QWaOZ2UTzqdIHBCt3x",
+    "previewUrl": null,
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b2738fc857633a3804cd2786f923",
+    "artistName": "Leonard Cohen",
+    "trackName": "Everybody Knows",
+    "confidence": "high"
+  },
+  "Leonard Cohen|My Oh My": {
+    "spotifyId": "19y5sbhPCWJAOGcgKmKyCA",
+    "spotifyUrl": "https://open.spotify.com/track/19y5sbhPCWJAOGcgKmKyCA",
+    "previewUrl": null,
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b27329821bfa53efcf9f467e3118",
+    "artistName": "Leonard Cohen",
+    "trackName": "My Oh My",
+    "confidence": "high"
+  },
+  "Leonard Cohen|I’m Your Man": {
+    "spotifyId": "5atFAXIgMXP378op4FaxBm",
+    "spotifyUrl": "https://open.spotify.com/track/5atFAXIgMXP378op4FaxBm",
+    "previewUrl": null,
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b2738fc857633a3804cd2786f923",
+    "artistName": "Leonard Cohen",
+    "trackName": "I'm Your Man",
+    "confidence": "high"
+  },
+  "Leonard Cohen|Samson In New Orleans": {
+    "spotifyId": "6gi5TmdyUB2oec5OT2zRO6",
+    "spotifyUrl": "https://open.spotify.com/track/6gi5TmdyUB2oec5OT2zRO6",
+    "previewUrl": null,
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b27329821bfa53efcf9f467e3118",
+    "artistName": "Leonard Cohen",
+    "trackName": "Samson in New Orleans",
+    "confidence": "high"
+  },
+  "Leonard Cohen|Hallelujah": {
+    "spotifyId": "7yzbimr8WVyAtBX3Eg6UL9",
+    "spotifyUrl": "https://open.spotify.com/track/7yzbimr8WVyAtBX3Eg6UL9",
+    "previewUrl": null,
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b2731324dce973eaebfe380d73a5",
+    "artistName": "Leonard Cohen",
+    "trackName": "Hallelujah",
+    "confidence": "high"
+  },
+  "Leonard Cohen|You Got Me": {
+    "spotifyId": "5eXyjGDzy8wrEn1pzu13uM",
+    "spotifyUrl": "https://open.spotify.com/track/5eXyjGDzy8wrEn1pzu13uM",
+    "previewUrl": null,
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b27329821bfa53efcf9f467e3118",
+    "artistName": "Leonard Cohen",
+    "trackName": "You Got Me Singing",
+    "confidence": "high"
+  },
+  "Leonard Cohen|Suzanne": {
+    "spotifyId": "4jiM2fAXVOxl4DAx3wraFx",
+    "spotifyUrl": "https://open.spotify.com/track/4jiM2fAXVOxl4DAx3wraFx",
+    "previewUrl": null,
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b273456d608be39a97751dd39e2d",
+    "artistName": "Leonard Cohen",
+    "trackName": "Suzanne",
+    "confidence": "high"
+  },
+  "Leonard Cohen|Nevermind": {
+    "spotifyId": "454DinyN4ouKpOrtEIIYQU",
+    "spotifyUrl": "https://open.spotify.com/track/454DinyN4ouKpOrtEIIYQU",
+    "previewUrl": null,
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b27329821bfa53efcf9f467e3118",
+    "artistName": "Leonard Cohen",
+    "trackName": "Nevermind",
+    "confidence": "high"
+  },
   "Bruce Springsteen|Born In The USA": {
     "spotifyId": "0dOg1ySSI7NkpAe89Zo0b9",
     "spotifyUrl": "https://open.spotify.com/track/0dOg1ySSI7NkpAe89Zo0b9",
@@ -2247,15 +2337,6 @@
     "albumArt": "https://i.scdn.co/image/ab67616d0000b27358796128781c0d9b1cc84533",
     "artistName": "Nicole Atkins",
     "trackName": "Dancing in the Dark",
-    "confidence": "high"
-  },
-  "Leonard Cohen|Slow": {
-    "spotifyId": "5I2EVhgVWV0CElpY07bU5h",
-    "spotifyUrl": "https://open.spotify.com/track/5I2EVhgVWV0CElpY07bU5h",
-    "previewUrl": null,
-    "albumArt": "https://i.scdn.co/image/ab67616d0000b27329821bfa53efcf9f467e3118",
-    "artistName": "Leonard Cohen",
-    "trackName": "Slow",
     "confidence": "high"
   },
   "Smokey Robinson & Ledisi|Ooh Baby Baby": {
@@ -3203,7 +3284,7 @@
     "trackName": "Following You",
     "confidence": "high"
   },
-  "B,B, King|Everyday I Have The Blues": {
+  "B.B. King|Everyday I Have The Blues": {
     "spotifyId": "6MrLjEmXy9IAPAX1mAKySE",
     "spotifyUrl": "https://open.spotify.com/track/6MrLjEmXy9IAPAX1mAKySE",
     "previewUrl": null,
@@ -3212,7 +3293,7 @@
     "trackName": "Everyday I Have The Blues",
     "confidence": "high"
   },
-  "B,B, King|Sweet Little Angel": {
+  "B.B. King|Sweet Little Angel": {
     "spotifyId": "4xDugsnzDMX1z44ZTtxpO2",
     "spotifyUrl": "https://open.spotify.com/track/4xDugsnzDMX1z44ZTtxpO2",
     "previewUrl": null,
@@ -3257,7 +3338,7 @@
     "trackName": "Young Boy Blues - Mono",
     "confidence": "high"
   },
-  "B,B, King|Why I Sing The Blues": {
+  "B.B. King|Why I Sing The Blues": {
     "spotifyId": "2bIfM0ZOF4gxK1BeqH3Djm",
     "spotifyUrl": "https://open.spotify.com/track/2bIfM0ZOF4gxK1BeqH3Djm",
     "previewUrl": null,
@@ -3284,13 +3365,13 @@
     "trackName": "This Magic Moment",
     "confidence": "medium"
   },
-  "B,B, King|Worry Worry": {
-    "spotifyId": "2v2XfuQHfRO5jQcKlXVAF5",
-    "spotifyUrl": "https://open.spotify.com/track/2v2XfuQHfRO5jQcKlXVAF5",
+  "B.B. King|Worry Worry": {
+    "spotifyId": "6bAgRG61LPaCqhye8IZAGS",
+    "spotifyUrl": "https://open.spotify.com/track/6bAgRG61LPaCqhye8IZAGS",
     "previewUrl": null,
-    "albumArt": "https://i.scdn.co/image/ab67616d0000b2730f652cda5b73d2a27b0844c4",
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b273bf373fb956297a3c0aa3a9a0",
     "artistName": "B.B. King",
-    "trackName": "Worry, Worry, Worry",
+    "trackName": "Worry, Worry",
     "confidence": "high"
   },
   "Ben E. King|I Count The Tears": {
@@ -3302,7 +3383,7 @@
     "trackName": "I Count the Tears",
     "confidence": "medium"
   },
-  "B,B, King|The Thrill Is Gone": {
+  "B.B. King|The Thrill Is Gone": {
     "spotifyId": "4NQfrmGs9iQXVQI9IpRhjM",
     "spotifyUrl": "https://open.spotify.com/track/4NQfrmGs9iQXVQI9IpRhjM",
     "previewUrl": null,
@@ -3473,7 +3554,7 @@
     "trackName": "Exodus",
     "confidence": "high"
   },
-  "Rolling Stones|Brown Sugar": {
+  "The Rolling Stones|Brown Sugar": {
     "spotifyId": "61UuPxxYUvacEH6SHIK3sU",
     "spotifyUrl": "https://open.spotify.com/track/61UuPxxYUvacEH6SHIK3sU",
     "previewUrl": null,
@@ -3482,7 +3563,7 @@
     "trackName": "Brown Sugar - Remastered 2009",
     "confidence": "high"
   },
-  "Rolling Stones|Wild Horses": {
+  "The Rolling Stones|Wild Horses": {
     "spotifyId": "4M4Q3JLsUbyTkd5WHty1WB",
     "spotifyUrl": "https://open.spotify.com/track/4M4Q3JLsUbyTkd5WHty1WB",
     "previewUrl": null,
@@ -3491,7 +3572,7 @@
     "trackName": "Wild Horses",
     "confidence": "high"
   },
-  "Rolling Stones|Bitch": {
+  "The Rolling Stones|Bitch": {
     "spotifyId": "01JYvQ6udfhUw9Jed9EzoK",
     "spotifyUrl": "https://open.spotify.com/track/01JYvQ6udfhUw9Jed9EzoK",
     "previewUrl": null,
@@ -3500,7 +3581,7 @@
     "trackName": "Bitch - 2009 Mix",
     "confidence": "high"
   },
-  "Rolling Stones|Dead Flowers": {
+  "The Rolling Stones|Dead Flowers": {
     "spotifyId": "3oJtUnnt5uYPtzulIbLw3D",
     "spotifyUrl": "https://open.spotify.com/track/3oJtUnnt5uYPtzulIbLw3D",
     "previewUrl": null,
@@ -3509,7 +3590,7 @@
     "trackName": "Dead Flowers - 2009 Mix",
     "confidence": "high"
   },
-  "Rolling Stones|Stray Cat Blues": {
+  "The Rolling Stones|Stray Cat Blues": {
     "spotifyId": "0mynYmSfl8q2KhjSp96G3w",
     "spotifyUrl": "https://open.spotify.com/track/0mynYmSfl8q2KhjSp96G3w",
     "previewUrl": null,
@@ -3518,7 +3599,7 @@
     "trackName": "Stray Cat Blues - 50th Anniversary Edition",
     "confidence": "high"
   },
-  "Rolling Stones|Love In Vain": {
+  "The Rolling Stones|Love In Vain": {
     "spotifyId": "4GNEqWXhKEoMyL3k5wF0r7",
     "spotifyUrl": "https://open.spotify.com/track/4GNEqWXhKEoMyL3k5wF0r7",
     "previewUrl": null,
@@ -3527,7 +3608,7 @@
     "trackName": "Love In Vain",
     "confidence": "high"
   },
-  "Rolling Stones|Midnight Rambler": {
+  "The Rolling Stones|Midnight Rambler": {
     "spotifyId": "3tIvHt7VaIenprWXrYzgwb",
     "spotifyUrl": "https://open.spotify.com/track/3tIvHt7VaIenprWXrYzgwb",
     "previewUrl": null,
@@ -3536,7 +3617,7 @@
     "trackName": "Midnight Rambler",
     "confidence": "high"
   },
-  "Rolling Stones|Honky Tonk Woman": {
+  "The Rolling Stones|Honky Tonk Woman": {
     "spotifyId": "1YzxWhqHJBHJkf3U3dROQP",
     "spotifyUrl": "https://open.spotify.com/track/1YzxWhqHJBHJkf3U3dROQP",
     "previewUrl": null,
@@ -6785,15 +6866,6 @@
     "trackName": "Choices - Live at Christchurch Soundcheck, 2013",
     "confidence": "high"
   },
-  "Leonard Cohen|I’m Your Man": {
-    "spotifyId": "5atFAXIgMXP378op4FaxBm",
-    "spotifyUrl": "https://open.spotify.com/track/5atFAXIgMXP378op4FaxBm",
-    "previewUrl": null,
-    "albumArt": "https://i.scdn.co/image/ab67616d0000b2738fc857633a3804cd2786f923",
-    "artistName": "Leonard Cohen",
-    "trackName": "I'm Your Man",
-    "confidence": "high"
-  },
   "Leonard Cohen|Chelsea Hotel": {
     "spotifyId": "4krhCfJg0znykZoyjeMXRe",
     "spotifyUrl": "https://open.spotify.com/track/4krhCfJg0znykZoyjeMXRe",
@@ -6801,24 +6873,6 @@
     "albumArt": "https://i.scdn.co/image/ab67616d0000b2731570b8b58aa7c0ce5e3af2e6",
     "artistName": "Leonard Cohen",
     "trackName": "Chelsea Hotel #2",
-    "confidence": "high"
-  },
-  "Leonard Cohen|Everybody Knows": {
-    "spotifyId": "60s0QWaOZ2UTzqdIHBCt3x",
-    "spotifyUrl": "https://open.spotify.com/track/60s0QWaOZ2UTzqdIHBCt3x",
-    "previewUrl": null,
-    "albumArt": "https://i.scdn.co/image/ab67616d0000b2738fc857633a3804cd2786f923",
-    "artistName": "Leonard Cohen",
-    "trackName": "Everybody Knows",
-    "confidence": "high"
-  },
-  "Leonard Cohen|Hallelujah": {
-    "spotifyId": "7yzbimr8WVyAtBX3Eg6UL9",
-    "spotifyUrl": "https://open.spotify.com/track/7yzbimr8WVyAtBX3Eg6UL9",
-    "previewUrl": null,
-    "albumArt": "https://i.scdn.co/image/ab67616d0000b2731324dce973eaebfe380d73a5",
-    "artistName": "Leonard Cohen",
-    "trackName": "Hallelujah",
     "confidence": "high"
   },
   "Roger McGuinn|King Of The Hill": {
@@ -7172,7 +7226,7 @@
     "trackName": "I’ve Been Loving You Too Long (To Stop Now)",
     "confidence": "high"
   },
-  "BB King|“Rock Me Baby”": {
+  "B.B. King|“Rock Me Baby”": {
     "spotifyId": "1bursm5ZnNHQS55a23h7kR",
     "spotifyUrl": "https://open.spotify.com/track/1bursm5ZnNHQS55a23h7kR",
     "previewUrl": null,
@@ -7694,15 +7748,6 @@
     "trackName": "The Wheel / Uncle John’s Band - Medley / Live",
     "confidence": "high"
   },
-  "Rolling Stones|Commit A Crime": {
-    "spotifyId": "5hWH3pUZccd9fiDvR19GJl",
-    "spotifyUrl": "https://open.spotify.com/track/5hWH3pUZccd9fiDvR19GJl",
-    "previewUrl": null,
-    "albumArt": "https://i.scdn.co/image/ab67616d0000b273a7afce056f527eba678349a5",
-    "artistName": "The Rolling Stones",
-    "trackName": "Commit A Crime",
-    "confidence": "high"
-  },
   "Van Morrison|Keep Me Singing": {
     "spotifyId": "0AiHTTjO6dvpbObg2Woy6U",
     "spotifyUrl": "https://open.spotify.com/track/0AiHTTjO6dvpbObg2Woy6U",
@@ -7719,15 +7764,6 @@
     "albumArt": "https://i.scdn.co/image/ab67616d0000b273188c391e4523c67f98cac540",
     "artistName": "Madeleine Peyroux",
     "trackName": "Everything I Do Gonh Be Funky (From Now On)",
-    "confidence": "high"
-  },
-  "Rolling Stones|I Can’t Quit You Baby": {
-    "spotifyId": "5d48Ugz3zU2qfKdgKk4tL5",
-    "spotifyUrl": "https://open.spotify.com/track/5d48Ugz3zU2qfKdgKk4tL5",
-    "previewUrl": null,
-    "albumArt": "https://i.scdn.co/image/ab67616d0000b273a7afce056f527eba678349a5",
-    "artistName": "The Rolling Stones",
-    "trackName": "I Can't Quit You Baby",
     "confidence": "high"
   },
   "Van Morrison|Let It Rhyme": {
