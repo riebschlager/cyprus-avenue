@@ -21,7 +21,8 @@
       "Bash(done)",
       "Bash(mkdir:*)",
       "Bash(git mv:*)",
-      "Bash(tree:*)"
+      "Bash(tree:*)",
+      "Bash(git add:*)"
     ]
   }
 }

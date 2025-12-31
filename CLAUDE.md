@@ -34,8 +34,8 @@ This project was created entirely through a collaborative session with **Claude 
 4. Created Docker environment for reproducible execution
 
 **Key Files Created**:
-- `parse_playlists.py` - Main parser with regex pattern matching
-- `Dockerfile` - Containerized Python environment
+- `scripts/parsing/parse_playlists.py` - Main parser with regex pattern matching
+- `docker/Dockerfile.parse` - Containerized Python environment
 - `json/individual/*.json` - 125 individual playlist files
 - `json/playlists.json` - Consolidated database
 
@@ -60,10 +60,10 @@ This project was created entirely through a collaborative session with **Claude 
 - Found 7 missing playlists to add
 
 **Key Files Created**:
-- `discover_playlists.py` - Web scraper with pagination
-- `Dockerfile.discover` - Discovery tool environment
-- `discovered_playlists.json` - Found content
-- `gap_analysis.json` - Missing playlist report
+- `scripts/discovery/discover_playlists.py` - Web scraper with pagination
+- `docker/Dockerfile.discover` - Discovery tool environment
+- `data/discovered_playlists.json` - Found content
+- `data/gap_analysis.json` - Missing playlist report
 
 ### Phase 3: Automated Collection
 
@@ -82,9 +82,46 @@ This project was created entirely through a collaborative session with **Claude 
 5. Successfully added 6 playlists (67 new tracks)
 
 **Key Files Created**:
-- `fetch_missing_playlists.py` - Playlist fetcher
-- `Dockerfile.fetch` - Fetcher environment
+- `scripts/discovery/fetch_missing_playlists.py` - Playlist fetcher
+- `docker/Dockerfile.fetch` - Fetcher environment
 - 6 new JSON playlist files
+
+### Phase 4: Web Interface & Spotify Integration
+
+**Challenge**: Create a user-friendly web interface to browse playlists and link tracks to Spotify.
+
+**Claude Code Actions**:
+1. Built modern web interface with playlist browsing and search
+2. Created Spotify API integration (`scripts/spotify/index-spotify-tracks.js`)
+3. Automated track indexing with confidence scoring
+4. Successfully indexed 1,449 unique tracks (89.9% found on Spotify)
+
+**Key Files Created**:
+- `scripts/spotify/index-spotify-tracks.js` - Spotify track indexer
+- `scripts/spotify/README.md` - Spotify integration documentation
+- `web/` - Modern web interface for browsing archive
+- `web/public/spotify-index.json` - Spotify track mapping
+
+### Phase 5: Project Organization
+
+**Challenge**: Root directory became cluttered with too many files as project grew.
+
+**Claude Code Actions**:
+1. Analyzed project structure and identified logical groupings
+2. Created organized directory structure:
+   - `scripts/parsing/` - Parser tools
+   - `scripts/discovery/` - Web scraping and fetching
+   - `scripts/spotify/` - Spotify integration
+   - `docker/` - All Dockerfiles
+   - `data/` - Generated analysis files
+3. Moved all files using `git mv` to preserve history
+4. Updated all file path references in:
+   - Docker COPY commands
+   - Python script outputs
+   - Documentation (README.md, Spotify README)
+5. Verified all paths and references remain functional
+
+**Result**: Clean root directory with only documentation and organized subdirectories
 
 ### Documentation & Polish
 
@@ -154,19 +191,24 @@ Every step validated results:
 ## Metrics
 
 ### Lines of Code Written
-- `parse_playlists.py`: ~200 lines
-- `discover_playlists.py`: ~180 lines
-- `fetch_missing_playlists.py`: ~210 lines
+- `scripts/parsing/parse_playlists.py`: ~200 lines
+- `scripts/discovery/discover_playlists.py`: ~180 lines
+- `scripts/discovery/fetch_missing_playlists.py`: ~210 lines
+- `scripts/spotify/index-spotify-tracks.js`: ~300 lines
 - Total Python: ~590 lines
+- Total JavaScript: ~300 lines
 - Dockerfiles: 3 files
-- Documentation: ~400 lines (README + ARCHIVE_REPORT + CLAUDE)
+- Documentation: ~600 lines (README + ARCHIVE_REPORT + CLAUDE + Spotify README)
 
 ### Development Time
-Completed in a single collaborative session, including:
+Completed across multiple collaborative sessions, including:
 - Planning and architecture
 - Parser development and refinement
 - Web scraping implementation
 - Data fetching and integration
+- Spotify API integration
+- Web interface development
+- Project reorganization
 - Full documentation
 
 ### Quality Metrics
@@ -174,6 +216,8 @@ Completed in a single collaborative session, including:
 - **0 empty playlists** (all contain valid track data)
 - **33% improvement** in track extraction through iterations
 - **6 missing playlists recovered** from KCUR
+- **89.9% Spotify match rate** (1,302 of 1,449 unique tracks found)
+- **88.3% high-confidence matches** on Spotify
 
 ## What Claude Code Did Well
 
@@ -197,6 +241,12 @@ Completed in a single collaborative session, including:
    - Proper Unicode handling for quotes/dashes
    - Consistent date formatting
 
+7. **Project Organization**:
+   - Recognized when structure needed improvement
+   - Created logical directory organization
+   - Preserved git history with `git mv`
+   - Updated all references without breaking functionality
+
 ## Lessons Learned
 
 1. **Multiple format variations are common** in copy/pasted web content - robust parsing requires handling many edge cases
@@ -209,22 +259,27 @@ Completed in a single collaborative session, including:
 
 5. **Documentation matters** - well-documented projects are ready to share and maintain
 
+6. **Refactor when needed** - as projects grow, taking time to reorganize improves maintainability
+
 ## Reproducibility
 
 Every step can be reproduced:
 
 ```bash
 # Phase 1: Parse existing text files
-docker build -t cyprus-avenue-parser .
+docker build -f docker/Dockerfile.parse -t cyprus-avenue-parser .
 docker run --rm -v "$(pwd)/archive/txt:/app/txt" -v "$(pwd)/json:/app/json" cyprus-avenue-parser
 
 # Phase 2: Discover available playlists
-docker build -f Dockerfile.discover -t cyprus-avenue-discover .
+docker build -f docker/Dockerfile.discover -t cyprus-avenue-discover .
 docker run --rm -v "$(pwd):/app" cyprus-avenue-discover
 
 # Phase 3: Fetch missing playlists
-docker build -f Dockerfile.fetch -t cyprus-avenue-fetch .
+docker build -f docker/Dockerfile.fetch -t cyprus-avenue-fetch .
 docker run --rm -v "$(pwd):/app" cyprus-avenue-fetch
+
+# Phase 4: Index tracks with Spotify
+SPOTIFY_CLIENT_ID=xxx SPOTIFY_CLIENT_SECRET=yyy node scripts/spotify/index-spotify-tracks.js
 ```
 
 ## Impact
@@ -237,15 +292,21 @@ This project preserves:
 
 Many of these playlists are no longer easily accessible on KCUR's website, making this archive a valuable cultural preservation effort.
 
-## Future Possibilities
+## Realized & Future Possibilities
 
-This structured data enables:
-- Building a searchable website
-- Creating Spotify/Apple Music playlists
-- Analyzing music trends and patterns
-- Studying radio playlist curation
-- Exploring artist connections
-- Generating music recommendations
+**Already Implemented**:
+- ✓ Searchable web interface for browsing archive
+- ✓ Direct Spotify links for 89.9% of tracks
+- ✓ Playlist browsing with metadata and descriptions
+
+**Future Possibilities**:
+- Creating collaborative Spotify/Apple Music playlists
+- Analyzing music trends and patterns over time
+- Studying radio playlist curation techniques
+- Exploring artist connections and relationships
+- Generating music recommendations based on listening history
+- Adding user comments and favorites
+- Social sharing features
 
 ---
 
