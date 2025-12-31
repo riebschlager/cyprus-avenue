@@ -107,10 +107,16 @@ watch(() => props.isExpanded, (newVal) => {
         </div>
       </div>
 
-      <div class="mt-4 pt-4 border-t border-gray-700">
+      <div class="mt-4 pt-4 border-t border-gray-700 flex items-center justify-between">
         <p class="text-xs text-gray-400">
           Original broadcast: {{ formatDate(playlist.date) }}
         </p>
+        <a
+          :href="`mailto:chris@the816.com?subject=Cyprus Avenue Archive - Issue Report&body=Regarding playlist: ${playlist.title} (${playlist.date})%0D%0A%0D%0APlease describe the issue:%0D%0A`"
+          class="text-xs text-blue-400 hover:text-blue-300 underline"
+        >
+          Report an issue
+        </a>
       </div>
     </div>
   </div>
