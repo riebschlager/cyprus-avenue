@@ -32,7 +32,7 @@ def extract_artist_from_title_and_description(title, description):
             r'[\u201c"][^""\u201d]+,[\u201d"]\s+([A-Z][a-zA-Z\s\.&]+?)(?:\s+through|\s+is|\s+has)',  # "The Boss," Bruce Springsteen
             r'(?:The legendary|Legendary)\s+([A-Z][a-zA-Z\s\.&]+?)(?:\s+is|\s+has|\s+was)',
             r'(?:The great|great)\s+([A-Z][a-zA-Z\s\.&]+?)(?:\s+got|\s+is|\s+has|\s+was)',  # "The great Jimi Hendrix"
-            r'(?:genius|talent)\s+of\s+([A-Z][a-zA-Z\s\.&]+?),',  # "genius of Ray Charles,"
+            r'(?:genius|talent)\s+of\s+([A-Z][a-zA-Z\s\.&]+?)(?:,|\s+has|\s+is|\s+was)',  # "genius of Ray Charles," or "genius of Van Morrison has"
             r'the music of\s+([A-Z][a-zA-Z\s\.&]+?)(?:\s+inspired|\s+is|\s+on)',  # "the music of Sly and the Family Stone"
             r'It\'s\s+([A-Z][a-zA-Z\s\.&]+?)\s+on\s+this\s+edition',  # "It's Sly and the Family Stone on this edition"
             r'^([A-Z][a-zA-Z\s\.&]+?)\s+is back',
@@ -175,6 +175,15 @@ def parse_playlist_file(filepath):
         if match:
             song = match.group(1).strip()
             artist = match.group(2).strip()
+            tracks.append({"artist": artist, "song": song})
+            continue
+
+        # Pattern 1c: - "Song" (leading dash without artist, for continuation lists)
+        match = re.match(r'^[-–—]\s*["\u201c](.+?)["\u201d]\s*$', line)
+        if match:
+            song = match.group(1).strip()
+            # Extract artist from title/description for single-artist shows
+            artist = extract_artist_from_title_and_description(title, description)
             tracks.append({"artist": artist, "song": song})
             continue
 
