@@ -26,78 +26,78 @@ const getSortIcon = (field: SortField, currentField: SortField, direction: SortD
 </script>
 
 <template>
-  <div class="bg-white rounded-lg shadow overflow-hidden">
+  <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden border border-gray-700">
     <div class="overflow-x-auto">
-      <table class="min-w-full divide-y divide-gray-200">
-        <thead class="bg-gray-50">
+      <table class="min-w-full divide-y divide-gray-700">
+        <thead class="bg-gray-900">
           <tr>
             <th
               scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none"
+              class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider cursor-pointer hover:bg-gray-800 select-none"
               @click="emit('sort', 'artist')"
             >
               <div class="flex items-center gap-2">
                 Artist
-                <span class="text-gray-400">{{ getSortIcon('artist', sortField, sortDirection) }}</span>
+                <span class="text-gray-500">{{ getSortIcon('artist', sortField, sortDirection) }}</span>
               </div>
             </th>
             <th
               scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none"
+              class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider cursor-pointer hover:bg-gray-800 select-none"
               @click="emit('sort', 'song')"
             >
               <div class="flex items-center gap-2">
                 Song
-                <span class="text-gray-400">{{ getSortIcon('song', sortField, sortDirection) }}</span>
+                <span class="text-gray-500">{{ getSortIcon('song', sortField, sortDirection) }}</span>
               </div>
             </th>
             <th
               scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none"
+              class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider cursor-pointer hover:bg-gray-800 select-none"
               @click="emit('sort', 'playlistTitle')"
             >
               <div class="flex items-center gap-2">
                 Playlist
-                <span class="text-gray-400">{{ getSortIcon('playlistTitle', sortField, sortDirection) }}</span>
+                <span class="text-gray-500">{{ getSortIcon('playlistTitle', sortField, sortDirection) }}</span>
               </div>
             </th>
             <th
               scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none"
+              class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider cursor-pointer hover:bg-gray-800 select-none"
               @click="emit('sort', 'playlistDate')"
             >
               <div class="flex items-center gap-2">
                 Date
-                <span class="text-gray-400">{{ getSortIcon('playlistDate', sortField, sortDirection) }}</span>
+                <span class="text-gray-500">{{ getSortIcon('playlistDate', sortField, sortDirection) }}</span>
               </div>
             </th>
             <th
               scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
             >
               Actions
             </th>
           </tr>
         </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
+        <tbody class="bg-gray-800 divide-y divide-gray-700">
           <tr
             v-for="(track, index) in tracks"
             :key="`${track.playlistDate}-${index}`"
-            class="hover:bg-gray-50 transition-colors"
+            class="hover:bg-gray-700/50 transition-colors"
           >
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
               {{ track.artist }}
             </td>
-            <td class="px-6 py-4 text-sm text-gray-900">
+            <td class="px-6 py-4 text-sm text-gray-200">
               {{ track.song }}
             </td>
-            <td class="px-6 py-4 text-sm text-gray-600">
+            <td class="px-6 py-4 text-sm text-gray-300">
               {{ track.playlistTitle }}
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
               {{ formatDate(track.playlistDate) }}
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
               <StreamingLinks :artist="track.artist" :song="track.song" />
             </td>
           </tr>
@@ -106,11 +106,11 @@ const getSortIcon = (field: SortField, currentField: SortField, direction: SortD
     </div>
 
     <div v-if="tracks.length === 0" class="text-center py-12">
-      <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="mx-auto h-12 w-12 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
       </svg>
-      <h3 class="mt-2 text-sm font-medium text-gray-900">No tracks found</h3>
-      <p class="mt-1 text-sm text-gray-500">
+      <h3 class="mt-2 text-sm font-medium text-white">No tracks found</h3>
+      <p class="mt-1 text-sm text-gray-400">
         Try adjusting your search query
       </p>
     </div>

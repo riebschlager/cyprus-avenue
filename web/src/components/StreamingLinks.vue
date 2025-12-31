@@ -49,7 +49,7 @@ onUnmounted(() => {
   <div ref="dropdownRef" class="relative inline-block text-left">
     <button
       @click.stop="toggleDropdown"
-      class="inline-flex items-center px-2 py-1 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+      class="inline-flex items-center px-2 py-1 text-xs font-medium text-gray-300 bg-gray-700 border border-gray-600 rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
       title="Listen on streaming platforms"
     >
       <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -69,7 +69,7 @@ onUnmounted(() => {
     >
       <div
         v-if="isOpen"
-        class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+        class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-gray-800 shadow-xl ring-1 ring-gray-700 focus:outline-none border border-gray-700"
       >
         <div class="py-1">
           <button

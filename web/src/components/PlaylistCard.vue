@@ -27,24 +27,24 @@ const getAlbumArt = (artist: string, song: string): string | null => {
 </script>
 
 <template>
-  <div class="bg-white rounded-lg shadow hover:shadow-md transition-shadow">
+  <div class="bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-gray-700">
     <button
       @click="emit('toggle')"
       class="w-full px-6 py-4 text-left flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg"
     >
       <div class="flex-1 min-w-0">
         <div class="flex items-center gap-3">
-          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-500/20 text-blue-300">
             {{ playlist.date }}
           </span>
-          <h3 class="text-lg font-semibold text-gray-900 truncate">
+          <h3 class="text-lg font-semibold text-white truncate">
             {{ playlist.title }}
           </h3>
         </div>
-        <p class="mt-1 text-sm text-gray-600 line-clamp-2">
+        <p class="mt-1 text-sm text-gray-300 line-clamp-2">
           {{ playlist.description }}
         </p>
-        <p class="mt-2 text-xs text-gray-500">
+        <p class="mt-2 text-xs text-gray-400">
           {{ playlist.tracks.length }} track{{ playlist.tracks.length === 1 ? '' : 's' }}
         </p>
       </div>
@@ -59,16 +59,16 @@ const getAlbumArt = (artist: string, song: string): string | null => {
       </svg>
     </button>
 
-    <div v-if="isExpanded" class="px-6 pb-4 border-t border-gray-100">
+    <div v-if="isExpanded" class="px-6 pb-4 border-t border-gray-700">
       <div class="mt-4">
-        <h4 class="text-sm font-semibold text-gray-900 mb-3">Track List</h4>
+        <h4 class="text-sm font-semibold text-white mb-3">Track List</h4>
         <div class="space-y-2">
           <div
             v-for="(track, index) in playlist.tracks"
             :key="index"
-            class="flex items-start gap-3 py-2 px-3 rounded hover:bg-gray-50"
+            class="flex items-start gap-3 py-2 px-3 rounded hover:bg-gray-700/50"
           >
-            <span class="text-sm text-gray-400 font-mono min-w-[2rem]">{{ index + 1 }}.</span>
+            <span class="text-sm text-gray-500 font-mono min-w-[2rem]">{{ index + 1 }}.</span>
 
             <!-- Album Art (only loads when expanded) -->
             <div v-if="getAlbumArt(track.artist, track.song)" class="flex-shrink-0">
@@ -79,15 +79,15 @@ const getAlbumArt = (artist: string, song: string): string | null => {
                 loading="lazy"
               />
             </div>
-            <div v-else class="flex-shrink-0 w-12 h-12 bg-gray-200 rounded flex items-center justify-center">
-              <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div v-else class="flex-shrink-0 w-12 h-12 bg-gray-700 rounded flex items-center justify-center">
+              <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
               </svg>
             </div>
 
             <div class="flex-1 min-w-0">
-              <p class="text-sm font-medium text-gray-900">{{ track.song }}</p>
-              <p class="text-xs text-gray-600">{{ track.artist }}</p>
+              <p class="text-sm font-medium text-white">{{ track.song }}</p>
+              <p class="text-xs text-gray-400">{{ track.artist }}</p>
             </div>
             <div class="flex-shrink-0">
               <StreamingLinks :artist="track.artist" :song="track.song" />
@@ -96,8 +96,8 @@ const getAlbumArt = (artist: string, song: string): string | null => {
         </div>
       </div>
 
-      <div class="mt-4 pt-4 border-t border-gray-100">
-        <p class="text-xs text-gray-500">
+      <div class="mt-4 pt-4 border-t border-gray-700">
+        <p class="text-xs text-gray-400">
           Original broadcast: {{ formatDate(playlist.date) }}
         </p>
       </div>

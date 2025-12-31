@@ -17,8 +17,8 @@ const totalTracks = computed(() => sortedTracks.value.length)
 <template>
   <div>
     <div class="mb-6">
-      <h2 class="text-2xl font-bold text-gray-900 mb-2">All Tracks</h2>
-      <p class="text-sm text-gray-600">
+      <h2 class="text-2xl font-bold text-white mb-2">All Tracks</h2>
+      <p class="text-sm text-gray-400">
         Browse and search all {{ totalTracks.toLocaleString() }} tracks from the archive
       </p>
     </div>
@@ -27,7 +27,7 @@ const totalTracks = computed(() => sortedTracks.value.length)
       <SearchBar v-model="searchQuery" />
     </div>
 
-    <div class="mb-4 text-sm text-gray-600">
+    <div class="mb-4 text-sm text-gray-400">
       Showing {{ sortedTracks.length.toLocaleString() }} track{{ sortedTracks.length === 1 ? '' : 's' }}
     </div>
 
