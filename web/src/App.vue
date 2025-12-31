@@ -6,8 +6,9 @@ import PlaylistList from './components/PlaylistList.vue'
 import SearchBar from './components/SearchBar.vue'
 import StatsPanel from './components/StatsPanel.vue'
 import TracksView from './components/TracksView.vue'
+import ArtistsView from './components/ArtistsView.vue'
 
-type View = 'home' | 'playlists' | 'tracks'
+type View = 'home' | 'playlists' | 'tracks' | 'artists'
 
 const currentView = ref<View>('home')
 
@@ -67,6 +68,17 @@ const setView = (view: View) => {
             >
               All Tracks
             </button>
+            <button
+              @click="setView('artists')"
+              :class="[
+                currentView === 'artists'
+                  ? 'border-blue-500 text-blue-400'
+                  : 'border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-700',
+                'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm'
+              ]"
+            >
+              Artists
+            </button>
           </nav>
         </div>
       </div>
@@ -103,6 +115,11 @@ const setView = (view: View) => {
         <!-- Tracks View -->
         <div v-else-if="currentView === 'tracks'">
           <TracksView :playlists="playlists" />
+        </div>
+
+        <!-- Artists View -->
+        <div v-else-if="currentView === 'artists'">
+          <ArtistsView :playlists="playlists" />
         </div>
       </div>
     </main>

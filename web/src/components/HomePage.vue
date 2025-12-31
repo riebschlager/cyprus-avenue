@@ -155,8 +155,14 @@ defineProps<{
           Browse Playlists
         </button>
         <button
-          @click="$emit('navigate', 'tracks')"
+          @click="$emit('navigate', 'artists')"
           class="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors"
+        >
+          Browse Artists
+        </button>
+        <button
+          @click="$emit('navigate', 'tracks')"
+          class="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors"
         >
           View All Tracks
         </button>
