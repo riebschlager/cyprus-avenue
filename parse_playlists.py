@@ -207,7 +207,16 @@ def parse_playlist_file(filepath):
             tracks.append({"artist": artist, "song": album})
             continue
 
-        # Pattern 6: Just song title (no quotes, no artist - for artist-themed shows)
+        # Pattern 6: Artist [multiple spaces] Song (whitespace-separated format)
+        # Match lines with 5+ consecutive spaces separating artist and song
+        match = re.match(r'^([A-Z][a-zA-Z\s\.&]+?)\s{5,}(.+)$', line)
+        if match:
+            artist = match.group(1).strip()
+            song = match.group(2).strip()
+            tracks.append({"artist": artist, "song": song})
+            continue
+
+        # Pattern 7: Just song title (no quotes, no artist - for artist-themed shows)
         # This catches simple song titles that don't match any other pattern
         if line and not line.startswith('By ') and len(line) > 3:
             # Skip lines that are likely photo credits or standalone artist names
