@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import { ref, watch, nextTick } from 'vue'
 import type { Playlist } from '../types/playlist'
 import StreamingLinks from './StreamingLinks.vue'
 import { useStreamingLinks } from '../composables/useStreamingLinks'
 
-defineProps<{
+const props = defineProps<{
   playlist: Playlist
   isExpanded: boolean
   searchQuery: string
@@ -14,6 +15,7 @@ const emit = defineEmits<{
 }>()
 
 const { getTrackData } = useStreamingLinks()
+const cardRef = ref<HTMLElement | null>(null)
 
 const formatDate = (dateStr: string) => {
   const date = new Date(dateStr)
@@ -24,10 +26,19 @@ const getAlbumArt = (artist: string, song: string): string | null => {
   const trackData = getTrackData(artist, song)
   return trackData?.albumArt || null
 }
+
+// Scroll to top of card when expanded
+watch(() => props.isExpanded, (newVal) => {
+  if (newVal && cardRef.value) {
+    nextTick(() => {
+      cardRef.value?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    })
+  }
+})
 </script>
 
 <template>
-  <div class="bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-gray-700">
+  <div ref="cardRef" class="bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-gray-700">
     <button
       @click="emit('toggle')"
       class="w-full px-6 py-4 text-left flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg"
