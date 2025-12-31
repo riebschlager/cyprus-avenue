@@ -849,10 +849,6 @@
     "description": "Singer-songwriter Sam Baker is a man of few words…but when he puts them to music it’s something special.  Combine his music with singer Mary Gauthier (Gau-THEE-aye), it becomes a hour of radio to remember.",
     "tracks": [
       {
-        "artist": "Two Singer-Songwriters Heading Your Way",
-        "song": "Sam Baker"
-      },
-      {
         "artist": "Sam Baker",
         "song": "Say Grace"
       },
@@ -901,10 +897,6 @@
     "title": "The Quiet Influence Of J.J. Cale",
     "description": "How can you be called one of the single most important figures in rock history and not be a household name?  Try not being bombastic…J.J.Cale did, and he’s the focus on Cyprus Avenue this week.",
     "tracks": [
-      {
-        "artist": "The Quiet Influence Of J.J. Cale",
-        "song": "J.J. Cale"
-      },
       {
         "artist": "J.J. Cale",
         "song": "Magnolia"
@@ -966,10 +958,6 @@
     "title": "It's Time For Some New Tunes",
     "description": "Labor Day may mark the unofficial end of Summer…but Bill Shapiro continues to bring the heat with new music from Tom Petty, Spoon and Puss n-boots and more...",
     "tracks": [
-      {
-        "artist": "It's Time For Some New Tunes",
-        "song": "Tom Petty Walk of Fame"
-      },
       {
         "artist": "Tom Petty & The Heartbreakers",
         "song": "Full Grown Boy"
@@ -1080,10 +1068,6 @@
     "title": "Smokey Robinson Then And Now",
     "description": "Talent and longevity are the key elements of greatness. Smokey Robinson enjoys both, with a career spanning over 50 years, and he’s still going strong.  It’s Smokey Then and Now, on this edition of Cyprus Avenue.",
     "tracks": [
-      {
-        "artist": "Smokey Robinson Then And Now",
-        "song": "Smokey Robinson"
-      },
       {
         "artist": "Marvin Gaye",
         "song": "Ain’t That Peculiar"
@@ -1436,67 +1420,7 @@
     "tracks": [
       {
         "artist": "Dylan- The Basement Tapes Complete",
-        "song": "Bob Dylan"
-      },
-      {
-        "artist": "Dylan- The Basement Tapes Complete",
-        "song": "My Bucket’s Got A Hole In It"
-      },
-      {
-        "artist": "Dylan- The Basement Tapes Complete",
         "song": "I Forgot To Remember To Forget"
-      },
-      {
-        "artist": "Dylan- The Basement Tapes Complete",
-        "song": "You Win Again"
-      },
-      {
-        "artist": "Dylan- The Basement Tapes Complete",
-        "song": "Big River"
-      },
-      {
-        "artist": "Dylan- The Basement Tapes Complete",
-        "song": "Folsom Prison Blues"
-      },
-      {
-        "artist": "Dylan- The Basement Tapes Complete",
-        "song": "Cool Water"
-      },
-      {
-        "artist": "Dylan- The Basement Tapes Complete",
-        "song": "Johnny Todd"
-      },
-      {
-        "artist": "Dylan- The Basement Tapes Complete",
-        "song": "Tupelo"
-      },
-      {
-        "artist": "Dylan- The Basement Tapes Complete",
-        "song": "Tiny Montgomery"
-      },
-      {
-        "artist": "Dylan- The Basement Tapes Complete",
-        "song": "I’m Your Teenage Prayer"
-      },
-      {
-        "artist": "Dylan- The Basement Tapes Complete",
-        "song": "Rock Salt And Nails"
-      },
-      {
-        "artist": "Dylan- The Basement Tapes Complete",
-        "song": "A Fool Such As I"
-      },
-      {
-        "artist": "Dylan- The Basement Tapes Complete",
-        "song": "People Get Ready"
-      },
-      {
-        "artist": "Dylan- The Basement Tapes Complete",
-        "song": "I Don’t Hurt Anymore"
-      },
-      {
-        "artist": "Dylan- The Basement Tapes Complete",
-        "song": "Don’t You Try"
       }
     ],
     "source_url": "https://www.kcur.org/tags/cyprus-avenue",
@@ -1507,10 +1431,6 @@
     "title": "The Art of McCartney",
     "description": "Writing some of the world’s best-known songs takes talent and great deal of know-how.  You’ll experience the music of one of the best when Cyprus Avenue presents the Art of McCartney…",
     "tracks": [
-      {
-        "artist": "The Art of McCartney",
-        "song": "Sir Paul McCartney"
-      },
       {
         "artist": "Billy Joel",
         "song": "Maybe I’m Amazed"
@@ -1579,10 +1499,6 @@
       {
         "artist": "The New Basement Tapes (Jim James)",
         "song": "Kansas City"
-      },
-      {
-        "artist": "2014's Odds And Ends",
-        "song": "John Mellencamp"
       },
       {
         "artist": "John Mellencamp",
@@ -1915,10 +1831,6 @@
     "description": "They called him “Mr. Pitiful,” but singer Otis Redding’s moniker doesn’t fit the impact he had on popular music in the 60’s and beyond.  It’s the music of Otis Redding on this edition of Cyprus Avenue.",
     "tracks": [
       {
-        "artist": "They Call Him Mr. Pittiful",
-        "song": "Otis Redding"
-      },
-      {
         "artist": "Otis Redding",
         "song": "These Arms of Mine"
       },
@@ -2033,10 +1945,6 @@
     "description": "If you missed Kelley Hunt last month on Cyprus Avenue you’ve got a couple more chances to hear the talented Kansas City singer…one on this week’s edition of the show… followed by next week's Cyprus Avenue Live at the Folly Theater...",
     "tracks": [
       {
-        "artist": "Kansas City's Own Kelley Hunt",
-        "song": "Kelley Hunt"
-      },
-      {
         "artist": "Kelley Hunt",
         "song": "Talk To Me"
       },
@@ -2100,10 +2008,6 @@
       {
         "artist": "Marty Stuart Returns",
         "song": "Here I Am"
-      },
-      {
-        "artist": "Marty Stuart Returns",
-        "song": "Marty Stuart"
       },
       {
         "artist": "Marty Stuart Returns",
@@ -2269,10 +2173,6 @@
       },
       {
         "artist": "The Soul Of Designer Records",
-        "song": "Designer Records"
-      },
-      {
-        "artist": "The Soul Of Designer Records",
         "song": "Just A Little While"
       }
     ],
@@ -2329,10 +2229,6 @@
     "title": "Dave Alvin- Art Of The Song",
     "description": "The “art of the song” can never be perfected, but singer/songwriter Dave Alvin has a good sense of what it takes to get there, as you’ll hear on this week’s Cyprus Avenue…",
     "tracks": [
-      {
-        "artist": "Dave Alvin- Art Of The Song",
-        "song": "Dave Alvin"
-      },
       {
         "artist": "Dave Alvin",
         "song": "Help You Dream"
@@ -2452,10 +2348,6 @@
     "description": "Shelby Lynne’s a great singer who’s coming to Kansas City later this month when KCUR presents Cyprus Avenue Live at the Folly Theater…and we get a preview of her talent on this week’s Cyprus Avenue.",
     "tracks": [
       {
-        "artist": "Shelby's Return",
-        "song": "Shelby Lynne"
-      },
-      {
         "artist": "Shelby Lynne",
         "song": "Where I’m From"
       },
@@ -2566,10 +2458,6 @@
     "description": "Did you miss the recent Dylan concert here in KC…or just couldn’t get enough?  Well you’re in luck…Bob Dylan’s bringing it all back home on this week's Cyprus Avenue...",
     "tracks": [
       {
-        "artist": "Dylan: Bringing It All Back Home",
-        "song": "Bob Dylan"
-      },
-      {
         "artist": "Dylan",
         "song": "Subterranean Blues"
       },
@@ -2631,10 +2519,6 @@
         "song": "Burnin’ & Lootin’"
       },
       {
-        "artist": "Easy Shanking In Boston",
-        "song": "Bob Marley"
-      },
-      {
         "artist": "Marley",
         "song": "The Heathen"
       },
@@ -2684,10 +2568,6 @@
         "song": "Bitch"
       },
       {
-        "artist": "Sticky Fingers Is Back!",
-        "song": "The Rolling Stones"
-      },
-      {
         "artist": "Rolling Stones",
         "song": "Dead Flowers"
       },
@@ -2716,10 +2596,6 @@
     "title": "Real Country Today",
     "description": "Remember when country music was more authentic, and not so pop-infused?  Coming up on Cyprus Avenue, Bill Shapiro takes you back to that old school country feel with some new music.",
     "tracks": [
-      {
-        "artist": "Real Country Today",
-        "song": "Kasey Musgraves"
-      },
       {
         "artist": "Chris Stapleton",
         "song": "Parachute"
@@ -2775,55 +2651,11 @@
     "tracks": [
       {
         "artist": "The \"King\" Bounces Back",
-        "song": "Trouble/Guitar Man"
-      },
-      {
-        "artist": "The \"King\" Bounces Back",
-        "song": "Elvis Presley"
-      },
-      {
-        "artist": "The \"King\" Bounces Back",
-        "song": "That’s Alright"
-      },
-      {
-        "artist": "The \"King\" Bounces Back",
-        "song": "Heartbreak Hotel"
-      },
-      {
-        "artist": "The \"King\" Bounces Back",
-        "song": "Hound Dog"
-      },
-      {
-        "artist": "The \"King\" Bounces Back",
-        "song": "All Shook Up"
-      },
-      {
-        "artist": "The \"King\" Bounces Back",
         "song": "Can’t Help Falling In Love with You"
-      },
-      {
-        "artist": "The \"King\" Bounces Back",
-        "song": "Let Yourself Go"
-      },
-      {
-        "artist": "The \"King\" Bounces Back",
-        "song": "Baby What You Want Me to Do"
       },
       {
         "artist": "Where Could I Go But To the Lord",
         "song": "Up Above My Head, Saved"
-      },
-      {
-        "artist": "The \"King\" Bounces Back",
-        "song": "Trying To Get To You"
-      },
-      {
-        "artist": "The \"King\" Bounces Back",
-        "song": "Jailhouse Rock"
-      },
-      {
-        "artist": "The \"King\" Bounces Back",
-        "song": "Don’t Be Cruel"
       },
       {
         "artist": "The \"King\" Bounces Back",
@@ -2832,10 +2664,6 @@
       {
         "artist": "The \"King\" Bounces Back",
         "song": "Nothingville/Big Boss Man/Guitar Man/Little Egypt/Trouble/Guitar Man"
-      },
-      {
-        "artist": "The \"King\" Bounces Back",
-        "song": "Memories"
       },
       {
         "artist": "The \"King\" Bounces Back",
@@ -2862,10 +2690,6 @@
     "title": "It's Time For Some New Summer Sounds",
     "description": "",
     "tracks": [
-      {
-        "artist": "It's Time For Some New Summer Sounds",
-        "song": "Richard Thompson"
-      },
       {
         "artist": "Richard Thompson",
         "song": "Beatnik Walking"
@@ -3005,10 +2829,6 @@
     "title": "Another Side Of Country",
     "description": "If you listen closely to today’s country you’re likely to conclude that it’s not your mom and dad’s country.  If you want to give it a try listen to this week’s Cyprus Avenue for another side of country, featuring two of the more progressive artists, Chris Stapleton and Sturgill Simpson.",
     "tracks": [
-      {
-        "artist": "Another Side Of Country",
-        "song": "Sturgill Simpson"
-      },
       {
         "artist": "Steeldrivers",
         "song": "Blue Side Of The Mountain"
@@ -3283,10 +3103,6 @@
     "description": "There’s something magnetic about great a cappella singing that draws you in…Remember the Persuasions?  We’ll hear their music, plus some other sweet soul music on this edition of Cyprus Avenue.",
     "tracks": [
       {
-        "artist": "Echoes Of An Era: Sweet Soul Music",
-        "song": "The Persuasions"
-      },
-      {
         "artist": "Jerry Lawson",
         "song": "Peace Like A River"
       },
@@ -3352,10 +3168,6 @@
         "song": "Gloria"
       },
       {
-        "artist": "The Essential Van Morrison",
-        "song": "Van Morrison"
-      },
-      {
         "artist": "- \"Brown",
         "song": "Eyed Girl\""
       },
@@ -3409,10 +3221,6 @@
     "description": "On October 11 KCUR presents Cyprus Avenue Live at the Folly Theater with singer Rhiannon Giddens…and you get a chance to  preview her amazing singing on this week's edition of Cyprus Avenue.",
     "tracks": [
       {
-        "artist": "Introducing Rhiannon Giddens",
-        "song": "Rhiannon Giddens"
-      },
-      {
         "artist": "Rhiannon Giddens",
         "song": "Don’t Let It Trouble Your Mind"
       },
@@ -3465,10 +3273,6 @@
     "title": "New Releases- Women's Songs",
     "description": "There's some newly released music that is worth spending your time with...and much of it comes from some amazing women.  Coming up on Cyprus Avenue, we'll sample the new work of singers Amy Helm, Shawn Colvin and the great Darlene Love, as Bill Shapiro surveys women's songs.",
     "tracks": [
-      {
-        "artist": "New Releases- Women's Songs",
-        "song": "Amy Helm"
-      },
       {
         "artist": "Darlene Love",
         "song": "Night Closing In"
@@ -3865,10 +3669,6 @@
         "song": "Gates Of Gold"
       },
       {
-        "artist": "New Music Just In Time For The Holidays",
-        "song": "Elvis Presley"
-      },
-      {
         "artist": "Chris Isaak",
         "song": "Kiss Me Like A Stranger"
       },
@@ -3913,10 +3713,6 @@
     "title": "2015 Favorites",
     "description": "As 20-15 winds down we all tend to reflect on the past year.  Cyprus Avenue host Bill Shapiro is no different.  He describes 20-15 as a good year for music, and he serves up his favorites on this edition of Cyprus Avenue.",
     "tracks": [
-      {
-        "artist": "2015 Favorites",
-        "song": "Rhiannon Giddens"
-      },
       {
         "artist": "T-Bone Burnett",
         "song": "Kansas City"
@@ -4081,10 +3877,6 @@
     "description": "When you hear most music on the radio you are hearing the final version of a protracted studio session with many takes that are often left on the cutting room floor. Coming up on this week's Cyprus Avenue…it's the alternate takes of some of Dylan’s more popular tunes.",
     "tracks": [
       {
-        "artist": "Bob Dylan 1965-1966, Part Two",
-        "song": "Bob Dylan"
-      },
-      {
         "artist": "Bob Dylan",
         "song": "Tombstone Blues"
       },
@@ -4140,10 +3932,6 @@
       {
         "artist": "Led Zeppelin",
         "song": "I Can’t Quit You Baby"
-      },
-      {
-        "artist": "Return to Rock & Roll",
-        "song": "Led Zeppelin"
       },
       {
         "artist": "Led Zeppelin",
@@ -4334,10 +4122,6 @@
     "description": "Two months after Johnny Cash died a box set of his music was released.  It included ballads, country classics and even some Bob Marley songs, rarities and alternative takes from Cash's recordings produced by Rick Rubin.  The deep musical vaults of Johnny Cash…on this week's edition of Cyprus Avenue.",
     "tracks": [
       {
-        "artist": "Johnny Cash Unearthed",
-        "song": "Johnny Cash"
-      },
-      {
         "artist": "Johnny Cash",
         "song": "Long Black Veil"
       },
@@ -4484,10 +4268,6 @@
         "song": "Mission Temple Fireworks Stand"
       },
       {
-        "artist": "Different Styles Make Great Music",
-        "song": "Paul Thorn"
-      },
-      {
         "artist": "Joe Ely",
         "song": "She Leaves You Where You Are"
       },
@@ -4528,10 +4308,6 @@
     "title": "The Fifth Beatle",
     "description": "You know them as John, Paul, George and Ringo...the legendary foursome  also known as the Beatles. But did you know there was a fifth Beatle, who never appeared on stage or on an album cover, yet had a major impact on popular music?  Find out who that was on this week's edition of Cyrus Avenue.",
     "tracks": [
-      {
-        "artist": "The Fifth Beatle",
-        "song": "The Beatles"
-      },
       {
         "artist": "The Beatles",
         "song": "In My Life"
@@ -4695,10 +4471,6 @@
     "title": "Need Some New Summer Music?",
     "description": "",
     "tracks": [
-      {
-        "artist": "Need Some New Summer Music?",
-        "song": "Peter Wolfe"
-      },
       {
         "artist": "Peter Wolfe",
         "song": "Some Other Time"
@@ -4915,10 +4687,6 @@
     "title": "'Cash'ing In On A Good Thing",
     "description": "Expectations for singer Roseanne Cash have always been high.  After all, she is the daughter of music legend Johnny Cash.  Her talent and drive have helped her live up to the inherited hype...and you will have an opportunity to witness her gift, as she’s coming to Kansas City to perform for the tenth anniversary of Cyprus Avenue's Live at the Folly Theater series on June 17th. Cyprus Host Bill Shapiro helps get you in the Roseanne mood on this week's show.",
     "tracks": [
-      {
-        "artist": "'Cash'ing In On A Good Thing",
-        "song": "Roseanne Cash"
-      },
       {
         "artist": "Rosanne Cash",
         "song": "A Feather’s Not A Bird"
@@ -5206,14 +4974,6 @@
       {
         "artist": "Still Alive at 75!",
         "song": "Down By The Riverside"
-      },
-      {
-        "artist": "Still Alive at 75!",
-        "song": "Aaron Neville"
-      },
-      {
-        "artist": "Still Alive at 75!",
-        "song": "3:05"
       }
     ],
     "source_url": "https://www.kcur.org/tags/cyprus-avenue",
@@ -5312,10 +5072,6 @@
       {
         "artist": "The Byrds",
         "song": "Never Before"
-      },
-      {
-        "artist": "The Solo Artistry Of A Former Byrd",
-        "song": "Roger McGuinn"
       },
       {
         "artist": "Bob Dylan",
@@ -5420,10 +5176,6 @@
         "song": "Flagship"
       },
       {
-        "artist": "Meet Dave Cobb",
-        "song": "Chris Stapleton"
-      },
-      {
         "artist": "Sturgill Simpson",
         "song": "Call To Arms"
       }
@@ -5471,10 +5223,6 @@
       {
         "artist": "The Boss- Chapter and Verse",
         "song": "The Rising"
-      },
-      {
-        "artist": "The Boss- Chapter and Verse",
-        "song": "Bruce Springsteen"
       },
       {
         "artist": "The Boss- Chapter and Verse",
@@ -5555,10 +5303,6 @@
     "description": "Consistency and risk-taking have defined Bonnie Raitt's remarkable music. We’ll highlight the artistry, spanning the 45 year career of the ultra-talented Bonnie Raitt on this edition of Cyprus Avenue.",
     "tracks": [
       {
-        "artist": "Bonnie Raitt- A Journey Through Time",
-        "song": "Bonnie Raitt"
-      },
-      {
         "artist": "Bonnie Raitt",
         "song": "Give It Up"
       },
@@ -5611,10 +5355,6 @@
     "title": "Leonard Lately",
     "description": "Singer Leonard Cohen’s formula for producing a great song is to obsess over every lyric…and guess what…it works for him. Check out his new release “You Want It Darker” on this week's Cyprus Avenue.",
     "tracks": [
-      {
-        "artist": "Leonard Lately",
-        "song": "Leonard Cohen"
-      },
       {
         "artist": "Leonard Cohen",
         "song": "You Want It Darker"
@@ -5697,10 +5437,6 @@
         "song": "All I Ever Wonder"
       },
       {
-        "artist": "New Music And A Special Tribute",
-        "song": "Leon Russell"
-      },
-      {
         "artist": "St Paul & The Broken Bones",
         "song": "Is It Me"
       },
@@ -5776,10 +5512,6 @@
       {
         "artist": "The Rolling Stones",
         "song": "Little Rain"
-      },
-      {
-        "artist": "The Rolling Stones- Blue and Lonesome",
-        "song": "The Rolling Stones"
       },
       {
         "artist": "The Rolling Stones",
@@ -6479,10 +6211,6 @@
       },
       {
         "artist": "The Jefferson Airplane",
-        "song": "Jefferson Airplane"
-      },
-      {
-        "artist": "The Jefferson Airplane",
         "song": "Volunteers"
       },
       {
@@ -7080,10 +6808,6 @@
     "title": "Big City Music From A Small Town Studio",
     "description": "Major cities have been the source for a lot of great popular music…but there are exceptions.  On this edition of Cyprus Avenue a listen to some amazing music from a small Alabama town…",
     "tracks": [
-      {
-        "artist": "Big City Music From A Small Town Studio",
-        "song": "FAME Studios"
-      },
       {
         "artist": "Arthur Alexander",
         "song": "You Better Move On"

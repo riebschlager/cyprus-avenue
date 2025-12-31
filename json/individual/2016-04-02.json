@@ -4,10 +4,6 @@
   "description": "You know them as John, Paul, George and Ringo...the legendary foursome  also known as the Beatles. But did you know there was a fifth Beatle, who never appeared on stage or on an album cover, yet had a major impact on popular music?  Find out who that was on this week's edition of Cyrus Avenue.",
   "tracks": [
     {
-      "artist": "The Fifth Beatle",
-      "song": "The Beatles"
-    },
-    {
       "artist": "The Beatles",
       "song": "In My Life"
     },

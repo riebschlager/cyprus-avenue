@@ -187,6 +187,20 @@ def parse_playlist_file(filepath):
         # Pattern 6: Just song title (no quotes, no artist - for artist-themed shows)
         # This catches simple song titles that don't match any other pattern
         if line and not line.startswith('By ') and len(line) > 3:
+            # Skip lines that are likely photo credits or standalone artist names
+            # These are short lines with no track indicators (dashes, quotes, commas, "from")
+            has_track_indicators = (
+                '-' in line or '–' in line or '—' in line or  # dashes
+                '"' in line or '\u201c' in line or '\u201d' in line or  # quotes
+                ', ' in line or  # comma-space (Artist, Album pattern)
+                ' from ' in line.lower()  # "from" keyword
+            )
+
+            # If line is short (<30 chars) and has no track indicators, skip it
+            # This filters out standalone names like "Sam Baker" that are photo credits
+            if len(line) < 30 and not has_track_indicators:
+                continue
+
             # Extract artist from title/description for single-artist shows
             artist = extract_artist_from_title_and_description(title, description)
             tracks.append({"artist": artist, "song": line})

@@ -4,7 +4,8 @@
       "Bash(docker build:*)",
       "Bash(docker run:*)",
       "Bash(cat:*)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(ls:*)"
     ]
   }
 }
