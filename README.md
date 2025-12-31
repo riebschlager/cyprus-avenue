@@ -111,31 +111,85 @@ cyprus-avenue/
 └── README.md                # This file
 ```
 
+## Workflow - Maintaining the Archive
+
+**New to the project?** See [WORKFLOW.md](WORKFLOW.md) for detailed instructions.
+
+### Quick Commands
+
+```bash
+# Update playlists after editing txt files (fast - ~1 second)
+./update-playlists.sh
+
+# Discover new playlists on KCUR (slow - ~30 seconds)
+./discover.sh
+
+# Index tracks with Spotify (very slow - ~7-10 minutes)
+./index-spotify.sh
+```
+
+### Common Tasks
+
+**Fix errors in a playlist:**
+1. Edit the `.txt` file in `archive/txt/`
+2. Run `./update-playlists.sh`
+3. Check validation report
+
+**Add a new playlist:**
+1. Create a new `.txt` file in `archive/txt/` (format: `YYYY-MM-DD.txt`)
+2. Run `./update-playlists.sh`
+3. Optionally run `./index-spotify.sh` for Spotify links
+
+See [WORKFLOW.md](WORKFLOW.md) for complete documentation.
+
 ## Tools & Scripts
 
 ### Parser (`scripts/parsing/parse_playlists.py`)
 Converts raw text files to structured JSON. Handles multiple playlist formats and extracts artist/song information.
 
+**Via convenience script (recommended):**
+```bash
+./update-playlists.sh
+```
+
+**Or directly with Docker:**
 ```bash
 docker build -f docker/Dockerfile.parse -t cyprus-avenue-parser .
-docker run --rm -v "$(pwd)/archive/txt:/app/txt" -v "$(pwd)/json:/app/json" cyprus-avenue-parser
+docker run --rm \
+  -v /path/to/project/archive/txt:/app/txt \
+  -v /path/to/project/json:/app/json \
+  -v /path/to/project/web/public:/app/web/public \
+  cyprus-avenue-parser
 ```
 
 ### Discovery Tool (`scripts/discovery/discover_playlists.py`)
 Scrapes KCUR website to find available playlists and identify gaps in the archive.
 
+**Via convenience script (recommended):**
+```bash
+./discover.sh
+```
+
+**Or directly with Docker:**
 ```bash
 docker build -f docker/Dockerfile.discover -t cyprus-avenue-discover .
-docker run --rm -v "$(pwd):/app" cyprus-avenue-discover
+docker run --rm -v /path/to/project:/app cyprus-avenue-discover
 ```
 
-### Fetcher (`scripts/discovery/fetch_missing_playlists.py`)
-Automatically downloads missing playlists from KCUR and adds them to the archive.
+### Spotify Indexer (`scripts/spotify/index-spotify-tracks.js`)
+Indexes all tracks with Spotify API to provide direct track links in the web app.
 
+**Via convenience script (recommended):**
 ```bash
-docker build -f docker/Dockerfile.fetch -t cyprus-avenue-fetch .
-docker run --rm -v "$(pwd):/app" cyprus-avenue-fetch
+./index-spotify.sh
 ```
+
+**Or directly with Node.js:**
+```bash
+node scripts/spotify/index-spotify-tracks.js
+```
+
+See [scripts/spotify/README.md](scripts/spotify/README.md) for Spotify API setup.
 
 ## Historical Significance
 

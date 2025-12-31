@@ -80,7 +80,7 @@ if (!CLIENT_ID || !CLIENT_SECRET) {
   console.error('  SPOTIFY_CLIENT_SECRET=your_client_secret')
   console.error('')
   console.error('Option 2 - Set environment variables:')
-  console.error('  SPOTIFY_CLIENT_ID=xxx SPOTIFY_CLIENT_SECRET=yyy node scripts/index-spotify-tracks.js')
+  console.error('  SPOTIFY_CLIENT_ID=xxx SPOTIFY_CLIENT_SECRET=yyy node scripts/spotify/index-spotify-tracks.js')
   console.error('')
   console.error('Get credentials from: https://developer.spotify.com/dashboard')
   process.exit(1)

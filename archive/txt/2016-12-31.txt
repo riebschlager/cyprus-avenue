@@ -16,7 +16,7 @@ Sturgill Simpson -       “A Sailor’s Guide To Earth”
 
 Melissa Etheridge -     “Respect Yourself”
 
-Rolling Stones -          “Commit A Crime”
+The Rolling Stones -          “Commit A Crime”
 
 Van Morrison -            “Keep Me Singing”
 
@@ -30,7 +30,7 @@ Aaron Neville -           “I Wanna Love You”
 
 Alan Toussaint -          “Southern Nights”
 
-Rolling Stones -          “I Can’t Quit You Baby”
+The Rolling Stones -          “I Can’t Quit You Baby”
 
 Van Morrison -            “Let It Rhyme”
 

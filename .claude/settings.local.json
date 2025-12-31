@@ -22,7 +22,9 @@
       "Bash(mkdir:*)",
       "Bash(git mv:*)",
       "Bash(tree:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(chmod:*)",
+      "Bash(./update-playlists.sh:*)"
     ]
   }
 }

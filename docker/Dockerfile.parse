@@ -2,8 +2,9 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Copy the parser script
+# Copy the parser and validation scripts
 COPY scripts/parsing/parse_playlists.py .
+COPY scripts/parsing/validate_playlists.py .
 
 # The txt directory will be mounted as a volume
 # Output will also be written to mounted volumes

@@ -298,6 +298,9 @@ def parse_all_playlists(txt_dir, output_dir):
 
     print(f"Found {len(txt_files)} playlist files to parse...")
 
+    # Track which JSON files we're creating from txt
+    parsed_json_files = set()
+
     for txt_file in txt_files:
         try:
             print(f"Parsing {txt_file.name}...", end=' ')
@@ -306,6 +309,7 @@ def parse_all_playlists(txt_dir, output_dir):
             # Save individual JSON file
             json_filename = txt_file.stem + '.json'
             json_filepath = output_path / json_filename
+            parsed_json_files.add(json_filename)
 
             with open(json_filepath, 'w', encoding='utf-8') as f:
                 json.dump(playlist, f, indent=2, ensure_ascii=False)
@@ -315,6 +319,24 @@ def parse_all_playlists(txt_dir, output_dir):
 
         except Exception as e:
             print(f"✗ Error: {e}")
+
+    # Load any existing JSON files that don't have txt sources
+    # (These are playlists fetched from KCUR or manually created)
+    existing_json_files = sorted(output_path.glob('*.json'))
+    preserved_count = 0
+
+    for json_file in existing_json_files:
+        if json_file.name not in parsed_json_files:
+            try:
+                with open(json_file, 'r', encoding='utf-8') as f:
+                    playlist = json.load(f)
+                    all_playlists.append(playlist)
+                    preserved_count += 1
+            except Exception as e:
+                print(f"⚠️  Warning: Could not load {json_file.name}: {e}")
+
+    if preserved_count > 0:
+        print(f"\n✓ Preserved {preserved_count} existing JSON files without txt sources")
 
     # Sort all playlists by date
     all_playlists.sort(key=lambda x: x['date'] if x['date'] else '0000-00-00')
@@ -328,6 +350,7 @@ def main():
     txt_dir = 'txt'
     individual_json_dir = 'json/individual'
     consolidated_json_path = 'json/playlists.json'
+    web_public_path = 'web/public/playlists.json'
 
     # Parse all playlists
     all_playlists = parse_all_playlists(txt_dir, individual_json_dir)
@@ -336,6 +359,15 @@ def main():
     os.makedirs('json', exist_ok=True)
     with open(consolidated_json_path, 'w', encoding='utf-8') as f:
         json.dump(all_playlists, f, indent=2, ensure_ascii=False)
+
+    # Copy to web/public for web app
+    web_public_dir = os.path.dirname(web_public_path)
+    if os.path.exists(web_public_dir):
+        with open(web_public_path, 'w', encoding='utf-8') as f:
+            json.dump(all_playlists, f, indent=2, ensure_ascii=False)
+        print(f"✓ Copied to web app: {web_public_path}")
+    else:
+        print(f"⚠️  Warning: {web_public_dir} not found, skipping web app copy")
 
     # Print summary
     print(f"\n{'='*60}")
