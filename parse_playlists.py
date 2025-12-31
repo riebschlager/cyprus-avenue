@@ -25,11 +25,12 @@ def extract_artist_from_title_and_description(title, description):
         return title
 
     # First, try to extract from description if it explicitly mentions an artist
-    # Pattern: "The legendary Artist Name" or "Artist Name is back"
+    # Pattern: "The legendary Artist Name" or "Artist Name is back" or "Singer-songwriter Artist Name's"
     if description:
         desc_patterns = [
             r'(?:The legendary|Legendary)\s+([A-Z][a-zA-Z\s\.&]+?)(?:\s+is|\s+has|\s+was)',
             r'^([A-Z][a-zA-Z\s\.&]+?)\s+is back',
+            r'(?:Singer-songwriter|Singer/songwriter)\s+([A-Z][a-zA-Z\s\.&]+?)(?:\'s|\s+is|\s+has)',
         ]
         for pattern in desc_patterns:
             match = re.search(pattern, description)
@@ -41,6 +42,11 @@ def extract_artist_from_title_and_description(title, description):
 
     # Pattern: "Here Comes Artist Name" or "Here's Artist Name"
     match = re.match(r'^(?:Here Comes?|Here\'s)\s+(.+)$', title, re.IGNORECASE)
+    if match:
+        return match.group(1).strip()
+
+    # Pattern: "Artist Name Returns" or "Artist Name Redux" or "Artist Name Encore"
+    match = re.match(r'^(.+?)\s+(?:Returns|Redux|Encore)$', title, re.IGNORECASE)
     if match:
         return match.group(1).strip()
 
@@ -147,17 +153,7 @@ def parse_playlist_file(filepath):
             tracks.append({"artist": artist, "song": song})
             continue
 
-        # Pattern 2: Artist - Song (no quotes)
-        match = re.match(r'^(.+?)\s*[-–—]\s*(.+?)(?:\s+from\s+.+)?$', line)
-        if match:
-            artist = match.group(1).strip()
-            song = match.group(2).strip()
-            # Remove " from " and album info if present
-            song = re.sub(r'\s+from\s+.+$', '', song).strip()
-            tracks.append({"artist": artist, "song": song})
-            continue
-
-        # Pattern 3: "Song" from Album (for artist-themed shows)
+        # Pattern 2: "Song" from Album (for artist-themed shows)
         match = re.match(r'^["\u201c](.+?)["\u201d]\s+from\s+(.+)$', line)
         if match:
             song = match.group(1).strip()
@@ -167,12 +163,25 @@ def parse_playlist_file(filepath):
             tracks.append({"artist": artist, "song": song})
             continue
 
-        # Pattern 4: Just "Song" (for artist-themed shows like Prince)
-        match = re.match(r'^["\u201c](.+?)["\u201d]\s*$', line)
+        # Pattern 3: Just "Song" (for artist-themed shows like Prince)
+        # Also handles "Song" (with collaborator) format
+        # IMPORTANT: Check this BEFORE Pattern 4 (Artist - Song) to avoid misinterpreting
+        # dashes within quoted song titles (e.g., "Ghost Train Four-Oh-Ten")
+        match = re.match(r'^["\u201c](.+?)["\u201d](?:\s*\(.*\))?\s*$', line)
         if match:
             song = match.group(1).strip()
             # Extract artist from title/description for single-artist shows
             artist = extract_artist_from_title_and_description(title, description)
+            tracks.append({"artist": artist, "song": song})
+            continue
+
+        # Pattern 4: Artist - Song (no quotes)
+        match = re.match(r'^(.+?)\s*[-–—]\s*(.+?)(?:\s+from\s+.+)?$', line)
+        if match:
+            artist = match.group(1).strip()
+            song = match.group(2).strip()
+            # Remove " from " and album info if present
+            song = re.sub(r'\s+from\s+.+$', '', song).strip()
             tracks.append({"artist": artist, "song": song})
             continue
 
