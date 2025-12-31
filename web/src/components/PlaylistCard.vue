@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Playlist } from '../types/playlist'
 import StreamingLinks from './StreamingLinks.vue'
+import { useStreamingLinks } from '../composables/useStreamingLinks'
 
 defineProps<{
   playlist: Playlist
@@ -12,9 +13,16 @@ const emit = defineEmits<{
   toggle: []
 }>()
 
+const { getTrackData } = useStreamingLinks()
+
 const formatDate = (dateStr: string) => {
   const date = new Date(dateStr)
   return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+}
+
+const getAlbumArt = (artist: string, song: string): string | null => {
+  const trackData = getTrackData(artist, song)
+  return trackData?.albumArt || null
 }
 </script>
 
@@ -61,6 +69,22 @@ const formatDate = (dateStr: string) => {
             class="flex items-start gap-3 py-2 px-3 rounded hover:bg-gray-50"
           >
             <span class="text-sm text-gray-400 font-mono min-w-[2rem]">{{ index + 1 }}.</span>
+
+            <!-- Album Art (only loads when expanded) -->
+            <div v-if="getAlbumArt(track.artist, track.song)" class="flex-shrink-0">
+              <img
+                :src="getAlbumArt(track.artist, track.song)!"
+                :alt="`${track.song} by ${track.artist}`"
+                class="w-12 h-12 rounded shadow-sm object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div v-else class="flex-shrink-0 w-12 h-12 bg-gray-200 rounded flex items-center justify-center">
+              <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+              </svg>
+            </div>
+
             <div class="flex-1 min-w-0">
               <p class="text-sm font-medium text-gray-900">{{ track.song }}</p>
               <p class="text-xs text-gray-600">{{ track.artist }}</p>
