@@ -36,7 +36,7 @@ def extract_artist_from_title_and_description(title, description):
             r'It\'s\s+([A-Z][a-zA-Z\s\.&]+?)\s+on\s+this\s+edition',  # "It's Sly and the Family Stone on this edition"
             r'^([A-Z][a-zA-Z\s\.&]+?)\s+is back',
             r'(?:Singer-songwriter|Singer/songwriter)\s+([A-Z][a-zA-Z\s\.&]+?)(?:\'s|\s+is|\s+has)',
-            r'Singer\s+([A-Z][a-zA-Z\s\.&]+?),',  # "Singer Van Morrison,"
+            r'Singer\s+([A-Z][a-zA-Z\s\.&]+?)(?:,|\s+just|\s+is|\s+has|\s+was)',  # "Singer Van Morrison," or "Singer Aaron Neville just"
         ]
         for pattern in desc_patterns:
             match = re.search(pattern, description)
@@ -178,9 +178,11 @@ def parse_playlist_file(filepath):
         # Also handles "Song" (with collaborator) format
         # IMPORTANT: Check this BEFORE Pattern 4 (Artist - Song) to avoid misinterpreting
         # dashes within quoted song titles (e.g., "Ghost Train Four-Oh-Ten")
-        match = re.match(r'^["\u201c](.+?)["\u201d](?:\s*\(.*\))?\s*$', line)
+        match = re.match(r'^["\u201c](.+?)["\u201d](?:\s*\(.*\))?\s*(?:\d+:\d+)?\s*$', line)
         if match:
             song = match.group(1).strip()
+            # Strip any trailing track duration (e.g., "4:10") that might have been included
+            song = re.sub(r'\s+\d+:\d+\s*$', '', song).strip()
             # Extract artist from title/description for single-artist shows
             artist = extract_artist_from_title_and_description(title, description)
             tracks.append({"artist": artist, "song": song})
