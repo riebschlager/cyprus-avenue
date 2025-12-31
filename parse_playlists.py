@@ -28,6 +28,7 @@ def extract_artist_from_title_and_description(title, description):
     # Pattern: "The legendary Artist Name" or "Artist Name is back" or "Singer-songwriter Artist Name's"
     if description:
         desc_patterns = [
+            r'[\u201c"][^""\u201d]+,[\u201d"]\s+the\s+(?:iconic|legendary)\s+([A-Z][a-zA-Z\s\.&]+?)(?:\.|,|$)',  # "old blue eyes," the iconic Frank Sinatra
             r'[\u201c"][^""\u201d]+,[\u201d"]\s+([A-Z][a-zA-Z\s\.&]+?)(?:\s+through|\s+is|\s+has)',  # "The Boss," Bruce Springsteen
             r'(?:The legendary|Legendary)\s+([A-Z][a-zA-Z\s\.&]+?)(?:\s+is|\s+has|\s+was)',
             r'(?:The great|great)\s+([A-Z][a-zA-Z\s\.&]+?)(?:\s+got|\s+is|\s+has|\s+was)',  # "The great Jimi Hendrix"
