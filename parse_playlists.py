@@ -19,10 +19,25 @@ def extract_date_from_filename(filename):
     return None
 
 
-def extract_artist_from_title(title):
-    """Extract artist name from show titles like 'Here Comes Shelby Lynne' -> 'Shelby Lynne'"""
+def extract_artist_from_title_and_description(title, description):
+    """Extract artist name from show titles and descriptions"""
     if not title:
         return title
+
+    # First, try to extract from description if it explicitly mentions an artist
+    # Pattern: "The legendary Artist Name" or "Artist Name is back"
+    if description:
+        desc_patterns = [
+            r'(?:The legendary|Legendary)\s+([A-Z][a-zA-Z\s\.&]+?)(?:\s+is|\s+has|\s+was)',
+            r'^([A-Z][a-zA-Z\s\.&]+?)\s+is back',
+        ]
+        for pattern in desc_patterns:
+            match = re.search(pattern, description)
+            if match:
+                artist = match.group(1).strip()
+                # Clean up trailing words
+                artist = re.sub(r'\s+(is|has|was)$', '', artist)
+                return artist
 
     # Pattern: "Here Comes Artist Name" or "Here's Artist Name"
     match = re.match(r'^(?:Here Comes?|Here\'s)\s+(.+)$', title, re.IGNORECASE)
@@ -147,8 +162,8 @@ def parse_playlist_file(filepath):
         if match:
             song = match.group(1).strip()
             album = match.group(2).strip()
-            # Extract artist from title for single-artist shows
-            artist = extract_artist_from_title(title)
+            # Extract artist from title/description for single-artist shows
+            artist = extract_artist_from_title_and_description(title, description)
             tracks.append({"artist": artist, "song": song})
             continue
 
@@ -156,8 +171,8 @@ def parse_playlist_file(filepath):
         match = re.match(r'^["\u201c](.+?)["\u201d]\s*$', line)
         if match:
             song = match.group(1).strip()
-            # Extract artist from title for single-artist shows
-            artist = extract_artist_from_title(title)
+            # Extract artist from title/description for single-artist shows
+            artist = extract_artist_from_title_and_description(title, description)
             tracks.append({"artist": artist, "song": song})
             continue
 
@@ -172,8 +187,8 @@ def parse_playlist_file(filepath):
         # Pattern 6: Just song title (no quotes, no artist - for artist-themed shows)
         # This catches simple song titles that don't match any other pattern
         if line and not line.startswith('By ') and len(line) > 3:
-            # Extract artist from title for single-artist shows
-            artist = extract_artist_from_title(title)
+            # Extract artist from title/description for single-artist shows
+            artist = extract_artist_from_title_and_description(title, description)
             tracks.append({"artist": artist, "song": line})
             continue
 
