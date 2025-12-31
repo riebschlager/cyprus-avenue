@@ -165,6 +165,14 @@ def parse_playlist_file(filepath):
             tracks.append({"artist": artist, "song": song})
             continue
 
+        # Pattern 1b: "Song" - Artist (reversed format)
+        match = re.match(r'^["\u201c](.+?)["\u201d]\s*[-–—]\s*(.+)$', line)
+        if match:
+            song = match.group(1).strip()
+            artist = match.group(2).strip()
+            tracks.append({"artist": artist, "song": song})
+            continue
+
         # Pattern 2: "Song" from Album (for artist-themed shows)
         match = re.match(r'^["\u201c](.+?)["\u201d]\s+from\s+(.+)$', line)
         if match:
