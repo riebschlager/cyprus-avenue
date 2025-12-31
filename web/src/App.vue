@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { usePlaylists } from './composables/usePlaylists'
+import HomePage from './components/HomePage.vue'
 import PlaylistList from './components/PlaylistList.vue'
 import SearchBar from './components/SearchBar.vue'
 import StatsPanel from './components/StatsPanel.vue'
 import TracksView from './components/TracksView.vue'
 
-type View = 'playlists' | 'tracks'
+type View = 'home' | 'playlists' | 'tracks'
 
-const currentView = ref<View>('playlists')
+const currentView = ref<View>('home')
 
 const { loading, error, playlists, searchQuery, filteredPlaylists, stats, fetchPlaylists } = usePlaylists()
 
@@ -33,6 +34,17 @@ const setView = (view: View) => {
         <!-- Navigation Tabs -->
         <div class="mt-6 border-b border-gray-800">
           <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+            <button
+              @click="setView('home')"
+              :class="[
+                currentView === 'home'
+                  ? 'border-blue-500 text-blue-400'
+                  : 'border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-700',
+                'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm'
+              ]"
+            >
+              Home
+            </button>
             <button
               @click="setView('playlists')"
               :class="[
@@ -70,8 +82,13 @@ const setView = (view: View) => {
       </div>
 
       <div v-else>
+        <!-- Home View -->
+        <div v-if="currentView === 'home'">
+          <HomePage :stats="stats" @navigate="setView" />
+        </div>
+
         <!-- Playlists View -->
-        <div v-if="currentView === 'playlists'">
+        <div v-else-if="currentView === 'playlists'">
           <StatsPanel :stats="stats" />
 
           <div class="mt-8">
