@@ -6,6 +6,6 @@ WORKDIR /app
 RUN pip install --no-cache-dir requests beautifulsoup4
 
 # Copy the discovery script
-COPY discover_playlists.py .
+COPY scripts/discovery/discover_playlists.py .
 
 CMD ["python", "discover_playlists.py"]

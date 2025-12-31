@@ -6,6 +6,6 @@ WORKDIR /app
 RUN pip install --no-cache-dir requests beautifulsoup4
 
 # Copy the fetch script
-COPY fetch_missing_playlists.py .
+COPY scripts/discovery/fetch_missing_playlists.py .
 
 CMD ["python", "fetch_missing_playlists.py"]

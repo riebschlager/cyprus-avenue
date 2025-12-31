@@ -91,39 +91,49 @@ cyprus-avenue/
 │   └── playlists.json       # Consolidated file with all playlists
 ├── archive/
 │   └── txt/                 # Original copy/pasted text files
-├── parse_playlists.py       # Parser script
-├── discover_playlists.py    # Web discovery script
-├── fetch_missing_playlists.py # Playlist fetcher script
-├── Dockerfile               # Parser Docker environment
-├── Dockerfile.discover      # Discovery Docker environment
-├── Dockerfile.fetch         # Fetcher Docker environment
+├── scripts/
+│   ├── parsing/             # Parser tools
+│   │   └── parse_playlists.py
+│   ├── discovery/           # Discovery and fetching tools
+│   │   ├── discover_playlists.py
+│   │   └── fetch_missing_playlists.py
+│   └── spotify/             # Spotify integration scripts
+│       └── index-spotify-tracks.js
+├── docker/                  # Docker environments
+│   ├── Dockerfile.parse     # Parser environment
+│   ├── Dockerfile.discover  # Discovery environment
+│   └── Dockerfile.fetch     # Fetcher environment
+├── data/                    # Generated analysis data
+│   ├── discovered_playlists.json
+│   └── gap_analysis.json
 ├── ARCHIVE_REPORT.md        # Detailed archive report
+├── CLAUDE.md                # Development process documentation
 └── README.md                # This file
 ```
 
 ## Tools & Scripts
 
-### Parser (`parse_playlists.py`)
+### Parser (`scripts/parsing/parse_playlists.py`)
 Converts raw text files to structured JSON. Handles multiple playlist formats and extracts artist/song information.
 
 ```bash
-docker build -t cyprus-avenue-parser .
+docker build -f docker/Dockerfile.parse -t cyprus-avenue-parser .
 docker run --rm -v "$(pwd)/archive/txt:/app/txt" -v "$(pwd)/json:/app/json" cyprus-avenue-parser
 ```
 
-### Discovery Tool (`discover_playlists.py`)
+### Discovery Tool (`scripts/discovery/discover_playlists.py`)
 Scrapes KCUR website to find available playlists and identify gaps in the archive.
 
 ```bash
-docker build -f Dockerfile.discover -t cyprus-avenue-discover .
+docker build -f docker/Dockerfile.discover -t cyprus-avenue-discover .
 docker run --rm -v "$(pwd):/app" cyprus-avenue-discover
 ```
 
-### Fetcher (`fetch_missing_playlists.py`)
+### Fetcher (`scripts/discovery/fetch_missing_playlists.py`)
 Automatically downloads missing playlists from KCUR and adds them to the archive.
 
 ```bash
-docker build -f Dockerfile.fetch -t cyprus-avenue-fetch .
+docker build -f docker/Dockerfile.fetch -t cyprus-avenue-fetch .
 docker run --rm -v "$(pwd):/app" cyprus-avenue-fetch
 ```
 

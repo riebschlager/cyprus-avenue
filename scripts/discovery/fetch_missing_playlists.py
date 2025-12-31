@@ -222,11 +222,11 @@ def main():
 
     # Load gap analysis to get missing playlists
     try:
-        with open('gap_analysis.json', 'r') as f:
+        with open('data/gap_analysis.json', 'r') as f:
             gap_data = json.load(f)
             missing_playlists = gap_data.get('missing', [])
     except FileNotFoundError:
-        print("Error: gap_analysis.json not found. Run discover_playlists.py first.")
+        print("Error: data/gap_analysis.json not found. Run discover_playlists.py first.")
         return
 
     if not missing_playlists:

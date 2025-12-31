@@ -37,14 +37,14 @@ cp .env.example .env
 ```bash
 SPOTIFY_CLIENT_ID=your_client_id_here \
 SPOTIFY_CLIENT_SECRET=your_client_secret_here \
-node scripts/index-spotify-tracks.js
+node scripts/spotify/index-spotify-tracks.js
 ```
 
 ### 3. Run the Indexing Script
 
 ```bash
 # From the project root directory
-node scripts/index-spotify-tracks.js
+node scripts/spotify/index-spotify-tracks.js
 ```
 
 The script will:
@@ -115,7 +115,7 @@ To re-index (e.g., after adding new playlists):
 
 ```bash
 # Just run the same command again
-SPOTIFY_CLIENT_ID=xxx SPOTIFY_CLIENT_SECRET=yyy node scripts/index-spotify-tracks.js
+SPOTIFY_CLIENT_ID=xxx SPOTIFY_CLIENT_SECRET=yyy node scripts/spotify/index-spotify-tracks.js
 ```
 
 The script will overwrite the existing index file.

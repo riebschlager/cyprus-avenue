@@ -219,19 +219,19 @@ def main():
         return
 
     # Save discovered playlists
-    with open('discovered_playlists.json', 'w') as f:
+    with open('data/discovered_playlists.json', 'w') as f:
         json.dump(discovered, f, indent=2)
 
-    print(f"✓ Saved discovered playlists to discovered_playlists.json")
+    print(f"✓ Saved discovered playlists to data/discovered_playlists.json")
 
     # Analyze gaps
     results = analyze_gaps(discovered)
 
     # Save gap analysis
     if results:
-        with open('gap_analysis.json', 'w') as f:
+        with open('data/gap_analysis.json', 'w') as f:
             json.dump(results, f, indent=2)
-        print(f"\n✓ Saved gap analysis to gap_analysis.json")
+        print(f"\n✓ Saved gap analysis to data/gap_analysis.json")
 
 
 if __name__ == '__main__':
