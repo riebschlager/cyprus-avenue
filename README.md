@@ -1,7 +1,150 @@
-# cyprus-avenue
-An effort to archive Bill Shapiro's Cyprus Avenue
+# Cyprus Avenue Playlist Archive
+
+A comprehensive archive of playlists from KCUR's legendary **Cyprus Avenue** radio show, hosted by Bill Shapiro for over 40 years (1978-2018).
+
+## About Cyprus Avenue
+
+Cyprus Avenue was a Saturday night institution on KCUR 89.3 FM in Kansas City, featuring "the world of popular music from gospel to rock - from country to reggae - from a different point of view." Bill Shapiro, a Kansas City tax attorney by day and music enthusiast by night, curated unique playlists introducing listeners to both classic and contemporary artists across all genres. He passed away in January 2020 at age 82.
+
+## Archive Contents
+
+This archive preserves **125 Cyprus Avenue playlists** spanning nearly 8 years:
+
+- **Total Playlists**: 125
+- **Total Tracks**: 1,506
+- **Date Range**: December 12, 2009 to July 14, 2017
+- **Average Tracks per Show**: 12.0
+
+## Data Format
+
+All playlists are available in structured JSON format:
+
+### Individual Playlists
+Each episode has its own JSON file in [`json/individual/`](json/individual/):
+```json
+{
+  "date": "2015-01-03",
+  "title": "2014 Favorites",
+  "description": "As we look forward to what 2015 will bring...",
+  "tracks": [
+    {
+      "artist": "Rosanne Cash",
+      "song": "A Feather's Not A Bird"
+    }
+  ],
+  "source_url": "https://www.kcur.org/tags/cyprus-avenue",
+  "archived_date": "2025-12-31"
+}
+```
+
+### Consolidated Data
+All playlists are also available in a single file: [`json/playlists.json`](json/playlists.json)
+
+## Using the Data
+
+### Quick Start - Python
+```python
+import json
+
+# Load all playlists
+with open('json/playlists.json', 'r') as f:
+    playlists = json.load(f)
+
+# Find all Bob Dylan songs
+dylan_songs = []
+for playlist in playlists:
+    for track in playlist['tracks']:
+        if 'Dylan' in track['artist']:
+            dylan_songs.append(track)
+
+print(f"Found {len(dylan_songs)} Dylan tracks")
+```
+
+### Quick Start - JavaScript
+```javascript
+const playlists = require('./json/playlists.json');
+
+// Get all unique artists
+const artists = new Set();
+playlists.forEach(playlist => {
+  playlist.tracks.forEach(track => {
+    artists.add(track.artist);
+  });
+});
+
+console.log(`${artists.size} unique artists`);
+```
+
+## Example Queries
+
+- **Search by artist**: Find all tracks by a specific artist
+- **Search by date**: Get playlists from a specific time period
+- **Genre analysis**: Identify most-played artists or songs
+- **Playlist recreation**: Use the data to create Spotify/Apple Music playlists
+
+## Repository Structure
+
+```
+cyprus-avenue/
+├── json/
+│   ├── individual/          # 125 individual playlist JSON files
+│   └── playlists.json       # Consolidated file with all playlists
+├── archive/
+│   └── txt/                 # Original copy/pasted text files
+├── parse_playlists.py       # Parser script
+├── discover_playlists.py    # Web discovery script
+├── fetch_missing_playlists.py # Playlist fetcher script
+├── Dockerfile               # Parser Docker environment
+├── Dockerfile.discover      # Discovery Docker environment
+├── Dockerfile.fetch         # Fetcher Docker environment
+├── ARCHIVE_REPORT.md        # Detailed archive report
+└── README.md                # This file
+```
+
+## Tools & Scripts
+
+### Parser (`parse_playlists.py`)
+Converts raw text files to structured JSON. Handles multiple playlist formats and extracts artist/song information.
+
+```bash
+docker build -t cyprus-avenue-parser .
+docker run --rm -v "$(pwd)/archive/txt:/app/txt" -v "$(pwd)/json:/app/json" cyprus-avenue-parser
+```
+
+### Discovery Tool (`discover_playlists.py`)
+Scrapes KCUR website to find available playlists and identify gaps in the archive.
+
+```bash
+docker build -f Dockerfile.discover -t cyprus-avenue-discover .
+docker run --rm -v "$(pwd):/app" cyprus-avenue-discover
+```
+
+### Fetcher (`fetch_missing_playlists.py`)
+Automatically downloads missing playlists from KCUR and adds them to the archive.
+
+```bash
+docker build -f Dockerfile.fetch -t cyprus-avenue-fetch .
+docker run --rm -v "$(pwd):/app" cyprus-avenue-fetch
+```
+
+## Historical Significance
+
+This archive is particularly valuable because:
+
+1. **Preservation**: Many of these playlists (100+ from 2009-2017) are no longer easily accessible on KCUR's website
+2. **Cultural Heritage**: Documents nearly 8 years of Kansas City's music culture through Bill Shapiro's unique perspective
+3. **Musical Diversity**: Showcases an eclectic mix of genres from a legendary radio host
+4. **Structured Data**: Makes 40+ years of musical curation searchable and analyzable
 
 ## Sources
 
-https://www.kcur.org/tags/cyprus-avenue
+- Original playlists: [KCUR Cyprus Avenue Tag](https://www.kcur.org/tags/cyprus-avenue)
+- About the show: [Cyprus Avenue on KCUR](https://www.kcur.org/show/cyprus-avenue)
 
+## License
+
+This archive is created for preservation and educational purposes. The original content is © KCUR Kansas City Public Radio. Track listings and metadata are provided as-is for archival purposes.
+
+---
+
+*This archive represents an important preservation effort of Kansas City's musical cultural heritage and the legacy of Bill Shapiro's Cyprus Avenue.*
