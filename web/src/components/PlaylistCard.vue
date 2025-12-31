@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Playlist } from '../types/playlist'
+import StreamingLinks from './StreamingLinks.vue'
 
 defineProps<{
   playlist: Playlist
@@ -63,6 +64,9 @@ const formatDate = (dateStr: string) => {
             <div class="flex-1 min-w-0">
               <p class="text-sm font-medium text-gray-900">{{ track.song }}</p>
               <p class="text-xs text-gray-600">{{ track.artist }}</p>
+            </div>
+            <div class="flex-shrink-0">
+              <StreamingLinks :artist="track.artist" :song="track.song" />
             </div>
           </div>
         </div>
