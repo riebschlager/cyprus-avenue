@@ -31,6 +31,7 @@ def extract_artist_from_title_and_description(title, description):
             r'(?:The legendary|Legendary)\s+([A-Z][a-zA-Z\s\.&]+?)(?:\s+is|\s+has|\s+was)',
             r'^([A-Z][a-zA-Z\s\.&]+?)\s+is back',
             r'(?:Singer-songwriter|Singer/songwriter)\s+([A-Z][a-zA-Z\s\.&]+?)(?:\'s|\s+is|\s+has)',
+            r'Singer\s+([A-Z][a-zA-Z\s\.&]+?),',  # "Singer Van Morrison,"
         ]
         for pattern in desc_patterns:
             match = re.search(pattern, description)
