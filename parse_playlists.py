@@ -96,6 +96,9 @@ def parse_playlist_file(filepath):
         if not line or line.startswith('CREDIT') or line.startswith('Credit') or 'FLICKR' in line:
             continue
 
+        # Strip leading numbers from numbered lists (e.g., "1. Artist, Album" -> "Artist, Album")
+        line = re.sub(r'^\d+\.\s*', '', line)
+
         # Try to parse artist - song patterns
         # Pattern 1: Artist - "Song"
         match = re.match(r'^(.+?)\s*[-–—]\s*["\u201c](.+?)["\u201d]', line)

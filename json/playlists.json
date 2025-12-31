@@ -54,23 +54,23 @@
     "description": "",
     "tracks": [
       {
-        "artist": "1. Tom Jones",
+        "artist": "Tom Jones",
         "song": "Praise & Blame"
       },
       {
-        "artist": "2. Bettye LaVette",
+        "artist": "Bettye LaVette",
         "song": "Interpretations: The British Rock Songbook"
       },
       {
-        "artist": "3. Mary Gauthier",
+        "artist": "Mary Gauthier",
         "song": "The Foundling"
       },
       {
-        "artist": "4. Bruce Springsteen",
+        "artist": "Bruce Springsteen",
         "song": "The Promise"
       },
       {
-        "artist": "5. Bob Dylan",
+        "artist": "Bob Dylan",
         "song": "The Best of The Original Mono Recordings"
       }
     ],
