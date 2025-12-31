@@ -4,19 +4,19 @@ Generated: 2025-12-31
 
 ## Executive Summary
 
-This archive contains **119 Cyprus Avenue playlists** from KCUR's legendary rock-and-roll radio show, hosted by Bill Shapiro for over 40 years. The archive spans from **2009-12-12 to 2017-07-14** and includes **1,439 tracks** across various genres.
+This archive contains **125 Cyprus Avenue playlists** from KCUR's legendary rock-and-roll radio show, hosted by Bill Shapiro for over 40 years. The archive spans from **2009-12-12 to 2017-07-14** and includes **1,506 tracks** across various genres.
 
 ## Archive Statistics
 
 ### Coverage
-- **Total Playlists**: 119
-- **Total Tracks**: 1,439
-- **Average Tracks per Show**: 12.1
+- **Total Playlists**: 125
+- **Total Tracks**: 1,506
+- **Average Tracks per Show**: 12.0
 - **Date Range**: December 12, 2009 to July 14, 2017
 - **Time Span**: ~7.5 years
 
 ### Data Quality
-- **100% Success Rate**: All 119 playlists successfully parsed
+- **100% Success Rate**: All 125 playlists successfully parsed
 - **Zero Empty Playlists**: All playlists contain extracted track data
 - **Structured Format**: All data available in both individual JSON files and consolidated format
 
@@ -26,14 +26,16 @@ This archive contains **119 Cyprus Avenue playlists** from KCUR's legendary rock
 ```
 cyprus-avenue/
 ├── json/
-│   ├── individual/          # 119 individual playlist JSON files
+│   ├── individual/          # 125 individual playlist JSON files
 │   └── playlists.json       # Consolidated file with all playlists
 ├── archive/
 │   └── txt/                 # 119 original copy/pasted text files
 ├── parse_playlists.py       # Parser script
 ├── discover_playlists.py    # Web discovery script
+├── fetch_missing_playlists.py # Playlist fetcher script
 ├── Dockerfile               # Parser Docker environment
-└── Dockerfile.discover      # Discovery Docker environment
+├── Dockerfile.discover      # Discovery Docker environment
+└── Dockerfile.fetch         # Fetcher Docker environment
 ```
 
 ### JSON Schema

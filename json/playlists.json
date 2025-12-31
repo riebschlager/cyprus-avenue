@@ -135,6 +135,328 @@
     "archived_date": "2025-12-31"
   },
   {
+    "date": "2013-06-22",
+    "title": "Marty Stuart -- Redux",
+    "description": "Cyprus Avenue performance featuring Marty Stuart at The Folly Theater, demonstrating his multi-faceted music through various duets and solo recordings.",
+    "tracks": [
+      {
+        "artist": "Marty Stuart",
+        "song": "Crying, Waiting, Hoping (with Steve Earle)"
+      },
+      {
+        "artist": "Marty Stuart",
+        "song": "Doin' My Time (with Johnny Cash)"
+      },
+      {
+        "artist": "Marty Stuart",
+        "song": "Here I Am"
+      },
+      {
+        "artist": "Marty Stuart",
+        "song": "The Gospel Story of Noah's Ark"
+      },
+      {
+        "artist": "Marty Stuart",
+        "song": "No Hard Times Blues"
+      },
+      {
+        "artist": "Marty Stuart",
+        "song": "The Weight (with The Staple Singers)"
+      },
+      {
+        "artist": "Marty Stuart",
+        "song": "It's Time to Go Home"
+      },
+      {
+        "artist": "Marty Stuart",
+        "song": "Farmer's Blues (with Merle Haggard)"
+      },
+      {
+        "artist": "Marty Stuart",
+        "song": "Branded"
+      },
+      {
+        "artist": "Marty Stuart",
+        "song": "Ghost Train Four-Oh-Ten"
+      },
+      {
+        "artist": "Marty Stuart",
+        "song": "Hearts Like Ours (with Connie Smith)"
+      },
+      {
+        "artist": "Marty Stuart",
+        "song": "Lord, Give Me Just a Little More Time"
+      }
+    ],
+    "source_url": "https://www.kcur.org/music-shows/2013-06-22/marty-stuart-redux",
+    "archived_date": "2025-12-31"
+  },
+  {
+    "date": "2013-06-29",
+    "title": "Rhythm to the Rhythms, Vol. III: 2003-2004",
+    "description": "A collection showcasing the best of 2003-2004 music from various artists featured on Cyprus Avenue.",
+    "tracks": [
+      {
+        "artist": "Al Green",
+        "song": "I've Been Waitin' on You"
+      },
+      {
+        "artist": "Lucinda Williams",
+        "song": "Righteously"
+      },
+      {
+        "artist": "Jim White",
+        "song": "Static on the Radio"
+      },
+      {
+        "artist": "Los Lobos",
+        "song": "Wicked Rain / Across 110th Street"
+      },
+      {
+        "artist": "Bob Dylan",
+        "song": "Cold Irons Bound"
+      },
+      {
+        "artist": "Dave Alvin",
+        "song": "Ashgrove"
+      },
+      {
+        "artist": "Norah Jones",
+        "song": "Be Here to Love Me"
+      },
+      {
+        "artist": "Toots and The Maytals (with Willie Nelson)",
+        "song": "Still is Still Moving to Me"
+      },
+      {
+        "artist": "Warren Zevon",
+        "song": "Keep Me in Your Heart"
+      }
+    ],
+    "source_url": "https://www.kcur.org/music-shows/2013-06-29/rhythm-to-the-rhythms-vol-iii-2003-2004",
+    "archived_date": "2025-12-31"
+  },
+  {
+    "date": "2013-07-06",
+    "title": "Jimmy and Bob",
+    "description": "A celebration of reggae legends Jimmy Cliff and Bob Marley, featuring their most beloved songs.",
+    "tracks": [
+      {
+        "artist": "Jimmy Cliff",
+        "song": "Trapped"
+      },
+      {
+        "artist": "Bob Marley",
+        "song": "Three Little Birds"
+      },
+      {
+        "artist": "Bob Marley",
+        "song": "No Woman No Cry"
+      },
+      {
+        "artist": "Jimmy Cliff",
+        "song": "You Can Get It If You Really Want"
+      },
+      {
+        "artist": "Bob Marley",
+        "song": "Stir It Up"
+      },
+      {
+        "artist": "Jimmy Cliff",
+        "song": "World Upside Down"
+      },
+      {
+        "artist": "Bob Marley",
+        "song": "I Shot the Sheriff"
+      },
+      {
+        "artist": "Jimmy Cliff",
+        "song": "One More"
+      },
+      {
+        "artist": "Bob Marley",
+        "song": "Could You Be Loved"
+      },
+      {
+        "artist": "Jimmy Cliff",
+        "song": "Many Rivers to Cross"
+      },
+      {
+        "artist": "Bob Marley",
+        "song": "Redemption Song"
+      }
+    ],
+    "source_url": "https://www.kcur.org/music-shows/2013-07-06/jimmy-and-bob",
+    "archived_date": "2025-12-31"
+  },
+  {
+    "date": "2013-07-13",
+    "title": "Marty Stuart, Redux: Encore",
+    "description": "An encore presentation featuring Marty Stuart performing diverse musical selections including collaborations with legendary artists.",
+    "tracks": [
+      {
+        "artist": "Marty Stuart",
+        "song": "Crying, Waiting, Hoping (with Steve Earle)"
+      },
+      {
+        "artist": "Marty Stuart",
+        "song": "Doin' My Time (with Johnny Cash)"
+      },
+      {
+        "artist": "Marty Stuart",
+        "song": "Here I Am"
+      },
+      {
+        "artist": "Marty Stuart",
+        "song": "The Gospel Story of Noah's Ark"
+      },
+      {
+        "artist": "Marty Stuart",
+        "song": "No Hard Times Blues"
+      },
+      {
+        "artist": "Marty Stuart",
+        "song": "The Weight (with The Staple Singers)"
+      },
+      {
+        "artist": "Marty Stuart",
+        "song": "It's Time to Go Home"
+      },
+      {
+        "artist": "Marty Stuart",
+        "song": "Farmer's Blues (with Merle Haggard)"
+      },
+      {
+        "artist": "Marty Stuart",
+        "song": "Branded"
+      },
+      {
+        "artist": "Marty Stuart",
+        "song": "Ghost Train Four-Oh-Ten"
+      },
+      {
+        "artist": "Marty Stuart",
+        "song": "Hearts Like Ours (with Connie Smith)"
+      },
+      {
+        "artist": "Marty Stuart",
+        "song": "Lord, Give Me Just a Little More Time"
+      }
+    ],
+    "source_url": "https://www.kcur.org/music-shows/2013-07-13/marty-stuart-redux-encore",
+    "archived_date": "2025-12-31"
+  },
+  {
+    "date": "2013-08-10",
+    "title": "Ballads by Rockers, Vol. 2 (35th Anniversary Edition)",
+    "description": "A collection of classic ballads performed by rock legends, celebrating 35 years of memorable music.",
+    "tracks": [
+      {
+        "artist": "Elton John",
+        "song": "Love Song"
+      },
+      {
+        "artist": "Elvis Presley",
+        "song": "Love Me Tender"
+      },
+      {
+        "artist": "The Rolling Stones",
+        "song": "Angie"
+      },
+      {
+        "artist": "Jefferson Airplane",
+        "song": "Triad"
+      },
+      {
+        "artist": "Joe Cocker",
+        "song": "Do I Still Figure in Your Life?"
+      },
+      {
+        "artist": "Van Morrison",
+        "song": "Astral Weeks"
+      },
+      {
+        "artist": "Buddy Holly",
+        "song": "True Love Ways"
+      },
+      {
+        "artist": "The Who",
+        "song": "Behind Blue Eyes"
+      },
+      {
+        "artist": "The Beatles",
+        "song": "Yesterday"
+      },
+      {
+        "artist": "Leon Russell",
+        "song": "A Song for You"
+      },
+      {
+        "artist": "Bob Dylan",
+        "song": "Simple Twist of Fate"
+      }
+    ],
+    "source_url": "https://www.kcur.org/music-shows/2013-08-10/ballads-by-rockers-vol-2-35th-anniversary-edition",
+    "archived_date": "2025-12-31"
+  },
+  {
+    "date": "2014-02-01",
+    "title": "The Beatles' 12 Greatest Hits",
+    "description": "A curated selection of The Beatles' greatest hits featured on Cyprus Avenue following the Grammy Awards recognition of Paul McCartney and Ringo Starr.",
+    "tracks": [
+      {
+        "artist": "The Beatles",
+        "song": "Norwegian Wood"
+      },
+      {
+        "artist": "The Beatles",
+        "song": "A Hard Day's Night"
+      },
+      {
+        "artist": "The Beatles",
+        "song": "While My Guitar Gently Weeps"
+      },
+      {
+        "artist": "The Beatles",
+        "song": "Come Together"
+      },
+      {
+        "artist": "The Beatles",
+        "song": "Let It Be"
+      },
+      {
+        "artist": "The Beatles",
+        "song": "Hey Jude"
+      },
+      {
+        "artist": "The Beatles",
+        "song": "Something"
+      },
+      {
+        "artist": "The Beatles",
+        "song": "In My Life"
+      },
+      {
+        "artist": "The Beatles",
+        "song": "Yesterday"
+      },
+      {
+        "artist": "The Beatles",
+        "song": "Strawberry Fields Forever"
+      },
+      {
+        "artist": "The Beatles",
+        "song": "I Wanna Hold Your Hand"
+      },
+      {
+        "artist": "The Beatles",
+        "song": "A Day In The Life"
+      }
+    ],
+    "source_url": "https://www.kcur.org/arts-life/2014-02-01/the-beatles-12-greatest-hits",
+    "archived_date": "2025-12-31"
+  },
+  {
     "date": "2014-06-21",
     "title": "Rock And Roll Is Back",
     "description": "Led Zeppelin If you’re fan of '60s and '70s rock & roll, this episode of Cyprus Avenue will absolutely blow you away.  It’s the return of Led Zepplelin …",

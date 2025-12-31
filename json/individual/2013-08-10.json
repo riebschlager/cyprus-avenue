@@ -1,0 +1,53 @@
+{
+  "date": "2013-08-10",
+  "title": "Ballads by Rockers, Vol. 2 (35th Anniversary Edition)",
+  "description": "A collection of classic ballads performed by rock legends, celebrating 35 years of memorable music.",
+  "tracks": [
+    {
+      "artist": "Elton John",
+      "song": "Love Song"
+    },
+    {
+      "artist": "Elvis Presley",
+      "song": "Love Me Tender"
+    },
+    {
+      "artist": "The Rolling Stones",
+      "song": "Angie"
+    },
+    {
+      "artist": "Jefferson Airplane",
+      "song": "Triad"
+    },
+    {
+      "artist": "Joe Cocker",
+      "song": "Do I Still Figure in Your Life?"
+    },
+    {
+      "artist": "Van Morrison",
+      "song": "Astral Weeks"
+    },
+    {
+      "artist": "Buddy Holly",
+      "song": "True Love Ways"
+    },
+    {
+      "artist": "The Who",
+      "song": "Behind Blue Eyes"
+    },
+    {
+      "artist": "The Beatles",
+      "song": "Yesterday"
+    },
+    {
+      "artist": "Leon Russell",
+      "song": "A Song for You"
+    },
+    {
+      "artist": "Bob Dylan",
+      "song": "Simple Twist of Fate"
+    }
+  ],
+  "source_url": "https://www.kcur.org/music-shows/2013-08-10/ballads-by-rockers-vol-2-35th-anniversary-edition",
+  "archived_date": "2025-12-31"
+}
