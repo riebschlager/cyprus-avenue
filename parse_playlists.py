@@ -29,6 +29,7 @@ def extract_artist_from_title_and_description(title, description):
     if description:
         desc_patterns = [
             r'(?:The legendary|Legendary)\s+([A-Z][a-zA-Z\s\.&]+?)(?:\s+is|\s+has|\s+was)',
+            r'(?:The great|great)\s+([A-Z][a-zA-Z\s\.&]+?)(?:\s+got|\s+is|\s+has|\s+was)',  # "The great Jimi Hendrix"
             r'^([A-Z][a-zA-Z\s\.&]+?)\s+is back',
             r'(?:Singer-songwriter|Singer/songwriter)\s+([A-Z][a-zA-Z\s\.&]+?)(?:\'s|\s+is|\s+has)',
             r'Singer\s+([A-Z][a-zA-Z\s\.&]+?),',  # "Singer Van Morrison,"
@@ -38,8 +39,13 @@ def extract_artist_from_title_and_description(title, description):
             if match:
                 artist = match.group(1).strip()
                 # Clean up trailing words
-                artist = re.sub(r'\s+(is|has|was)$', '', artist)
+                artist = re.sub(r'\s+(is|has|was|got)$', '', artist)
                 return artist
+
+    # Pattern: "Artist Name: Album Name" - extract artist before colon
+    match = re.match(r'^([A-Z][a-zA-Z\s\.&]+?):\s+.+$', title)
+    if match:
+        return match.group(1).strip()
 
     # Pattern: "Here Comes Artist Name" or "Here's Artist Name"
     match = re.match(r'^(?:Here Comes?|Here\'s)\s+(.+)$', title, re.IGNORECASE)
