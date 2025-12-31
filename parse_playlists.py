@@ -19,6 +19,30 @@ def extract_date_from_filename(filename):
     return None
 
 
+def extract_artist_from_title(title):
+    """Extract artist name from show titles like 'Here Comes Shelby Lynne' -> 'Shelby Lynne'"""
+    if not title:
+        return title
+
+    # Pattern: "Here Comes Artist Name" or "Here's Artist Name"
+    match = re.match(r'^(?:Here Comes?|Here\'s)\s+(.+)$', title, re.IGNORECASE)
+    if match:
+        return match.group(1).strip()
+
+    # Pattern: "Artist Name Playlist" or "Artist Name's Playlist"
+    match = re.match(r'^(.+?)(?:\'s)?\s+Playlist$', title, re.IGNORECASE)
+    if match:
+        return match.group(1).strip()
+
+    # Pattern: "Remembering Artist Name"
+    match = re.match(r'^Remembering\s+(.+)$', title, re.IGNORECASE)
+    if match:
+        return match.group(1).strip()
+
+    # Default: return the title as-is
+    return title
+
+
 def parse_playlist_file(filepath):
     """Parse a single playlist text file into structured data"""
     with open(filepath, 'r', encoding='utf-8') as f:
@@ -123,8 +147,8 @@ def parse_playlist_file(filepath):
         if match:
             song = match.group(1).strip()
             album = match.group(2).strip()
-            # For these, extract artist from title if it's an artist-focused show
-            artist = title if title else ""
+            # Extract artist from title for single-artist shows
+            artist = extract_artist_from_title(title)
             tracks.append({"artist": artist, "song": song})
             continue
 
@@ -132,8 +156,8 @@ def parse_playlist_file(filepath):
         match = re.match(r'^["\u201c](.+?)["\u201d]\s*$', line)
         if match:
             song = match.group(1).strip()
-            # Use the show title as the artist for single-artist shows
-            artist = title if title else ""
+            # Extract artist from title for single-artist shows
+            artist = extract_artist_from_title(title)
             tracks.append({"artist": artist, "song": song})
             continue
 
@@ -148,8 +172,9 @@ def parse_playlist_file(filepath):
         # Pattern 6: Just song title (no quotes, no artist - for artist-themed shows)
         # This catches simple song titles that don't match any other pattern
         if line and not line.startswith('By ') and len(line) > 3:
-            # Use title as artist for single-artist shows
-            tracks.append({"artist": title if title else "", "song": line})
+            # Extract artist from title for single-artist shows
+            artist = extract_artist_from_title(title)
+            tracks.append({"artist": artist, "song": line})
             continue
 
     # Get date from filename
