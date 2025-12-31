@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useStreamingLinks } from '../composables/useStreamingLinks'
 
 const props = defineProps<{
@@ -7,9 +7,18 @@ const props = defineProps<{
   song: string
 }>()
 
-const { platforms, openTrack } = useStreamingLinks()
+const { platforms, openTrack, hasDirectLink, getTrackData, indexLoaded } = useStreamingLinks()
 const isOpen = ref(false)
 const dropdownRef = ref<HTMLElement | null>(null)
+
+const hasSpotifyLink = computed(() => {
+  // This computed depends on indexLoaded to trigger re-evaluation
+  if (!indexLoaded.value) return false
+  const result = hasDirectLink(props.artist, props.song)
+  console.log(`Checking ${props.artist} - ${props.song}:`, result)
+  return result
+})
+const trackData = computed(() => getTrackData(props.artist, props.song))
 
 const toggleDropdown = () => {
   isOpen.value = !isOpen.value
@@ -67,11 +76,20 @@ onUnmounted(() => {
             v-for="platform in platforms"
             :key="platform.name"
             @click.stop="handlePlatformClick(platform)"
-            class="flex items-center w-full px-4 py-2 text-sm text-white hover:opacity-90 transition-opacity"
+            class="flex items-center justify-between w-full px-4 py-2 text-sm text-white hover:opacity-90 transition-opacity"
             :class="platform.color"
           >
-            <span class="mr-2">{{ platform.icon }}</span>
-            {{ platform.name }}
+            <div class="flex items-center">
+              <span class="mr-2">{{ platform.icon }}</span>
+              {{ platform.name }}
+            </div>
+            <span
+              v-if="platform.name === 'Spotify' && hasSpotifyLink"
+              class="text-xs bg-white text-green-600 px-2 py-0.5 rounded font-semibold"
+              title="Direct link available"
+            >
+              ✓
+            </span>
           </button>
         </div>
       </div>
