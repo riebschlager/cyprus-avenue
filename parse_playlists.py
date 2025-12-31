@@ -47,6 +47,11 @@ def extract_artist_from_title_and_description(title, description):
                 artist = re.sub(r'\s+(is|has|was|got)$', '', artist)
                 return artist
 
+    # Pattern: "Artist Name YYYY-YYYY" - extract artist before date range
+    match = re.match(r'^([A-Z][a-zA-Z\s\.&]+?)\s+\d{4}-\d{4}$', title)
+    if match:
+        return match.group(1).strip()
+
     # Pattern: "Artist Name- Album Name" or "Artist Name: Album Name" - extract artist before separator
     match = re.match(r'^([A-Z][a-zA-Z\s\.&]+?)[-:]\s+.+$', title)
     if match:
