@@ -31,7 +31,7 @@ def extract_artist_from_title_and_description(title, description):
             r'[\u201c"][^""\u201d]+,[\u201d"]\s+the\s+(?:iconic|legendary)\s+([A-Z][a-zA-Z\s\.&]+?)(?:\.|,|$)',  # "old blue eyes," the iconic Frank Sinatra
             r'[\u201c"][^""\u201d]+,[\u201d"]\s+([A-Z][a-zA-Z\s\.&]+?)(?:\s+through|\s+is|\s+has)',  # "The Boss," Bruce Springsteen
             r'(?:The legendary|Legendary)\s+([A-Z][a-zA-Z\s\.&]+?)(?:\s+is|\s+has|\s+was)',
-            r'(?:The great|great)\s+([A-Z][a-zA-Z\s\.&]+?)(?:\s+got|\s+is|\s+has|\s+was)',  # "The great Jimi Hendrix"
+            r'(?:The great|great)\s+([A-Z][a-zA-Z\s\.&]+?)(?:\s+got|\s+is|\s+has|\s+was|\s+with)',  # "The great Jimi Hendrix" or "the great Bob Marley with"
             r'(?:genius|talent)\s+of\s+([A-Z][a-zA-Z\s\.&]+?)(?:,|\s+has|\s+is|\s+was)',  # "genius of Ray Charles," or "genius of Van Morrison has"
             r'the music of\s+([A-Z][a-zA-Z\s\.&]+?)(?:\s+inspired|\s+is|\s+on)',  # "the music of Sly and the Family Stone"
             r'It\'s\s+([A-Z][a-zA-Z\s\.&]+?)\s+on\s+this\s+edition',  # "It's Sly and the Family Stone on this edition"
