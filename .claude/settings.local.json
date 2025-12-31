@@ -5,7 +5,11 @@
       "Bash(docker run:*)",
       "Bash(cat:*)",
       "Bash(python3:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(npm create:*)",
+      "Bash(npm install:*)",
+      "Bash(npx tailwindcss:*)",
+      "Bash(npm run dev:*)"
     ]
   }
 }
