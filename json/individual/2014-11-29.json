@@ -1,0 +1,69 @@
+{
+  "date": "2014-11-29",
+  "title": "The Art of McCartney",
+  "description": "Writing some of the world’s best-known songs takes talent and great deal of know-how.  You’ll experience the music of one of the best when Cyprus Avenue presents the Art of McCartney…",
+  "tracks": [
+    {
+      "artist": "The Art of McCartney",
+      "song": "Sir Paul McCartney"
+    },
+    {
+      "artist": "Billy Joel",
+      "song": "Maybe I’m Amazed"
+    },
+    {
+      "artist": "Heart",
+      "song": "Band On The Run"
+    },
+    {
+      "artist": "Bob Dylan",
+      "song": "Things We Said Today"
+    },
+    {
+      "artist": "Sammy Hagar",
+      "song": "Birthday"
+    },
+    {
+      "artist": "Barry Gibb",
+      "song": "When I’m 64"
+    },
+    {
+      "artist": "Dion",
+      "song": "Drive My Car"
+    },
+    {
+      "artist": "Willie Nelson",
+      "song": "Yesterday"
+    },
+    {
+      "artist": "Paul Rodgers",
+      "song": "Let Me Roll It"
+    },
+    {
+      "artist": "Def Leppard",
+      "song": "Helen Wheels"
+    },
+    {
+      "artist": "Chrissie Hynde",
+      "song": "Let It Be"
+    },
+    {
+      "artist": "Allen Tousaint",
+      "song": "Lady Madonna"
+    },
+    {
+      "artist": "Dr. John",
+      "song": "Let ‘Em In"
+    },
+    {
+      "artist": "Toots, Sly & Robbie",
+      "song": "Come And Get It"
+    },
+    {
+      "artist": "Owl City",
+      "song": "Listen To What The Man Says"
+    }
+  ],
+  "source_url": "https://www.kcur.org/tags/cyprus-avenue",
+  "archived_date": "2025-12-31"
+}

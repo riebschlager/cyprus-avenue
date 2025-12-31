@@ -1,0 +1,41 @@
+{
+  "date": "2016-01-23",
+  "title": "Return to Rock & Roll",
+  "description": "If you’re fan of 60s and 70s rock & roll, this week’s Cyprus Avenue will absolutely blow you away.  It’s the return of Led Zepplelin on this week's Cyprus Avenue.",
+  "tracks": [
+    {
+      "artist": "Led Zeppelin",
+      "song": "Your Time Is Gonna Come"
+    },
+    {
+      "artist": "Led Zeppelin",
+      "song": "Babe I’m Gonna Leave You"
+    },
+    {
+      "artist": "Led Zeppelin",
+      "song": "Good Times Bad Times"
+    },
+    {
+      "artist": "Led Zeppelin",
+      "song": "I Can’t Quit You Baby"
+    },
+    {
+      "artist": "Return to Rock & Roll",
+      "song": "Led Zeppelin"
+    },
+    {
+      "artist": "Led Zeppelin",
+      "song": "I Can’t Quit You Baby (Live)"
+    },
+    {
+      "artist": "Led Zeppelin",
+      "song": "Heartbreaker"
+    },
+    {
+      "artist": "Led Zeppelin",
+      "song": "Dazed and Confused"
+    }
+  ],
+  "source_url": "https://www.kcur.org/tags/cyprus-avenue",
+  "archived_date": "2025-12-31"
+}

@@ -1,0 +1,65 @@
+{
+  "date": "2017-02-16",
+  "title": "Let Freedom Sing",
+  "description": "Cyprus Avenue celebrates Black history month by taking you on an excursion through Black history via music.  It’s Let Freedom Sing coming up on Cyprus Avenue. Sam Cooke",
+  "tracks": [
+    {
+      "artist": "The Southern Sons",
+      "song": "Go Down Moses"
+    },
+    {
+      "artist": "Billie Holiday",
+      "song": "Strange Fruit"
+    },
+    {
+      "artist": "Josh White",
+      "song": "Uncle Sam Says"
+    },
+    {
+      "artist": "Pete Seeger",
+      "song": "If I Had A Hammer"
+    },
+    {
+      "artist": "The Staples Singers",
+      "song": "Why Am I Treated So Bad"
+    },
+    {
+      "artist": "Brother Will Hairston",
+      "song": "The Alabama Bus"
+    },
+    {
+      "artist": "Bob Dylan",
+      "song": "Blowin’ In The Wind"
+    },
+    {
+      "artist": "Sam Cooke",
+      "song": "A Change Is Gonna Come"
+    },
+    {
+      "artist": "Aretha Franklin",
+      "song": "Respect"
+    },
+    {
+      "artist": "John Lee Hooker",
+      "song": "The Motor City Is Burning"
+    },
+    {
+      "artist": "Reverend Ray Scott",
+      "song": "The Prayer"
+    },
+    {
+      "artist": "James Brown",
+      "song": "I’m Black And I’m Proud"
+    },
+    {
+      "artist": "Sly & The Family Stone",
+      "song": "Stand"
+    },
+    {
+      "artist": "Bob Marley & Marcia Griffiths",
+      "song": "Young Gifted And Black"
+    }
+  ],
+  "source_url": "https://www.kcur.org/tags/cyprus-avenue",
+  "archived_date": "2025-12-31"
+}

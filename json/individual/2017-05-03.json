@@ -1,0 +1,53 @@
+{
+  "date": "2017-05-03",
+  "title": "Monterey Pop",
+  "description": "",
+  "tracks": [
+    {
+      "artist": "The Birds",
+      "song": "So You Want To Be A Rock and Roll Star"
+    },
+    {
+      "artist": "Jefferson Airplane",
+      "song": "Somebody To Love"
+    },
+    {
+      "artist": "Jefferson Airplane",
+      "song": "Right Rabbit"
+    },
+    {
+      "artist": "Ravi Shankar",
+      "song": "Duhm"
+    },
+    {
+      "artist": "The Who",
+      "song": "My Generation"
+    },
+    {
+      "artist": "Janis Joplin",
+      "song": "Ball & Chain"
+    },
+    {
+      "artist": "Otis Redding",
+      "song": "Shake"
+    },
+    {
+      "artist": "Otis Redding",
+      "song": "Respect"
+    },
+    {
+      "artist": "Otis Redding",
+      "song": "Try A Little Tenderness"
+    },
+    {
+      "artist": "Jimi Hendrix",
+      "song": "Foxy Lady"
+    },
+    {
+      "artist": "Jimi Hendrix",
+      "song": "Wild Thing"
+    }
+  ],
+  "source_url": "https://www.kcur.org/tags/cyprus-avenue",
+  "archived_date": "2025-12-31"
+}

@@ -1,0 +1,45 @@
+{
+  "date": "2017-03-20",
+  "title": "The Last Waltz 40th Anniversary- The Band",
+  "description": "40 years ago, The Band gave a farewell concert that, to this day, is arguably the greatest concert ever.  Re-live the legendary “Last Waltz” on this week's  Cyprus Avenue.",
+  "tracks": [
+    {
+      "artist": "The Band",
+      "song": "Theme From The Last Waltz"
+    },
+    {
+      "artist": "The Band",
+      "song": "It Makes No Difference"
+    },
+    {
+      "artist": "The Band",
+      "song": "Such A Night"
+    },
+    {
+      "artist": "The Band",
+      "song": "The Night They Drove Old Dixie Down"
+    },
+    {
+      "artist": "The Band",
+      "song": "Mystery Train"
+    },
+    {
+      "artist": "The Band",
+      "song": "Mannish Boy"
+    },
+    {
+      "artist": "The Band",
+      "song": "Further On"
+    },
+    {
+      "artist": "The Band",
+      "song": "Forever Young"
+    },
+    {
+      "artist": "The Band",
+      "song": "The Weight"
+    }
+  ],
+  "source_url": "https://www.kcur.org/tags/cyprus-avenue",
+  "archived_date": "2025-12-31"
+}

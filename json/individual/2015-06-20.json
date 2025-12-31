@@ -1,0 +1,45 @@
+{
+  "date": "2015-06-20",
+  "title": "Sticky Fingers Is Back!",
+  "description": "The Rolling Stones, arguably the greatest rock ‘n roll band of all time, will rock Kansas City next week…but this week Cyprus Avenue rocks a redux of The Stones’ 1971 release Stick Fingers...",
+  "tracks": [
+    {
+      "artist": "Rolling Stones",
+      "song": "Brown Sugar"
+    },
+    {
+      "artist": "Rolling Stones",
+      "song": "Wild Horses"
+    },
+    {
+      "artist": "Rolling Stones",
+      "song": "Bitch"
+    },
+    {
+      "artist": "Sticky Fingers Is Back!",
+      "song": "The Rolling Stones"
+    },
+    {
+      "artist": "Rolling Stones",
+      "song": "Dead Flowers"
+    },
+    {
+      "artist": "Rolling Stones",
+      "song": "Stray Cat Blues"
+    },
+    {
+      "artist": "Rolling Stones",
+      "song": "Love In Vain"
+    },
+    {
+      "artist": "Rolling Stones",
+      "song": "Midnight Rambler"
+    },
+    {
+      "artist": "Rolling Stones",
+      "song": "Honky Tonk Woman"
+    }
+  ],
+  "source_url": "https://www.kcur.org/tags/cyprus-avenue",
+  "archived_date": "2025-12-31"
+}

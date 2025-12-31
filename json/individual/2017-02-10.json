@@ -1,0 +1,65 @@
+{
+  "date": "2017-02-10",
+  "title": "Country Gentlemen",
+  "description": "Country music, once relegated to memories, roars back to life this weekend on Cyprus Avenue. It’s great music from George Jones, the Earls of Leicester (Lester) and more... George Jones",
+  "tracks": [
+    {
+      "artist": "Earls Of Leicester",
+      "song": "The Train That Carried My Girl From Town"
+    },
+    {
+      "artist": "Bobby Bare",
+      "song": "Rosalie’s Good Eats Cafe"
+    },
+    {
+      "artist": "Earls Of Leicester",
+      "song": "Flint Hill Special"
+    },
+    {
+      "artist": "George Jones",
+      "song": "Detroit City"
+    },
+    {
+      "artist": "Waylon Jennings",
+      "song": "Waymore’s Blues"
+    },
+    {
+      "artist": "Earls Of Leicester",
+      "song": "Steel Guitar Blues"
+    },
+    {
+      "artist": "Gary Stewart",
+      "song": "Drinking Thing"
+    },
+    {
+      "artist": "George Jones",
+      "song": "Funny How Time Slips Away"
+    },
+    {
+      "artist": "Earls Of Leicester",
+      "song": "Just Ain’t"
+    },
+    {
+      "artist": "Merle Haggard",
+      "song": "What Am I Going To Do"
+    },
+    {
+      "artist": "Gary Stewart",
+      "song": "Ain’t Living Long Like This"
+    },
+    {
+      "artist": "Willie Nelson",
+      "song": "It Ain’t Supposed To Be That Way"
+    },
+    {
+      "artist": "Johnny Cash",
+      "song": "I Walk The Line"
+    },
+    {
+      "artist": "Earls Of Leicester",
+      "song": "You Can Feel It In Your Soul"
+    }
+  ],
+  "source_url": "https://www.kcur.org/tags/cyprus-avenue",
+  "archived_date": "2025-12-31"
+}

@@ -1,0 +1,69 @@
+{
+  "date": "2016-02-20",
+  "title": "Back To The Beginning",
+  "description": "This week on Cyprus Avenue, we’re taking you back to the early days of rock & roll…a time when most great music was less than three minutes…and you listened on your transistor radio. Richie Valens",
+  "tracks": [
+    {
+      "artist": "Richie Valens",
+      "song": "Come On Let’s Go"
+    },
+    {
+      "artist": "Johnnie Taylor",
+      "song": "Who’s Makin’ Love"
+    },
+    {
+      "artist": "The Turtles",
+      "song": "It Ain’t Me Babe"
+    },
+    {
+      "artist": "Big Bopper",
+      "song": "Chantilly Lace"
+    },
+    {
+      "artist": "Mickey & Sylvia",
+      "song": "Opportunity To Cry"
+    },
+    {
+      "artist": "Dion",
+      "song": "Wanderer"
+    },
+    {
+      "artist": "Beach Boys",
+      "song": "Surfin’ Safari"
+    },
+    {
+      "artist": "Frankie Ford",
+      "song": "Sea Cruise"
+    },
+    {
+      "artist": "The Dells",
+      "song": "Oh What A Night"
+    },
+    {
+      "artist": "Jeanie C. Riley",
+      "song": "Harper Valley PTA"
+    },
+    {
+      "artist": "Buddy Holly",
+      "song": "Peggy Sue"
+    },
+    {
+      "artist": "The Dominoes",
+      "song": "Sixty Minute Man"
+    },
+    {
+      "artist": "Jerry Lee Lewis",
+      "song": "Whole Lotta Shakin’"
+    },
+    {
+      "artist": "The Shirelles",
+      "song": "Mama Said"
+    },
+    {
+      "artist": "The Monkees",
+      "song": "I’m A Believer"
+    }
+  ],
+  "source_url": "https://www.kcur.org/tags/cyprus-avenue",
+  "archived_date": "2025-12-31"
+}

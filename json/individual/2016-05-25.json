@@ -1,0 +1,41 @@
+{
+  "date": "2016-05-25",
+  "title": "A Tribute To Jackson Brown",
+  "description": "Jackson Brown If you’re a Jackson Browne fan you won’t want to miss this edition of Cyprus Avenue, as host Bill Shapiro and some very talented musical artists pay tribute to this talented singer.",
+  "tracks": [
+    {
+      "artist": "Don Henley",
+      "song": "These Days"
+    },
+    {
+      "artist": "Paul Thorn",
+      "song": "Doctor My Eyes"
+    },
+    {
+      "artist": "Indigo Girls",
+      "song": "Fountain Of Sorrow"
+    },
+    {
+      "artist": "Jackson Browne",
+      "song": "Red Neck Friend"
+    },
+    {
+      "artist": "Sara & Sean Watkins",
+      "song": "Your Bright Baby Blues"
+    },
+    {
+      "artist": "Bob Schneider",
+      "song": "Running On Empty"
+    },
+    {
+      "artist": "Lucinda Williams",
+      "song": "The Pretender"
+    },
+    {
+      "artist": "Jackson Browne",
+      "song": "The Load Out/Stay"
+    }
+  ],
+  "source_url": "https://www.kcur.org/tags/cyprus-avenue",
+  "archived_date": "2025-12-31"
+}

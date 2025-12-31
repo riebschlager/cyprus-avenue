@@ -1,0 +1,45 @@
+{
+  "date": "2015-03-28",
+  "title": "2006 Redux",
+  "description": "2006 was a very good year for music…Next up on Cyprus Avenue, host Bill Shapiro brings back some great music from the year that was 2006. M. Ward",
+  "tracks": [
+    {
+      "artist": "Bob Dylan",
+      "song": "Thunder On The Mountain"
+    },
+    {
+      "artist": "M. Ward",
+      "song": "Eyes On The Prize / Magic Trick"
+    },
+    {
+      "artist": "Jerry Lee Lewis",
+      "song": "Before the Night Is Over"
+    },
+    {
+      "artist": "Bruce Springsteen",
+      "song": "Oh Mary, Don’t You Weep"
+    },
+    {
+      "artist": "Dayna Kurtz",
+      "song": "Venezuela"
+    },
+    {
+      "artist": "Teddy Thompson",
+      "song": "The Future"
+    },
+    {
+      "artist": "Dave Alvin",
+      "song": "Here In California"
+    },
+    {
+      "artist": "Maria Muldair",
+      "song": "Buckets Of Rain"
+    },
+    {
+      "artist": "Leonard Cohen",
+      "song": "Tower Of Song"
+    }
+  ],
+  "source_url": "https://www.kcur.org/tags/cyprus-avenue",
+  "archived_date": "2025-12-31"
+}

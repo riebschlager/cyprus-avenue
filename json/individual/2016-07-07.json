@@ -1,0 +1,57 @@
+{
+  "date": "2016-07-07",
+  "title": "The Brazilian Connection",
+  "description": "The Summer Olympics are less than a month away and Cyprus Avenue celebrates the Brazilian connection. It’s an hour of great music with a Brazilian flavor on Cyprus Avenue. National flag of Brazil",
+  "tracks": [
+    {
+      "artist": "Bill Withers",
+      "song": "Lovely Day"
+    },
+    {
+      "artist": "Aretha Franklin",
+      "song": "Walk On By"
+    },
+    {
+      "artist": "Marvin Gaye",
+      "song": "Sexual Healing"
+    },
+    {
+      "artist": "Billie Holiday",
+      "song": "You’ve Changed"
+    },
+    {
+      "artist": "Sly & The Family Stone",
+      "song": "Family Affair"
+    },
+    {
+      "artist": "Mel Torme",
+      "song": "I’ve Got You Under My Skin"
+    },
+    {
+      "artist": "Nina Simone",
+      "song": "I Wish I Knew How It Would Feel To Be Free"
+    },
+    {
+      "artist": "Johnny Nash",
+      "song": "I Can See Clearly Now"
+    },
+    {
+      "artist": "Dave Brubeck & Carmen McRae",
+      "song": "Take Five"
+    },
+    {
+      "artist": "Andy Williams",
+      "song": "Music To Watch The Girls Go By"
+    },
+    {
+      "artist": "Sarah Vaughn",
+      "song": "Summertime"
+    },
+    {
+      "artist": "Johnny Winter, Bob Dylan",
+      "song": "Highway 61 Revisited"
+    }
+  ],
+  "source_url": "https://www.kcur.org/tags/cyprus-avenue",
+  "archived_date": "2025-12-31"
+}

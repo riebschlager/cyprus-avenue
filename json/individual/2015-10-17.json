@@ -1,0 +1,53 @@
+{
+  "date": "2015-10-17",
+  "title": "Survey: The Guys",
+  "description": "If you loved the Eagles…or the Blasters…or the Stones, you’re going to love this week's survey of some great new releases, on Cyprus Avenue. Don Henley",
+  "tracks": [
+    {
+      "artist": "Don Henley",
+      "song": "Train In The Distance"
+    },
+    {
+      "artist": "Keith Richards",
+      "song": "Blues In The Morning"
+    },
+    {
+      "artist": "Don Henley",
+      "song": "The Cost Of Living"
+    },
+    {
+      "artist": "Don Henley",
+      "song": "No Thank You"
+    },
+    {
+      "artist": "Dave & Phil Alvin",
+      "song": "Feelin’ Happy"
+    },
+    {
+      "artist": "Keith Richards",
+      "song": "Heart Stopper"
+    },
+    {
+      "artist": "Don Henley",
+      "song": "That Old Flame"
+    },
+    {
+      "artist": "Don Henley",
+      "song": "A Younger Man"
+    },
+    {
+      "artist": "Dave & Phil Alvin",
+      "song": "Rattlesnakin Daddy"
+    },
+    {
+      "artist": "Don Henley",
+      "song": "Prayin’ For Rain"
+    },
+    {
+      "artist": "Keith Richards",
+      "song": "Goodnight Irene"
+    }
+  ],
+  "source_url": "https://www.kcur.org/tags/cyprus-avenue",
+  "archived_date": "2025-12-31"
+}

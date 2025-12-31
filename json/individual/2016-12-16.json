@@ -1,0 +1,41 @@
+{
+  "date": "2016-12-16",
+  "title": "Dear Jerry...",
+  "description": "A group of all-star musicians gathered in Maryland back in May, 2015 to pay tribute to Jerome Garcia…you know him better as Jerry Garcia of the Grateful Dead, and that concert is the subject of this week's Cyprus Avenue. Jerry Garcia",
+  "tracks": [
+    {
+      "artist": "David Grisman",
+      "song": "Shady Grove"
+    },
+    {
+      "artist": "Buddy Miller",
+      "song": "Deal"
+    },
+    {
+      "artist": "Jimmy Cliff",
+      "song": "The Harder They Come"
+    },
+    {
+      "artist": "Los Lobos",
+      "song": "Bertha"
+    },
+    {
+      "artist": "Bob Weir",
+      "song": "Ripple"
+    },
+    {
+      "artist": "Trampled By Turtles",
+      "song": "Brown Eyed Woman"
+    },
+    {
+      "artist": "Alan Toussaint",
+      "song": "Get Out Of My Life"
+    },
+    {
+      "artist": "Phil Lesh",
+      "song": "The Wheel / Uncle John’s Band"
+    }
+  ],
+  "source_url": "https://www.kcur.org/tags/cyprus-avenue",
+  "archived_date": "2025-12-31"
+}

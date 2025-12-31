@@ -1,0 +1,49 @@
+{
+  "date": "2015-07-24",
+  "title": "The Jimi Hendrix You May Have Missed",
+  "description": "You’re probably familiar with Jimi Hendrix’s iconic tunes like Foxy Lady, or Purple Haze…but check our this week’s Cyprus Avenue for some of his more obscure works. Jimi Hendrix",
+  "tracks": [
+    {
+      "artist": "Jimi Hendrix",
+      "song": "Somewhere"
+    },
+    {
+      "artist": "Jimi Hendrix",
+      "song": "Earth Blues"
+    },
+    {
+      "artist": "Jimi Hendrix",
+      "song": "Here My Train A Comin’"
+    },
+    {
+      "artist": "Jimi Hendrix",
+      "song": "Bleeding Heart"
+    },
+    {
+      "artist": "Jimi Hendrix",
+      "song": "Crash Landing"
+    },
+    {
+      "artist": "Jimi Hendrix",
+      "song": "Mojo Man"
+    },
+    {
+      "artist": "Jimi Hendrix",
+      "song": "Easy Blues"
+    },
+    {
+      "artist": "Jimi Hendrix",
+      "song": "Hey Gypsy Boy"
+    },
+    {
+      "artist": "Jimi Hendrix",
+      "song": "Let Me Move You"
+    },
+    {
+      "artist": "Jimi Hendrix",
+      "song": "Villanova Junction Blues"
+    }
+  ],
+  "source_url": "https://www.kcur.org/tags/cyprus-avenue",
+  "archived_date": "2025-12-31"
+}

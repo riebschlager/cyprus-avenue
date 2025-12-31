@@ -1,0 +1,49 @@
+{
+  "date": "2016-09-01",
+  "title": "A Janis Revival",
+  "description": "Janis Joplin If the great Janis Joplin were alive today what would she be singing? We’ll never know the real answer to that question, but you can relive her glory days on this edition of Cyprus Avenue.",
+  "tracks": [
+    {
+      "artist": "Janis Joplin",
+      "song": "Ball and Chain"
+    },
+    {
+      "artist": "Janis Joplin",
+      "song": "Cry Baby"
+    },
+    {
+      "artist": "Janis Joplin",
+      "song": "Get It While You Can"
+    },
+    {
+      "artist": "Janis Joplin",
+      "song": "Piece Of My Heart"
+    },
+    {
+      "artist": "Janis Joplin",
+      "song": "Little Girl Blue"
+    },
+    {
+      "artist": "Janis Joplin",
+      "song": "Kosmic Blues"
+    },
+    {
+      "artist": "Janis Joplin",
+      "song": "Mercedes Benz"
+    },
+    {
+      "artist": "Janis Joplin",
+      "song": "Summertime"
+    },
+    {
+      "artist": "Janis Joplin",
+      "song": "Me & Bobby McGee"
+    },
+    {
+      "artist": "Janis Joplin",
+      "song": "Tell Mama"
+    }
+  ],
+  "source_url": "https://www.kcur.org/tags/cyprus-avenue",
+  "archived_date": "2025-12-31"
+}

@@ -1,0 +1,65 @@
+{
+  "date": "2015-08-01",
+  "title": "Another Side Of Country",
+  "description": "If you listen closely to today’s country you’re likely to conclude that it’s not your mom and dad’s country.  If you want to give it a try listen to this week’s Cyprus Avenue for another side of country, featuring two of the more progressive artists, Chris Stapleton and Sturgill Simpson.",
+  "tracks": [
+    {
+      "artist": "Another Side Of Country",
+      "song": "Sturgill Simpson"
+    },
+    {
+      "artist": "Steeldrivers",
+      "song": "Blue Side Of The Mountain"
+    },
+    {
+      "artist": "Chris Stapleton",
+      "song": "Tennessee Whiskey"
+    },
+    {
+      "artist": "Sturgill Simpson",
+      "song": "Some Days"
+    },
+    {
+      "artist": "Chris Stapleton",
+      "song": "Parachute"
+    },
+    {
+      "artist": "Steeldrivers",
+      "song": "Heaven Sent"
+    },
+    {
+      "artist": "Sturgill Simpson",
+      "song": "Life Of Sin"
+    },
+    {
+      "artist": "Chris Stapleton",
+      "song": "Might As Well Got Stoned"
+    },
+    {
+      "artist": "Sturgill Simpson",
+      "song": "Voices"
+    },
+    {
+      "artist": "Steeldrivers",
+      "song": "If It Hadn’t Been For Love"
+    },
+    {
+      "artist": "Sturgill Simpson",
+      "song": "Voices"
+    },
+    {
+      "artist": "Sturgill Simpson",
+      "song": "Long White Line"
+    },
+    {
+      "artist": "Sturgill Simpson",
+      "song": "A Little Light"
+    },
+    {
+      "artist": "Sturgill Simpson",
+      "song": "It Ain’t All Flowers"
+    }
+  ],
+  "source_url": "https://www.kcur.org/tags/cyprus-avenue",
+  "archived_date": "2025-12-31"
+}

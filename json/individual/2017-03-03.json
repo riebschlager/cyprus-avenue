@@ -1,0 +1,57 @@
+{
+  "date": "2017-03-03",
+  "title": "Springtime Listening",
+  "description": "",
+  "tracks": [
+    {
+      "artist": "Bob Weir",
+      "song": "Only A River"
+    },
+    {
+      "artist": "Paul Kelly & Charlie Owen",
+      "song": "To Live Is To Fly"
+    },
+    {
+      "artist": "Bonnie Raitt",
+      "song": "What You’re Doin’ To Me"
+    },
+    {
+      "artist": "Sean McConnell",
+      "song": "Holy Days"
+    },
+    {
+      "artist": "Bob Weir",
+      "song": "Whatever Happened To Rose"
+    },
+    {
+      "artist": "Paul Kelly & Charlie Owen",
+      "song": "Bird On A Wire"
+    },
+    {
+      "artist": "Sean McConnell",
+      "song": "Beautiful Rose"
+    },
+    {
+      "artist": "Alejandro Escovedo",
+      "song": "Farewell To The Good Times"
+    },
+    {
+      "artist": "Bonnie Raitt",
+      "song": "All Alone With Something To Say"
+    },
+    {
+      "artist": "Sean McConnell",
+      "song": "Living In A Ghost Town"
+    },
+    {
+      "artist": "Bob Weir",
+      "song": "Gonesville"
+    },
+    {
+      "artist": "Paul Kelly & Charlie Owen",
+      "song": "Don’t Fence Me In"
+    }
+  ],
+  "source_url": "https://www.kcur.org/tags/cyprus-avenue",
+  "archived_date": "2025-12-31"
+}

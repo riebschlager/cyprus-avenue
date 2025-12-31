@@ -1,0 +1,45 @@
+{
+  "date": "2015-12-26",
+  "title": "Cyprus Avenue's New Year's Concert",
+  "description": "Start your New Year celebration early with Cyprus Avenue!  Bill Shapiro brings you his annual party of live concert recordings. James Brown, Bruce Springsteen, Bob Marley and more. James Brown",
+  "tracks": [
+    {
+      "artist": "“Whole Lotta Shakin’ Goin’ On”",
+      "song": "Jerry Lee Lewis"
+    },
+    {
+      "artist": "“Can’t Turn You Loose”",
+      "song": "Otis Redding"
+    },
+    {
+      "artist": "“Brother Rapp / Ain’t It Funky Now”",
+      "song": "James Brown"
+    },
+    {
+      "artist": "“Like a Rolling Stone”",
+      "song": "Jimi Hendrix"
+    },
+    {
+      "artist": "“Highway 61 Revisited”",
+      "song": "Bob Dylan"
+    },
+    {
+      "artist": "“Cadillac Ranch”",
+      "song": "Bruce Springsteen"
+    },
+    {
+      "artist": "“Hey Hey, My My (Into the Black)”",
+      "song": "Neil Young"
+    },
+    {
+      "artist": "“No Woman, No Cry”",
+      "song": "Bob Marley and The Wailers"
+    },
+    {
+      "artist": "“Cyprus Avenue”",
+      "song": "Van Morrison"
+    }
+  ],
+  "source_url": "https://www.kcur.org/tags/cyprus-avenue",
+  "archived_date": "2025-12-31"
+}

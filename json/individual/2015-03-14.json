@@ -1,0 +1,53 @@
+{
+  "date": "2015-03-14",
+  "title": "McMurtry And Earle",
+  "description": "Singer-songwriters James McMurtry and Steve Earle are known for songs with strong narratives that blend country and blues.  Both have new albums that are featured on this week’s Cyprus Avenue. James McMurtry",
+  "tracks": [
+    {
+      "artist": "James McMurtry",
+      "song": "She Loves Me"
+    },
+    {
+      "artist": "Steve Earl",
+      "song": "Baby, Baby, Baby, (Baby)"
+    },
+    {
+      "artist": "James McMurtry",
+      "song": "Painting By Numbers"
+    },
+    {
+      "artist": "Steve Earl",
+      "song": "Guitar Town"
+    },
+    {
+      "artist": "Steve Earl",
+      "song": "Tennessee Kid"
+    },
+    {
+      "artist": "James McMurtry",
+      "song": "How’n I Gonna Find You Now"
+    },
+    {
+      "artist": "Steve Earl",
+      "song": "Copperhead Road"
+    },
+    {
+      "artist": "James McMurtry",
+      "song": "Out Here In The Middle"
+    },
+    {
+      "artist": "Steve Earl",
+      "song": "Good Bye"
+    },
+    {
+      "artist": "Steve Earl",
+      "song": "I’m Lookin’ Through"
+    },
+    {
+      "artist": "James McMurtry",
+      "song": "Choctaw Bingo"
+    }
+  ],
+  "source_url": "https://www.kcur.org/tags/cyprus-avenue",
+  "archived_date": "2025-12-31"
+}

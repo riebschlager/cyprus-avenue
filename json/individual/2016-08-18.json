@@ -1,0 +1,45 @@
+{
+  "date": "2016-08-18",
+  "title": "Leonard Live",
+  "description": "Singer Leonard Cohen has made a significant contribution to contemporary music and thought…He’s described as uncompromising and urgent, and he’ll be singing on this edition of Cyprus Avenue.",
+  "tracks": [
+    {
+      "artist": "Leonard Cohen",
+      "song": "Dance With Me To The End Of Love"
+    },
+    {
+      "artist": "Leonard Live",
+      "song": "Light As The Breeze"
+    },
+    {
+      "artist": "Leonard Live",
+      "song": "Got A Little Secret"
+    },
+    {
+      "artist": "Leonard Live",
+      "song": "Choices"
+    },
+    {
+      "artist": "Leonard Live",
+      "song": "I’m Your Man"
+    },
+    {
+      "artist": "Leonard Live",
+      "song": "Chelsea Hotel"
+    },
+    {
+      "artist": "Leonard Live",
+      "song": "Everybody Knows"
+    },
+    {
+      "artist": "Leonard Live",
+      "song": "Hallelujah"
+    },
+    {
+      "artist": "Leonard Live",
+      "song": "Tower Of Song"
+    }
+  ],
+  "source_url": "https://www.kcur.org/tags/cyprus-avenue",
+  "archived_date": "2025-12-31"
+}

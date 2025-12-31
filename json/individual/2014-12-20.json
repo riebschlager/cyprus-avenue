@@ -1,0 +1,65 @@
+{
+  "date": "2014-12-20",
+  "title": "A Cyprus Avenue Christmas",
+  "description": "Ring in the holidays with Cyprus Avenue!  Bill Shapiro brings you his annual “The Sounds of Christmas” show… with Elvis Presley, Al Green, Darlene Love and more... Elvis Presley",
+  "tracks": [
+    {
+      "artist": "Clyde McPhatter and The Drifters",
+      "song": "White Christmas"
+    },
+    {
+      "artist": "Bob B. Soxx and The Blue Jeans",
+      "song": "The Bells of St. Mary’s"
+    },
+    {
+      "artist": "Elvis Presley",
+      "song": "Merry Christmas, Baby"
+    },
+    {
+      "artist": "Wilson Pickett",
+      "song": "Silver Bells"
+    },
+    {
+      "artist": "Lowell Fulson",
+      "song": "I Wanna Spend Christmas with You"
+    },
+    {
+      "artist": "The Blind Boys of Alabama, featuring Mavis Staples",
+      "song": "Born in Bethlehem"
+    },
+    {
+      "artist": "The Ronettes",
+      "song": "Sleigh Ride"
+    },
+    {
+      "artist": "Elvis Presley",
+      "song": "I’ll Be Home for Christmas"
+    },
+    {
+      "artist": "Darlene Love",
+      "song": "Christmas (Baby Please Come Home)"
+    },
+    {
+      "artist": "Amos Milburn",
+      "song": "Let’s Make Christmas Merry, Baby"
+    },
+    {
+      "artist": "Charles Brown",
+      "song": "Merry Christmas, Baby"
+    },
+    {
+      "artist": "Chuck Berry",
+      "song": "Run, Rudolph, Run"
+    },
+    {
+      "artist": "Nat King Cole",
+      "song": "The Christmas Song"
+    },
+    {
+      "artist": "Al Green",
+      "song": "Silent Night"
+    }
+  ],
+  "source_url": "https://www.kcur.org/tags/cyprus-avenue",
+  "archived_date": "2025-12-31"
+}
