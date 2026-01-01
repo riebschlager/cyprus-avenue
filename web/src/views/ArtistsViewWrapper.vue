@@ -33,6 +33,15 @@ const artistToExpand = computed(() => {
   if (!autoExpandSlug.value || !artists.value || artists.value.length === 0) return null
   return findArtistBySlug(artists.value, autoExpandSlug.value)
 })
+
+// Update page title when viewing a specific artist
+watch(artistToExpand, (artist) => {
+  if (artist) {
+    document.title = `${artist.name} - Cyprus Avenue Archive`
+  } else {
+    document.title = 'Artists - Cyprus Avenue Archive'
+  }
+}, { immediate: true })
 </script>
 
 <template>

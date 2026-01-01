@@ -29,6 +29,15 @@ const playlistToExpand = computed(() => {
   if (!autoExpandSlug.value) return null
   return findPlaylistBySlug(playlists.value, autoExpandSlug.value)
 })
+
+// Update page title when viewing a specific playlist
+watch(playlistToExpand, (playlist) => {
+  if (playlist) {
+    document.title = `${playlist.title} - Cyprus Avenue Archive`
+  } else {
+    document.title = 'Playlists - Cyprus Avenue Archive'
+  }
+}, { immediate: true })
 </script>
 
 <template>

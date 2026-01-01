@@ -10,34 +10,40 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomePage
+      component: HomePage,
+      meta: { title: 'Cyprus Avenue Archive' }
     },
     {
       path: '/playlists',
       name: 'playlists',
-      component: PlaylistsView
+      component: PlaylistsView,
+      meta: { title: 'Playlists - Cyprus Avenue Archive' }
     },
     {
       path: '/playlist/:slug',
       name: 'playlist',
       component: PlaylistsView,
-      props: true
+      props: true,
+      meta: { title: 'Playlist - Cyprus Avenue Archive' }
     },
     {
       path: '/tracks',
       name: 'tracks',
-      component: TracksViewWrapper
+      component: TracksViewWrapper,
+      meta: { title: 'All Tracks - Cyprus Avenue Archive' }
     },
     {
       path: '/artists',
       name: 'artists',
-      component: ArtistsViewWrapper
+      component: ArtistsViewWrapper,
+      meta: { title: 'Artists - Cyprus Avenue Archive' }
     },
     {
       path: '/artist/:slug',
       name: 'artist',
       component: ArtistsViewWrapper,
-      props: true
+      props: true,
+      meta: { title: 'Artist - Cyprus Avenue Archive' }
     }
   ],
   scrollBehavior(to, from, savedPosition) {
@@ -54,6 +60,11 @@ const router = createRouter({
     // Otherwise scroll to top for new pages
     return { top: 0 }
   }
+})
+
+// Update page title on route change
+router.afterEach((to) => {
+  document.title = (to.meta.title as string) || 'Cyprus Avenue Archive'
 })
 
 export default router
