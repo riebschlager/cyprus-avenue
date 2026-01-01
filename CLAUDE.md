@@ -261,6 +261,108 @@ This project was created entirely through a collaborative session with **Claude 
 
 **Result**: Clean root directory with only documentation and organized subdirectories
 
+### Phase 7: Spotify Playlist Creation & Optimization
+
+**Challenge**: Enable users to create Spotify playlists directly from the archive with proper rate limiting and performance optimization.
+
+**Claude Code Actions**:
+
+1. **OAuth 2.0 Implementation**
+   - Implemented client-side OAuth 2.0 PKCE flow (no backend required)
+   - Session-based authentication with `sessionStorage` for temporary code verifier/state
+   - Token exchange on `/auth/callback` route
+   - Automatic redirect to Spotify authorization endpoint
+
+2. **Spotify API Integration**
+   - Built `SpotifyApiClient` factory function with methods:
+     - `getCurrentUser()` - Fetch authenticated user info
+     - `createPlaylist(userId, name, isPublic)` - Create playlist
+     - `addTracksToPlaylist(playlistId, trackUris)` - Batch add tracks (100 per request)
+     - `searchTrack(artist, song)` - Search for track by artist/song
+   - Centralized error handling with meaningful error messages
+
+3. **Track Matching System**
+   - Created `TrackMatcher` with tiered matching strategy:
+     - Level 1: Check pre-indexed Spotify tracks (high/medium confidence)
+     - Level 2: Fallback to API search for unindexed tracks (individual playlists only)
+     - Level 3: Mark as not found if no match available
+   - Optimized mega-playlist creation with `skipApiSearch` parameter:
+     - Skips API searches for Complete Archive playlist
+     - Uses only pre-indexed tracks (88% coverage)
+     - Reduces creation time from 4-5 minutes to 30-60 seconds
+
+4. **Rate Limiting Strategy**
+   - Sequential processing prevents concurrent request storms
+   - Individual playlists: 150ms delay between track matches (protects API searches)
+   - Mega-playlists: 1ms delay between matches (index lookups only)
+   - 1000ms delay between batch additions (100 tracks per batch)
+   - Respects Spotify's ~7 requests/second limit with conservative margins
+
+5. **State Management**
+   - Singleton composable `useSpotifyPlaylistCreation()` for shared state
+   - Tracks creation state: idle → creating → completed/error
+   - Real-time progress updates:
+     - Current track index and count
+     - Current artist and song name
+     - Playlist name
+   - Results reporting:
+     - Tracks successfully added
+     - Tracks not found with list of failures
+     - Direct Spotify playlist URL
+
+6. **User Interface Components**
+   - `SpotifyAuthButton.vue` - OAuth login button
+   - `SpotifyPlaylistModal.vue` - Modal dialog with dual modes:
+     - Single playlist creation from individual shows
+     - Complete archive mega-playlist (all unique tracks)
+   - `PlaylistCreationProgress.vue` - Real-time progress indicator
+   - `TrackMatchingSummary.vue` - Results display with warnings
+   - `Toast.vue` / `ToastContainer.vue` - Notification system
+
+7. **Features**
+   - Two creation modes:
+     - **Individual**: Create playlist from any archive show (e.g., "Cyprus Avenue - 2017-04-18")
+     - **Complete Archive**: Single mega-playlist with all unique tracks (1,300+ tracks)
+   - Pre-indexed track confidence indicators
+   - Automatic track deduplication for mega-playlist
+   - User-friendly warnings about unmatched tracks
+   - Spotify icon (🎧) for visibility on dark backgrounds
+
+**Key Files Created**:
+- `web/src/utils/spotifyApi.ts` - SpotifyApiClient factory function
+- `web/src/utils/spotifyConstants.ts` - OAuth configuration and constants
+- `web/src/utils/trackMatching.ts` - TrackMatcher with skipApiSearch optimization
+- `web/src/composables/useSpotifyAuth.ts` - OAuth flow and token management
+- `web/src/composables/useSpotifyPlaylistCreation.ts` - Playlist creation logic
+- `web/src/composables/useToast.ts` - Toast notification system
+- `web/src/types/spotify.ts` - TypeScript interfaces for Spotify API
+- `web/src/components/SpotifyAuthButton.vue` - Login button
+- `web/src/components/SpotifyPlaylistModal.vue` - Creation modal
+- `web/src/components/PlaylistCreationProgress.vue` - Progress indicator
+- `web/src/components/TrackMatchingSummary.vue` - Results display
+- `web/src/components/Toast.vue` - Individual notification
+- `web/src/components/ToastContainer.vue` - Notification container
+- `web/src/views/SpotifyCallback.vue` - OAuth callback handler
+
+**Optimizations Implemented**:
+
+1. **Rate Limiting Fix** (Commit: Sequential rate limiting)
+   - Problem: `Promise.all()` fired concurrent requests during track matching
+   - Solution: Sequential for-loops with per-track delays
+   - Result: Eliminates rate limit errors for mega-playlists
+
+2. **Mega-Playlist Performance** (Commit: Optimize mega-playlist creation)
+   - Problem: Searching API for unindexed tracks (4-5 minutes total)
+   - Solution: Skip API searches for Complete Archive, use index only
+   - Result: 30-60 seconds for mega-playlist creation (88%+ coverage)
+
+3. **Icon Visibility** (Commit: Replace musical note with headphones)
+   - Problem: 🎵 musical note hard to see on dark backgrounds
+   - Solution: Changed to 🎧 headphones emoji (better contrast)
+   - Applies to: All Spotify links, buttons, and documentation
+
+**Result**: Users can now create Spotify playlists in seconds without rate limiting errors, with individual playlists getting quality API fallbacks and mega-playlists optimized for speed.
+
 ### Documentation & Polish
 
 **Claude Code Actions**:
@@ -470,6 +572,14 @@ Completed across multiple collaborative sessions, including:
 
 10. **Composition API scales well** - Vue 3's composables enable clean, reusable logic across components
 
+11. **Sequential processing beats concurrent for rate limiting** - When APIs have rate limits, async/await with delays is more reliable than Promise.all()
+
+12. **Index-first strategy optimizes performance** - Pre-indexed data (88% coverage) should be exploited fully before falling back to expensive operations like API searches
+
+13. **Tiered matching strategies balance quality and speed** - High-confidence matches first, fallback searches second, graceful degradation third
+
+14. **Icon choice affects usability** - Emoji selection matters for contrast and visibility on different backgrounds (🎧 over 🎵 on dark themes)
+
 ## Reproducibility
 
 Every step can be reproduced:
@@ -522,6 +632,12 @@ Many of these playlists are no longer easily accessible on KCUR's website, makin
 - ✓ Real-time search and filtering
 - ✓ Smart scrolling with auto-expand for deep links
 - ✓ Production deployment on Netlify
+- ✓ One-click Spotify playlist creation from any archive show
+- ✓ Complete Archive mega-playlist with all unique tracks
+- ✓ Client-side OAuth 2.0 authentication (no backend required)
+- ✓ Real-time progress tracking for playlist creation
+- ✓ Rate-limiting and performance optimizations
+- ✓ Toast notification system for user feedback
 
 **Future Possibilities**:
 - Creating collaborative Spotify/Apple Music playlists
