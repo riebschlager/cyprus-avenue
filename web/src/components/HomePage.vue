@@ -173,6 +173,15 @@ const router = useRouter()
             </li>
           </ul>
         </div>
+
+        <div class="mt-8 p-6 bg-blue-900/20 border border-blue-800/50 rounded-lg">
+          <p class="text-gray-200">
+            This project is <strong class="text-white">open source</strong> and hosted on 
+            <a href="https://github.com/riebschlager/cyprus-avenue/" target="_blank" rel="noopener" class="text-blue-400 hover:text-blue-300 font-medium underline-offset-4 hover:underline">GitHub</a>. 
+            I welcome any edits, suggestions, or corrections to the archive. You can contact me directly at 
+            <a href="mailto:chris@the816.com" class="text-blue-400 hover:text-blue-300 font-medium underline-offset-4 hover:underline">chris@the816.com</a>.
+          </p>
+        </div>
       </div>
     </div>
 
