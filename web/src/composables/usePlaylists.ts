@@ -63,12 +63,12 @@ export function usePlaylists() {
 
     const dates = playlists.value
       .map(p => p.date)
-      .filter(d => d)
+      .filter((d): d is string => !!d)
       .sort()
 
     const dateRange = dates.length > 0 ? {
-      start: dates[0],
-      end: dates[dates.length - 1]
+      start: dates[0] as string,
+      end: dates[dates.length - 1] as string
     } : null
 
     return {

@@ -24,7 +24,8 @@
       "Bash(tree:*)",
       "Bash(git add:*)",
       "Bash(chmod:*)",
-      "Bash(./update-playlists.sh:*)"
+      "Bash(./update-playlists.sh:*)",
+      "Bash(npm run build:*)"
     ]
   }
 }

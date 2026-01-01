@@ -7,7 +7,7 @@ const props = defineProps<{
   song: string
 }>()
 
-const { platforms, openTrack, hasDirectLink, getTrackData, indexLoaded } = useStreamingLinks()
+const { platforms, openTrack, hasDirectLink, indexLoaded } = useStreamingLinks()
 const isOpen = ref(false)
 const dropdownRef = ref<HTMLElement | null>(null)
 
@@ -18,7 +18,6 @@ const hasSpotifyLink = computed(() => {
   console.log(`Checking ${props.artist} - ${props.song}:`, result)
   return result
 })
-const trackData = computed(() => getTrackData(props.artist, props.song))
 
 const toggleDropdown = () => {
   isOpen.value = !isOpen.value

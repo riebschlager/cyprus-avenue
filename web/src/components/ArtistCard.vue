@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watch, nextTick, computed } from 'vue'
-import type { Artist, ArtistTrack } from '../composables/useArtists'
+import type { Artist } from '../composables/useArtists'
 import StreamingLinks from './StreamingLinks.vue'
 
 const props = defineProps<{
