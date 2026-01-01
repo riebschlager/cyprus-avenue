@@ -28,13 +28,13 @@ onUnmounted(() => {
       ]"
     >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-300"
-           :class="isScrolled ? 'py-3' : 'py-6'">
+           :class="isScrolled ? 'py-3' : 'py-4'">
         <div :class="['transition-all duration-300', isScrolled ? 'flex items-center justify-between' : '']">
-          <div>
+          <div :class="[!isScrolled ? 'flex items-baseline justify-between' : '']">
             <h1 :class="['font-bold text-white transition-all duration-300', isScrolled ? 'text-xl' : 'text-3xl']">
               Cyprus Avenue Archive
             </h1>
-            <p v-show="!isScrolled" class="mt-2 text-sm text-gray-400 transition-opacity duration-300">
+            <p v-show="!isScrolled" class="text-sm text-gray-400 transition-opacity duration-300 ml-4">
               Browse playlists from KCUR's Cyprus Avenue radio show
             </p>
           </div>
@@ -42,7 +42,7 @@ onUnmounted(() => {
           <!-- Navigation Tabs -->
           <div :class="[
             'border-b border-gray-800 transition-all duration-300',
-            isScrolled ? 'border-0 ml-8' : 'mt-6'
+            isScrolled ? 'border-0 ml-8' : 'mt-4'
           ]">
             <nav :class="[
               'flex space-x-8 transition-all duration-300',
