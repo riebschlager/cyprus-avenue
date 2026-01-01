@@ -1,4 +1,4 @@
-import { computed, ref } from 'vue'
+import { computed, ref, toValue, type MaybeRefOrGetter } from 'vue'
 import type { Playlist } from '../types/playlist'
 
 export interface ArtistTrack {
@@ -14,14 +14,15 @@ export interface Artist {
   playlistCount: number
 }
 
-export function useArtists(playlists: Playlist[]) {
+export function useArtists(playlists: MaybeRefOrGetter<Playlist[]>) {
   const searchQuery = ref('')
 
   // Build artist map
   const artists = computed(() => {
     const artistMap = new Map<string, ArtistTrack[]>()
+    const playlistsValue = toValue(playlists)
 
-    playlists.forEach(playlist => {
+    playlistsValue.forEach(playlist => {
       playlist.tracks.forEach(track => {
         const artistName = track.artist
         if (!artistMap.has(artistName)) {

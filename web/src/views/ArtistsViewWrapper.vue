@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { usePlaylists } from '../composables/usePlaylists'
 import { useArtists } from '../composables/useArtists'
@@ -7,8 +7,14 @@ import ArtistsView from '../components/ArtistsView.vue'
 import { findArtistBySlug } from '../utils/slug'
 
 const route = useRoute()
-const { playlists } = usePlaylists()
-const { artists } = useArtists(playlists.value)
+const { playlists, loading, error, fetchPlaylists } = usePlaylists()
+
+onMounted(() => {
+  fetchPlaylists()
+})
+
+// Compute artists reactively from playlists - pass ref, not value
+const { artists } = useArtists(playlists)
 
 // Track which artist should be auto-expanded from URL
 const autoExpandSlug = ref<string | null>(null)
@@ -22,13 +28,23 @@ watch(() => route.params.slug, (slug) => {
   }
 }, { immediate: true })
 
-// Find the artist to auto-expand
+// Find the artist to auto-expand - this computed will react to changes in artists
 const artistToExpand = computed(() => {
-  if (!autoExpandSlug.value) return null
+  if (!autoExpandSlug.value || !artists.value || artists.value.length === 0) return null
   return findArtistBySlug(artists.value, autoExpandSlug.value)
 })
 </script>
 
 <template>
-  <ArtistsView :playlists="playlists" :auto-expand-artist="artistToExpand" />
+  <div>
+    <div v-if="loading" class="flex justify-center items-center py-12">
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+    </div>
+
+    <div v-else-if="error" class="bg-red-950/50 border border-red-800 rounded-lg p-4">
+      <p class="text-red-300">{{ error }}</p>
+    </div>
+
+    <ArtistsView v-else :playlists="playlists" :auto-expand-artist="artistToExpand" />
+  </div>
 </template>

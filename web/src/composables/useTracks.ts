@@ -1,4 +1,4 @@
-import { computed, ref } from 'vue'
+import { computed, ref, toValue, type MaybeRefOrGetter } from 'vue'
 import type { Playlist } from '../types/playlist'
 
 export interface TrackWithPlaylist {
@@ -12,7 +12,7 @@ export interface TrackWithPlaylist {
 export type SortField = 'artist' | 'song' | 'playlistTitle' | 'playlistDate'
 export type SortDirection = 'asc' | 'desc'
 
-export function useTracks(playlists: Playlist[]) {
+export function useTracks(playlists: MaybeRefOrGetter<Playlist[]>) {
   const searchQuery = ref('')
   const sortField = ref<SortField>('artist')
   const sortDirection = ref<SortDirection>('asc')
@@ -20,8 +20,9 @@ export function useTracks(playlists: Playlist[]) {
   // Flatten all tracks from all playlists
   const allTracks = computed<TrackWithPlaylist[]>(() => {
     const tracks: TrackWithPlaylist[] = []
+    const playlistsValue = toValue(playlists)
 
-    playlists.forEach(playlist => {
+    playlistsValue.forEach(playlist => {
       playlist.tracks.forEach(track => {
         tracks.push({
           artist: track.artist,
