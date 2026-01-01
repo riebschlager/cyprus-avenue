@@ -40,12 +40,19 @@ const router = createRouter({
       props: true
     }
   ],
-  scrollBehavior(_to, _from, savedPosition) {
+  scrollBehavior(to, from, savedPosition) {
+    // If navigating within the same component (e.g., expanding/collapsing), don't scroll
+    if (to.matched[0]?.components?.default === from.matched[0]?.components?.default) {
+      return false // Maintain current scroll position
+    }
+
+    // If there's a saved position (browser back/forward), use it
     if (savedPosition) {
       return savedPosition
-    } else {
-      return { top: 0 }
     }
+
+    // Otherwise scroll to top for new pages
+    return { top: 0 }
   }
 })
 

@@ -30,16 +30,16 @@ const toggleArtist = (index: number) => {
   const wasExpanded = expandedArtistIndex.value === index
   expandedArtistIndex.value = wasExpanded ? null : index
 
-  // Update URL
+  // Update URL without triggering scroll behavior
   if (wasExpanded) {
     // Collapsed - go back to artists view
-    router.push('/artists')
+    router.replace('/artists')
   } else {
     // Expanded - navigate to artist permalink
     const artist = filteredArtists.value[index]
     if (artist) {
       const slug = generateArtistSlug(artist.name)
-      router.push(`/artist/${slug}`)
+      router.replace(`/artist/${slug}`)
     }
   }
 }

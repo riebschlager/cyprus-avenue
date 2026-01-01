@@ -25,16 +25,16 @@ const togglePlaylist = (date: string) => {
   const wasExpanded = expandedPlaylist.value === date
   expandedPlaylist.value = wasExpanded ? null : date
 
-  // Update URL
+  // Update URL without triggering scroll behavior
   if (wasExpanded) {
     // Collapsed - go back to playlists view
-    router.push('/playlists')
+    router.replace('/playlists')
   } else {
     // Expanded - navigate to playlist permalink
     const playlist = props.playlists.find(p => p.date === date)
     if (playlist) {
       const slug = generatePlaylistSlug(playlist.title, playlist.date)
-      router.push(`/playlist/${slug}`)
+      router.replace(`/playlist/${slug}`)
     }
   }
 }
