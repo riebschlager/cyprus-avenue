@@ -239,7 +239,7 @@ const showAllTracksModal = ref(false)
           <p class="text-sm text-blue-200">
             💡 <strong>Tip:</strong> You can also add individual shows to Spotify by expanding any playlist
             in the <router-link to="/playlists" class="text-blue-400 hover:text-blue-300 underline">Playlists</router-link> view
-            and clicking the "🎵 Add to Spotify" button.
+            and clicking the "🎧 Add to Spotify" button.
           </p>
         </div>
       </div>

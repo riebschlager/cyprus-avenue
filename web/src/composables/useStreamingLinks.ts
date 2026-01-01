@@ -26,7 +26,7 @@ const indexLoading = ref(false)
 export const streamingPlatforms: StreamingPlatform[] = [
   {
     name: 'Spotify',
-    icon: '🎵',
+    icon: '🎧',
     getUrl: (artist: string, song: string, index?: SpotifyIndex) => {
       // Try to get direct link from index
       const key = `${artist}|${song}`
