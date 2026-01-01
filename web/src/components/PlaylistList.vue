@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import type { Playlist } from '../types/playlist'
 import PlaylistCard from './PlaylistCard.vue'
@@ -14,12 +14,49 @@ const props = defineProps<{
 const router = useRouter()
 const expandedPlaylist = ref<string | null>(null)
 
+// Pagination
+const itemsPerPage = 50
+const currentPage = ref(1)
+
+const totalPlaylists = computed(() => props.playlists.length)
+const totalPages = computed(() => Math.ceil(totalPlaylists.value / itemsPerPage))
+
+const paginatedPlaylists = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage
+  const end = start + itemsPerPage
+  return props.playlists.slice(start, end)
+})
+
+const displayedRange = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage + 1
+  const end = Math.min(currentPage.value * itemsPerPage, totalPlaylists.value)
+  if (totalPlaylists.value === 0) return '0'
+  return `${start}-${end}`
+})
+
+const changePage = (page: number) => {
+  if (page >= 1 && page <= totalPages.value) {
+    currentPage.value = page
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+}
+
 // Watch for auto-expand playlist from URL
 watch(() => props.autoExpandPlaylist, (playlist) => {
   if (playlist) {
     expandedPlaylist.value = playlist.date
+    // Calculate which page this playlist is on
+    const index = props.playlists.findIndex(p => p.date === playlist.date)
+    if (index !== -1) {
+      currentPage.value = Math.floor(index / itemsPerPage) + 1
+    }
   }
 }, { immediate: true })
+
+// Reset to first page when search changes
+watch(() => props.searchQuery, () => {
+  currentPage.value = 1
+})
 
 const togglePlaylist = (date: string) => {
   const wasExpanded = expandedPlaylist.value === date
@@ -53,19 +90,61 @@ const togglePlaylist = (date: string) => {
     </div>
 
     <div v-else class="space-y-4">
-      <p class="text-sm text-gray-600">
-        Showing {{ playlists.length }} playlist{{ playlists.length === 1 ? '' : 's' }}
-      </p>
+      <div class="flex items-center justify-between text-sm text-gray-600">
+        <p>
+          Showing {{ displayedRange }} of {{ playlists.length }} playlist{{ playlists.length === 1 ? '' : 's' }}
+        </p>
+        
+        <!-- Pagination Controls (Top) -->
+        <div v-if="totalPages > 1" class="flex gap-2">
+          <button 
+            @click="changePage(currentPage - 1)" 
+            :disabled="currentPage === 1"
+            class="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-gray-800"
+          >
+            Previous
+          </button>
+          <span class="px-2 py-1 text-gray-600">Page {{ currentPage }} of {{ totalPages }}</span>
+          <button 
+            @click="changePage(currentPage + 1)" 
+            :disabled="currentPage === totalPages"
+            class="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-gray-800"
+          >
+            Next
+          </button>
+        </div>
+      </div>
 
       <div class="space-y-3">
         <PlaylistCard
-          v-for="playlist in playlists"
+          v-for="playlist in paginatedPlaylists"
           :key="playlist.date"
           :playlist="playlist"
           :is-expanded="expandedPlaylist === playlist.date"
           :search-query="searchQuery"
           @toggle="togglePlaylist(playlist.date)"
         />
+      </div>
+
+      <!-- Pagination Controls (Bottom) -->
+      <div v-if="totalPages > 1" class="mt-6 flex justify-center gap-2 text-sm">
+        <button 
+          @click="changePage(currentPage - 1)" 
+          :disabled="currentPage === 1"
+          class="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-gray-800"
+        >
+          Previous
+        </button>
+        <div class="flex items-center px-2 text-gray-600">
+          Page {{ currentPage }} of {{ totalPages }}
+        </div>
+        <button 
+          @click="changePage(currentPage + 1)" 
+          :disabled="currentPage === totalPages"
+          class="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-gray-800"
+        >
+          Next
+        </button>
       </div>
     </div>
   </div>

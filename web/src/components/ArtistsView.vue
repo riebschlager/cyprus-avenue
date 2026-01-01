@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useArtists, type Artist } from '../composables/useArtists'
 import type { Playlist } from '../types/playlist'
@@ -16,15 +16,48 @@ const router = useRouter()
 const { searchQuery, filteredArtists } = useArtists(props.playlists)
 const expandedArtistIndex = ref<number | null>(null)
 
+// Pagination
+const itemsPerPage = 50
+const currentPage = ref(1)
+
+const totalArtists = computed(() => filteredArtists.value.length)
+const totalPages = computed(() => Math.ceil(totalArtists.value / itemsPerPage))
+
+const paginatedArtists = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage
+  const end = start + itemsPerPage
+  return filteredArtists.value.slice(start, end)
+})
+
+const displayedRange = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage + 1
+  const end = Math.min(currentPage.value * itemsPerPage, totalArtists.value)
+  if (totalArtists.value === 0) return '0'
+  return `${start}-${end}`
+})
+
+const changePage = (page: number) => {
+  if (page >= 1 && page <= totalPages.value) {
+    currentPage.value = page
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+}
+
 // Watch for auto-expand artist from URL
 watch(() => props.autoExpandArtist, (artist) => {
   if (artist) {
     const index = filteredArtists.value.findIndex(a => a.name === artist.name)
     if (index !== -1) {
       expandedArtistIndex.value = index
+      currentPage.value = Math.floor(index / itemsPerPage) + 1
     }
   }
 }, { immediate: true })
+
+// Reset to first page when search changes
+watch(searchQuery, () => {
+  currentPage.value = 1
+})
 
 const toggleArtist = (index: number) => {
   const wasExpanded = expandedArtistIndex.value === index
@@ -80,13 +113,63 @@ const toggleArtist = (index: number) => {
         <p class="text-gray-400">No artists found matching your search.</p>
       </div>
 
-      <ArtistCard
-        v-for="(artist, index) in filteredArtists"
-        :key="artist.name"
-        :artist="artist"
-        :is-expanded="expandedArtistIndex === index"
-        @toggle="toggleArtist(index)"
-      />
+      <div v-else>
+        <div class="flex items-center justify-between text-sm text-gray-400 mb-4">
+          <p>
+            Showing {{ displayedRange }} of {{ totalArtists.toLocaleString() }} artists
+          </p>
+          
+          <!-- Pagination Controls (Top) -->
+          <div v-if="totalPages > 1" class="flex gap-2">
+            <button 
+              @click="changePage(currentPage - 1)" 
+              :disabled="currentPage === 1"
+              class="px-3 py-1 rounded bg-gray-800 hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              Previous
+            </button>
+            <span class="px-2 py-1">Page {{ currentPage }} of {{ totalPages }}</span>
+            <button 
+              @click="changePage(currentPage + 1)" 
+              :disabled="currentPage === totalPages"
+              class="px-3 py-1 rounded bg-gray-800 hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <ArtistCard
+            v-for="(artist, i) in paginatedArtists"
+            :key="artist.name"
+            :artist="artist"
+            :is-expanded="expandedArtistIndex === ((currentPage - 1) * itemsPerPage + i)"
+            @toggle="toggleArtist((currentPage - 1) * itemsPerPage + i)"
+          />
+        </div>
+
+        <!-- Pagination Controls (Bottom) -->
+        <div v-if="totalPages > 1" class="mt-6 flex justify-center gap-2 text-sm text-gray-400">
+          <button 
+            @click="changePage(currentPage - 1)" 
+            :disabled="currentPage === 1"
+            class="px-4 py-2 rounded bg-gray-800 hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          >
+            Previous
+          </button>
+          <div class="flex items-center px-2">
+            Page {{ currentPage }} of {{ totalPages }}
+          </div>
+          <button 
+            @click="changePage(currentPage + 1)" 
+            :disabled="currentPage === totalPages"
+            class="px-4 py-2 rounded bg-gray-800 hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          >
+            Next
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
