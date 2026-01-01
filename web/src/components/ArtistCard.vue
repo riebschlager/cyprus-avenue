@@ -87,17 +87,17 @@ watch(() => props.isExpanded, (newVal) => {
       @click="emit('toggle')"
       class="w-full px-6 py-4 text-left flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg"
     >
-      <div class="flex-1 min-w-0">
+      <div class="flex-1 min-w-0 flex items-center justify-between mr-4">
         <h3 class="text-lg font-semibold text-white">
           {{ artist.name }}
         </h3>
-        <div class="mt-2 flex gap-4 text-xs text-gray-400">
+        <div class="flex gap-4 text-xs text-gray-400">
           <span>{{ artist.uniqueSongs.length }} unique song{{ artist.uniqueSongs.length === 1 ? '' : 's' }}</span>
           <span>{{ artist.playlistCount }} playlist{{ artist.playlistCount === 1 ? '' : 's' }}</span>
         </div>
       </div>
       <svg
-        class="ml-4 h-5 w-5 text-gray-400 transition-transform flex-shrink-0"
+        class="h-5 w-5 text-gray-400 transition-transform flex-shrink-0"
         :class="{ 'rotate-180': isExpanded }"
         fill="none"
         stroke="currentColor"
