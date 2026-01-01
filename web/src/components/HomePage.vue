@@ -12,7 +12,7 @@ const router = useRouter()
     <div class="text-center">
       <h1 class="text-5xl font-bold text-white mb-4">Cyprus Avenue Archive</h1>
       <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-        A comprehensive digital archive of playlists from KCUR's legendary Cyprus Avenue radio show,
+        A digital archive of playlists from KCUR's legendary Cyprus Avenue radio show,
         preserving nearly 8 years of musical cultural heritage curated by Bill Shapiro.
       </p>
     </div>
@@ -23,23 +23,66 @@ const router = useRouter()
 
       <div class="space-y-4 text-gray-300">
         <p>
-          Cyprus Avenue was a Saturday night institution on KCUR 89.3 FM in Kansas City,
+          Cyprus Avenue was a Saturday evening institution on KCUR 89.3 FM in Kansas City,
           featuring "the world of popular music from gospel to rock - from country to reggae -
-          from a different point of view."
-        </p>
-
-        <p>
-          For over 40 years (1978-2018), Bill Shapiro—a Kansas City tax attorney by day and
-          music enthusiast by night—curated unique playlists introducing listeners to both
-          classic and contemporary artists across all genres. His eclectic taste and deep
-          knowledge of music made Cyprus Avenue a beloved show for generations of Kansas City listeners.
-        </p>
-
-        <p>
-          Bill Shapiro passed away in January 2020 at age 82, but his musical legacy lives on
-          through this archive. The show was named after Van Morrison's iconic song "Cyprus Avenue"
+          from a different point of view." 
+          The show was named after Van Morrison's iconic song "Cyprus Avenue"
           from the 1968 album <em>Astral Weeks</em>.
         </p>
+
+        <p>
+          For over 40 years (1978-2018), Bill Shapiro—a Kansas City tax and estate planner by day and
+          music enthusiast by night—curated unique playlists introducing listeners to both
+          classic and contemporary artists across all genres. A native of Kansas City, Missouri,
+          Shapiro received his law degree from the University of Michigan and practiced law since 1962.
+        </p>
+
+        <p>
+          Beyond the radio, Shapiro was the author of two definitive music guides, both published
+          by Andrews & McMeel:
+          <a href="https://www.amazon.com/dp/0836279476" target="_blank" rel="noopener" class="text-blue-400 hover:text-blue-300"><em>The CD Rock and Roll Library</em></a> (1988) and
+          <a href="https://www.amazon.com/dp/0836262174" target="_blank" rel="noopener" class="text-blue-400 hover:text-blue-300"><em>The Rock and Roll Review</em></a> (1991).
+          His taste and deep knowledge of music made Cyprus Avenue a beloved show for generations of Kansas City listeners.
+        </p>
+
+        <p>
+          Bill Shapiro passed away in January 2020 at age 82, but his musical legacy lives on. Read more about his life and impact at 
+          <a href="https://www.kcur.org/community/2020-01-23/bill-shapiro-longtime-host-of-kcurs-cyprus-avenue-dies-at-82" target="_blank" rel="noopener" class="text-blue-400 hover:text-blue-300">KCUR</a>.
+        </p>
+      </div>
+    </div>
+
+    <!-- Marr Sound Archive -->
+    <div class="bg-gray-800 rounded-lg shadow-lg p-8 border border-gray-700">
+      <h2 class="text-3xl font-bold text-white mb-6">Marr Sound Archive</h2>
+
+      <div class="space-y-4 text-gray-300">
+        <p>
+          More recordings appear to be available as part of the <strong>Marr Sound Archive</strong> at the
+          University of Missouri Kansas City.
+        </p>
+
+        <p>
+          The archive was founded by Professor Gaylord Marr, who specialized in sound recordings.
+          This collection contains audio recordings of the "Cyprus Avenue" radio program aired on KCUR-FM in Kansas City, Missouri.
+        </p>
+
+        <div class="mt-6 p-4 bg-gray-900 rounded-lg border border-gray-600">
+          <p class="mb-2">
+            <strong>Access the Collection:</strong>
+          </p>
+          <a
+            href="https://finding-aids.library.umkc.edu/repositories/2/resources/415/collection_organization"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-blue-400 hover:text-blue-300 underline break-words"
+          >
+            Marr Sound Archive: Cyprus Avenue Collection
+          </a>
+          <p class="mt-2 text-sm text-gray-400">
+            Please contact the Marr Sound Archive directly regarding research, borrowing, and access to these materials.
+          </p>
+        </div>
       </div>
     </div>
 
@@ -67,20 +110,6 @@ const router = useRouter()
           </p>
         </div>
       </div>
-
-      <div class="text-gray-300 space-y-4">
-        <p>
-          This archive preserves <strong class="text-white">{{ stats.totalPlaylists }} playlists</strong> spanning
-          nearly 8 years, containing <strong class="text-white">{{ stats.totalTracks.toLocaleString() }} tracks</strong>
-          across all genres.
-        </p>
-
-        <p>
-          Many of these playlists (100+ from 2009-2017) are no longer easily accessible on
-          KCUR's website, making this archive a valuable cultural preservation effort for
-          Kansas City's musical heritage.
-        </p>
-      </div>
     </div>
 
     <!-- About This Project -->
@@ -90,7 +119,7 @@ const router = useRouter()
       <div class="space-y-4 text-gray-300">
         <p>
           This digital archive was created to preserve and make accessible the musical legacy
-          of Cyprus Avenue. The playlists were painstakingly collected from various sources,
+          of Cyprus Avenue. The playlists were collected from various sources,
           parsed, and structured into a searchable database.
         </p>
 
