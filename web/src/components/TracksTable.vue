@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { TrackWithPlaylist, SortField, SortDirection } from '../composables/useTracks'
 import StreamingLinks from './StreamingLinks.vue'
+import { generatePlaylistSlug, generateArtistSlug } from '../utils/slug'
 
 defineProps<{
   tracks: TrackWithPlaylist[]
@@ -22,6 +23,14 @@ const getSortIcon = (field: SortField, currentField: SortField, direction: SortD
     return '↕'
   }
   return direction === 'asc' ? '↑' : '↓'
+}
+
+const getArtistUrl = (name: string) => {
+  return `/artist/${generateArtistSlug(name)}`
+}
+
+const getPlaylistUrl = (title: string, date: string) => {
+  return `/playlist/${generatePlaylistSlug(title, date)}`
 }
 </script>
 
@@ -85,14 +94,24 @@ const getSortIcon = (field: SortField, currentField: SortField, direction: SortD
             :key="`${track.playlistDate}-${index}`"
             class="hover:bg-gray-700/50 transition-colors"
           >
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
-              {{ track.artist }}
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+              <router-link
+                :to="getArtistUrl(track.artist)"
+                class="text-blue-400 hover:text-blue-300 transition-colors"
+              >
+                {{ track.artist }}
+              </router-link>
             </td>
             <td class="px-6 py-4 text-sm text-gray-200">
               {{ track.song }}
             </td>
-            <td class="px-6 py-4 text-sm text-gray-300">
-              {{ track.playlistTitle }}
+            <td class="px-6 py-4 text-sm">
+              <router-link
+                :to="getPlaylistUrl(track.playlistTitle, track.playlistDate)"
+                class="text-blue-400 hover:text-blue-300 transition-colors"
+              >
+                {{ track.playlistTitle }}
+              </router-link>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
               {{ formatDate(track.playlistDate) }}
