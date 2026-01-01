@@ -233,6 +233,7 @@ async function indexAllTracks() {
 
   // Index tracks
   const trackIndex = {}
+  const notFoundTracks = []
   const stats = {
     total: uniqueTracks.size,
     found: 0,
@@ -260,11 +261,20 @@ async function indexAllTracks() {
         console.log(` ✓ (${result.confidence})`)
       } else {
         stats.notFound++
+        notFoundTracks.push({
+          artist: track.artist,
+          song: track.song
+        })
         console.log(` ✗ (not found)`)
       }
     } catch (error) {
       console.log(` ⚠ (error: ${error.message})`)
       stats.notFound++
+      notFoundTracks.push({
+        artist: track.artist,
+        song: track.song,
+        error: error.message
+      })
     }
 
     // Rate limiting
@@ -277,6 +287,11 @@ async function indexAllTracks() {
   const outputPath = 'web/public/spotify-index.json'
   fs.mkdirSync('web/public', { recursive: true })
   fs.writeFileSync(outputPath, JSON.stringify(trackIndex, null, 2))
+
+  // Save not-found tracks
+  const notFoundPath = 'data/spotify-not-found.json'
+  fs.mkdirSync('data', { recursive: true })
+  fs.writeFileSync(notFoundPath, JSON.stringify(notFoundTracks, null, 2))
 
   // Print summary
   console.log('\n=====================================')
@@ -291,8 +306,10 @@ async function indexAllTracks() {
   console.log(`  Medium:            ${stats.mediumConfidence} (${(stats.mediumConfidence/stats.found*100).toFixed(1)}%)`)
   console.log(`  Low:               ${stats.lowConfidence} (${(stats.lowConfidence/stats.found*100).toFixed(1)}%)`)
   console.log('')
-  console.log(`Output saved to: ${outputPath}`)
-  console.log(`File size: ${(fs.statSync(outputPath).size / 1024).toFixed(1)} KB`)
+  console.log(`Index saved to:      ${outputPath}`)
+  console.log(`Index size:          ${(fs.statSync(outputPath).size / 1024).toFixed(1)} KB`)
+  console.log(`Not found saved to:  ${notFoundPath}`)
+  console.log(`Not found count:     ${notFoundTracks.length} tracks`)
 }
 
 // Run the indexer

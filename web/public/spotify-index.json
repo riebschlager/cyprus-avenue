@@ -818,7 +818,7 @@
     "trackName": "You've Changed - Studio Rio Version",
     "confidence": "high"
   },
-  "Sly & The Family Stone|Family Affair": {
+  "Sly and the Family Stone|Family Affair": {
     "spotifyId": "2GVEs1sn5Q1jB1976vQoAX",
     "spotifyUrl": "https://open.spotify.com/track/2GVEs1sn5Q1jB1976vQoAX",
     "previewUrl": null,
@@ -864,12 +864,12 @@
     "confidence": "high"
   },
   "Sarah Vaughn|Summertime": {
-    "spotifyId": "2DhUfgd0W13gEJfAaHrHmw",
-    "spotifyUrl": "https://open.spotify.com/track/2DhUfgd0W13gEJfAaHrHmw",
+    "spotifyId": "1Vnqdb4nkckUfOlTHXhThn",
+    "spotifyUrl": "https://open.spotify.com/track/1Vnqdb4nkckUfOlTHXhThn",
     "previewUrl": null,
-    "albumArt": "https://i.scdn.co/image/ab67616d0000b2737ac9c6c57939054cfad45dcf",
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b2732eface417f9bd4b3436b1ee5",
     "artistName": "Sarah Vaughan",
-    "trackName": "Summertime - UFO Remix",
+    "trackName": "Summertime - Studio Rio Version",
     "confidence": "high"
   },
   "Sturgill Simpson|Life Of Sin": {
@@ -1367,7 +1367,7 @@
     "trackName": "Cajun Moon",
     "confidence": "high"
   },
-  "J.J. Cale & “Eric Clapton|It’s Easy”": {
+  "J.J. Cale & Eric Clapton|It’s Easy": {
     "spotifyId": "6UVPrccDy1OQtZduNtanhP",
     "spotifyUrl": "https://open.spotify.com/track/6UVPrccDy1OQtZduNtanhP",
     "previewUrl": null,
@@ -1493,7 +1493,7 @@
     "trackName": "Ain't That Peculiar - Single Version",
     "confidence": "high"
   },
-  "Smokey & The Miracles|You Really Got A Hold On Me": {
+  "Smokey Robinson & The Miracles|You Really Got A Hold On Me": {
     "spotifyId": "7ifcJ5DDytGf8aITxmgsLN",
     "spotifyUrl": "https://open.spotify.com/track/7ifcJ5DDytGf8aITxmgsLN",
     "previewUrl": null,
@@ -1502,7 +1502,7 @@
     "trackName": "You've Really Got A Hold On Me - Alternate Stereo Mix",
     "confidence": "medium"
   },
-  "Smokey & The Miracles|Tears Of A Clown": {
+  "Smokey Robinson & The Miracles|Tears Of A Clown": {
     "spotifyId": "4Dq749x2QP6OXTURJ9GGY8",
     "spotifyUrl": "https://open.spotify.com/track/4Dq749x2QP6OXTURJ9GGY8",
     "previewUrl": null,
@@ -1979,7 +1979,7 @@
     "trackName": "You Can’t Be Told",
     "confidence": "high"
   },
-  "Dylan|I Forgot To Remember To Forget": {
+  "Bob Dylan|I Forgot To Remember To Forget": {
     "spotifyId": "00HJYR05DhEkpawG444zN8",
     "spotifyUrl": "https://open.spotify.com/track/00HJYR05DhEkpawG444zN8",
     "previewUrl": null,
@@ -2069,6 +2069,15 @@
     "trackName": "Let It Be",
     "confidence": "high"
   },
+  "Allen Toussaint|Lady Madonna": {
+    "spotifyId": "2ZI8f6UPVtq9npRgNRI7Xm",
+    "spotifyUrl": "https://open.spotify.com/track/2ZI8f6UPVtq9npRgNRI7Xm",
+    "previewUrl": null,
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b273182c8ddb85f0bfb9f0d6eb8e",
+    "artistName": "Allen Toussaint",
+    "trackName": "Lady Madonna",
+    "confidence": "high"
+  },
   "Dr. John|Let ‘Em In": {
     "spotifyId": "5bqoL7c5C3dIixG1zoLTAc",
     "spotifyUrl": "https://open.spotify.com/track/5bqoL7c5C3dIixG1zoLTAc",
@@ -2077,6 +2086,15 @@
     "artistName": "Dr. John",
     "trackName": "Let 'Em In",
     "confidence": "high"
+  },
+  "Jim James|Kansas City": {
+    "spotifyId": "5eaDsFBc2hbgHf9ykkeVDB",
+    "spotifyUrl": "https://open.spotify.com/track/5eaDsFBc2hbgHf9ykkeVDB",
+    "previewUrl": null,
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b273cb0fadc7cc611f12842a05d4",
+    "artistName": "James Brown",
+    "trackName": "Kansas City - Live At The Apollo/2001",
+    "confidence": "medium"
   },
   "John Mellencamp|The Isolation Of Mister": {
     "spotifyId": "3ecx24y8MbCHsEa6eD1c8I",
@@ -2096,7 +2114,7 @@
     "trackName": "Volcano",
     "confidence": "high"
   },
-  "Jackson Brown|The Long Way Around": {
+  "Jackson Browne|The Long Way Around": {
     "spotifyId": "4BQXwbdfsY9dBnJiFSPXQu",
     "spotifyUrl": "https://open.spotify.com/track/4BQXwbdfsY9dBnJiFSPXQu",
     "previewUrl": null,
@@ -2447,7 +2465,7 @@
     "trackName": "The Beautiful Bones",
     "confidence": "high"
   },
-  "Elvis|Reconsider Baby": {
+  "Elvis Presley|Reconsider Baby": {
     "spotifyId": "34K50Idx5EKBEVWkmHZ2IZ",
     "spotifyUrl": "https://open.spotify.com/track/34K50Idx5EKBEVWkmHZ2IZ",
     "previewUrl": null,
@@ -2456,7 +2474,7 @@
     "trackName": "Reconsider Baby",
     "confidence": "high"
   },
-  "Elvis|Hi-Heel Sneakers": {
+  "Elvis Presley|Hi-Heel Sneakers": {
     "spotifyId": "7E7h5gByrU6lfVyoplM5Ze",
     "spotifyUrl": "https://open.spotify.com/track/7E7h5gByrU6lfVyoplM5Ze",
     "previewUrl": null,
@@ -2465,7 +2483,7 @@
     "trackName": "Hi-Heel Sneakers - Original Unedited Master- Digitally Remastered",
     "confidence": "high"
   },
-  "Elvis|Cindy Cindy": {
+  "Elvis Presley|Cindy Cindy": {
     "spotifyId": "741zs5gckPQEfA2YRGFbOw",
     "spotifyUrl": "https://open.spotify.com/track/741zs5gckPQEfA2YRGFbOw",
     "previewUrl": null,
@@ -2474,7 +2492,7 @@
     "trackName": "Cindy, Cindy",
     "confidence": "high"
   },
-  "Elvis|So Glad You’re Mine": {
+  "Elvis Presley|So Glad You’re Mine": {
     "spotifyId": "0apxGgBLcrpFqWVi1mDL5O",
     "spotifyUrl": "https://open.spotify.com/track/0apxGgBLcrpFqWVi1mDL5O",
     "previewUrl": null,
@@ -2483,7 +2501,7 @@
     "trackName": "So Glad You're Mine",
     "confidence": "high"
   },
-  "Elvis|You Asked Me To": {
+  "Elvis Presley|You Asked Me To": {
     "spotifyId": "7Eq66mQS309633F8TFOXT1",
     "spotifyUrl": "https://open.spotify.com/track/7Eq66mQS309633F8TFOXT1",
     "previewUrl": null,
@@ -2492,7 +2510,7 @@
     "trackName": "You Asked Me To",
     "confidence": "high"
   },
-  "Elvis|Memphis Tennessee": {
+  "Elvis Presley|Memphis Tennessee": {
     "spotifyId": "0kgiv71S8AiXEXSz8XJRbB",
     "spotifyUrl": "https://open.spotify.com/track/0kgiv71S8AiXEXSz8XJRbB",
     "previewUrl": null,
@@ -2501,7 +2519,7 @@
     "trackName": "Memphis Tennessee",
     "confidence": "high"
   },
-  "Elvis|Little Sister": {
+  "Elvis Presley|Little Sister": {
     "spotifyId": "5jRnmQJAwBbtikNcvYbp3B",
     "spotifyUrl": "https://open.spotify.com/track/5jRnmQJAwBbtikNcvYbp3B",
     "previewUrl": null,
@@ -2510,7 +2528,7 @@
     "trackName": "Little Sister",
     "confidence": "high"
   },
-  "Elvis|If I Were You": {
+  "Elvis Presley|If I Were You": {
     "spotifyId": "4WFEwq78dWquObx1d2x1nS",
     "spotifyUrl": "https://open.spotify.com/track/4WFEwq78dWquObx1d2x1nS",
     "previewUrl": null,
@@ -2519,7 +2537,7 @@
     "trackName": "If I Were You",
     "confidence": "high"
   },
-  "Elvis|Good Time Charlie’s Got The Blues": {
+  "Elvis Presley|Good Time Charlie’s Got The Blues": {
     "spotifyId": "7KPZnDTRHP1dD7HYv1FcmH",
     "spotifyUrl": "https://open.spotify.com/track/7KPZnDTRHP1dD7HYv1FcmH",
     "previewUrl": null,
@@ -2528,7 +2546,7 @@
     "trackName": "Good Time Charlie's Got the Blues",
     "confidence": "high"
   },
-  "Elvis|It Hurts Me": {
+  "Elvis Presley|It Hurts Me": {
     "spotifyId": "2QNGJoBP60oMlUMcPvIxF3",
     "spotifyUrl": "https://open.spotify.com/track/2QNGJoBP60oMlUMcPvIxF3",
     "previewUrl": null,
@@ -2537,7 +2555,7 @@
     "trackName": "It Hurts Me",
     "confidence": "high"
   },
-  "Elvis|Stuck On You": {
+  "Elvis Presley|Stuck On You": {
     "spotifyId": "7bA1DHtoJAvqyL42gHwOLa",
     "spotifyUrl": "https://open.spotify.com/track/7bA1DHtoJAvqyL42gHwOLa",
     "previewUrl": null,
@@ -2546,7 +2564,7 @@
     "trackName": "Stuck On You",
     "confidence": "high"
   },
-  "Elvis|Fever": {
+  "Elvis Presley|Fever": {
     "spotifyId": "73m8WuJlhzVusTVzJCGaDZ",
     "spotifyUrl": "https://open.spotify.com/track/73m8WuJlhzVusTVzJCGaDZ",
     "previewUrl": null,
@@ -2555,7 +2573,7 @@
     "trackName": "Fever",
     "confidence": "high"
   },
-  "Elvis|Bridge Over Troubled Water": {
+  "Elvis Presley|Bridge Over Troubled Water": {
     "spotifyId": "0gaZi6J3Pk7FG7GNMHsK5o",
     "spotifyUrl": "https://open.spotify.com/track/0gaZi6J3Pk7FG7GNMHsK5o",
     "previewUrl": null,
@@ -3168,10 +3186,10 @@
     "confidence": "high"
   },
   "The Staples Singers|Samson & Delilah": {
-    "spotifyId": "69RJ2VMOUNUVEdTYP7uKjd",
-    "spotifyUrl": "https://open.spotify.com/track/69RJ2VMOUNUVEdTYP7uKjd",
+    "spotifyId": "1q6Xhe4MC90NdRn44sqeJR",
+    "spotifyUrl": "https://open.spotify.com/track/1q6Xhe4MC90NdRn44sqeJR",
     "previewUrl": null,
-    "albumArt": "https://i.scdn.co/image/ab67616d0000b27359d554b530e90d0fb88583d1",
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b2730fd463a0cb39bba7dae5e8a2",
     "artistName": "The Staple Singers",
     "trackName": "Samson and Delilah",
     "confidence": "high"
@@ -5327,15 +5345,6 @@
     "trackName": "Poquito Para Aqui",
     "confidence": "high"
   },
-  "Elvis Presley|Fever": {
-    "spotifyId": "73m8WuJlhzVusTVzJCGaDZ",
-    "spotifyUrl": "https://open.spotify.com/track/73m8WuJlhzVusTVzJCGaDZ",
-    "previewUrl": null,
-    "albumArt": "https://i.scdn.co/image/ab67616d0000b273e33bf70631080c9e41d07b3b",
-    "artistName": "Elvis Presley",
-    "trackName": "Fever",
-    "confidence": "high"
-  },
   "Van Morrison & Mavis Staples|If I Ever Needed Someone": {
     "spotifyId": "1M2XbII0lQJJjCpCozyCrx",
     "spotifyUrl": "https://open.spotify.com/track/1M2XbII0lQJJjCpCozyCrx",
@@ -6884,6 +6893,15 @@
     "trackName": "King Of The Hill",
     "confidence": "high"
   },
+  "Roger McGuinn|Your Love Is A Gold Mine": {
+    "spotifyId": "0Ot6ZZIBMSAWuWUHAXckby",
+    "spotifyUrl": "https://open.spotify.com/track/0Ot6ZZIBMSAWuWUHAXckby",
+    "previewUrl": null,
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b27376d42182f7a1effe11526c49",
+    "artistName": "Roger McGuinn",
+    "trackName": "Your Love Is A Gold Mine",
+    "confidence": "high"
+  },
   "The Byrds|Eight Miles High": {
     "spotifyId": "2BGNomqCxEDcXyxf8bg27k",
     "spotifyUrl": "https://open.spotify.com/track/2BGNomqCxEDcXyxf8bg27k",
@@ -6920,6 +6938,15 @@
     "trackName": "You Ain't Goin' Nowhere",
     "confidence": "high"
   },
+  "Roger McGuinn|Nothing Was Delivered": {
+    "spotifyId": "05RhmeKf386I9l5PfL198O",
+    "spotifyUrl": "https://open.spotify.com/track/05RhmeKf386I9l5PfL198O",
+    "previewUrl": null,
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b273696480940ba4fd3a76d08e60",
+    "artistName": "Roger McGuinn",
+    "trackName": "Nothing Was Delivered - Live",
+    "confidence": "high"
+  },
   "Bob Dylan|My Back Page": {
     "spotifyId": "0bIGNGUqgpB82sAksxonkZ",
     "spotifyUrl": "https://open.spotify.com/track/0bIGNGUqgpB82sAksxonkZ",
@@ -6938,7 +6965,7 @@
     "trackName": "The Day Walk (Never Before)",
     "confidence": "high"
   },
-  "Bob Dylan|“Knockin’ On Heaven’s Door": {
+  "Bob Dylan|Knockin’ On Heaven’s Door": {
     "spotifyId": "6HSXNV0b4M4cLJ7ljgVVeh",
     "spotifyUrl": "https://open.spotify.com/track/6HSXNV0b4M4cLJ7ljgVVeh",
     "previewUrl": null,
@@ -7739,6 +7766,15 @@
     "trackName": "Ripple - Live",
     "confidence": "medium"
   },
+  "Allen Toussaint|Get Out Of My Life": {
+    "spotifyId": "3bgSPRMiCEbOWRT5RsxUzj",
+    "spotifyUrl": "https://open.spotify.com/track/3bgSPRMiCEbOWRT5RsxUzj",
+    "previewUrl": null,
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b27320cf056f34f60acd01ecb3be",
+    "artistName": "Allen Toussaint",
+    "trackName": "Get Out Of My Life Woman - Live",
+    "confidence": "high"
+  },
   "Phil Lesh|The Wheel / Uncle John’s Band": {
     "spotifyId": "40UyZ0DIZeZrGRDMyqoS09",
     "spotifyUrl": "https://open.spotify.com/track/40UyZ0DIZeZrGRDMyqoS09",
@@ -7881,15 +7917,6 @@
     "albumArt": "https://i.scdn.co/image/ab67616d0000b273147e35fd67f22f92cb587c3b",
     "artistName": "Sly & The Family Stone",
     "trackName": "Stand!",
-    "confidence": "high"
-  },
-  "Sly and the Family Stone|Family Affair": {
-    "spotifyId": "2GVEs1sn5Q1jB1976vQoAX",
-    "spotifyUrl": "https://open.spotify.com/track/2GVEs1sn5Q1jB1976vQoAX",
-    "previewUrl": null,
-    "albumArt": "https://i.scdn.co/image/ab67616d0000b27330d2b883196a6d50c5af952e",
-    "artistName": "Sly & The Family Stone",
-    "trackName": "Family Affair - Single Version",
     "confidence": "high"
   },
   "Van Morrison|Purple Heather": {
@@ -8126,13 +8153,139 @@
     "trackName": "Say It Loud - I'm Black And I'm Proud - Pts.1 & 2",
     "confidence": "high"
   },
-  "Sly & The Family Stone|Stand": {
+  "Sly and the Family Stone|Stand": {
     "spotifyId": "68DqLs1hv7zI08EBvu53wV",
     "spotifyUrl": "https://open.spotify.com/track/68DqLs1hv7zI08EBvu53wV",
     "previewUrl": null,
     "albumArt": "https://i.scdn.co/image/ab67616d0000b273147e35fd67f22f92cb587c3b",
     "artistName": "Sly & The Family Stone",
     "trackName": "Stand!",
+    "confidence": "high"
+  },
+  "Sam Baker|Summer Wind": {
+    "spotifyId": "4Ab2w3cr229fX5v1kf2u89",
+    "spotifyUrl": "https://open.spotify.com/track/4Ab2w3cr229fX5v1kf2u89",
+    "previewUrl": null,
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b2739ab88db1830f496b57cf5f1a",
+    "artistName": "Sam Baker",
+    "trackName": "Summer Wind",
+    "confidence": "high"
+  },
+  "Sam Baker|Same Kind Of Blue": {
+    "spotifyId": "1qOzw6kqYh05zYlfKaoAcq",
+    "spotifyUrl": "https://open.spotify.com/track/1qOzw6kqYh05zYlfKaoAcq",
+    "previewUrl": null,
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b2732ac8f669905bd5b9a9128864",
+    "artistName": "Sam Baker",
+    "trackName": "Same Kind of Blue (Live)",
+    "confidence": "high"
+  },
+  "Sam Baker|The Slivered Moon": {
+    "spotifyId": "3J0KT0gWguqIf3n4FL9Xmj",
+    "spotifyUrl": "https://open.spotify.com/track/3J0KT0gWguqIf3n4FL9Xmj",
+    "previewUrl": null,
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b2739ab88db1830f496b57cf5f1a",
+    "artistName": "Sam Baker",
+    "trackName": "The Slivered Moon",
+    "confidence": "high"
+  },
+  "Sam Baker|Margaret": {
+    "spotifyId": "29jzf8t7cluvHn9SebJhpu",
+    "spotifyUrl": "https://open.spotify.com/track/29jzf8t7cluvHn9SebJhpu",
+    "previewUrl": null,
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b2739ab88db1830f496b57cf5f1a",
+    "artistName": "Sam Baker",
+    "trackName": "Margaret",
+    "confidence": "high"
+  },
+  "Sam Baker|Love Is Patient": {
+    "spotifyId": "73n1KStUZs1mwFS1HnlRjw",
+    "spotifyUrl": "https://open.spotify.com/track/73n1KStUZs1mwFS1HnlRjw",
+    "previewUrl": null,
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b2739ab88db1830f496b57cf5f1a",
+    "artistName": "Sam Baker",
+    "trackName": "Love Is Patient",
+    "confidence": "high"
+  },
+  "Sam Baker|Leave": {
+    "spotifyId": "5Oc57kGkPuqsXOoQ1buC6z",
+    "spotifyUrl": "https://open.spotify.com/track/5Oc57kGkPuqsXOoQ1buC6z",
+    "previewUrl": null,
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b2731787ffe92034ebe043081bd5",
+    "artistName": "SameLand.",
+    "trackName": "Leave My Heart",
+    "confidence": "medium"
+  },
+  "Sam Baker|Pasture Fit For Thoroughbreds": {
+    "spotifyId": "00IZIuc3o7Q8xdHimYLTPa",
+    "spotifyUrl": "https://open.spotify.com/track/00IZIuc3o7Q8xdHimYLTPa",
+    "previewUrl": null,
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b2739ab88db1830f496b57cf5f1a",
+    "artistName": "Sam Baker",
+    "trackName": "Pastures Fit for Thoroughbreds",
+    "confidence": "medium"
+  },
+  "Sam Baker|Song Of Sunrise Birds": {
+    "spotifyId": "046OrLIav6rt2D08p9UDBD",
+    "spotifyUrl": "https://open.spotify.com/track/046OrLIav6rt2D08p9UDBD",
+    "previewUrl": null,
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b2739ab88db1830f496b57cf5f1a",
+    "artistName": "Sam Baker",
+    "trackName": "Song of Sunrise Birds",
+    "confidence": "high"
+  },
+  "Sam Baker|Moses In The Reeds": {
+    "spotifyId": "6zgFnSdngTJ1SwsgueIyI0",
+    "spotifyUrl": "https://open.spotify.com/track/6zgFnSdngTJ1SwsgueIyI0",
+    "previewUrl": null,
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b2739ab88db1830f496b57cf5f1a",
+    "artistName": "Sam Baker",
+    "trackName": "Moses in the Reeds",
+    "confidence": "high"
+  },
+  "Sam Baker|The Right Words": {
+    "spotifyId": "01ceRfRiFX0R9UyhJEd7VC",
+    "spotifyUrl": "https://open.spotify.com/track/01ceRfRiFX0R9UyhJEd7VC",
+    "previewUrl": null,
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b273bdf02ef7035819c6d7d05ad0",
+    "artistName": "Sam Baker",
+    "trackName": "Say the Right Words",
+    "confidence": "high"
+  },
+  "Sam Baker|The Sunken City Rises": {
+    "spotifyId": "1ixZB8OaCnUNvu3RUPlVKr",
+    "spotifyUrl": "https://open.spotify.com/track/1ixZB8OaCnUNvu3RUPlVKr",
+    "previewUrl": null,
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b2739ab88db1830f496b57cf5f1a",
+    "artistName": "Sam Baker",
+    "trackName": "The Sunken City Rises",
+    "confidence": "high"
+  },
+  "Sam Baker|Peace Out": {
+    "spotifyId": "4CuOlNFmSPLOuK1mrhz2Is",
+    "spotifyUrl": "https://open.spotify.com/track/4CuOlNFmSPLOuK1mrhz2Is",
+    "previewUrl": null,
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b2739ab88db1830f496b57cf5f1a",
+    "artistName": "Sam Baker",
+    "trackName": "Peace Out",
+    "confidence": "high"
+  },
+  "Sam Baker|Land Of Doubt": {
+    "spotifyId": "1m13RxRgMbrF2NO0P4CCL8",
+    "spotifyUrl": "https://open.spotify.com/track/1m13RxRgMbrF2NO0P4CCL8",
+    "previewUrl": null,
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b2739ab88db1830f496b57cf5f1a",
+    "artistName": "Sam Baker",
+    "trackName": "Land of Doubt",
+    "confidence": "high"
+  },
+  "Sam Baker|\"Summer Wind": {
+    "spotifyId": "4Ab2w3cr229fX5v1kf2u89",
+    "spotifyUrl": "https://open.spotify.com/track/4Ab2w3cr229fX5v1kf2u89",
+    "previewUrl": null,
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b2739ab88db1830f496b57cf5f1a",
+    "artistName": "Sam Baker",
+    "trackName": "Summer Wind",
     "confidence": "high"
   },
   "Bob Weir|Only A River": {
