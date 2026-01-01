@@ -14,8 +14,8 @@ export type SortDirection = 'asc' | 'desc'
 
 export function useTracks(playlists: Playlist[]) {
   const searchQuery = ref('')
-  const sortField = ref<SortField>('playlistDate')
-  const sortDirection = ref<SortDirection>('desc')
+  const sortField = ref<SortField>('artist')
+  const sortDirection = ref<SortDirection>('asc')
 
   // Flatten all tracks from all playlists
   const allTracks = computed<TrackWithPlaylist[]>(() => {

@@ -4,7 +4,7 @@
   "description": "20-14 is winding down but the great music keeps right on coming… John Mellencamp, U2, Jackson Brown and The New Basement Tapes are all featured on this week’s Cyprus Avenue...",
   "tracks": [
     {
-      "artist": "The New Basement Tapes (Jim James)",
+      "artist": "Jim James",
       "song": "Kansas City"
     },
     {
@@ -16,7 +16,7 @@
       "song": "Volcano"
     },
     {
-      "artist": "The New Basement Tapes (Rhianon Giddens)",
+      "artist": "Rhianon Giddens",
       "song": "Duncan & Jimmy"
     },
     {
@@ -28,7 +28,7 @@
       "song": "The Crystal Ballroom"
     },
     {
-      "artist": "The New Basement Tapes (Rhianon Giddens & Elvis Costello",
+      "artist": "Rhianon Giddens & Elvis Costello",
       "song": "Hidee Hidee Ho"
     },
     {
@@ -36,11 +36,11 @@
       "song": "Freedom"
     },
     {
-      "artist": "The New Basement Tapes (Marcus Mumford)",
+      "artist": "Marcus Mumford",
       "song": "When I Get My Hands On You"
     },
     {
-      "artist": "The New Basement Tapes (Taylor Goldsmith)",
+      "artist": "Taylor Goldsmith",
       "song": "Diamond Ring"
     },
     {
@@ -49,5 +49,5 @@
     }
   ],
   "source_url": "https://www.kcur.org/tags/cyprus-avenue",
-  "archived_date": "2025-12-31"
+  "archived_date": "2026-01-01"
 }
