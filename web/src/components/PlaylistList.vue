@@ -1,17 +1,42 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import { useRouter } from 'vue-router'
 import type { Playlist } from '../types/playlist'
 import PlaylistCard from './PlaylistCard.vue'
+import { generatePlaylistSlug } from '../utils/slug'
 
-defineProps<{
+const props = defineProps<{
   playlists: Playlist[]
   searchQuery: string
+  autoExpandPlaylist?: Playlist | null
 }>()
 
+const router = useRouter()
 const expandedPlaylist = ref<string | null>(null)
 
+// Watch for auto-expand playlist from URL
+watch(() => props.autoExpandPlaylist, (playlist) => {
+  if (playlist) {
+    expandedPlaylist.value = playlist.date
+  }
+}, { immediate: true })
+
 const togglePlaylist = (date: string) => {
-  expandedPlaylist.value = expandedPlaylist.value === date ? null : date
+  const wasExpanded = expandedPlaylist.value === date
+  expandedPlaylist.value = wasExpanded ? null : date
+
+  // Update URL
+  if (wasExpanded) {
+    // Collapsed - go back to playlists view
+    router.push('/playlists')
+  } else {
+    // Expanded - navigate to playlist permalink
+    const playlist = props.playlists.find(p => p.date === date)
+    if (playlist) {
+      const slug = generatePlaylistSlug(playlist.title, playlist.date)
+      router.push(`/playlist/${slug}`)
+    }
+  }
 }
 </script>
 

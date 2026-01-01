@@ -1,19 +1,47 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useArtists } from '../composables/useArtists'
+import { ref, watch } from 'vue'
+import { useRouter } from 'vue-router'
+import { useArtists, type Artist } from '../composables/useArtists'
 import type { Playlist } from '../types/playlist'
 import ArtistCard from './ArtistCard.vue'
 import SearchBar from './SearchBar.vue'
+import { generateArtistSlug } from '../utils/slug'
 
 const props = defineProps<{
   playlists: Playlist[]
+  autoExpandArtist?: Artist | null
 }>()
 
+const router = useRouter()
 const { searchQuery, filteredArtists } = useArtists(props.playlists)
 const expandedArtistIndex = ref<number | null>(null)
 
+// Watch for auto-expand artist from URL
+watch(() => props.autoExpandArtist, (artist) => {
+  if (artist) {
+    const index = filteredArtists.value.findIndex(a => a.name === artist.name)
+    if (index !== -1) {
+      expandedArtistIndex.value = index
+    }
+  }
+}, { immediate: true })
+
 const toggleArtist = (index: number) => {
-  expandedArtistIndex.value = expandedArtistIndex.value === index ? null : index
+  const wasExpanded = expandedArtistIndex.value === index
+  expandedArtistIndex.value = wasExpanded ? null : index
+
+  // Update URL
+  if (wasExpanded) {
+    // Collapsed - go back to artists view
+    router.push('/artists')
+  } else {
+    // Expanded - navigate to artist permalink
+    const artist = filteredArtists.value[index]
+    if (artist) {
+      const slug = generateArtistSlug(artist.name)
+      router.push(`/artist/${slug}`)
+    }
+  }
 }
 </script>
 

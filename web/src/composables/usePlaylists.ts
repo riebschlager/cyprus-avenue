@@ -1,27 +1,38 @@
 import { ref, computed } from 'vue'
 import type { Playlist } from '../types/playlist'
 
-export function usePlaylists() {
-  const playlists = ref<Playlist[]>([])
-  const loading = ref(false)
-  const error = ref<string | null>(null)
-  const searchQuery = ref('')
+// Create singleton state outside the function
+const playlists = ref<Playlist[]>([])
+const loading = ref(false)
+const error = ref<string | null>(null)
+const searchQuery = ref('')
 
+let fetchPromise: Promise<void> | null = null
+
+export function usePlaylists() {
   const fetchPlaylists = async () => {
+    // Return existing promise if already fetching
+    if (fetchPromise) return fetchPromise
+
     loading.value = true
     error.value = null
 
-    try {
-      const response = await fetch('/playlists.json')
-      if (!response.ok) {
-        throw new Error('Failed to fetch playlists')
+    fetchPromise = (async () => {
+      try {
+        const response = await fetch('/playlists.json')
+        if (!response.ok) {
+          throw new Error('Failed to fetch playlists')
+        }
+        playlists.value = await response.json()
+      } catch (err) {
+        error.value = err instanceof Error ? err.message : 'An error occurred'
+      } finally {
+        loading.value = false
+        fetchPromise = null
       }
-      playlists.value = await response.json()
-    } catch (err) {
-      error.value = err instanceof Error ? err.message : 'An error occurred'
-    } finally {
-      loading.value = false
-    }
+    })()
+
+    return fetchPromise
   }
 
   const filteredPlaylists = computed(() => {

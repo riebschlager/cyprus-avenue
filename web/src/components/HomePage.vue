@@ -1,12 +1,9 @@
 <script setup lang="ts">
-defineProps<{
-  stats: {
-    totalPlaylists: number
-    totalTracks: number
-    avgTracksPerShow: number
-    dateRange: { start: string; end: string } | null
-  }
-}>()
+import { usePlaylists } from '../composables/usePlaylists'
+import { useRouter } from 'vue-router'
+
+const { stats } = usePlaylists()
+const router = useRouter()
 </script>
 
 <template>
@@ -149,19 +146,19 @@ defineProps<{
       </p>
       <div class="flex gap-4 justify-center flex-wrap">
         <button
-          @click="$emit('navigate', 'playlists')"
+          @click="router.push('/playlists')"
           class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors"
         >
           Browse Playlists
         </button>
         <button
-          @click="$emit('navigate', 'artists')"
+          @click="router.push('/artists')"
           class="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors"
         >
           Browse Artists
         </button>
         <button
-          @click="$emit('navigate', 'tracks')"
+          @click="router.push('/tracks')"
           class="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors"
         >
           View All Tracks

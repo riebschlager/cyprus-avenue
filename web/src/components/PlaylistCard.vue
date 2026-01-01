@@ -44,20 +44,19 @@ watch(() => props.isExpanded, (newVal) => {
       class="w-full px-6 py-4 text-left flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg"
     >
       <div class="flex-1 min-w-0">
-        <div class="flex items-center gap-3">
-          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-500/20 text-blue-300">
-            {{ playlist.date }}
+        <div class="flex items-center justify-between gap-3">
+          <div class="flex items-center gap-3 min-w-0">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-500/20 text-blue-300 flex-shrink-0">
+              {{ playlist.date }}
+            </span>
+            <h3 class="text-lg font-semibold text-white truncate">
+              {{ playlist.title }}
+            </h3>
+          </div>
+          <span class="text-xs text-gray-400 flex-shrink-0 ml-2">
+            {{ playlist.tracks.length }} track{{ playlist.tracks.length === 1 ? '' : 's' }}
           </span>
-          <h3 class="text-lg font-semibold text-white truncate">
-            {{ playlist.title }}
-          </h3>
         </div>
-        <p class="mt-1 text-sm text-gray-300 line-clamp-2">
-          {{ playlist.description }}
-        </p>
-        <p class="mt-2 text-xs text-gray-400">
-          {{ playlist.tracks.length }} track{{ playlist.tracks.length === 1 ? '' : 's' }}
-        </p>
       </div>
       <svg
         class="ml-4 h-5 w-5 text-gray-400 transition-transform flex-shrink-0"
@@ -71,6 +70,12 @@ watch(() => props.isExpanded, (newVal) => {
     </button>
 
     <div v-if="isExpanded" class="px-6 pb-4 border-t border-gray-700">
+      <!-- Description -->
+      <div v-if="playlist.description" class="mt-4 mb-4 pb-4 border-b border-gray-700">
+        <p class="text-sm text-gray-300">{{ playlist.description }}</p>
+      </div>
+
+      <!-- Track List -->
       <div class="mt-4">
         <h4 class="text-sm font-semibold text-white mb-3">Track List</h4>
         <div class="space-y-2">
