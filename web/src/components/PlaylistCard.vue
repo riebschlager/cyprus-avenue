@@ -30,9 +30,17 @@ const getAlbumArt = (artist: string, song: string): string | null => {
 const scrollToCard = () => {
   if (cardRef.value) {
     nextTick(() => {
-      const headerOffset = 100 // Account for sticky header height
-      const elementPosition = cardRef.value!.getBoundingClientRect().top
-      const offsetPosition = elementPosition + window.scrollY - headerOffset
+      const header = document.querySelector('header')
+      const collapsedHeaderHeight = 100 // Target offset for collapsed state
+      const currentHeaderHeight = header?.clientHeight || collapsedHeaderHeight
+      
+      // Calculate how much the content will shift if header collapses
+      const heightDifference = Math.max(0, currentHeaderHeight - collapsedHeaderHeight)
+      
+      const elementPosition = cardRef.value!.getBoundingClientRect().top + window.scrollY
+      
+      // Adjust target: remove the extra height that will disappear upon scrolling
+      const offsetPosition = elementPosition - heightDifference - collapsedHeaderHeight
 
       window.scrollTo({
         top: offsetPosition,
