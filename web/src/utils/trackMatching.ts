@@ -67,10 +67,6 @@ export function TrackMatcher(
       for (const track of tracks) {
         const match = await matchTrack(track)
         matches.push(match)
-        // Add delay between search requests to avoid rate limiting
-        // Most tracks are in the index, but for fallback searches we need protection
-        // 100ms per search is conservative but necessary for mega-playlist creation
-        await new Promise(resolve => setTimeout(resolve, 100))
       }
 
       return matches

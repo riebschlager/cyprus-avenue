@@ -67,11 +67,11 @@ export function SpotifyApiClient(accessToken: string): SpotifyApiClientType {
           })
         })
         // Add delay between batch requests to avoid rate limiting
-        // Spotify allows ~429 requests per minute per user, so ~7 requests per second
-        // With batches of 100, we need ~10-15 requests for a full archive
-        // Adding 300ms delay gives us safe margin
+        // Spotify has strict rate limits, especially when combined with search requests
+        // Using 1 second (1000ms) delay between batches provides safe margin
+        // For 1500 tracks in 15 batches = ~15 seconds of delays + API time
         if (i + SPOTIFY_BATCH_SIZE < trackUris.length) {
-          await new Promise(resolve => setTimeout(resolve, 300))
+          await new Promise(resolve => setTimeout(resolve, 1000))
         }
       }
     },

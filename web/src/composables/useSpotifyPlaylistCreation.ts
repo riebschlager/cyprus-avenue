@@ -61,15 +61,20 @@ export function useSpotifyPlaylistCreation() {
 
       // Match and add tracks
       creationProgress.value.totalTracks = playlist.tracks.length
-      const trackMatches = await Promise.all(
-        playlist.tracks.map(async (track, index) => {
-          creationProgress.value.currentTrackIndex = index
-          creationProgress.value.currentTrackName = track.song
-          creationProgress.value.currentArtist = track.artist
+      const trackMatches: any[] = []
+      for (let i = 0; i < playlist.tracks.length; i++) {
+        const track = playlist.tracks[i]!
+        creationProgress.value.currentTrackIndex = i
+        creationProgress.value.currentTrackName = track.song
+        creationProgress.value.currentArtist = track.artist
 
-          return matcher.matchTrack(track)
-        })
-      )
+        const match = await matcher.matchTrack(track)
+        trackMatches.push(match)
+
+        // Add delay between matches to avoid rate limiting
+        // 150ms per track = ~6.7 requests/second, well below Spotify's limit
+        await new Promise(resolve => setTimeout(resolve, 150))
+      }
 
       const { uris, notFound } = matcher.getUrisFromMatches(trackMatches)
 
@@ -130,15 +135,20 @@ export function useSpotifyPlaylistCreation() {
 
       // Match and add tracks
       creationProgress.value.totalTracks = uniqueTracks.length
-      const trackMatches = await Promise.all(
-        uniqueTracks.map(async (track, index) => {
-          creationProgress.value.currentTrackIndex = index
-          creationProgress.value.currentTrackName = track.song
-          creationProgress.value.currentArtist = track.artist
+      const trackMatches: any[] = []
+      for (let i = 0; i < uniqueTracks.length; i++) {
+        const track = uniqueTracks[i]!
+        creationProgress.value.currentTrackIndex = i
+        creationProgress.value.currentTrackName = track.song
+        creationProgress.value.currentArtist = track.artist
 
-          return matcher.matchTrack(track)
-        })
-      )
+        const match = await matcher.matchTrack(track)
+        trackMatches.push(match)
+
+        // Add delay between matches to avoid rate limiting
+        // 150ms per track = ~6.7 requests/second, well below Spotify's limit
+        await new Promise(resolve => setTimeout(resolve, 150))
+      }
 
       const { uris, notFound } = matcher.getUrisFromMatches(trackMatches)
 
