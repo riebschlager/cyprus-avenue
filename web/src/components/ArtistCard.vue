@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, nextTick, computed } from 'vue'
+import { ref, watch, nextTick, computed, onMounted } from 'vue'
 import type { Artist } from '../composables/useArtists'
 import StreamingLinks from './StreamingLinks.vue'
 
@@ -36,12 +36,25 @@ const playlistsWithTracks = computed(() => {
   )
 })
 
-// Scroll to top of card when expanded
-watch(() => props.isExpanded, (newVal) => {
-  if (newVal && cardRef.value) {
+const scrollToCard = () => {
+  if (cardRef.value) {
     nextTick(() => {
       cardRef.value?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     })
+  }
+}
+
+// Scroll to card when expanded via URL (on mount)
+onMounted(() => {
+  if (props.isExpanded) {
+    scrollToCard()
+  }
+})
+
+// Scroll to top of card when expanded via toggle
+watch(() => props.isExpanded, (newVal) => {
+  if (newVal) {
+    scrollToCard()
   }
 })
 </script>
