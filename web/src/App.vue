@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
 import { usePlaylists } from './composables/usePlaylists'
+import ToastContainer from './components/ToastContainer.vue'
 
 const { fetchPlaylists } = usePlaylists()
 const isScrolled = ref(false)
@@ -156,5 +157,8 @@ onUnmounted(() => {
         </p>
       </div>
     </footer>
+
+    <!-- Toast Notifications -->
+    <ToastContainer />
   </div>
 </template>

@@ -2,6 +2,7 @@
 import { ref, watch, nextTick, onMounted } from 'vue'
 import type { Playlist } from '../types/playlist'
 import StreamingLinks from './StreamingLinks.vue'
+import SpotifyPlaylistModal from './SpotifyPlaylistModal.vue'
 import { useStreamingLinks } from '../composables/useStreamingLinks'
 
 const props = defineProps<{
@@ -16,6 +17,7 @@ const emit = defineEmits<{
 
 const { getTrackData } = useStreamingLinks()
 const cardRef = ref<HTMLElement | null>(null)
+const showSpotifyModal = ref(false)
 
 const formatDate = (dateStr: string) => {
   const date = new Date(dateStr)
@@ -140,17 +142,36 @@ watch(() => props.isExpanded, (newVal) => {
         </div>
       </div>
 
-      <div class="mt-4 pt-4 border-t border-gray-700 flex items-center justify-between">
-        <p class="text-xs text-gray-400">
-          Original broadcast: {{ formatDate(playlist.date) }}
-        </p>
-        <a
-          :href="`mailto:chris@the816.com?subject=Cyprus Avenue Archive - Issue Report&body=Regarding playlist: ${playlist.title} (${playlist.date})%0D%0A%0D%0APlease describe the issue:%0D%0A`"
-          class="text-xs text-blue-400 hover:text-blue-300 underline"
+      <div class="mt-4 pt-4 border-t border-gray-700 space-y-3">
+        <!-- Spotify Creation Button -->
+        <button
+          @click="showSpotifyModal = true"
+          class="w-full bg-green-500/20 hover:bg-green-500/30 text-green-300 border border-green-500/50 font-semibold py-2 px-4 rounded-lg text-sm transition-colors"
         >
-          Report an issue
-        </a>
+          🎵 Add to Spotify
+        </button>
+
+        <!-- Footer -->
+        <div class="flex items-center justify-between">
+          <p class="text-xs text-gray-400">
+            Original broadcast: {{ formatDate(playlist.date) }}
+          </p>
+          <a
+            :href="`mailto:chris@the816.com?subject=Cyprus Avenue Archive - Issue Report&body=Regarding playlist: ${playlist.title} (${playlist.date})%0D%0A%0D%0APlease describe the issue:%0D%0A`"
+            class="text-xs text-blue-400 hover:text-blue-300 underline"
+          >
+            Report an issue
+          </a>
+        </div>
       </div>
+
+      <!-- Spotify Playlist Modal -->
+      <SpotifyPlaylistModal
+        :is-open="showSpotifyModal"
+        :playlist="playlist"
+        mode="single"
+        @close="showSpotifyModal = false"
+      />
     </div>
   </div>
 </template>

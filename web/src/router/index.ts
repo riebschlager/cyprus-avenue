@@ -3,6 +3,7 @@ import HomePage from '../components/HomePage.vue'
 import PlaylistsView from '../views/PlaylistsView.vue'
 import TracksViewWrapper from '../views/TracksViewWrapper.vue'
 import ArtistsViewWrapper from '../views/ArtistsViewWrapper.vue'
+import SpotifyCallback from '../views/SpotifyCallback.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -44,6 +45,12 @@ const router = createRouter({
       component: ArtistsViewWrapper,
       props: true,
       meta: { title: 'Artist - Cyprus Avenue Archive' }
+    },
+    {
+      path: '/auth/callback',
+      name: 'spotify-callback',
+      component: SpotifyCallback,
+      meta: { title: 'Connecting to Spotify - Cyprus Avenue Archive' }
     }
   ],
   scrollBehavior(to, from, savedPosition) {

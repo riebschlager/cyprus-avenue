@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { usePlaylists } from '../composables/usePlaylists'
 import { useRouter } from 'vue-router'
+import SpotifyPlaylistModal from './SpotifyPlaylistModal.vue'
 
 const { stats } = usePlaylists()
 const router = useRouter()
+const showAllTracksModal = ref(false)
 </script>
 
 <template>
@@ -171,19 +174,83 @@ const router = useRouter()
               </svg>
               <span><strong class="text-white">Sortable Track View:</strong> Browse and sort all tracks by artist, song, playlist, or date</span>
             </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span><strong class="text-white">Export to Spotify:</strong> Create Spotify playlists from any archive show or from all unique tracks</span>
+            </li>
           </ul>
         </div>
 
         <div class="mt-8 p-6 bg-blue-900/20 border border-blue-800/50 rounded-lg">
           <p class="text-gray-200">
-            This project is <strong class="text-white">open source</strong> and hosted on 
-            <a href="https://github.com/riebschlager/cyprus-avenue/" target="_blank" rel="noopener" class="text-blue-400 hover:text-blue-300 font-medium underline-offset-4 hover:underline">GitHub</a>. 
-            I welcome any edits, suggestions, or corrections to the archive. You can contact me directly at 
+            This project is <strong class="text-white">open source</strong> and hosted on
+            <a href="https://github.com/riebschlager/cyprus-avenue/" target="_blank" rel="noopener" class="text-blue-400 hover:text-blue-300 font-medium underline-offset-4 hover:underline">GitHub</a>.
+            I welcome any edits, suggestions, or corrections to the archive. You can contact me directly at
             <a href="mailto:chris@the816.com" class="text-blue-400 hover:text-blue-300 font-medium underline-offset-4 hover:underline">chris@the816.com</a>.
           </p>
         </div>
       </div>
     </div>
+
+    <!-- Export to Spotify Section -->
+    <div class="bg-green-900/20 rounded-lg shadow-lg p-8 border border-green-700/50">
+      <h2 class="text-3xl font-bold text-white mb-6">Export to Spotify</h2>
+
+      <div class="space-y-6">
+        <p class="text-gray-300">
+          Connect your Spotify account to create playlists directly from the Cyprus Avenue archive.
+          You can create a playlist from any individual show or generate a single playlist containing
+          all {{ (stats.totalTracks || 0).toLocaleString() }} unique tracks from the entire archive.
+        </p>
+
+        <div class="grid gap-6 md:grid-cols-2">
+          <!-- Individual Playlist Card -->
+          <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-white mb-3">Create from Show</h3>
+            <p class="text-sm text-gray-300 mb-4">
+              Choose any Cyprus Avenue episode and create a Spotify playlist with all its tracks.
+            </p>
+            <button
+              @click="router.push('/playlists')"
+              class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
+            >
+              Browse Shows →
+            </button>
+          </div>
+
+          <!-- Complete Archive Card -->
+          <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-white mb-3">Complete Archive</h3>
+            <p class="text-sm text-gray-300 mb-4">
+              Create one mega-playlist with all unique tracks from the entire archive ({{ (stats.totalTracks || 0).toLocaleString() }} tracks).
+            </p>
+            <button
+              @click="showAllTracksModal = true"
+              class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
+            >
+              Create Complete Playlist →
+            </button>
+          </div>
+        </div>
+
+        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+          <p class="text-sm text-blue-200">
+            💡 <strong>Tip:</strong> You can also add individual shows to Spotify by expanding any playlist
+            in the <router-link to="/playlists" class="text-blue-400 hover:text-blue-300 underline">Playlists</router-link> view
+            and clicking the "🎵 Add to Spotify" button.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for creating all tracks playlist -->
+    <SpotifyPlaylistModal
+      :is-open="showAllTracksModal"
+      mode="all-tracks"
+      @close="showAllTracksModal = false"
+    />
 
     <!-- Call to Action -->
     <div class="bg-gradient-to-r from-blue-900/50 to-purple-900/50 rounded-lg shadow-lg p-8 border border-blue-700/50 text-center">
