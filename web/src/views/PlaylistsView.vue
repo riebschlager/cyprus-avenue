@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch, onMounted } from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { usePlaylists } from '../composables/usePlaylists'
 import SearchBar from '../components/SearchBar.vue'
@@ -12,6 +12,10 @@ const { loading, error, playlists, searchQuery, filteredPlaylists, stats, fetchP
 
 onMounted(() => {
   fetchPlaylists()
+})
+
+onUnmounted(() => {
+  searchQuery.value = ''
 })
 
 // Track which playlist should be auto-expanded from URL
