@@ -39,7 +39,14 @@ const playlistsWithTracks = computed(() => {
 const scrollToCard = () => {
   if (cardRef.value) {
     nextTick(() => {
-      cardRef.value?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      const headerOffset = 100 // Account for sticky header height
+      const elementPosition = cardRef.value!.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.scrollY - headerOffset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
     })
   }
 }
