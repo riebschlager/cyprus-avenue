@@ -2,6 +2,7 @@
 import { ref, watch, nextTick, computed, onMounted } from 'vue'
 import type { Artist } from '../composables/useArtists'
 import StreamingLinks from './StreamingLinks.vue'
+import { generatePlaylistSlug } from '../utils/slug'
 
 const props = defineProps<{
   artist: Artist
@@ -13,6 +14,12 @@ const emit = defineEmits<{
 }>()
 
 const cardRef = ref<HTMLElement | null>(null)
+
+// Generate playlist permalink
+const getPlaylistUrl = (title: string, date: string) => {
+  const slug = generatePlaylistSlug(title, date)
+  return `/playlist/${slug}`
+}
 
 // Group tracks by playlist
 const playlistsWithTracks = computed(() => {
@@ -122,12 +129,15 @@ watch(() => props.isExpanded, (newVal) => {
             :key="index"
             class="py-2 px-3 rounded hover:bg-gray-700/50"
           >
-            <div class="flex items-baseline gap-2 mb-2">
+            <router-link
+              :to="getPlaylistUrl(playlist.title, playlist.date)"
+              class="flex items-baseline gap-2 mb-2 hover:opacity-80 transition-opacity"
+            >
               <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-500/20 text-blue-300">
                 {{ playlist.date }}
               </span>
-              <p class="text-sm text-gray-300">{{ playlist.title }}</p>
-            </div>
+              <p class="text-sm text-blue-400 hover:text-blue-300 transition-colors">{{ playlist.title }}</p>
+            </router-link>
             <ul class="ml-[4.5rem] space-y-1">
               <li
                 v-for="(song, songIndex) in playlist.songs"
