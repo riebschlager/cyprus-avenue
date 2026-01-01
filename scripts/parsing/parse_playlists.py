@@ -48,7 +48,7 @@ def extract_artist_from_title_and_description(title, description):
                 return artist
 
     # Pattern: "Artist Name YYYY-YYYY" - extract artist before date range
-    match = re.match(r'^([A-Z][a-zA-Z\s\.&]+?)\s+\d{4}-\d{4}$', title)
+    match = re.match(r'^([A-Z][a-zA-Z\s\.&]+?)\s+\d{4}\s*[-–—]\s*\d{4}$', title)
     if match:
         return match.group(1).strip()
 
@@ -97,6 +97,9 @@ def parse_playlist_file(filepath):
 
     # Extract title (first non-empty line)
     title = lines[0].strip() if lines else ""
+    
+    # Ensure any dash in the title has a space on either side
+    title = re.sub(r'\s*[-–—]\s*', ' - ', title)
 
     # Extract description - typically appears after metadata and before track list
     description = ""
