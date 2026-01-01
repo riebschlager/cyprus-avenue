@@ -56,8 +56,8 @@ export function useSpotifyPlaylistCreation() {
       // Get current user
       const user = await apiClient.getCurrentUser()
 
-      // Create Spotify playlist
-      const spotifyPlaylist = await apiClient.createPlaylist(user.id, playlistName, false)
+      // Create Spotify playlist with archive playlist title as description
+      const spotifyPlaylist = await apiClient.createPlaylist(user.id, playlistName, false, playlist.title)
 
       // Match and add tracks
       creationProgress.value.totalTracks = playlist.tracks.length
@@ -132,8 +132,9 @@ export function useSpotifyPlaylistCreation() {
       // Get current user
       const user = await apiClient.getCurrentUser()
 
-      // Create Spotify playlist
-      const spotifyPlaylist = await apiClient.createPlaylist(user.id, playlistName, false)
+      // Create Spotify playlist with count of unique shows
+      const description = `All unique tracks from ${playlists.length} Cyprus Avenue shows`
+      const spotifyPlaylist = await apiClient.createPlaylist(user.id, playlistName, false, description)
 
       // Match and add tracks
       creationProgress.value.totalTracks = uniqueTracks.length

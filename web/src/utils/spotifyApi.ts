@@ -3,7 +3,7 @@ import { SPOTIFY_API_BASE, SPOTIFY_BATCH_SIZE } from './spotifyConstants'
 
 interface SpotifyApiClientType {
   getCurrentUser(): Promise<SpotifyUser>
-  createPlaylist(userId: string, name: string, isPublic?: boolean): Promise<SpotifyPlaylist>
+  createPlaylist(userId: string, name: string, isPublic?: boolean, description?: string): Promise<SpotifyPlaylist>
   addTracksToPlaylist(playlistId: string, trackUris: string[]): Promise<void>
   searchTrack(artist: string, song: string): Promise<{ id: string; uri: string } | null>
 }
@@ -41,14 +41,15 @@ export function SpotifyApiClient(accessToken: string): SpotifyApiClientType {
     async createPlaylist(
       userId: string,
       name: string,
-      isPublic: boolean = false
+      isPublic: boolean = false,
+      description: string = ''
     ): Promise<SpotifyPlaylist> {
       return request<SpotifyPlaylist>(`/users/${userId}/playlists`, {
         method: 'POST',
         body: JSON.stringify({
           name,
           public: isPublic,
-          description: 'Created from Cyprus Avenue Archive'
+          description
         })
       })
     },
