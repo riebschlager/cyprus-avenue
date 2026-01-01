@@ -3,7 +3,6 @@ import { ref } from 'vue'
 export interface StreamingPlatform {
   name: string
   icon: string
-  color: string
   getUrl: (artist: string, song: string, spotifyIndex?: SpotifyIndex) => string
 }
 
@@ -28,7 +27,6 @@ export const streamingPlatforms: StreamingPlatform[] = [
   {
     name: 'Spotify',
     icon: '🎵',
-    color: 'bg-green-600 hover:bg-green-700',
     getUrl: (artist: string, song: string, index?: SpotifyIndex) => {
       // Try to get direct link from index
       const key = `${artist}|${song}`
@@ -47,7 +45,6 @@ export const streamingPlatforms: StreamingPlatform[] = [
   {
     name: 'Apple Music',
     icon: '🍎',
-    color: 'bg-pink-600 hover:bg-pink-700',
     getUrl: (artist: string, song: string) => {
       const query = encodeURIComponent(`${artist} ${song}`)
       return `https://music.apple.com/us/search?term=${query}`
@@ -56,7 +53,6 @@ export const streamingPlatforms: StreamingPlatform[] = [
   {
     name: 'YouTube Music',
     icon: '▶️',
-    color: 'bg-red-600 hover:bg-red-700',
     getUrl: (artist: string, song: string) => {
       const query = encodeURIComponent(`${artist} ${song}`)
       return `https://music.youtube.com/search?q=${query}`

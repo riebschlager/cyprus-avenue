@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
 import { useStreamingLinks } from '../composables/useStreamingLinks'
+import { useDropdownState } from '../composables/useDropdownState'
 
 const props = defineProps<{
   artist: string
@@ -8,8 +9,11 @@ const props = defineProps<{
 }>()
 
 const { platforms, openTrack, hasDirectLink, indexLoaded } = useStreamingLinks()
-const isOpen = ref(false)
 const dropdownRef = ref<HTMLElement | null>(null)
+
+// Create unique ID for this dropdown instance
+const dropdownId = `streaming-${props.artist}-${props.song}-${Math.random()}`
+const { isOpen, toggle, close, currentOpenDropdownId } = useDropdownState(dropdownId)
 
 const hasSpotifyLink = computed(() => {
   // This computed depends on indexLoaded to trigger re-evaluation
@@ -20,20 +24,27 @@ const hasSpotifyLink = computed(() => {
 })
 
 const toggleDropdown = () => {
-  isOpen.value = !isOpen.value
+  toggle()
 }
 
 const handlePlatformClick = (platform: typeof platforms[0]) => {
   openTrack(platform, props.artist, props.song)
-  isOpen.value = false
+  close()
 }
 
 // Close dropdown when clicking outside
 const handleClickOutside = (event: MouseEvent) => {
   if (dropdownRef.value && !dropdownRef.value.contains(event.target as Node)) {
-    isOpen.value = false
+    close()
   }
 }
+
+// Watch for changes to currentOpenDropdownId and close if another dropdown opens
+watch(currentOpenDropdownId, (newId) => {
+  if (newId !== dropdownId && isOpen.value) {
+    isOpen.value = false
+  }
+})
 
 onMounted(() => {
   document.addEventListener('click', handleClickOutside)
@@ -75,8 +86,7 @@ onUnmounted(() => {
             v-for="platform in platforms"
             :key="platform.name"
             @click.stop="handlePlatformClick(platform)"
-            class="flex items-center justify-between w-full px-4 py-2 text-sm text-white hover:opacity-90 transition-opacity"
-            :class="platform.color"
+            class="flex items-center justify-between w-full px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition-colors"
           >
             <div class="flex items-center">
               <span class="mr-2">{{ platform.icon }}</span>
@@ -84,7 +94,7 @@ onUnmounted(() => {
             </div>
             <span
               v-if="platform.name === 'Spotify' && hasSpotifyLink"
-              class="text-xs bg-white text-green-600 px-2 py-0.5 rounded font-semibold"
+              class="text-xs bg-blue-500 text-white px-2 py-0.5 rounded font-semibold"
               title="Direct link available"
             >
               ✓
