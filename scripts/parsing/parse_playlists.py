@@ -81,6 +81,13 @@ def extract_artist_from_title_and_description(title, description):
     return title
 
 
+def clean_song_title(song):
+    """Strip any non-alpha or non-digit characters from the beginning of a song title."""
+    if not song:
+        return song
+    return re.sub(r'^[^a-zA-Z0-9]+', '', song).strip()
+
+
 def parse_playlist_file(filepath):
     """Parse a single playlist text file into structured data"""
     with open(filepath, 'r', encoding='utf-8') as f:
@@ -166,7 +173,7 @@ def parse_playlist_file(filepath):
         match = re.match(r'^(.+?):\s*["\u201c](.+?)["\u201d]', line)
         if match:
             artist = match.group(1).strip()
-            song = match.group(2).strip()
+            song = clean_song_title(match.group(2))
             tracks.append({"artist": artist, "song": song})
             continue
 
@@ -174,14 +181,14 @@ def parse_playlist_file(filepath):
         match = re.match(r'^(.+?)\s*[-–—]\s*["\u201c](.+?)["\u201d]', line)
         if match:
             artist = match.group(1).strip()
-            song = match.group(2).strip()
+            song = clean_song_title(match.group(2))
             tracks.append({"artist": artist, "song": song})
             continue
 
         # Pattern 1b: "Song" - Artist (reversed format)
         match = re.match(r'^["\u201c](.+?)["\u201d]\s*[-–—]\s*(.+)$', line)
         if match:
-            song = match.group(1).strip()
+            song = clean_song_title(match.group(1))
             artist = match.group(2).strip()
             tracks.append({"artist": artist, "song": song})
             continue
@@ -189,7 +196,7 @@ def parse_playlist_file(filepath):
         # Pattern 1c: - "Song" (leading dash without artist, for continuation lists)
         match = re.match(r'^[-–—]\s*["\u201c](.+?)["\u201d]\s*$', line)
         if match:
-            song = match.group(1).strip()
+            song = clean_song_title(match.group(1))
             # Extract artist from title/description for single-artist shows
             artist = extract_artist_from_title_and_description(title, description)
             tracks.append({"artist": artist, "song": song})
@@ -198,7 +205,7 @@ def parse_playlist_file(filepath):
         # Pattern 2: "Song" from Album (for artist-themed shows)
         match = re.match(r'^["\u201c](.+?)["\u201d]\s+from\s+(.+)$', line)
         if match:
-            song = match.group(1).strip()
+            song = clean_song_title(match.group(1))
             album = match.group(2).strip()
             # Extract artist from title/description for single-artist shows
             artist = extract_artist_from_title_and_description(title, description)
@@ -211,7 +218,7 @@ def parse_playlist_file(filepath):
         # dashes within quoted song titles (e.g., "Ghost Train Four-Oh-Ten")
         match = re.match(r'^["\u201c](.+?)["\u201d](?:\s*\(.*\))?\s*(?:\d+:\d+)?\s*$', line)
         if match:
-            song = match.group(1).strip()
+            song = clean_song_title(match.group(1))
             # Strip any trailing track duration (e.g., "4:10") that might have been included
             song = re.sub(r'\s+\d+:\d+\s*$', '', song).strip()
             # Extract artist from title/description for single-artist shows
@@ -223,7 +230,7 @@ def parse_playlist_file(filepath):
         match = re.match(r'^(.+?)\s*[-–—]\s*(.+?)(?:\s+from\s+.+)?$', line)
         if match:
             artist = match.group(1).strip()
-            song = match.group(2).strip()
+            song = clean_song_title(match.group(2))
             # Remove " from " and album info if present
             song = re.sub(r'\s+from\s+.+$', '', song).strip()
             tracks.append({"artist": artist, "song": song})
@@ -233,7 +240,7 @@ def parse_playlist_file(filepath):
         match = re.match(r'^(.+?),\s+(.+)$', line)
         if match and len(tracks) < 20:  # Likely a best-of album list
             artist = match.group(1).strip()
-            album = match.group(2).strip()
+            album = clean_song_title(match.group(2))
             tracks.append({"artist": artist, "song": album})
             continue
 
@@ -242,7 +249,7 @@ def parse_playlist_file(filepath):
         match = re.match(r'^([A-Z][a-zA-Z\s\.&]+?)\s{5,}(.+)$', line)
         if match:
             artist = match.group(1).strip()
-            song = match.group(2).strip()
+            song = clean_song_title(match.group(2))
             tracks.append({"artist": artist, "song": song})
             continue
 
@@ -265,8 +272,9 @@ def parse_playlist_file(filepath):
 
             # Extract artist from title/description for single-artist shows
             artist = extract_artist_from_title_and_description(title, description)
-            tracks.append({"artist": artist, "song": line})
+            tracks.append({"artist": artist, "song": clean_song_title(line)})
             continue
+
 
     # Get date from filename
     filename = os.path.basename(filepath)
