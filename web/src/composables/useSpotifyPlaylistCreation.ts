@@ -38,7 +38,6 @@ export function useSpotifyPlaylistCreation() {
   const createPlaylistFromArchivePlaylist = async (
     playlist: Playlist
   ): Promise<PlaylistCreationResult | null> => {
-    resetState()
     const accessToken = getAccessToken()
     if (!accessToken) {
       creationError.value = 'Not authenticated with Spotify'

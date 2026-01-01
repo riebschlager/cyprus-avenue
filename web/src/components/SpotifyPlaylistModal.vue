@@ -28,7 +28,8 @@ const {
   creationResult,
   creationError,
   createPlaylistFromArchivePlaylist,
-  createPlaylistFromAllTracks
+  createPlaylistFromAllTracks,
+  resetState
 } = useSpotifyPlaylistCreation()
 const { playlists } = usePlaylists()
 const { success, error: showError, warning } = useToast()
@@ -71,6 +72,10 @@ const handleCreatePlaylist = async () => {
 }
 
 const handleClose = () => {
+  // Reset state when modal closes
+  if (creationState.value !== 'idle') {
+    resetState()
+  }
   emit('close')
 }
 </script>
