@@ -14,7 +14,8 @@ interface TrackMatcherType {
 
 export function TrackMatcher(
   spotifyIndex: SpotifyIndex,
-  apiClient: ReturnType<typeof SpotifyApiClient>
+  apiClient: ReturnType<typeof SpotifyApiClient>,
+  skipApiSearch: boolean = false
 ): TrackMatcherType {
   async function matchTrack(track: Track): Promise<SpotifyTrackMatch> {
     // First, try to find in the pre-indexed tracks
@@ -28,6 +29,17 @@ export function TrackMatcher(
         spotifyId: indexed.spotifyId,
         spotifyUri: `spotify:track:${indexed.spotifyId}`,
         confidence: indexed.confidence
+      }
+    }
+
+    // Skip API search if requested (e.g., for mega-playlist where we only want indexed tracks)
+    if (skipApiSearch) {
+      return {
+        artist: track.artist,
+        song: track.song,
+        spotifyId: null,
+        spotifyUri: null,
+        confidence: 'not_found'
       }
     }
 
