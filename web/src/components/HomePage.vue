@@ -118,9 +118,24 @@ const router = useRouter()
 
       <div class="space-y-4 text-gray-300">
         <p>
-          This digital archive was created to preserve and make accessible the musical legacy
-          of Cyprus Avenue. The playlists were collected from various sources,
-          parsed, and structured into a searchable database.
+          This project originally began in 2018 as a manual preservation effort. At the time, the work 
+          consisted primarily of copying and pasting as many playlists as possible from the KCUR website before they 
+          disappeared. You can read more about the original motivation in this 2018 blog post: 
+          <a href="https://riebschlager.medium.com/the-cyprus-avenue-preservation-project-5fa0a3894c3a" target="_blank" rel="noopener" class="text-blue-400 hover:text-blue-300">The Cyprus Avenue Preservation Project</a>.
+        </p>
+
+        <p>
+          The inspiration back then was a growing nostalgia for human-curated music in an era where streaming 
+          services and algorithmically generated playlists were already beginning to dominate. Now in 2026, 
+          with the incredible advancement of AI and coding tools, I chose to re-ignite this project.
+        </p>
+
+        <p>
+          Over the course of just a few days, I used these modern tools alongside my background in software 
+          development to build this archive—automatedly parsing the original text files and searching the 
+          KCUR website for any shows I had previously missed. It is my hope to both preserve a small piece 
+          of Kansas City history and to "swim against the tide" of algorithmic listening by appreciating 
+          the curation of a true musicologist.
         </p>
 
         <div class="bg-gray-900 rounded-lg p-6 mt-6">
@@ -158,11 +173,6 @@ const router = useRouter()
             </li>
           </ul>
         </div>
-
-        <p class="mt-6">
-          This project was built with modern web technologies and designed to honor Bill Shapiro's
-          legacy while making his curated playlists accessible to music lovers everywhere.
-        </p>
       </div>
     </div>
 
