@@ -8,6 +8,8 @@ export interface OpenGraphData {
   image?: string
   url: string
   type?: string
+  author?: string
+  publishDate?: string
 }
 
 const BASE_URL = 'https://cyprus-avenue.netlify.app'
@@ -22,12 +24,14 @@ export function useOpenGraph() {
   const route = useRoute()
 
   const setOpenGraphTags = (data: OpenGraphData) => {
-    const tags = {
+    const tags: Record<string, string> = {
       'og:title': data.title,
       'og:description': data.description,
       'og:image': data.image || DEFAULT_IMAGE,
       'og:url': data.url,
       'og:type': data.type || 'website',
+      'og:author': data.author || 'Chris Riebschlager',
+      'og:publish_date': data.publishDate || '2026-01-01',
       'twitter:card': 'summary_large_image',
       'twitter:title': data.title,
       'twitter:description': data.description,
