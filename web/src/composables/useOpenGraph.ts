@@ -8,7 +8,6 @@ export interface OpenGraphData {
   image?: string
   url: string
   type?: string
-  author?: string
   publishDate?: string
 }
 
@@ -30,8 +29,7 @@ export function useOpenGraph() {
       'og:image': data.image || DEFAULT_IMAGE,
       'og:url': data.url,
       'og:type': data.type || 'website',
-      'og:author': data.author || 'Chris Riebschlager',
-      'og:publish_date': data.publishDate || '2026-01-01',
+      'article:published_time': data.publishDate || '2026-01-01',
       'twitter:card': 'summary_large_image',
       'twitter:title': data.title,
       'twitter:description': data.description,
