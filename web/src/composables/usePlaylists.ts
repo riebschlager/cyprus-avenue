@@ -1,11 +1,14 @@
 import { ref, computed } from 'vue'
 import type { Playlist } from '../types/playlist'
 
+export type SearchFilter = 'playlist' | 'artist' | 'song'
+
 // Create singleton state outside the function
 const playlists = ref<Playlist[]>([])
 const loading = ref(false)
 const error = ref<string | null>(null)
 const searchQuery = ref('')
+const searchFilters = ref<SearchFilter[]>(['playlist', 'artist', 'song'])
 
 let fetchPromise: Promise<void> | null = null
 
@@ -43,24 +46,26 @@ export function usePlaylists() {
     const query = searchQuery.value.toLowerCase()
 
     return playlists.value.filter(playlist => {
-      // Search in title
-      if (playlist.title.toLowerCase().includes(query)) {
-        return true
-      }
-
-      // Search in description
-      if (playlist.description.toLowerCase().includes(query)) {
-        return true
+      // Search in playlist title/description
+      if (searchFilters.value.includes('playlist')) {
+        if (playlist.title.toLowerCase().includes(query) ||
+            playlist.description.toLowerCase().includes(query)) {
+          return true
+        }
       }
 
       // Search in artist names
-      if (playlist.tracks.some(track => track.artist.toLowerCase().includes(query))) {
-        return true
+      if (searchFilters.value.includes('artist')) {
+        if (playlist.tracks.some(track => track.artist.toLowerCase().includes(query))) {
+          return true
+        }
       }
 
       // Search in song titles
-      if (playlist.tracks.some(track => track.song.toLowerCase().includes(query))) {
-        return true
+      if (searchFilters.value.includes('song')) {
+        if (playlist.tracks.some(track => track.song.toLowerCase().includes(query))) {
+          return true
+        }
       }
 
       return false
@@ -90,13 +95,33 @@ export function usePlaylists() {
     }
   })
 
+  const toggleSearchFilter = (filter: SearchFilter) => {
+    const index = searchFilters.value.indexOf(filter)
+    if (index > -1) {
+      // Remove filter only if there are other filters selected
+      if (searchFilters.value.length > 1) {
+        searchFilters.value.splice(index, 1)
+      }
+    } else {
+      // Add filter
+      searchFilters.value.push(filter)
+    }
+  }
+
+  const isFilterActive = (filter: SearchFilter) => {
+    return searchFilters.value.includes(filter)
+  }
+
   return {
     playlists,
     loading,
     error,
     searchQuery,
+    searchFilters,
     filteredPlaylists,
     stats,
-    fetchPlaylists
+    fetchPlaylists,
+    toggleSearchFilter,
+    isFilterActive
   }
 }

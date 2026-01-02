@@ -90,25 +90,25 @@ const togglePlaylist = (date: string) => {
     </div>
 
     <div v-else class="space-y-4">
-      <div class="flex items-center justify-between text-sm text-gray-600">
+      <div class="flex items-center justify-between text-sm text-gray-400">
         <p>
           Showing {{ displayedRange }} of {{ playlists.length }} playlist{{ playlists.length === 1 ? '' : 's' }}
         </p>
-        
+
         <!-- Pagination Controls (Top) -->
         <div v-if="totalPages > 1" class="flex gap-2">
-          <button 
-            @click="changePage(currentPage - 1)" 
+          <button
+            @click="changePage(currentPage - 1)"
             :disabled="currentPage === 1"
-            class="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-gray-800"
+            class="px-3 py-1 rounded bg-gray-800 hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             Previous
           </button>
-          <span class="px-2 py-1 text-gray-600">Page {{ currentPage }} of {{ totalPages }}</span>
-          <button 
-            @click="changePage(currentPage + 1)" 
+          <span class="px-2 py-1">Page {{ currentPage }} of {{ totalPages }}</span>
+          <button
+            @click="changePage(currentPage + 1)"
             :disabled="currentPage === totalPages"
-            class="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-gray-800"
+            class="px-3 py-1 rounded bg-gray-800 hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             Next
           </button>
@@ -127,21 +127,21 @@ const togglePlaylist = (date: string) => {
       </div>
 
       <!-- Pagination Controls (Bottom) -->
-      <div v-if="totalPages > 1" class="mt-6 flex justify-center gap-2 text-sm">
-        <button 
-          @click="changePage(currentPage - 1)" 
+      <div v-if="totalPages > 1" class="mt-6 flex justify-center gap-2 text-sm text-gray-400">
+        <button
+          @click="changePage(currentPage - 1)"
           :disabled="currentPage === 1"
-          class="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-gray-800"
+          class="px-4 py-2 rounded bg-gray-800 hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           Previous
         </button>
-        <div class="flex items-center px-2 text-gray-600">
+        <div class="flex items-center px-2">
           Page {{ currentPage }} of {{ totalPages }}
         </div>
-        <button 
-          @click="changePage(currentPage + 1)" 
+        <button
+          @click="changePage(currentPage + 1)"
           :disabled="currentPage === totalPages"
-          class="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-gray-800"
+          class="px-4 py-2 rounded bg-gray-800 hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           Next
         </button>
