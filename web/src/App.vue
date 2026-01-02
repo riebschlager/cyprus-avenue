@@ -8,19 +8,27 @@ const { fetchPlaylists } = usePlaylists()
 const { setOpenGraphTags, getDefaultOG } = useOpenGraph()
 const isScrolled = ref(false)
 
+let rafId: number | null = null
+
 const handleScroll = () => {
-  isScrolled.value = window.scrollY > 20
+  if (rafId) return
+
+  rafId = requestAnimationFrame(() => {
+    isScrolled.value = window.scrollY > 20
+    rafId = null
+  })
 }
 
 onMounted(() => {
   fetchPlaylists()
   // Initialize default OG tags
   setOpenGraphTags(getDefaultOG())
-  window.addEventListener('scroll', handleScroll)
+  window.addEventListener('scroll', handleScroll, { passive: true })
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
+  if (rafId) cancelAnimationFrame(rafId)
 })
 </script>
 
@@ -28,15 +36,14 @@ onUnmounted(() => {
   <div class="min-h-screen bg-gray-950">
     <header
       :class="[
-        'sticky top-0 z-50 bg-gray-900 shadow-lg border-b border-gray-800 transition-all duration-300',
-        isScrolled ? 'backdrop-blur-md bg-gray-900/95' : ''
+        'sticky top-0 z-50 bg-gray-900 shadow-lg border-b border-gray-800 transition-[padding] duration-300'
       ]"
     >
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-300"
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-[padding] duration-300"
            :class="isScrolled ? 'py-3' : 'py-4'">
-        <div :class="['transition-all duration-300', isScrolled ? 'flex items-center justify-between' : '']">
+        <div :class="[isScrolled ? 'flex items-center justify-between' : '']">
           <div :class="[!isScrolled ? 'flex items-baseline justify-between' : '']">
-            <h1 :class="['font-bold text-white transition-all duration-300', isScrolled ? 'text-xl' : 'text-3xl']">
+            <h1 :class="['font-bold text-white transition-[font-size] duration-300', isScrolled ? 'text-xl' : 'text-3xl']">
               Cyprus Avenue Archive
             </h1>
             <p v-show="!isScrolled" class="text-sm text-gray-400 transition-opacity duration-300 ml-4">
@@ -46,11 +53,11 @@ onUnmounted(() => {
 
           <!-- Navigation Tabs -->
           <div :class="[
-            'border-b border-gray-800 transition-all duration-300',
+            'border-b border-gray-800 transition-[margin,border-width] duration-300',
             isScrolled ? 'border-0 ml-8' : 'mt-4'
           ]">
             <nav :class="[
-              'flex space-x-8 transition-all duration-300',
+              'flex space-x-8',
               isScrolled ? '' : '-mb-px'
             ]" aria-label="Tabs">
               <router-link
@@ -68,7 +75,7 @@ onUnmounted(() => {
                       : isScrolled
                         ? 'text-gray-400 hover:text-gray-300 hover:bg-gray-800/50'
                         : 'border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-700',
-                    'whitespace-nowrap font-medium text-sm transition-all duration-300',
+                    'whitespace-nowrap font-medium text-sm transition-[padding,background-color,border-color,color] duration-300',
                     isScrolled ? 'px-3 py-2 rounded-md' : 'py-4 px-1 border-b-2'
                   ]"
                 >
@@ -90,7 +97,7 @@ onUnmounted(() => {
                       : isScrolled
                         ? 'text-gray-400 hover:text-gray-300 hover:bg-gray-800/50'
                         : 'border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-700',
-                    'whitespace-nowrap font-medium text-sm transition-all duration-300',
+                    'whitespace-nowrap font-medium text-sm transition-[padding,background-color,border-color,color] duration-300',
                     isScrolled ? 'px-3 py-2 rounded-md' : 'py-4 px-1 border-b-2'
                   ]"
                 >
@@ -112,7 +119,7 @@ onUnmounted(() => {
                       : isScrolled
                         ? 'text-gray-400 hover:text-gray-300 hover:bg-gray-800/50'
                         : 'border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-700',
-                    'whitespace-nowrap font-medium text-sm transition-all duration-300',
+                    'whitespace-nowrap font-medium text-sm transition-[padding,background-color,border-color,color] duration-300',
                     isScrolled ? 'px-3 py-2 rounded-md' : 'py-4 px-1 border-b-2'
                   ]"
                 >
@@ -134,7 +141,7 @@ onUnmounted(() => {
                       : isScrolled
                         ? 'text-gray-400 hover:text-gray-300 hover:bg-gray-800/50'
                         : 'border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-700',
-                    'whitespace-nowrap font-medium text-sm transition-all duration-300',
+                    'whitespace-nowrap font-medium text-sm transition-[padding,background-color,border-color,color] duration-300',
                     isScrolled ? 'px-3 py-2 rounded-md' : 'py-4 px-1 border-b-2'
                   ]"
                 >
