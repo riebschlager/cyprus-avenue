@@ -27,7 +27,7 @@ watch(() => route.params.slug, (slug) => {
     autoExpandSlug.value = slug
     // Update OG tags when viewing a specific artist
     const artist = findArtistBySlug(artists.value, slug)
-    if (artist) {
+    if (artist && artist.appearances) {
       const trackCount = artist.appearances.length
       setOpenGraphTags(getArtistOG(artist.name, trackCount))
     }
