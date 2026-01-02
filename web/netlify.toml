@@ -6,7 +6,9 @@
   publish = "dist"
 
 # Redirect all routes to index.html for SPA routing
+# Only redirect routes without file extensions (to preserve .jpg, .css, .js, etc.)
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+  conditions = { NOT = [{Path = "*.*"}] }
