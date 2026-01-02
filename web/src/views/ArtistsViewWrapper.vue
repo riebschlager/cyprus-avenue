@@ -3,11 +3,13 @@ import { ref, computed, watch, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { usePlaylists } from '../composables/usePlaylists'
 import { useArtists } from '../composables/useArtists'
+import { useOpenGraph } from '../composables/useOpenGraph'
 import ArtistsView from '../components/ArtistsView.vue'
 import { findArtistBySlug } from '../utils/slug'
 
 const route = useRoute()
 const { playlists, loading, error, fetchPlaylists } = usePlaylists()
+const { setOpenGraphTags, getArtistOG, getDefaultOG } = useOpenGraph()
 
 onMounted(() => {
   fetchPlaylists()
@@ -23,8 +25,15 @@ const autoExpandSlug = ref<string | null>(null)
 watch(() => route.params.slug, (slug) => {
   if (typeof slug === 'string') {
     autoExpandSlug.value = slug
+    // Update OG tags when viewing a specific artist
+    const artist = findArtistBySlug(artists.value, slug)
+    if (artist) {
+      const trackCount = artist.appearances.length
+      setOpenGraphTags(getArtistOG(artist.name, trackCount))
+    }
   } else {
     autoExpandSlug.value = null
+    setOpenGraphTags(getDefaultOG())
   }
 }, { immediate: true })
 

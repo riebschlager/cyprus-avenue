@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
 import { usePlaylists } from './composables/usePlaylists'
+import { useOpenGraph } from './composables/useOpenGraph'
 import ToastContainer from './components/ToastContainer.vue'
 
 const { fetchPlaylists } = usePlaylists()
+const { setOpenGraphTags, getDefaultOG } = useOpenGraph()
 const isScrolled = ref(false)
 
 const handleScroll = () => {
@@ -12,6 +14,8 @@ const handleScroll = () => {
 
 onMounted(() => {
   fetchPlaylists()
+  // Initialize default OG tags
+  setOpenGraphTags(getDefaultOG())
   window.addEventListener('scroll', handleScroll)
 })
 
