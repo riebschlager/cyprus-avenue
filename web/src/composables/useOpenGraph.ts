@@ -1,6 +1,5 @@
 import { watch } from 'vue'
 import { useRoute } from 'vue-router'
-import cyprusAvenueImage from '../assets/cyprus-avenue.jpg'
 
 export interface OpenGraphData {
   title: string
@@ -12,7 +11,7 @@ export interface OpenGraphData {
 }
 
 const BASE_URL = 'https://cyprus-avenue.netlify.app'
-const DEFAULT_IMAGE = `${BASE_URL}${cyprusAvenueImage}`
+const DEFAULT_IMAGE = `${BASE_URL}/cyprus-avenue.jpg`
 const DEFAULT_DESCRIPTION = 'A searchable archive of Cyprus Avenue radio show playlists from KCUR, featuring over 1,500 tracks across 125 shows.'
 
 /**
