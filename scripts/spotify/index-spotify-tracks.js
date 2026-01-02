@@ -231,8 +231,29 @@ async function indexAllTracks() {
   // Get Spotify token
   const token = await getSpotifyToken()
 
-  // Index tracks
-  const trackIndex = {}
+  // Load existing index to preserve manually-recovered tracks
+  const outputPath = 'web/public/spotify-index.json'
+  let trackIndex = {}
+  let preservedCount = 0
+
+  if (fs.existsSync(outputPath)) {
+    try {
+      const existing = JSON.parse(fs.readFileSync(outputPath, 'utf-8'))
+      // Preserve tracks that were manually confirmed (medium confidence from recovery tool)
+      for (const [key, value] of Object.entries(existing)) {
+        if (value.confidence === 'medium' && value.manual === true) {
+          trackIndex[key] = value
+          preservedCount++
+        }
+      }
+      if (preservedCount > 0) {
+        console.log(`✓ Preserving ${preservedCount} manually-recovered tracks\n`)
+      }
+    } catch (err) {
+      console.log('⚠ Could not load existing index, starting fresh\n')
+    }
+  }
+
   const notFoundTracks = []
   const stats = {
     total: uniqueTracks.size,
@@ -240,7 +261,8 @@ async function indexAllTracks() {
     notFound: 0,
     highConfidence: 0,
     mediumConfidence: 0,
-    lowConfidence: 0
+    lowConfidence: 0,
+    preserved: preservedCount
   }
 
   let processed = 0
@@ -248,6 +270,14 @@ async function indexAllTracks() {
   for (const [key, track] of uniqueTracks) {
     processed++
     const progress = `[${processed}/${stats.total}]`
+
+    // Skip if already preserved from manual recovery
+    if (trackIndex[key] && trackIndex[key].manual === true) {
+      console.log(`${progress} ${track.artist} - ${track.song}... ⊙ (preserved)`)
+      stats.found++
+      stats.mediumConfidence++
+      continue
+    }
 
     process.stdout.write(`${progress} Searching: ${track.artist} - ${track.song}...`)
 

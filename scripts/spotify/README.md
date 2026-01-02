@@ -134,6 +134,159 @@ The script will overwrite the existing index file.
 - The script includes built-in rate limiting (350ms between requests)
 - If you still get errors, the delay can be increased in the script
 
+## Recovering Missing Tracks
+
+After the initial indexing, some tracks may not be found due to:
+- Album names mistakenly used as song titles
+- Artist names duplicated in song field
+- Featured artists in parentheses
+- Typos or parsing errors
+
+Use the **interactive recovery tool** to find and fix these:
+
+```bash
+node scripts/spotify/recover-missing-tracks.js
+```
+
+### How It Works
+
+The recovery tool:
+
+1. **Loads missing tracks** from `data/spotify-not-found.json`
+2. **Tries multiple search strategies** for each track:
+   - Default search (artist + track)
+   - Simplified (removes featuring artists, special characters)
+   - Artist-only (for duplicate names or album titles)
+   - Album search (when song field looks like album name)
+   - Loose search (broad match)
+
+3. **Shows you the results** interactively:
+   ```
+   [1/178] Bob Dylan - Together Through Life
+
+     Strategy: album
+     Results:
+       1. "Life Is Hard" by Bob Dylan
+          Album: Together Through Life
+          URL: https://open.spotify.com/track/...
+       2. "Beyond Here Lies Nothin'" by Bob Dylan
+          Album: Together Through Life
+          URL: https://open.spotify.com/track/...
+       3. "My Wife's Home Town" by Bob Dylan
+          Album: Together Through Life
+          URL: https://open.spotify.com/track/...
+
+     Select (1-3), Skip (s), or Quit (q):
+   ```
+
+4. **You choose**:
+   - Enter `1`, `2`, or `3` to select a match
+   - Enter `s` to skip this track
+   - Enter `q` to quit and save progress
+
+5. **Updates the index** automatically with your selections
+
+6. **Saves results**:
+   - Updates `web/public/spotify-index.json` with recovered tracks
+   - Updates `data/spotify-not-found.json` with remaining missing tracks
+   - Creates `data/spotify-recovery-report.json` with recovery details
+
+### Example Session
+
+```bash
+$ node scripts/spotify/recover-missing-tracks.js
+
+🎵 Spotify Missing Track Recovery Tool
+
+Found 178 missing tracks
+
+✓ Authenticated with Spotify
+
+[1/178] Bob Dylan - Together Through Life
+
+  Strategy: album
+  Results:
+    1. "Life Is Hard" by Bob Dylan
+       Album: Together Through Life
+    2. "Beyond Here Lies Nothin'" by Bob Dylan
+       Album: Together Through Life
+
+  Select (1-3), Skip (s), or Quit (q): 1
+  ✓ Added to index
+
+[2/178] Marty Stuart - Crying, Waiting, Hoping (with Steve Earle)
+
+  Strategy: simplified
+  Results:
+    1. "Crying, Waiting, Hoping" by Marty Stuart, Steve Earle
+       Album: The Pilgrim
+
+  Select (1-3), Skip (s), or Quit (q): 1
+
+  ⚠️  Data mismatch detected:
+     Original:  "Marty Stuart" - "Crying, Waiting, Hoping (with Steve Earle)"
+     Spotify:   "Marty Stuart" - "Crying, Waiting, Hoping"
+  Update source playlists with Spotify data? (y/n): y
+  ✓ Added to index
+
+...
+
+📝 Updating source playlists...
+   ✓ Updated 12 tracks across 3 playlists
+
+✅ Recovery complete!
+   Recovered: 45
+   Skipped: 8
+   Still missing: 125
+   Source corrections: 12
+
+   Updated spotify-not-found.json with 125 remaining tracks
+   Saved recovery report to data/spotify-recovery-report.json
+```
+
+### Tips
+
+- **Album titles as songs**: When you see album names in the song field, select the first track or most popular track from that album
+- **Duplicate names**: Artist name same as song name usually means it's a self-titled track or compilation
+- **Featured artists**: The simplified strategy removes "(with X)" and "(feat. Y)" to find base tracks
+- **Data corrections**: When the tool detects mismatches, you can choose to update the source playlist files with the correct Spotify metadata
+- **Save progress**: You can quit anytime with `q` and your selections are saved immediately
+
+### Source Data Corrections
+
+When a track is successfully matched but the data differs from what's in the archive, the tool will:
+
+1. **Detect the mismatch** and show you both versions:
+   - Original archive data (possibly incorrect or incomplete)
+   - Spotify's canonical data (verified from their database)
+
+2. **Ask for confirmation** to update the source files
+
+3. **Update all occurrences** across all playlists if you confirm
+
+This helps improve the overall data quality of the archive by:
+- Removing parsing artifacts like "(with Artist)" or "(feat. Artist)"
+- Fixing typos in artist or song names
+- Standardizing capitalization and formatting
+- Replacing album names with actual track names
+
+**Important**: Source corrections update `json/playlists.json`, which is the canonical data source. Individual playlist files in `json/individual/` are not modified by this tool.
+
+### Protection Against Re-indexing
+
+**Important**: Your manually-recovered tracks are protected!
+
+The recovery tool marks each track you confirm with `manual: true`. When you run the main indexing script later (e.g., after adding new playlists), it will:
+
+1. **Preserve** all manually-recovered tracks (skip re-searching them)
+2. **Show** them as "preserved" in the output: `⊙ (preserved)`
+3. **Only search** for new tracks or tracks that failed in the original indexing
+
+This means you can safely:
+- Run the recovery tool first to fix missing tracks
+- Run the main indexer later when you add new playlists
+- Your manual work won't be lost!
+
 ## Notes
 
 - The Spotify API has a rate limit of 100 requests per 30 seconds
