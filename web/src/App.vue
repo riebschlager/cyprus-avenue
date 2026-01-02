@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref, computed } from 'vue'
 import { usePlaylists } from './composables/usePlaylists'
 import { useOpenGraph } from './composables/useOpenGraph'
 import ToastContainer from './components/ToastContainer.vue'
 
 const { fetchPlaylists } = usePlaylists()
 const { setOpenGraphTags, getDefaultOG } = useOpenGraph()
-const isScrolled = ref(false)
+const scrollY = ref(0)
+
+const isScrolled = computed(() => scrollY.value > 20)
 
 let rafId: number | null = null
 
@@ -14,7 +16,7 @@ const handleScroll = () => {
   if (rafId) return
 
   rafId = requestAnimationFrame(() => {
-    isScrolled.value = window.scrollY > 20
+    scrollY.value = window.scrollY
     rafId = null
   })
 }
@@ -35,31 +37,29 @@ onUnmounted(() => {
 <template>
   <div class="min-h-screen bg-gray-950">
     <header
-      :class="[
-        'sticky top-0 z-50 bg-gray-900 shadow-lg border-b border-gray-800 transition-[padding] duration-300'
-      ]"
+      class="sticky top-0 z-50 bg-gray-900 shadow-lg border-b border-gray-800"
+      style="contain: layout style paint;"
     >
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-[padding] duration-300"
-           :class="isScrolled ? 'py-3' : 'py-4'">
-        <div :class="[isScrolled ? 'flex items-center justify-between' : '']">
-          <div :class="[!isScrolled ? 'flex items-baseline justify-between' : '']">
-            <h1 :class="['font-bold text-white transition-[font-size] duration-300', isScrolled ? 'text-xl' : 'text-3xl']">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div class="flex items-center justify-between gap-4">
+          <div class="flex items-baseline gap-4 flex-1">
+            <h1
+              class="font-bold text-white whitespace-nowrap"
+              :style="{ fontSize: isScrolled ? '1.25rem' : '1.875rem', transition: 'font-size 300ms cubic-bezier(0.4, 0, 0.2, 1)' }"
+            >
               Cyprus Avenue Archive
             </h1>
-            <p v-show="!isScrolled" class="text-sm text-gray-400 transition-opacity duration-300 ml-4">
+            <p
+              class="text-sm text-gray-400 ml-4 whitespace-nowrap"
+              :style="{ opacity: isScrolled ? '0' : '1', transition: 'opacity 300ms cubic-bezier(0.4, 0, 0.2, 1)' }"
+            >
               Browse playlists from KCUR's Cyprus Avenue radio show
             </p>
           </div>
 
           <!-- Navigation Tabs -->
-          <div :class="[
-            'border-b border-gray-800 transition-[margin,border-width] duration-300',
-            isScrolled ? 'border-0 ml-8' : 'mt-4'
-          ]">
-            <nav :class="[
-              'flex space-x-8',
-              isScrolled ? '' : '-mb-px'
-            ]" aria-label="Tabs">
+          <div class="border-b border-gray-800">
+            <nav class="flex space-x-8 -mb-px" aria-label="Tabs">
               <router-link
                 to="/"
                 custom
@@ -67,17 +67,13 @@ onUnmounted(() => {
               >
                 <button
                   @click="navigate"
-                  :class="[
-                    isActive
-                      ? isScrolled
-                        ? 'text-blue-400 bg-blue-500/10'
-                        : 'border-blue-500 text-blue-400'
-                      : isScrolled
-                        ? 'text-gray-400 hover:text-gray-300 hover:bg-gray-800/50'
-                        : 'border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-700',
-                    'whitespace-nowrap font-medium text-sm transition-[padding,background-color,border-color,color] duration-300',
-                    isScrolled ? 'px-3 py-2 rounded-md' : 'py-4 px-1 border-b-2'
-                  ]"
+                  :style="{
+                    color: isActive ? '#60a5fa' : '#9ca3af',
+                    borderBottomColor: isActive ? '#3b82f6' : 'transparent',
+                    borderBottomWidth: isActive ? '2px' : '2px',
+                    transition: 'color 300ms cubic-bezier(0.4, 0, 0.2, 1), border-color 300ms cubic-bezier(0.4, 0, 0.2, 1)'
+                  }"
+                  class="whitespace-nowrap font-medium text-sm py-4 px-1"
                 >
                   Home
                 </button>
@@ -89,17 +85,13 @@ onUnmounted(() => {
               >
                 <button
                   @click="navigate"
-                  :class="[
-                    isActive
-                      ? isScrolled
-                        ? 'text-blue-400 bg-blue-500/10'
-                        : 'border-blue-500 text-blue-400'
-                      : isScrolled
-                        ? 'text-gray-400 hover:text-gray-300 hover:bg-gray-800/50'
-                        : 'border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-700',
-                    'whitespace-nowrap font-medium text-sm transition-[padding,background-color,border-color,color] duration-300',
-                    isScrolled ? 'px-3 py-2 rounded-md' : 'py-4 px-1 border-b-2'
-                  ]"
+                  :style="{
+                    color: isActive ? '#60a5fa' : '#9ca3af',
+                    borderBottomColor: isActive ? '#3b82f6' : 'transparent',
+                    borderBottomWidth: isActive ? '2px' : '2px',
+                    transition: 'color 300ms cubic-bezier(0.4, 0, 0.2, 1), border-color 300ms cubic-bezier(0.4, 0, 0.2, 1)'
+                  }"
+                  class="whitespace-nowrap font-medium text-sm py-4 px-1"
                 >
                   Playlists
                 </button>
@@ -111,17 +103,13 @@ onUnmounted(() => {
               >
                 <button
                   @click="navigate"
-                  :class="[
-                    isActive
-                      ? isScrolled
-                        ? 'text-blue-400 bg-blue-500/10'
-                        : 'border-blue-500 text-blue-400'
-                      : isScrolled
-                        ? 'text-gray-400 hover:text-gray-300 hover:bg-gray-800/50'
-                        : 'border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-700',
-                    'whitespace-nowrap font-medium text-sm transition-[padding,background-color,border-color,color] duration-300',
-                    isScrolled ? 'px-3 py-2 rounded-md' : 'py-4 px-1 border-b-2'
-                  ]"
+                  :style="{
+                    color: isActive ? '#60a5fa' : '#9ca3af',
+                    borderBottomColor: isActive ? '#3b82f6' : 'transparent',
+                    borderBottomWidth: isActive ? '2px' : '2px',
+                    transition: 'color 300ms cubic-bezier(0.4, 0, 0.2, 1), border-color 300ms cubic-bezier(0.4, 0, 0.2, 1)'
+                  }"
+                  class="whitespace-nowrap font-medium text-sm py-4 px-1"
                 >
                   All Tracks
                 </button>
@@ -133,17 +121,13 @@ onUnmounted(() => {
               >
                 <button
                   @click="navigate"
-                  :class="[
-                    isActive
-                      ? isScrolled
-                        ? 'text-blue-400 bg-blue-500/10'
-                        : 'border-blue-500 text-blue-400'
-                      : isScrolled
-                        ? 'text-gray-400 hover:text-gray-300 hover:bg-gray-800/50'
-                        : 'border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-700',
-                    'whitespace-nowrap font-medium text-sm transition-[padding,background-color,border-color,color] duration-300',
-                    isScrolled ? 'px-3 py-2 rounded-md' : 'py-4 px-1 border-b-2'
-                  ]"
+                  :style="{
+                    color: isActive ? '#60a5fa' : '#9ca3af',
+                    borderBottomColor: isActive ? '#3b82f6' : 'transparent',
+                    borderBottomWidth: isActive ? '2px' : '2px',
+                    transition: 'color 300ms cubic-bezier(0.4, 0, 0.2, 1), border-color 300ms cubic-bezier(0.4, 0, 0.2, 1)'
+                  }"
+                  class="whitespace-nowrap font-medium text-sm py-4 px-1"
                 >
                   Artists
                 </button>
