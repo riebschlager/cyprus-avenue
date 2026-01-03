@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
+import { useRouter } from 'vue-router'
 import { useStreamingLinks } from '../composables/useStreamingLinks'
 import { useDropdownState } from '../composables/useDropdownState'
+import { useSpotifyAuth } from '../composables/useSpotifyAuth'
+import { useSpotifyPlayback } from '../composables/useSpotifyPlayback'
 
 const props = defineProps<{
   artist: string
@@ -9,7 +12,10 @@ const props = defineProps<{
   compact?: boolean
 }>()
 
-const { platforms, openTrack, hasDirectLink, indexLoaded } = useStreamingLinks()
+const router = useRouter()
+const { platforms, openTrack, hasDirectLink, indexLoaded, getTrackData } = useStreamingLinks()
+const { isAuthenticated, initiateLogin } = useSpotifyAuth()
+const { playTrack, initializePlayer } = useSpotifyPlayback()
 const dropdownRef = ref<HTMLElement | null>(null)
 
 // Create unique ID for this dropdown instance
@@ -24,6 +30,15 @@ const hasSpotifyLink = computed(() => {
   return result
 })
 
+const spotifyTrackUri = computed(() => {
+  if (!indexLoaded.value) return null
+  const trackData = getTrackData(props.artist, props.song)
+  if (!trackData || trackData.confidence === 'low' || !trackData.spotifyId) {
+    return null
+  }
+  return `spotify:track:${trackData.spotifyId}`
+})
+
 const toggleDropdown = () => {
   toggle()
 }
@@ -31,6 +46,22 @@ const toggleDropdown = () => {
 const handlePlatformClick = (platform: typeof platforms[0]) => {
   openTrack(platform, props.artist, props.song)
   close()
+}
+
+const handleSpotifyPlay = async () => {
+  if (!spotifyTrackUri.value) return
+  if (!isAuthenticated.value) {
+    await initiateLogin(router.currentRoute.value.fullPath)
+    return
+  }
+
+  try {
+    await initializePlayer()
+    await playTrack(spotifyTrackUri.value)
+    close()
+  } catch (err) {
+    console.error('Failed to start Spotify playback', err)
+  }
 }
 
 // Close dropdown when clicking outside
@@ -86,6 +117,23 @@ onUnmounted(() => {
         class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-gray-800 shadow-xl ring-1 ring-gray-700 focus:outline-none border border-gray-700"
       >
         <div class="py-1">
+          <button
+            v-if="spotifyTrackUri"
+            @click.stop="handleSpotifyPlay"
+            class="flex items-center justify-between w-full px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition-colors"
+          >
+            <div class="flex items-center">
+              <span class="mr-2">▶️</span>
+              Play in Web Player
+            </div>
+            <span
+              v-if="isAuthenticated"
+              class="text-xs bg-green-500 text-white px-2 py-0.5 rounded font-semibold"
+              title="Plays in this app"
+            >
+              App
+            </span>
+          </button>
           <button
             v-for="platform in platforms"
             :key="platform.name"

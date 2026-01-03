@@ -1,0 +1,84 @@
+<script setup lang="ts">
+import { computed, onMounted, watch } from 'vue'
+import SpotifyAuthButton from './SpotifyAuthButton.vue'
+import { useSpotifyAuth } from '../composables/useSpotifyAuth'
+import { useSpotifyPlayback } from '../composables/useSpotifyPlayback'
+
+const { isAuthenticated } = useSpotifyAuth()
+const { isReady, isPaused, currentTrack, initializePlayer, togglePlay, nextTrack, previousTrack } = useSpotifyPlayback()
+
+onMounted(() => {
+  if (isAuthenticated.value) {
+    initializePlayer().catch((err) => {
+      console.error('Failed to initialize Spotify player', err)
+    })
+  }
+})
+
+watch(isAuthenticated, (value) => {
+  if (value) {
+    initializePlayer().catch((err) => {
+      console.error('Failed to initialize Spotify player', err)
+    })
+  }
+})
+
+const trackTitle = computed(() => {
+  if (!currentTrack.value) return 'No track playing'
+  const artists = currentTrack.value.artists.map(a => a.name).join(', ')
+  return `${currentTrack.value.name} - ${artists}`
+})
+
+const albumArt = computed(() => {
+  if (!currentTrack.value?.album?.images?.length) return null
+  return currentTrack.value.album.images[0].url
+})
+</script>
+
+<template>
+  <div class="bg-gray-900/70 border border-gray-800 rounded-lg px-4 py-3">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-3 min-w-0">
+        <div class="w-10 h-10 rounded bg-gray-800 flex items-center justify-center overflow-hidden text-xs font-semibold text-gray-400">
+          <img v-if="albumArt" :src="albumArt" alt="" class="w-full h-full object-cover" />
+          <span v-else>SP</span>
+        </div>
+        <div class="min-w-0">
+          <p class="text-xs text-gray-400 uppercase tracking-wider">Spotify Web Player</p>
+          <p class="text-sm text-white truncate">{{ trackTitle }}</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <SpotifyAuthButton v-if="!isAuthenticated" />
+        <div v-else class="flex items-center gap-2">
+          <button
+            type="button"
+            class="px-3 py-1 rounded-full bg-gray-800 text-gray-300 hover:text-white hover:bg-gray-700 transition-colors text-xs font-semibold"
+            @click="previousTrack"
+            title="Previous"
+          >
+            Prev
+          </button>
+          <button
+            type="button"
+            class="px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 hover:text-blue-200 hover:bg-blue-500/30 transition-colors text-xs font-semibold"
+            @click="togglePlay"
+            title="Play/Pause"
+            :disabled="!isReady"
+          >
+            {{ isPaused ? 'Play' : 'Pause' }}
+          </button>
+          <button
+            type="button"
+            class="px-3 py-1 rounded-full bg-gray-800 text-gray-300 hover:text-white hover:bg-gray-700 transition-colors text-xs font-semibold"
+            @click="nextTrack"
+            title="Next"
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

@@ -2,6 +2,8 @@ export interface SpotifyAuthState {
   isAuthenticated: boolean
   isAuthenticating: boolean
   accessToken: string | null
+  refreshToken: string | null
+  tokenExpiresAt: number | null
   error: string | null
 }
 

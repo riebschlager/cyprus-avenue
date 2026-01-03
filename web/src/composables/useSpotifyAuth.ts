@@ -13,6 +13,8 @@ const authState = ref<SpotifyAuthState>({
   isAuthenticated: false,
   isAuthenticating: false,
   accessToken: null,
+  refreshToken: null,
+  tokenExpiresAt: null,
   error: null
 })
 
@@ -125,6 +127,12 @@ export function useSpotifyAuth() {
 
       const data = await response.json()
       authState.value.accessToken = data.access_token
+      if (data.refresh_token) {
+        authState.value.refreshToken = data.refresh_token
+      }
+      if (data.expires_in) {
+        authState.value.tokenExpiresAt = Date.now() + data.expires_in * 1000
+      }
       authState.value.isAuthenticated = true
 
       // Clean up OAuth session storage (but keep return path and modal state for redirect)
@@ -145,6 +153,8 @@ export function useSpotifyAuth() {
 
   const logout = () => {
     authState.value.accessToken = null
+    authState.value.refreshToken = null
+    authState.value.tokenExpiresAt = null
     authState.value.isAuthenticated = false
     authState.value.error = null
     authState.value.isAuthenticating = false
@@ -172,6 +182,60 @@ export function useSpotifyAuth() {
     return authState.value.accessToken
   }
 
+  const refreshAccessToken = async (): Promise<string> => {
+    if (!authState.value.refreshToken) {
+      throw new Error('Spotify refresh token not available')
+    }
+
+    const response = await fetch(SPOTIFY_TOKEN_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: new URLSearchParams({
+        client_id: SPOTIFY_CLIENT_ID,
+        grant_type: 'refresh_token',
+        refresh_token: authState.value.refreshToken
+      }).toString()
+    })
+
+    if (!response.ok) {
+      const error = await response.json()
+      throw new Error(
+        error.error_description || 'Failed to refresh access token'
+      )
+    }
+
+    const data = await response.json()
+    authState.value.accessToken = data.access_token
+    if (data.refresh_token) {
+      authState.value.refreshToken = data.refresh_token
+    }
+    if (data.expires_in) {
+      authState.value.tokenExpiresAt = Date.now() + data.expires_in * 1000
+    }
+    authState.value.isAuthenticated = true
+
+    return data.access_token
+  }
+
+  const getValidAccessToken = async (): Promise<string> => {
+    if (!authState.value.accessToken) {
+      throw new Error('Spotify access token not available')
+    }
+
+    if (!authState.value.tokenExpiresAt) {
+      return authState.value.accessToken
+    }
+
+    const bufferMs = 30_000
+    if (Date.now() < authState.value.tokenExpiresAt - bufferMs) {
+      return authState.value.accessToken
+    }
+
+    return refreshAccessToken()
+  }
+
   const isAuthenticated = computed(() => authState.value.isAuthenticated)
   const isAuthenticating = computed(() => authState.value.isAuthenticating)
   const error = computed(() => authState.value.error)
@@ -184,6 +248,7 @@ export function useSpotifyAuth() {
     handleOAuthCallback,
     logout,
     getAccessToken,
+    getValidAccessToken,
     getReturnPath,
     getModalState,
     clearReturnContext

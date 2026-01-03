@@ -5,6 +5,7 @@ import { usePlaylists } from './composables/usePlaylists'
 import { useOpenGraph } from './composables/useOpenGraph'
 import { useMobileMenu } from './composables/useMobileMenu'
 import ToastContainer from './components/ToastContainer.vue'
+import SpotifyWebPlayer from './components/SpotifyWebPlayer.vue'
 
 const { fetchPlaylists } = usePlaylists()
 const { setOpenGraphTags, getDefaultOG } = useOpenGraph()
@@ -234,7 +235,11 @@ onUnmounted(() => {
       </router-view>
     </main>
 
-    <footer class="bg-gray-900 border-t border-gray-800 mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
+      <SpotifyWebPlayer />
+    </div>
+
+    <footer class="bg-gray-900 border-t border-gray-800 mt-6">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div class="flex flex-col md:flex-row items-center justify-between gap-4">
           <p class="text-sm text-gray-400">

@@ -12,7 +12,12 @@ export const SPOTIFY_API_BASE = 'https://api.spotify.com/v1'
 
 export const SPOTIFY_SCOPES = [
   'playlist-modify-public',
-  'playlist-modify-private'
+  'playlist-modify-private',
+  'streaming',
+  'user-read-email',
+  'user-read-private',
+  'user-read-playback-state',
+  'user-modify-playback-state'
 ]
 
 export const PLAYLIST_NAME_INDIVIDUAL = (date: string) => `Cyprus Avenue - ${date}`
