@@ -1,14 +1,71 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import { usePlaylists } from '../composables/usePlaylists'
 import { useRouter } from 'vue-router'
 import SpotifyPlaylistModal from './SpotifyPlaylistModal.vue'
 import PlaylistCard from './PlaylistCard.vue'
 import { generatePlaylistSlug, generateArtistSlug } from '../utils/slug'
+import type { Playlist } from '../types/playlist'
 
 const { stats, playlists } = usePlaylists()
 const router = useRouter()
 const showAllTracksModal = ref(false)
+
+// Suggested content
+const suggestedPlaylist = ref<Playlist | null>(null)
+const suggestedArtist = ref<string | null>(null)
+
+const refreshSuggestions = () => {
+  if (playlists.value.length === 0) return
+
+  // Random Playlist
+  const randomPlaylistIndex = Math.floor(Math.random() * playlists.value.length)
+  const randomPlaylist = playlists.value[randomPlaylistIndex]
+  if (randomPlaylist) {
+    suggestedPlaylist.value = randomPlaylist
+  }
+
+  // Random Artist
+  const artists = new Set<string>()
+  playlists.value.forEach(p => {
+    p.tracks.forEach(t => {
+      if (t.artist) artists.add(t.artist)
+    })
+  })
+  const artistArray = Array.from(artists)
+  if (artistArray.length > 0) {
+    const randomArtistIndex = Math.floor(Math.random() * artistArray.length)
+    const randomArtist = artistArray[randomArtistIndex]
+    if (randomArtist) {
+      suggestedArtist.value = randomArtist
+    }
+  }
+}
+
+// Watch for playlists to load
+watch(playlists, () => {
+  if (!suggestedPlaylist.value) {
+    refreshSuggestions()
+  }
+}, { immediate: true })
+
+onMounted(() => {
+  if (playlists.value.length > 0) {
+    refreshSuggestions()
+  }
+})
+
+const navigateToSuggestedPlaylist = () => {
+  if (!suggestedPlaylist.value) return
+  const slug = generatePlaylistSlug(suggestedPlaylist.value.title, suggestedPlaylist.value.date)
+  router.push({ name: 'playlist', params: { slug } })
+}
+
+const navigateToSuggestedArtist = () => {
+  if (!suggestedArtist.value) return
+  const slug = generateArtistSlug(suggestedArtist.value)
+  router.push({ name: 'artist', params: { slug } })
+}
 
 // Logic for "This Week in History"
 const thisWeekPlaylists = computed(() => {
@@ -114,23 +171,57 @@ const navigateToRandomArtist = () => {
           />
         </div>
 
-        <div class="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row gap-4 items-center justify-between">
-          <p class="text-gray-300 text-sm italic">
-            Feeling adventurous? Try something completely different.
-          </p>
-          <div class="flex gap-3">
-            <button 
-              @click="navigateToRandomPlaylist"
-              class="px-4 py-2 bg-blue-600/50 hover:bg-blue-600 text-white text-sm font-medium rounded-lg transition-colors border border-blue-500/30"
+        <div class="mt-8 pt-6 border-t border-white/10">
+          <h3 class="text-lg font-semibold text-white mb-4">From the Archive</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <!-- Suggested Playlist -->
+            <div 
+              v-if="suggestedPlaylist"
+              @click="navigateToSuggestedPlaylist"
+              class="bg-white/5 p-4 rounded-lg hover:bg-white/10 transition cursor-pointer border border-white/5 hover:border-blue-500/30 group"
             >
-              🎲 Random Playlist
-            </button>
-            <button 
-              @click="navigateToRandomArtist"
-              class="px-4 py-2 bg-purple-600/50 hover:bg-purple-600 text-white text-sm font-medium rounded-lg transition-colors border border-purple-500/30"
+              <div class="text-xs text-blue-300 uppercase tracking-wider mb-1">Suggested Playlist</div>
+              <div class="font-medium text-white group-hover:text-blue-200 transition-colors">{{ suggestedPlaylist.title }}</div>
+              <div class="text-sm text-gray-400 mt-1">{{ suggestedPlaylist.date }}</div>
+            </div>
+
+            <!-- Suggested Artist -->
+            <div 
+              v-if="suggestedArtist"
+              @click="navigateToSuggestedArtist"
+              class="bg-white/5 p-4 rounded-lg hover:bg-white/10 transition cursor-pointer border border-white/5 hover:border-purple-500/30 group"
             >
-              🎤 Random Artist
+              <div class="text-xs text-purple-300 uppercase tracking-wider mb-1">Suggested Artist</div>
+              <div class="font-medium text-white group-hover:text-purple-200 transition-colors text-lg">{{ suggestedArtist }}</div>
+              <div class="text-sm text-gray-400 mt-1">Explore their tracks in the archive</div>
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-4 items-center justify-between">
+            <button 
+              @click="refreshSuggestions"
+              class="text-sm text-gray-400 hover:text-white flex items-center gap-2 transition-colors"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+              Refresh Suggestions
             </button>
+            <div class="flex gap-3">
+              <button 
+                @click="navigateToRandomPlaylist"
+                class="px-4 py-2 bg-blue-600/50 hover:bg-blue-600 text-white text-sm font-medium rounded-lg transition-colors border border-blue-500/30"
+              >
+                🎲 Surprise Playlist
+              </button>
+              <button 
+                @click="navigateToRandomArtist"
+                class="px-4 py-2 bg-purple-600/50 hover:bg-purple-600 text-white text-sm font-medium rounded-lg transition-colors border border-purple-500/30"
+              >
+                🎤 Surprise Artist
+              </button>
+            </div>
           </div>
         </div>
       </div>
