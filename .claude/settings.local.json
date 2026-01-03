@@ -31,7 +31,13 @@
       "Bash(git commit:*)",
       "Bash(curl:*)",
       "Bash(node scripts/lastfm/fetch-artist-bios.js:*)",
-      "Bash(export LASTFM_API_KEY=0e62a8500a5eee62a282a98504081365)"
+      "Bash(export LASTFM_API_KEY=0e62a8500a5eee62a282a98504081365)",
+      "Bash(if [ -f web/public/artist-bios.json ])",
+      "Bash(then cat web/public/artist-bios.json)",
+      "Bash(else echo \"No artist-bios.json found\")",
+      "Bash(pkill:*)",
+      "Bash(node scripts/spotify/enrich-artist-images.js:*)",
+      "Bash(node scripts/consolidate-genres.js:*)"
     ]
   }
 }
