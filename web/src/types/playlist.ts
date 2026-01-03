@@ -1,6 +1,7 @@
 export interface Track {
   artist: string
   song: string
+  genres?: string[]
 }
 
 export interface Playlist {

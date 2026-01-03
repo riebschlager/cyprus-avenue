@@ -142,6 +142,33 @@ async function getSpotifyToken() {
   }
 }
 
+// Cache for artist genres to avoid redundant API calls
+const artistGenreCache = new Map()
+
+// Helper: Get artist genres
+async function getArtistGenres(token, artistId) {
+  if (artistGenreCache.has(artistId)) {
+    return artistGenreCache.get(artistId)
+  }
+
+  try {
+    // slight delay to be safe with rate limits since this adds a call
+    await new Promise(resolve => setTimeout(resolve, 100))
+    
+    const data = await httpsRequest(`https://api.spotify.com/v1/artists/${artistId}`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+
+    const genres = data.genres || []
+    artistGenreCache.set(artistId, genres)
+    return genres
+  } catch (e) {
+    // If it fails, just return empty array and don't cache (or cache empty?)
+    // Let's return empty for now
+    return []
+  }
+}
+
 // Step 2: Search for a track on Spotify
 async function searchSpotifyTrack(token, artist, song) {
   const query = encodeURIComponent(`track:"${song}" artist:"${artist}"`)
@@ -155,6 +182,12 @@ async function searchSpotifyTrack(token, artist, song) {
     // Get best match
     const track = data.tracks.items[0]
     const confidence = calculateConfidence(artist, song, track)
+    
+    // Fetch genres for the primary artist
+    let genres = []
+    if (track.artists && track.artists.length > 0 && track.artists[0].id) {
+      genres = await getArtistGenres(token, track.artists[0].id)
+    }
 
     return {
       spotifyId: track.id,
@@ -163,6 +196,7 @@ async function searchSpotifyTrack(token, artist, song) {
       albumArt: track.album.images[0]?.url || null,
       artistName: track.artists[0].name,
       trackName: track.name,
+      genres: genres,
       confidence: confidence
     }
   }
