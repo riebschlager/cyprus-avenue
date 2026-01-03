@@ -5,7 +5,7 @@ import { useSpotifyAuth } from '../composables/useSpotifyAuth'
 import { useSpotifyPlayback } from '../composables/useSpotifyPlayback'
 
 const { isAuthenticated } = useSpotifyAuth()
-const { isReady, isPaused, currentTrack, initializePlayer, togglePlay, nextTrack, previousTrack } = useSpotifyPlayback()
+const { isReady, isPaused, currentTrack, initializePlayer, togglePlay } = useSpotifyPlayback()
 
 onMounted(() => {
   if (isAuthenticated.value) {

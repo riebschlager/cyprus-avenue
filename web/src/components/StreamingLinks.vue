@@ -13,7 +13,7 @@ const props = defineProps<{
 }>()
 
 const router = useRouter()
-const { platforms, openTrack, hasDirectLink, indexLoaded, getTrackData } = useStreamingLinks()
+const { platforms, openTrack, indexLoaded, getTrackData } = useStreamingLinks()
 const { isAuthenticated, initiateLogin } = useSpotifyAuth()
 const { playTrack, initializePlayer } = useSpotifyPlayback()
 const dropdownRef = ref<HTMLElement | null>(null)
@@ -21,14 +21,6 @@ const dropdownRef = ref<HTMLElement | null>(null)
 // Create unique ID for this dropdown instance
 const dropdownId = `streaming-${props.artist}-${props.song}-${Math.random()}`
 const { isOpen, toggle, close, currentOpenDropdownId } = useDropdownState(dropdownId)
-
-const hasSpotifyLink = computed(() => {
-  // This computed depends on indexLoaded to trigger re-evaluation
-  if (!indexLoaded.value) return false
-  const result = hasDirectLink(props.artist, props.song)
-  console.log(`Checking ${props.artist} - ${props.song}:`, result)
-  return result
-})
 
 const spotifyTrackUri = computed(() => {
   if (!indexLoaded.value) return null
