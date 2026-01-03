@@ -8,6 +8,7 @@
 export const TAG_BLACKLIST = new Set([
   'All',
   'Funk_add_to_lidarr_batch_4',
+  'Spoken Word',
   'Audiobooks',
   'Audiobook',
   'Books',
@@ -51,6 +52,10 @@ export const TAG_MAPPINGS: Record<string, string> = {
   'Alt-Country': 'Alternative Country',
   'Rock N Roll': 'Rock & Roll',
   'Rock and Roll': 'Rock & Roll',
+  'Rock And Roll': 'Rock & Roll',
+  'Rock': 'Rock & Roll',
+  'Singer': 'Singer Songwriter',
+  'Singer Songwriters': 'Singer Songwriter',
   'Soul Music': 'Soul',
   'Americana Music': 'Americana',
   'Jazz Music': 'Jazz',
