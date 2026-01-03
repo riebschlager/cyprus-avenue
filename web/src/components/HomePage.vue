@@ -193,10 +193,14 @@ const navigateToRandomArtist = () => {
       <!-- Left Column: About & Marr -->
       <div class="lg:col-span-2 space-y-8">
         <!-- About Cyprus Avenue -->
-        <div class="bg-gray-800 rounded-lg shadow-lg p-8 border border-gray-700 h-full">
-          <h2 class="text-3xl font-bold text-white mb-6">About Cyprus Avenue</h2>
+        <div class="relative rounded-2xl overflow-hidden border border-gray-800/60 shadow-lg h-full">
+          <div class="absolute inset-0 bg-gradient-to-b from-blue-600/10 to-transparent pointer-events-none"></div>
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[120px] pointer-events-none"></div>
 
-          <div class="space-y-4 text-gray-300">
+          <div class="relative z-10 p-8">
+            <h2 class="text-3xl font-bold text-white mb-6">About Cyprus Avenue</h2>
+
+            <div class="space-y-4 text-gray-300">
             <p>
               Cyprus Avenue was a Saturday evening institution on KCUR 89.3 FM in Kansas City,
               featuring "the world of popular music from gospel to rock - from country to reggae -
@@ -224,14 +228,19 @@ const navigateToRandomArtist = () => {
               Bill Shapiro passed away in January 2020 at age 82, but his musical legacy lives on. Read more about his life and impact at 
               <a href="https://www.kcur.org/community/2020-01-23/bill-shapiro-longtime-host-of-kcurs-cyprus-avenue-dies-at-82" target="_blank" rel="noopener" class="text-blue-400 hover:text-blue-300">KCUR</a>.
             </p>
+            </div>
           </div>
         </div>
 
         <!-- Marr Sound Archive -->
-        <div class="bg-gray-800 rounded-lg shadow-lg p-8 border border-gray-700">
-          <h2 class="text-3xl font-bold text-white mb-6">Marr Sound Archive</h2>
+        <div class="relative rounded-2xl overflow-hidden border border-gray-800/60 shadow-lg">
+          <div class="absolute inset-0 bg-gradient-to-b from-blue-600/10 to-transparent pointer-events-none"></div>
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[120px] pointer-events-none"></div>
 
-          <div class="space-y-4 text-gray-300">
+          <div class="relative z-10 p-8">
+            <h2 class="text-3xl font-bold text-white mb-6">Marr Sound Archive</h2>
+
+            <div class="space-y-4 text-gray-300">
             <p>
               More recordings appear to be available as part of the <strong>Marr Sound Archive</strong> at the
               University of Missouri Kansas City.
@@ -242,7 +251,7 @@ const navigateToRandomArtist = () => {
               This collection contains audio recordings of the "Cyprus Avenue" radio program aired on KCUR-FM in Kansas City, Missouri.
             </p>
 
-            <div class="mt-6 p-4 bg-gray-900 rounded-lg border border-gray-600">
+            <div class="mt-6 p-4 bg-gray-900/70 rounded-lg border border-gray-700">
               <p class="mb-2">
                 <strong>Access the Collection:</strong>
               </p>
@@ -258,31 +267,37 @@ const navigateToRandomArtist = () => {
                 Please contact the Marr Sound Archive directly regarding research, borrowing, and access to these materials.
               </p>
             </div>
+            </div>
           </div>
         </div>
 
         <!-- Archive Statistics -->
-        <div class="bg-gray-800 rounded-lg shadow-lg p-8 border border-gray-700">
-          <h2 class="text-3xl font-bold text-white mb-6">Archive Statistics</h2>
+        <div class="relative rounded-2xl overflow-hidden border border-gray-800/60 shadow-lg">
+          <div class="absolute inset-0 bg-gradient-to-b from-blue-600/10 to-transparent pointer-events-none"></div>
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[120px] pointer-events-none"></div>
 
-          <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            <div class="bg-gray-900 rounded-lg p-6 border-l-4 border-blue-500">
-              <p class="text-sm text-gray-400 mb-2">Total Playlists</p>
-              <p class="text-4xl font-bold text-white">{{ stats.totalPlaylists }}</p>
-            </div>
-            <div class="bg-gray-900 rounded-lg p-6 border-l-4 border-green-500">
-              <p class="text-sm text-gray-400 mb-2">Total Tracks</p>
-              <p class="text-4xl font-bold text-white">{{ stats.totalTracks.toLocaleString() }}</p>
-            </div>
-            <div class="bg-gray-900 rounded-lg p-6 border-l-4 border-purple-500">
-              <p class="text-sm text-gray-400 mb-2">Avg Tracks/Show</p>
-              <p class="text-4xl font-bold text-white">{{ stats.avgTracksPerShow.toFixed(1) }}</p>
-            </div>
-            <div v-if="stats.dateRange" class="bg-gray-900 rounded-lg p-6 border-l-4 border-orange-500">
-              <p class="text-sm text-gray-400 mb-2">Date Range</p>
-              <p class="text-lg font-semibold text-white">
-                {{ stats.dateRange.start }}<br>to {{ stats.dateRange.end }}
-              </p>
+          <div class="relative z-10 p-8">
+            <h2 class="text-3xl font-bold text-white mb-6">Archive Statistics</h2>
+
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              <div class="bg-gray-900/70 rounded-lg p-6 border border-gray-800 border-l-4 border-blue-500">
+                <p class="text-sm text-gray-400 mb-2">Total Playlists</p>
+                <p class="text-4xl font-bold text-white">{{ stats.totalPlaylists }}</p>
+              </div>
+              <div class="bg-gray-900/70 rounded-lg p-6 border border-gray-800 border-l-4 border-green-500">
+                <p class="text-sm text-gray-400 mb-2">Total Tracks</p>
+                <p class="text-4xl font-bold text-white">{{ stats.totalTracks.toLocaleString() }}</p>
+              </div>
+              <div class="bg-gray-900/70 rounded-lg p-6 border border-gray-800 border-l-4 border-purple-500">
+                <p class="text-sm text-gray-400 mb-2">Avg Tracks/Show</p>
+                <p class="text-4xl font-bold text-white">{{ stats.avgTracksPerShow.toFixed(1) }}</p>
+              </div>
+              <div v-if="stats.dateRange" class="bg-gray-900/70 rounded-lg p-6 border border-gray-800 border-l-4 border-orange-500">
+                <p class="text-sm text-gray-400 mb-2">Date Range</p>
+                <p class="text-lg font-semibold text-white">
+                  {{ stats.dateRange.start }}<br>to {{ stats.dateRange.end }}
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -290,7 +305,7 @@ const navigateToRandomArtist = () => {
 
       <!-- Right Column: This Week in History -->
       <div v-if="thisWeekPlaylists.length > 0" class="lg:col-span-1 h-full">
-        <div class="bg-gradient-to-br from-blue-900/40 to-indigo-900/40 rounded-lg shadow-lg p-6 border border-blue-700/50 relative overflow-hidden h-full">
+        <div class="bg-gray-900/40 rounded-lg shadow-lg p-6 border border-blue-900/30 relative overflow-hidden h-full">
           <!-- Decorative background element -->
           <div class="absolute top-0 right-0 -mt-4 -mr-4 w-16 h-16 bg-blue-500/10 rounded-full blur-xl"></div>
           
@@ -406,10 +421,14 @@ const navigateToRandomArtist = () => {
     </div>
 
     <!-- About This Project -->
-    <div class="bg-gray-800 rounded-lg shadow-lg p-8 border border-gray-700">
-      <h2 class="text-3xl font-bold text-white mb-6">About This Project</h2>
+    <div class="relative rounded-2xl overflow-hidden border border-gray-800/60 shadow-lg">
+      <div class="absolute inset-0 bg-gradient-to-b from-blue-600/10 to-transparent pointer-events-none"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[120px] pointer-events-none"></div>
 
-      <div class="space-y-4 text-gray-300">
+      <div class="relative z-10 p-8">
+        <h2 class="text-3xl font-bold text-white mb-6">About This Project</h2>
+
+        <div class="space-y-4 text-gray-300">
         <p>
           This project originally began in 2018 as a manual preservation effort. At the time, the work 
           consisted primarily of copying and pasting as many playlists as possible from the KCUR website before they 
@@ -431,7 +450,7 @@ const navigateToRandomArtist = () => {
           the curation of a true musicologist.
         </p>
 
-        <div class="bg-gray-900 rounded-lg p-6 mt-6">
+        <div class="bg-gray-900/70 rounded-lg p-6 mt-6 border border-gray-800">
           <h3 class="text-xl font-semibold text-white mb-4">Features</h3>
           <ul class="space-y-2 text-gray-300">
             <li class="flex items-start">
@@ -480,6 +499,7 @@ const navigateToRandomArtist = () => {
             I welcome any edits, suggestions, or corrections to the archive. You can contact me directly at
             <a href="mailto:chris@the816.com" class="text-blue-400 hover:text-blue-300 font-medium underline-offset-4 hover:underline">chris@the816.com</a>.
           </p>
+        </div>
         </div>
       </div>
     </div>
