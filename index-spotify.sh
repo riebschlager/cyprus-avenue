@@ -11,7 +11,10 @@
 #   - Set SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET environment variables
 #
 # Usage:
-#   ./index-spotify.sh
+#   ./index-spotify.sh [--missing-only]
+#
+# Options:
+#   --missing-only    Only search for tracks not already in spotify-index.json
 #
 # What it does:
 #   1. Reads json/playlists.json
@@ -25,6 +28,14 @@ set -e  # Exit on error
 echo "🎵 Cyprus Avenue - Index Spotify Tracks"
 echo "========================================"
 echo ""
+
+# Check for --missing-only flag
+MISSING_ONLY=false
+for arg in "$@"; do
+    if [ "$arg" == "--missing-only" ]; then
+        MISSING_ONLY=true
+    fi
+done
 
 # Check if we're in the right directory
 if [ ! -f "json/playlists.json" ]; then
@@ -53,8 +64,13 @@ fi
 # Get absolute path to project root
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-echo "⏱️  This will take 7-10 minutes for ~1,449 tracks"
-echo "   (Spotify API has rate limits)"
+if [ "$MISSING_ONLY" = true ]; then
+    echo "⏱️  Mode: Missing tracks only. This will be much faster if most tracks are indexed."
+else
+    echo "⏱️  This will take 7-10 minutes for ~1,449 tracks"
+    echo "   (Spotify API has rate limits)"
+fi
+
 echo ""
 read -p "Continue? [y/N] " -n 1 -r
 echo ""
@@ -87,7 +103,7 @@ if [ -f ".env" ]; then
     export $(cat .env | grep -v '^#' | xargs)
 fi
 
-node scripts/spotify/index-spotify-tracks.js
+node scripts/spotify/index-spotify-tracks.js "$@"
 
 echo ""
 echo "✨ Spotify indexing complete!"

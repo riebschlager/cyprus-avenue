@@ -237,7 +237,12 @@ function calculateConfidence(originalArtist, originalSong, spotifyTrack) {
 
 // Step 4: Index all unique tracks
 async function indexAllTracks() {
+  const missingOnly = process.argv.includes('--missing-only')
+
   console.log('📀 Cyprus Avenue Spotify Track Indexer')
+  if (missingOnly) {
+    console.log('🔍 Mode: Indexing only missing tracks')
+  }
   console.log('=====================================\n')
 
   // Read playlists
@@ -260,12 +265,12 @@ async function indexAllTracks() {
     }
   }
 
-  console.log(`Found ${uniqueTracks.size} unique tracks to index\n`)
+  console.log(`Found ${uniqueTracks.size} unique tracks total\n`)
 
   // Get Spotify token
   const token = await getSpotifyToken()
 
-  // Load existing index to preserve manually-recovered tracks
+  // Load existing index
   const outputPath = 'web/public/spotify-index.json'
   let trackIndex = {}
   let preservedCount = 0
@@ -273,15 +278,23 @@ async function indexAllTracks() {
   if (fs.existsSync(outputPath)) {
     try {
       const existing = JSON.parse(fs.readFileSync(outputPath, 'utf-8'))
-      // Preserve tracks that were manually confirmed (medium confidence from recovery tool)
-      for (const [key, value] of Object.entries(existing)) {
-        if (value.confidence === 'medium' && value.manual === true) {
-          trackIndex[key] = value
-          preservedCount++
+      
+      if (missingOnly) {
+        // In missing-only mode, we keep everything that's already indexed
+        trackIndex = existing
+        preservedCount = Object.keys(existing).length
+        console.log(`✓ Loaded ${preservedCount} existing tracks from index\n`)
+      } else {
+        // Normal mode: only preserve manually confirmed tracks
+        for (const [key, value] of Object.entries(existing)) {
+          if (value.confidence === 'medium' && value.manual === true) {
+            trackIndex[key] = value
+            preservedCount++
+          }
         }
-      }
-      if (preservedCount > 0) {
-        console.log(`✓ Preserving ${preservedCount} manually-recovered tracks\n`)
+        if (preservedCount > 0) {
+          console.log(`✓ Preserving ${preservedCount} manually-recovered tracks\n`)
+        }
       }
     } catch (err) {
       console.log('⚠ Could not load existing index, starting fresh\n')
@@ -296,22 +309,37 @@ async function indexAllTracks() {
     highConfidence: 0,
     mediumConfidence: 0,
     lowConfidence: 0,
-    preserved: preservedCount
+    preserved: preservedCount,
+    skipped: 0
   }
 
   let processed = 0
-
+  const tracksToProcess = []
+  
+  // Filter unique tracks down to what we actually need to search
   for (const [key, track] of uniqueTracks) {
-    processed++
-    const progress = `[${processed}/${stats.total}]`
-
-    // Skip if already preserved from manual recovery
-    if (trackIndex[key] && trackIndex[key].manual === true) {
-      console.log(`${progress} ${track.artist} - ${track.song}... ⊙ (preserved)`)
+    if (trackIndex[key]) {
       stats.found++
-      stats.mediumConfidence++
+      stats.skipped++
+      // If we already have it, count its confidence for stats
+      const existing = trackIndex[key]
+      if (existing.confidence) {
+        stats[`${existing.confidence}Confidence`]++
+      }
       continue
     }
+    tracksToProcess.push({ key, track })
+  }
+
+  if (missingOnly) {
+    console.log(`Skipping ${stats.skipped} already indexed tracks.`)
+    console.log(`${tracksToProcess.length} tracks remaining to search.\n`)
+  }
+
+  for (const item of tracksToProcess) {
+    const { key, track } = item
+    processed++
+    const progress = `[${processed}/${tracksToProcess.length}]`
 
     process.stdout.write(`${progress} Searching: ${track.artist} - ${track.song}...`)
 
