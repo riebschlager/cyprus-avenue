@@ -25,6 +25,10 @@ const handleScroll = () => {
   })
 }
 
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
 // Close menu when route changes
 watch(() => route.path, () => {
   closeMenu()
@@ -239,6 +243,16 @@ onUnmounted(() => {
               KCUR Cyprus Avenue
             </a>
           </p>
+          <button
+            type="button"
+            @click="scrollToTop"
+            class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider border border-blue-500/40 text-blue-300 hover:text-blue-200 hover:border-blue-400/70 hover:bg-blue-500/10 transition-colors"
+          >
+            <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+            </svg>
+            Back to top
+          </button>
           <p class="text-sm text-gray-500">
             Created by 
             <a href="https://the816.com" target="_blank" rel="noopener" class="text-gray-400 hover:text-blue-400 transition-colors font-medium">
