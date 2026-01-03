@@ -235,17 +235,17 @@ const navigateToRandomArtist = () => {
               Shows broadcast during this week in years past.
             </p>
 
-            <div class="space-y-4 flex-grow">
-              <PlaylistCard
-                v-for="playlist in thisWeekPlaylists"
-                :key="playlist.date"
-                :playlist="playlist"
-                :search-query="''"
-                :is-expanded="expandedHistoryId === playlist.date"
-                @toggle="toggleHistoryCard(playlist.date)"
-              />
-            </div>
-
+                    <div class="space-y-4 flex-grow">
+                      <PlaylistCard
+                        v-for="playlist in thisWeekPlaylists"
+                        :key="playlist.date"
+                        :playlist="playlist"
+                        :search-query="''"
+                        :is-expanded="expandedHistoryId === playlist.date"
+                        :compact="true"
+                        @toggle="toggleHistoryCard(playlist.date)"
+                      />
+                    </div>
             <div class="mt-8 pt-6 border-t border-white/10">
               <h3 class="text-lg font-semibold text-white mb-4">From the Archive</h3>
               

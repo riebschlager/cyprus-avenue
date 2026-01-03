@@ -11,6 +11,7 @@ const props = defineProps<{
   playlist: Playlist
   isExpanded: boolean
   searchQuery: string
+  compact?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -113,10 +114,24 @@ watch(() => props.isExpanded, (newVal) => {
   <div ref="cardRef" class="bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-gray-700">
     <button
       @click="emit('toggle')"
-      class="w-full px-6 py-4 text-left flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg"
+      class="w-full text-left flex items-start justify-between focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg"
+      :class="[compact ? 'px-4 py-3' : 'px-6 py-4']"
     >
       <div class="flex-1 min-w-0">
-        <div class="flex items-center justify-between gap-3">
+        <div v-if="compact" class="flex flex-col gap-1">
+          <div class="flex items-center justify-between">
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-blue-500/20 text-blue-300">
+              {{ playlist.date }}
+            </span>
+            <span class="text-[10px] text-gray-400">
+              {{ playlist.tracks.length }} tracks
+            </span>
+          </div>
+          <h3 class="text-base font-semibold text-white leading-tight">
+            {{ playlist.title }}
+          </h3>
+        </div>
+        <div v-else class="flex items-center justify-between gap-3">
           <div class="flex items-center gap-3 min-w-0">
             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-500/20 text-blue-300 flex-shrink-0">
               {{ playlist.date }}
@@ -131,7 +146,7 @@ watch(() => props.isExpanded, (newVal) => {
         </div>
       </div>
       <svg
-        class="ml-4 h-5 w-5 text-gray-400 transition-transform flex-shrink-0"
+        class="ml-2 h-5 w-5 text-gray-400 transition-transform flex-shrink-0 mt-1"
         :class="{ 'rotate-180': isExpanded }"
         fill="none"
         stroke="currentColor"
