@@ -1,12 +1,44 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { usePlaylists } from '../composables/usePlaylists'
 import { useRouter } from 'vue-router'
 import SpotifyPlaylistModal from './SpotifyPlaylistModal.vue'
+import PlaylistCard from './PlaylistCard.vue'
 
-const { stats } = usePlaylists()
+const { stats, playlists } = usePlaylists()
 const router = useRouter()
 const showAllTracksModal = ref(false)
+
+// Logic for "This Week in History"
+const thisWeekPlaylists = computed(() => {
+  const today = new Date()
+  const currentMonth = today.getMonth() // 0-11
+  const currentDate = today.getDate() // 1-31
+
+  // Define "This Week" as +/- 3 days from today
+  return playlists.value.filter(p => {
+    if (!p.date) return false
+    const pDate = new Date(p.date)
+    
+    // Normalize both dates to the same leap year (2000) to handle Feb 29 correctly
+    const target = new Date(2000, currentMonth, currentDate)
+    const check = new Date(2000, pDate.getMonth(), pDate.getDate())
+    
+    // Calculate difference in days
+    const diffTime = Math.abs(target.getTime() - check.getTime())
+    const diffDays = diffTime / (1000 * 60 * 60 * 24)
+    
+    // Check direct difference OR wrap-around difference (for Dec/Jan boundary)
+    // 366 because 2000 is a leap year
+    return diffDays <= 3 || (366 - diffDays) <= 3
+  }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+})
+
+// Track expanded state for the history cards
+const expandedHistoryId = ref<string | null>(null)
+const toggleHistoryCard = (date: string) => {
+  expandedHistoryId.value = expandedHistoryId.value === date ? null : date
+}
 </script>
 
 <template>
@@ -18,6 +50,34 @@ const showAllTracksModal = ref(false)
         A digital archive of playlists from KCUR's legendary Cyprus Avenue radio show,
         preserving nearly 8 years of musical cultural heritage curated by Bill Shapiro.
       </p>
+    </div>
+
+    <!-- This Week in History -->
+    <div v-if="thisWeekPlaylists.length > 0" class="bg-gradient-to-br from-blue-900/40 to-indigo-900/40 rounded-lg shadow-lg p-8 border border-blue-700/50 relative overflow-hidden">
+      <!-- Decorative background element -->
+      <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-blue-500/10 rounded-full blur-xl"></div>
+      
+      <div class="relative z-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="text-2xl">📅</span>
+          <h2 class="text-3xl font-bold text-white">This Week in History</h2>
+        </div>
+        
+        <p class="text-gray-300 mb-6">
+          Here are shows that Bill Shapiro broadcast during this week in years past.
+        </p>
+
+        <div class="space-y-4">
+          <PlaylistCard
+            v-for="playlist in thisWeekPlaylists"
+            :key="playlist.date"
+            :playlist="playlist"
+            :search-query="''"
+            :is-expanded="expandedHistoryId === playlist.date"
+            @toggle="toggleHistoryCard(playlist.date)"
+          />
+        </div>
+      </div>
     </div>
 
     <!-- About Cyprus Avenue -->

@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { ref, watch, nextTick, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 import type { Playlist } from '../types/playlist'
 import StreamingLinks from './StreamingLinks.vue'
 import SpotifyPlaylistModal from './SpotifyPlaylistModal.vue'
 import { useStreamingLinks } from '../composables/useStreamingLinks'
+import { generatePlaylistSlug } from '../utils/slug'
 
 const props = defineProps<{
   playlist: Playlist
@@ -15,9 +17,11 @@ const emit = defineEmits<{
   toggle: []
 }>()
 
+const route = useRoute()
 const { getTrackData } = useStreamingLinks()
 const cardRef = ref<HTMLElement | null>(null)
 const showSpotifyModal = ref(false)
+const copiedTrackIndex = ref<number | null>(null)
 
 const formatDate = (dateStr: string) => {
   const date = new Date(dateStr)
@@ -32,6 +36,11 @@ const getAlbumArt = (artist: string, song: string): string | null => {
 const scrollToCard = () => {
   if (cardRef.value) {
     nextTick(() => {
+      // If we have a track deep link, don't scroll to card top, let the track scrolling handle it
+      if (route.query.track && props.playlist.tracks.some(t => t.song === route.query.track)) {
+        return
+      }
+
       const header = document.querySelector('header')
       const collapsedHeaderHeight = 100 // Target offset for collapsed state
       const currentHeaderHeight = header?.clientHeight || collapsedHeaderHeight
@@ -52,10 +61,41 @@ const scrollToCard = () => {
   }
 }
 
+const copyTrackLink = async (song: string, index: number) => {
+  const slug = generatePlaylistSlug(props.playlist.title, props.playlist.date)
+  const url = `${window.location.origin}/playlist/${slug}?track=${encodeURIComponent(song)}`
+  try {
+    await navigator.clipboard.writeText(url)
+    copiedTrackIndex.value = index
+    setTimeout(() => {
+      copiedTrackIndex.value = null
+    }, 2000)
+  } catch (err) {
+    console.error('Failed to copy link', err)
+  }
+}
+
+const scrollToTrack = () => {
+  const trackName = route.query.track as string
+  if (!trackName) return
+
+  const index = props.playlist.tracks.findIndex(t => t.song === trackName)
+  if (index === -1) return
+
+  nextTick(() => {
+    const trackElement = document.getElementById(`track-${props.playlist.date}-${index}`)
+    if (trackElement) {
+      trackElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      // Add a temporary highlight animation class if needed, or just rely on the static highlight
+    }
+  })
+}
+
 // Scroll to card when expanded via URL (on mount)
 onMounted(() => {
   if (props.isExpanded) {
     scrollToCard()
+    scrollToTrack()
   }
 })
 
@@ -63,6 +103,8 @@ onMounted(() => {
 watch(() => props.isExpanded, (newVal) => {
   if (newVal) {
     scrollToCard()
+    // Small delay to ensure DOM is rendered before scrolling to track
+    setTimeout(scrollToTrack, 100)
   }
 })
 </script>
@@ -112,7 +154,11 @@ watch(() => props.isExpanded, (newVal) => {
           <div
             v-for="(track, index) in playlist.tracks"
             :key="index"
-            class="flex items-start gap-3 py-2 px-3 rounded hover:bg-gray-700/50"
+            :id="`track-${playlist.date}-${index}`"
+            class="flex items-start gap-3 py-2 px-3 rounded transition-colors duration-300"
+            :class="[
+              route.query.track === track.song ? 'bg-blue-900/40 border border-blue-500/30' : 'hover:bg-gray-700/50'
+            ]"
           >
             <span class="text-sm text-gray-500 font-mono min-w-[2rem]">{{ index + 1 }}.</span>
 
@@ -135,7 +181,30 @@ watch(() => props.isExpanded, (newVal) => {
               <p class="text-sm font-medium text-white">{{ track.song }}</p>
               <p class="text-xs text-gray-400">{{ track.artist }}</p>
             </div>
-            <div class="flex-shrink-0">
+            
+            <!-- Actions: Share & Stream -->
+            <div class="flex items-center gap-2 flex-shrink-0">
+              <button
+                @click.stop="copyTrackLink(track.song, index)"
+                class="p-1.5 text-gray-400 hover:text-white rounded hover:bg-gray-600 transition-colors relative"
+                title="Copy link to track"
+              >
+                <svg v-if="copiedTrackIndex === index" class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <svg v-else class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                </svg>
+                
+                <!-- Tooltip -->
+                <span 
+                  v-if="copiedTrackIndex === index" 
+                  class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white bg-black rounded shadow whitespace-nowrap z-10"
+                >
+                  Copied!
+                </span>
+              </button>
+              
               <StreamingLinks :artist="track.artist" :song="track.song" />
             </div>
           </div>
