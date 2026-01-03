@@ -42,6 +42,14 @@ const isLoading = computed(() => creationState.value === 'creating')
 const isSuccess = computed(() => creationState.value === 'completed')
 const isError = computed(() => creationState.value === 'error')
 
+// Create modal state object to preserve context through OAuth flow
+const modalState = computed(() => ({
+  mode: props.mode,
+  playlistSlug: props.playlist?.date,
+  genre: props.genre,
+  artistName: props.artistName
+}))
+
 const handleCreatePlaylist = async () => {
   if (!props.playlist && props.mode !== 'all-tracks' && props.mode !== 'genre' && props.mode !== 'artist') {
     showError('No source selected')
@@ -135,7 +143,7 @@ const handleClose = () => {
           <p class="text-sm text-gray-300">
             Connect your Spotify account to create playlists from Cyprus Avenue episodes.
           </p>
-          <SpotifyAuthButton />
+          <SpotifyAuthButton :modal-state="modalState" />
         </div>
 
         <!-- Authenticated - Ready to Create -->

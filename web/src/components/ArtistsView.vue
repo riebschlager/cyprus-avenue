@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, computed } from 'vue'
+import { ref, watch, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useArtists, type Artist } from '../composables/useArtists'
 import type { Playlist } from '../types/playlist'
@@ -18,6 +18,27 @@ const route = useRoute()
 const { searchQuery, selectedGenre, filteredArtists, availableGenres } = useArtists(props.playlists)
 const expandedArtistIndex = ref<number | null>(null)
 const showGenrePlaylistModal = ref(false)
+
+// Check for pending Spotify action after OAuth redirect
+onMounted(() => {
+  const pendingAction = sessionStorage.getItem('spotify_pending_action')
+  if (pendingAction) {
+    try {
+      const action = JSON.parse(pendingAction)
+      // Check if this was a genre modal
+      if (action.mode === 'genre' && action.genre) {
+        // Set the genre filter
+        selectedGenre.value = action.genre
+        // Open the modal
+        showGenrePlaylistModal.value = true
+        sessionStorage.removeItem('spotify_pending_action')
+      }
+    } catch (err) {
+      console.error('Failed to parse pending Spotify action', err)
+      sessionStorage.removeItem('spotify_pending_action')
+    }
+  }
+})
 
 // Pagination
 const itemsPerPage = 50

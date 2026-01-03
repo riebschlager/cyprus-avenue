@@ -5,7 +5,7 @@ import { useSpotifyAuth } from '../composables/useSpotifyAuth'
 import { useToast } from '../composables/useToast'
 
 const router = useRouter()
-const { handleOAuthCallback } = useSpotifyAuth()
+const { handleOAuthCallback, getReturnPath, getModalState, clearReturnContext } = useSpotifyAuth()
 const { success, error: showError } = useToast()
 
 onMounted(async () => {
@@ -18,12 +18,14 @@ onMounted(async () => {
 
     if (error) {
       showError(`Spotify authorization failed: ${error}`)
+      clearReturnContext()
       setTimeout(() => router.push('/'), 2000)
       return
     }
 
     if (!code || !state) {
       showError('Invalid authorization response from Spotify')
+      clearReturnContext()
       setTimeout(() => router.push('/'), 2000)
       return
     }
@@ -32,11 +34,25 @@ onMounted(async () => {
     await handleOAuthCallback(code, state)
     success('Connected to Spotify!')
 
-    // Redirect to home after short delay
-    setTimeout(() => router.push('/'), 1500)
+    // Get stored return path and modal state
+    const returnPath = getReturnPath() || '/'
+    const modalState = getModalState()
+
+    // Store modal state in a URL parameter if it exists
+    // This will be picked up by the destination component
+    if (modalState) {
+      sessionStorage.setItem('spotify_pending_action', JSON.stringify(modalState))
+    }
+
+    // Clear the return context from session storage
+    clearReturnContext()
+
+    // Redirect to the page the user was on
+    setTimeout(() => router.push(returnPath), 1500)
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Authentication failed'
     showError(message)
+    clearReturnContext()
     setTimeout(() => router.push('/'), 2000)
   }
 })

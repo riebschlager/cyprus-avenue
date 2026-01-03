@@ -1,13 +1,21 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
 import { useSpotifyAuth } from '../composables/useSpotifyAuth'
 import { useToast } from '../composables/useToast'
 
+const props = defineProps<{
+  modalState?: any
+}>()
+
+const router = useRouter()
 const { isAuthenticated, isAuthenticating, error, initiateLogin } = useSpotifyAuth()
 const { error: showError } = useToast()
 
 const handleLogin = async () => {
   try {
-    await initiateLogin()
+    // Pass current route path and modal state to preserve context
+    const returnPath = router.currentRoute.value.fullPath
+    await initiateLogin(returnPath, props.modalState)
   } catch (err) {
     showError(error.value || 'Failed to connect to Spotify')
   }

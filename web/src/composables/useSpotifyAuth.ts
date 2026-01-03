@@ -38,7 +38,7 @@ async function generateCodeChallenge(codeVerifier: string): Promise<string> {
 }
 
 export function useSpotifyAuth() {
-  const initiateLogin = async () => {
+  const initiateLogin = async (returnPath?: string, modalState?: any) => {
     if (!SPOTIFY_CLIENT_ID) {
       authState.value.error = 'Spotify Client ID not configured'
       return
@@ -51,11 +51,19 @@ export function useSpotifyAuth() {
       // Generate PKCE parameters
       const codeVerifier = generateRandomString(128)
       const codeChallenge = await generateCodeChallenge(codeVerifier)
-      const state = generateRandomString(16)
+      const stateRandom = generateRandomString(16)
 
       // Store in sessionStorage for callback
       sessionStorage.setItem('spotify_code_verifier', codeVerifier)
-      sessionStorage.setItem('spotify_state', state)
+      sessionStorage.setItem('spotify_state', stateRandom)
+
+      // Store return path and modal state if provided
+      if (returnPath) {
+        sessionStorage.setItem('spotify_return_path', returnPath)
+      }
+      if (modalState) {
+        sessionStorage.setItem('spotify_modal_state', JSON.stringify(modalState))
+      }
 
       // Build authorization URL
       const params = new URLSearchParams({
@@ -65,7 +73,7 @@ export function useSpotifyAuth() {
         scope: SPOTIFY_SCOPES.join(' '),
         code_challenge_method: 'S256',
         code_challenge: codeChallenge,
-        state
+        state: stateRandom
       })
 
       // Redirect to Spotify authorization
@@ -119,7 +127,7 @@ export function useSpotifyAuth() {
       authState.value.accessToken = data.access_token
       authState.value.isAuthenticated = true
 
-      // Clean up session storage
+      // Clean up OAuth session storage (but keep return path and modal state for redirect)
       sessionStorage.removeItem('spotify_code_verifier')
       sessionStorage.removeItem('spotify_state')
 
@@ -142,6 +150,22 @@ export function useSpotifyAuth() {
     authState.value.isAuthenticating = false
     sessionStorage.removeItem('spotify_code_verifier')
     sessionStorage.removeItem('spotify_state')
+    sessionStorage.removeItem('spotify_return_path')
+    sessionStorage.removeItem('spotify_modal_state')
+  }
+
+  const getReturnPath = (): string | null => {
+    return sessionStorage.getItem('spotify_return_path')
+  }
+
+  const getModalState = (): any | null => {
+    const state = sessionStorage.getItem('spotify_modal_state')
+    return state ? JSON.parse(state) : null
+  }
+
+  const clearReturnContext = () => {
+    sessionStorage.removeItem('spotify_return_path')
+    sessionStorage.removeItem('spotify_modal_state')
   }
 
   const getAccessToken = (): string | null => {
@@ -159,6 +183,9 @@ export function useSpotifyAuth() {
     initiateLogin,
     handleOAuthCallback,
     logout,
-    getAccessToken
+    getAccessToken,
+    getReturnPath,
+    getModalState,
+    clearReturnContext
   }
 }

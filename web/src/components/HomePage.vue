@@ -53,6 +53,22 @@ onMounted(() => {
   if (playlists.value.length > 0) {
     refreshSuggestions()
   }
+
+  // Check for pending Spotify action after OAuth redirect
+  const pendingAction = sessionStorage.getItem('spotify_pending_action')
+  if (pendingAction) {
+    try {
+      const action = JSON.parse(pendingAction)
+      // Check if this was the all-tracks modal
+      if (action.mode === 'all-tracks') {
+        showAllTracksModal.value = true
+        sessionStorage.removeItem('spotify_pending_action')
+      }
+    } catch (err) {
+      console.error('Failed to parse pending Spotify action', err)
+      sessionStorage.removeItem('spotify_pending_action')
+    }
+  }
 })
 
 const navigateToSuggestedPlaylist = () => {

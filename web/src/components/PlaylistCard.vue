@@ -24,6 +24,30 @@ const cardRef = ref<HTMLElement | null>(null)
 const showSpotifyModal = ref(false)
 const copiedTrackIndex = ref<number | null>(null)
 
+// Check for pending Spotify action on mount
+onMounted(() => {
+  if (props.isExpanded) {
+    scrollToCard()
+    scrollToTrack()
+
+    // Check if we should auto-reopen the Spotify modal after OAuth redirect
+    const pendingAction = sessionStorage.getItem('spotify_pending_action')
+    if (pendingAction) {
+      try {
+        const action = JSON.parse(pendingAction)
+        // Check if this is the playlist that should have the modal opened
+        if (action.mode === 'single' && action.playlistSlug === props.playlist.date) {
+          showSpotifyModal.value = true
+          sessionStorage.removeItem('spotify_pending_action')
+        }
+      } catch (err) {
+        console.error('Failed to parse pending Spotify action', err)
+        sessionStorage.removeItem('spotify_pending_action')
+      }
+    }
+  }
+})
+
 const formatDate = (dateStr: string) => {
   const date = new Date(dateStr)
   return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
@@ -91,14 +115,6 @@ const scrollToTrack = () => {
     }
   })
 }
-
-// Scroll to card when expanded via URL (on mount)
-onMounted(() => {
-  if (props.isExpanded) {
-    scrollToCard()
-    scrollToTrack()
-  }
-})
 
 // Scroll to top of card when expanded via toggle
 watch(() => props.isExpanded, (newVal) => {
