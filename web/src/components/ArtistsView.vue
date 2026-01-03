@@ -166,10 +166,10 @@ const toggleArtist = (index: number) => {
       <div class="flex gap-2">
         <button 
           @click="showGenrePlaylistModal = true"
-          class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-green-500/20 hover:bg-green-500/30 text-green-300 hover:text-green-200 transition-colors text-sm font-medium"
+          class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-green-500/20 hover:bg-green-500/30 text-green-300 hover:text-green-200 transition-colors text-sm font-medium border border-green-500/20"
         >
           <span>🎧</span>
-          Add to Spotify
+          Create {{ selectedGenre.charAt(0).toUpperCase() + selectedGenre.slice(1) }} Playlist on Spotify
         </button>
         <button 
           @click="clearGenre"
