@@ -559,11 +559,11 @@ const navigateToRandomArtist = () => {
           </div>
         </div>
 
-        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 mt-6">
-          <p class="text-sm text-blue-200">
+        <div class="bg-green-500/10 border border-green-500/30 rounded-lg p-4 mt-6">
+          <p class="text-sm text-green-200">
             💡 <strong>Tip:</strong> You can also add individual shows to Spotify by expanding any playlist
-            in the <router-link to="/playlists" class="text-blue-400 hover:text-blue-300 underline">Playlists</router-link> view, 
-            or generate <strong>genre or artist-based collections</strong> from the <router-link to="/artists" class="text-blue-400 hover:text-blue-300 underline">Artists</router-link> page.
+            in the <router-link to="/playlists" class="text-green-300 hover:text-green-200 underline">Playlists</router-link> view, 
+            or generate <strong>genre or artist-based collections</strong> from the <router-link to="/artists" class="text-green-300 hover:text-green-200 underline">Artists</router-link> page.
           </p>
         </div>
       </div>
