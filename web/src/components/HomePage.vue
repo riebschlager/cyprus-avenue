@@ -145,156 +145,165 @@ const navigateToRandomArtist = () => {
       </p>
     </div>
 
-    <!-- This Week in History -->
-    <div v-if="thisWeekPlaylists.length > 0" class="bg-gradient-to-br from-blue-900/40 to-indigo-900/40 rounded-lg shadow-lg p-8 border border-blue-700/50 relative overflow-hidden">
-      <!-- Decorative background element -->
-      <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-blue-500/10 rounded-full blur-xl"></div>
-      
-      <div class="relative z-10">
-        <div class="flex items-center gap-3 mb-6">
-          <span class="text-2xl">📅</span>
-          <h2 class="text-3xl font-bold text-white">This Week in History</h2>
-        </div>
-        
-        <p class="text-gray-300 mb-6">
-          Here are shows that Bill Shapiro broadcast during this week in years past.
-        </p>
+    <!-- Main Content Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+      <!-- Left Column: About & Marr -->
+      <div class="lg:col-span-2 space-y-8">
+        <!-- About Cyprus Avenue -->
+        <div class="bg-gray-800 rounded-lg shadow-lg p-8 border border-gray-700 h-full">
+          <h2 class="text-3xl font-bold text-white mb-6">About Cyprus Avenue</h2>
 
-        <div class="space-y-4">
-          <PlaylistCard
-            v-for="playlist in thisWeekPlaylists"
-            :key="playlist.date"
-            :playlist="playlist"
-            :search-query="''"
-            :is-expanded="expandedHistoryId === playlist.date"
-            @toggle="toggleHistoryCard(playlist.date)"
-          />
+          <div class="space-y-4 text-gray-300">
+            <p>
+              Cyprus Avenue was a Saturday evening institution on KCUR 89.3 FM in Kansas City,
+              featuring "the world of popular music from gospel to rock - from country to reggae -
+              from a different point of view." 
+              The show was named after Van Morrison's iconic song "Cyprus Avenue"
+              from the 1968 album <em>Astral Weeks</em>.
+            </p>
+
+            <p>
+              For over 40 years (1978-2018), Bill Shapiro—a Kansas City tax and estate planner by day and
+              music enthusiast by night—curated unique playlists introducing listeners to both
+              classic and contemporary artists across all genres. A native of Kansas City, Missouri,
+              Shapiro received his law degree from the University of Michigan and practiced law since 1962.
+            </p>
+
+            <p>
+              Beyond the radio, Shapiro was the author of two definitive music guides, both published
+              by Andrews & McMeel:
+              <a href="https://www.amazon.com/dp/0836279476" target="_blank" rel="noopener" class="text-blue-400 hover:text-blue-300"><em>The CD Rock and Roll Library</em></a> (1988) and
+              <a href="https://www.amazon.com/dp/0836262174" target="_blank" rel="noopener" class="text-blue-400 hover:text-blue-300"><em>The Rock and Roll Review</em></a> (1991).
+              His taste and deep knowledge of music made Cyprus Avenue a beloved show for generations of Kansas City listeners.
+            </p>
+
+            <p>
+              Bill Shapiro passed away in January 2020 at age 82, but his musical legacy lives on. Read more about his life and impact at 
+              <a href="https://www.kcur.org/community/2020-01-23/bill-shapiro-longtime-host-of-kcurs-cyprus-avenue-dies-at-82" target="_blank" rel="noopener" class="text-blue-400 hover:text-blue-300">KCUR</a>.
+            </p>
+          </div>
         </div>
 
-        <div class="mt-8 pt-6 border-t border-white/10">
-          <h3 class="text-lg font-semibold text-white mb-4">From the Archive</h3>
+        <!-- Marr Sound Archive -->
+        <div class="bg-gray-800 rounded-lg shadow-lg p-8 border border-gray-700">
+          <h2 class="text-3xl font-bold text-white mb-6">Marr Sound Archive</h2>
+
+          <div class="space-y-4 text-gray-300">
+            <p>
+              More recordings appear to be available as part of the <strong>Marr Sound Archive</strong> at the
+              University of Missouri Kansas City.
+            </p>
+
+            <p>
+              The archive was founded by Professor Gaylord Marr, who specialized in sound recordings.
+              This collection contains audio recordings of the "Cyprus Avenue" radio program aired on KCUR-FM in Kansas City, Missouri.
+            </p>
+
+            <div class="mt-6 p-4 bg-gray-900 rounded-lg border border-gray-600">
+              <p class="mb-2">
+                <strong>Access the Collection:</strong>
+              </p>
+              <a
+                href="https://finding-aids.library.umkc.edu/repositories/2/resources/415/collection_organization"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-blue-400 hover:text-blue-300 underline break-words"
+              >
+                Marr Sound Archive: Cyprus Avenue Collection
+              </a>
+              <p class="mt-2 text-sm text-gray-400">
+                Please contact the Marr Sound Archive directly regarding research, borrowing, and access to these materials.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: This Week in History -->
+      <div v-if="thisWeekPlaylists.length > 0" class="lg:col-span-1 h-full">
+        <div class="bg-gradient-to-br from-blue-900/40 to-indigo-900/40 rounded-lg shadow-lg p-6 border border-blue-700/50 relative overflow-hidden h-full">
+          <!-- Decorative background element -->
+          <div class="absolute top-0 right-0 -mt-4 -mr-4 w-16 h-16 bg-blue-500/10 rounded-full blur-xl"></div>
           
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            <!-- Suggested Playlist -->
-            <div 
-              v-if="suggestedPlaylist"
-              @click="navigateToSuggestedPlaylist"
-              class="bg-white/5 p-4 rounded-lg hover:bg-white/10 transition cursor-pointer border border-white/5 hover:border-blue-500/30 group"
-            >
-              <div class="text-xs text-blue-300 uppercase tracking-wider mb-1">Suggested Playlist</div>
-              <div class="font-medium text-white group-hover:text-blue-200 transition-colors">{{ suggestedPlaylist.title }}</div>
-              <div class="text-sm text-gray-400 mt-1">{{ suggestedPlaylist.date }}</div>
+          <div class="relative z-10 flex flex-col h-full">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-xl">📅</span>
+              <h2 class="text-2xl font-bold text-white leading-tight">This Week in History</h2>
+            </div>
+            
+            <p class="text-gray-300 text-sm mb-6">
+              Shows broadcast during this week in years past.
+            </p>
+
+            <div class="space-y-4 flex-grow">
+              <PlaylistCard
+                v-for="playlist in thisWeekPlaylists"
+                :key="playlist.date"
+                :playlist="playlist"
+                :search-query="''"
+                :is-expanded="expandedHistoryId === playlist.date"
+                @toggle="toggleHistoryCard(playlist.date)"
+              />
             </div>
 
-            <!-- Suggested Artist -->
-            <div 
-              v-if="suggestedArtist"
-              @click="navigateToSuggestedArtist"
-              class="bg-white/5 p-4 rounded-lg hover:bg-white/10 transition cursor-pointer border border-white/5 hover:border-purple-500/30 group"
-            >
-              <div class="text-xs text-purple-300 uppercase tracking-wider mb-1">Suggested Artist</div>
-              <div class="font-medium text-white group-hover:text-purple-200 transition-colors text-lg">{{ suggestedArtist }}</div>
-              <div class="text-sm text-gray-400 mt-1">Explore their tracks in the archive</div>
-            </div>
-          </div>
+            <div class="mt-8 pt-6 border-t border-white/10">
+              <h3 class="text-lg font-semibold text-white mb-4">From the Archive</h3>
+              
+              <div class="space-y-4 mb-6">
+                <!-- Suggested Playlist -->
+                <div 
+                  v-if="suggestedPlaylist"
+                  @click="navigateToSuggestedPlaylist"
+                  class="bg-white/5 p-4 rounded-lg hover:bg-white/10 transition cursor-pointer border border-white/5 hover:border-blue-500/30 group"
+                >
+                  <div class="text-xs text-blue-300 uppercase tracking-wider mb-1">Suggested Playlist</div>
+                  <div class="font-medium text-white group-hover:text-blue-200 transition-colors">{{ suggestedPlaylist.title }}</div>
+                  <div class="text-sm text-gray-400 mt-1">{{ suggestedPlaylist.date }}</div>
+                </div>
 
-          <div class="flex flex-col sm:flex-row gap-4 items-center justify-between">
-            <button 
-              @click="refreshSuggestions"
-              class="text-sm text-gray-400 hover:text-white flex items-center gap-2 transition-colors"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-              </svg>
-              Refresh Suggestions
-            </button>
-            <div class="flex gap-3">
-              <button 
-                @click="navigateToRandomPlaylist"
-                class="px-4 py-2 bg-blue-600/50 hover:bg-blue-600 text-white text-sm font-medium rounded-lg transition-colors border border-blue-500/30"
-              >
-                🎲 Surprise Playlist
-              </button>
-              <button 
-                @click="navigateToRandomArtist"
-                class="px-4 py-2 bg-purple-600/50 hover:bg-purple-600 text-white text-sm font-medium rounded-lg transition-colors border border-purple-500/30"
-              >
-                🎤 Surprise Artist
-              </button>
+                <!-- Suggested Artist -->
+                <div 
+                  v-if="suggestedArtist"
+                  @click="navigateToSuggestedArtist"
+                  class="bg-white/5 p-4 rounded-lg hover:bg-white/10 transition cursor-pointer border border-white/5 hover:border-purple-500/30 group"
+                >
+                  <div class="text-xs text-purple-300 uppercase tracking-wider mb-1">Suggested Artist</div>
+                  <div class="font-medium text-white group-hover:text-purple-200 transition-colors text-lg">{{ suggestedArtist }}</div>
+                  <div class="text-sm text-gray-400 mt-1">Explore their tracks</div>
+                </div>
+              </div>
+
+              <div class="space-y-4">
+                <div class="flex flex-wrap gap-2 justify-center">
+                  <button 
+                    @click="navigateToRandomPlaylist"
+                    class="flex-1 px-3 py-2 bg-blue-600/50 hover:bg-blue-600 text-white text-xs font-medium rounded-lg transition-colors border border-blue-500/30 whitespace-nowrap"
+                  >
+                    🎲 Surprise Playlist
+                  </button>
+                  <button 
+                    @click="navigateToRandomArtist"
+                    class="flex-1 px-3 py-2 bg-purple-600/50 hover:bg-purple-600 text-white text-xs font-medium rounded-lg transition-colors border border-purple-500/30 whitespace-nowrap"
+                  >
+                    🎤 Surprise Artist
+                  </button>
+                </div>
+                <button 
+                  @click="refreshSuggestions"
+                  class="w-full text-xs text-gray-400 hover:text-white flex items-center justify-center gap-2 transition-colors"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  </svg>
+                  Refresh Suggestions
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- About Cyprus Avenue -->
-    <div class="bg-gray-800 rounded-lg shadow-lg p-8 border border-gray-700">
-      <h2 class="text-3xl font-bold text-white mb-6">About Cyprus Avenue</h2>
-
-      <div class="space-y-4 text-gray-300">
-        <p>
-          Cyprus Avenue was a Saturday evening institution on KCUR 89.3 FM in Kansas City,
-          featuring "the world of popular music from gospel to rock - from country to reggae -
-          from a different point of view." 
-          The show was named after Van Morrison's iconic song "Cyprus Avenue"
-          from the 1968 album <em>Astral Weeks</em>.
-        </p>
-
-        <p>
-          For over 40 years (1978-2018), Bill Shapiro—a Kansas City tax and estate planner by day and
-          music enthusiast by night—curated unique playlists introducing listeners to both
-          classic and contemporary artists across all genres. A native of Kansas City, Missouri,
-          Shapiro received his law degree from the University of Michigan and practiced law since 1962.
-        </p>
-
-        <p>
-          Beyond the radio, Shapiro was the author of two definitive music guides, both published
-          by Andrews & McMeel:
-          <a href="https://www.amazon.com/dp/0836279476" target="_blank" rel="noopener" class="text-blue-400 hover:text-blue-300"><em>The CD Rock and Roll Library</em></a> (1988) and
-          <a href="https://www.amazon.com/dp/0836262174" target="_blank" rel="noopener" class="text-blue-400 hover:text-blue-300"><em>The Rock and Roll Review</em></a> (1991).
-          His taste and deep knowledge of music made Cyprus Avenue a beloved show for generations of Kansas City listeners.
-        </p>
-
-        <p>
-          Bill Shapiro passed away in January 2020 at age 82, but his musical legacy lives on. Read more about his life and impact at 
-          <a href="https://www.kcur.org/community/2020-01-23/bill-shapiro-longtime-host-of-kcurs-cyprus-avenue-dies-at-82" target="_blank" rel="noopener" class="text-blue-400 hover:text-blue-300">KCUR</a>.
-        </p>
-      </div>
-    </div>
-
-    <!-- Marr Sound Archive -->
-    <div class="bg-gray-800 rounded-lg shadow-lg p-8 border border-gray-700">
-      <h2 class="text-3xl font-bold text-white mb-6">Marr Sound Archive</h2>
-
-      <div class="space-y-4 text-gray-300">
-        <p>
-          More recordings appear to be available as part of the <strong>Marr Sound Archive</strong> at the
-          University of Missouri Kansas City.
-        </p>
-
-        <p>
-          The archive was founded by Professor Gaylord Marr, who specialized in sound recordings.
-          This collection contains audio recordings of the "Cyprus Avenue" radio program aired on KCUR-FM in Kansas City, Missouri.
-        </p>
-
-        <div class="mt-6 p-4 bg-gray-900 rounded-lg border border-gray-600">
-          <p class="mb-2">
-            <strong>Access the Collection:</strong>
-          </p>
-          <a
-            href="https://finding-aids.library.umkc.edu/repositories/2/resources/415/collection_organization"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-blue-400 hover:text-blue-300 underline break-words"
-          >
-            Marr Sound Archive: Cyprus Avenue Collection
-          </a>
-          <p class="mt-2 text-sm text-gray-400">
-            Please contact the Marr Sound Archive directly regarding research, borrowing, and access to these materials.
-          </p>
-        </div>
-      </div>
-    </div>
 
     <!-- Archive Statistics -->
     <div class="bg-gray-800 rounded-lg shadow-lg p-8 border border-gray-700">
