@@ -4,6 +4,7 @@ import type { Artist } from '../composables/useArtists'
 import StreamingLinks from './StreamingLinks.vue'
 import SpotifyPlaylistModal from './SpotifyPlaylistModal.vue'
 import { generatePlaylistSlug } from '../utils/slug'
+import { useArtistBios } from '../composables/useArtistBios'
 
 const props = defineProps<{
   artist: Artist
@@ -17,6 +18,10 @@ const emit = defineEmits<{
 
 const cardRef = ref<HTMLElement | null>(null)
 const showSpotifyModal = ref(false)
+
+// Artist bio functionality
+const { loadBiosIndex, getBio, indexLoaded } = useArtistBios()
+const artistBio = computed(() => getBio(props.artist.name))
 
 // Generate playlist permalink
 const getPlaylistUrl = (title: string, date: string) => {
@@ -70,7 +75,12 @@ const scrollToCard = () => {
 }
 
 // Scroll to card when expanded via URL (on mount)
-onMounted(() => {
+onMounted(async () => {
+  // Load artist bios index (lazy load)
+  if (!indexLoaded.value) {
+    await loadBiosIndex()
+  }
+
   if (props.isExpanded) {
     scrollToCard()
 
@@ -140,9 +150,59 @@ watch(() => props.isExpanded, (newVal) => {
         </button>
       </div>
 
+      <!-- Artist Bio Section -->
+      <div v-if="artistBio && artistBio.bioSummary" class="mt-4 pb-4 border-b border-gray-700">
+        <h4 class="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+          <span>About</span>
+          <a
+            v-if="artistBio.url"
+            :href="artistBio.url"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-xs text-gray-400 hover:text-blue-400 transition-colors"
+            title="View on Last.fm"
+          >
+            <svg class="w-3.5 h-3.5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </h4>
+        <div class="flex gap-4">
+          <!-- Artist Image -->
+          <div v-if="artistBio.image" class="flex-shrink-0">
+            <img
+              :src="artistBio.image"
+              :alt="artist.name"
+              class="w-24 h-24 rounded-lg object-cover shadow-lg"
+              loading="lazy"
+            />
+          </div>
+          <!-- Bio Text -->
+          <div class="flex-1 min-w-0">
+            <p class="text-sm text-gray-300 leading-relaxed" v-html="artistBio.bioSummary"></p>
+            <div v-if="artistBio.listeners && artistBio.playcount" class="mt-3 flex gap-4 text-xs text-gray-400">
+              <span>{{ artistBio.listeners.toLocaleString() }} listeners</span>
+              <span>{{ artistBio.playcount.toLocaleString() }} plays</span>
+            </div>
+            <!-- Tags from Last.fm -->
+            <div v-if="artistBio.tags && artistBio.tags.length > 0" class="mt-3">
+              <div class="flex flex-wrap gap-1.5">
+                <span
+                  v-for="tag in artistBio.tags.slice(0, 5)"
+                  :key="tag"
+                  class="px-2 py-0.5 rounded-full text-xs bg-gray-900 text-gray-400 border border-gray-700"
+                >
+                  {{ tag }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Genres Section -->
       <div v-if="artist.genres && artist.genres.length > 0" class="mt-4 pb-4 border-b border-gray-700">
-        <h4 class="text-sm font-semibold text-white mb-3">Genres</h4>
+        <h4 class="text-sm font-semibold text-white mb-3">Spotify Genres</h4>
         <div class="flex flex-wrap gap-2">
           <button
             v-for="genre in artist.genres"
