@@ -49,8 +49,8 @@ onUnmounted(() => {
       class="sticky top-0 z-50 bg-gray-900 shadow-lg border-b border-gray-800"
       style="contain: layout style paint;"
     >
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <div class="flex items-center justify-between gap-4">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between gap-4 w-full h-16 sm:h-20">
           <!-- Logo/Title -->
           <div class="flex items-baseline gap-4 flex-1 min-w-0">
             <h1
@@ -60,8 +60,8 @@ onUnmounted(() => {
               Cyprus Avenue Archive
             </h1>
             <p
-              class="text-sm text-gray-400 whitespace-nowrap hidden sm:block"
-              :style="{ opacity: isScrolled ? '0' : '1', transition: 'opacity 300ms cubic-bezier(0.4, 0, 0.2, 1)' }"
+              class="text-sm text-gray-400 whitespace-nowrap hidden sm:block transition-opacity duration-300"
+              :style="{ opacity: isScrolled ? '0' : '1' }"
             >
               Browse playlists from KCUR's Cyprus Avenue radio show
             </p>
@@ -222,8 +222,12 @@ onUnmounted(() => {
       </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <router-view />
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 min-h-[60vh]">
+      <router-view v-slot="{ Component }">
+        <transition name="fade" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </main>
 
     <footer class="bg-gray-900 border-t border-gray-800 mt-12">
@@ -251,6 +255,12 @@ onUnmounted(() => {
 </template>
 
 <style>
+/* Prevent horizontal layout jump by always reserving scrollbar space */
+html {
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
 @keyframes slideDown {
   from {
     opacity: 0;
@@ -260,5 +270,16 @@ onUnmounted(() => {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Page Transitions */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 200ms ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
