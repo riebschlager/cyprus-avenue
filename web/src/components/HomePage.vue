@@ -4,6 +4,7 @@ import { usePlaylists } from '../composables/usePlaylists'
 import { useRouter } from 'vue-router'
 import SpotifyPlaylistModal from './SpotifyPlaylistModal.vue'
 import PlaylistCard from './PlaylistCard.vue'
+import { generatePlaylistSlug, generateArtistSlug } from '../utils/slug'
 
 const { stats, playlists } = usePlaylists()
 const router = useRouter()
@@ -38,6 +39,41 @@ const thisWeekPlaylists = computed(() => {
 const expandedHistoryId = ref<string | null>(null)
 const toggleHistoryCard = (date: string) => {
   expandedHistoryId.value = expandedHistoryId.value === date ? null : date
+}
+
+const navigateToRandomPlaylist = () => {
+  if (playlists.value.length === 0) return
+  
+  const randomIndex = Math.floor(Math.random() * playlists.value.length)
+  const randomPlaylist = playlists.value[randomIndex]
+  
+  if (!randomPlaylist) return
+
+  const slug = generatePlaylistSlug(randomPlaylist.title, randomPlaylist.date)
+  
+  router.push({ name: 'playlist', params: { slug } })
+}
+
+const navigateToRandomArtist = () => {
+  // Collect all unique artists
+  const artists = new Set<string>()
+  playlists.value.forEach(p => {
+    p.tracks.forEach(t => {
+      if (t.artist) artists.add(t.artist)
+    })
+  })
+  
+  const artistArray = Array.from(artists)
+  if (artistArray.length === 0) return
+  
+  const randomIndex = Math.floor(Math.random() * artistArray.length)
+  const randomArtist = artistArray[randomIndex]
+  
+  if (!randomArtist) return
+
+  const slug = generateArtistSlug(randomArtist)
+  
+  router.push({ name: 'artist', params: { slug } })
 }
 </script>
 
@@ -76,6 +112,26 @@ const toggleHistoryCard = (date: string) => {
             :is-expanded="expandedHistoryId === playlist.date"
             @toggle="toggleHistoryCard(playlist.date)"
           />
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row gap-4 items-center justify-between">
+          <p class="text-gray-300 text-sm italic">
+            Feeling adventurous? Try something completely different.
+          </p>
+          <div class="flex gap-3">
+            <button 
+              @click="navigateToRandomPlaylist"
+              class="px-4 py-2 bg-blue-600/50 hover:bg-blue-600 text-white text-sm font-medium rounded-lg transition-colors border border-blue-500/30"
+            >
+              🎲 Random Playlist
+            </button>
+            <button 
+              @click="navigateToRandomArtist"
+              class="px-4 py-2 bg-purple-600/50 hover:bg-purple-600 text-white text-sm font-medium rounded-lg transition-colors border border-purple-500/30"
+            >
+              🎤 Random Artist
+            </button>
+          </div>
         </div>
       </div>
     </div>
