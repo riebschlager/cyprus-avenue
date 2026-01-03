@@ -12,7 +12,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <div v-if="loading" class="flex justify-center items-center py-12">
+    <div v-if="loading && playlists.length === 0" class="flex justify-center items-center py-12">
       <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
     </div>
 

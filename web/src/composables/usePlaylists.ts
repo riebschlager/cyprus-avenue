@@ -14,6 +14,7 @@ let fetchPromise: Promise<void> | null = null
 
 export function usePlaylists() {
   const fetchPlaylists = async () => {
+    if (playlists.value.length > 0) return
     // Return existing promise if already fetching
     if (fetchPromise) return fetchPromise
 
