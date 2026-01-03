@@ -1,6 +1,52 @@
 const fs = require('fs')
 const path = require('path')
 
+// Load .env file if it exists
+function loadEnv() {
+  // Try to find .env in the project root
+  const currentDir = process.cwd()
+  let envPath = path.join(currentDir, '.env')
+
+  // If not found in cwd, check if we're in a subdirectory and look one level up
+  if (!fs.existsSync(envPath)) {
+    const parentDir = path.dirname(currentDir)
+    const parentEnvPath = path.join(parentDir, '.env')
+    if (fs.existsSync(parentEnvPath)) {
+      envPath = parentEnvPath
+    }
+  }
+
+  if (fs.existsSync(envPath)) {
+    try {
+      const envContent = fs.readFileSync(envPath, 'utf-8')
+      const lines = envContent.split('\n')
+
+      for (const line of lines) {
+        const trimmed = line.trim()
+        // Skip comments and empty lines
+        if (!trimmed || trimmed.startsWith('#')) continue
+
+        const [key, ...valueParts] = trimmed.split('=')
+        const value = valueParts.join('=').trim()
+
+        // Remove quotes if present
+        const cleanValue = value.replace(/^["']|["']$/g, '')
+
+        // Only set if not already in environment
+        if (key && !process.env[key]) {
+          process.env[key] = cleanValue
+        }
+      }
+      console.log(`✓ Loaded credentials from .env file (${envPath})`)
+    } catch (err) {
+      console.warn(`⚠ Error reading .env file: ${err.message}`)
+    }
+  }
+}
+
+// Load environment variables
+loadEnv()
+
 // Configuration
 const LASTFM_API_KEY = process.env.LASTFM_API_KEY
 const LASTFM_BASE_URL = 'http://ws.audioscrobbler.com/2.0/'
