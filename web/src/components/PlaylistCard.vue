@@ -170,38 +170,46 @@ watch(() => props.isExpanded, (newVal) => {
             v-for="(track, index) in playlist.tracks"
             :key="index"
             :id="`track-${playlist.date}-${index}`"
-            class="flex items-start gap-3 py-2 px-3 rounded transition-colors duration-300"
+            class="flex items-start rounded transition-colors duration-300"
             :class="[
-              route.query.track === track.song ? 'bg-blue-900/40 border border-blue-500/30' : 'hover:bg-gray-700/50'
+              route.query.track === track.song ? 'bg-blue-900/40 border border-blue-500/30' : 'hover:bg-gray-700/50',
+              compact ? 'gap-2 py-2 px-2' : 'gap-3 py-2 px-3'
             ]"
           >
-            <span class="text-sm text-gray-500 font-mono min-w-[2rem]">{{ index + 1 }}.</span>
+            <span 
+              class="text-sm text-gray-500 font-mono"
+              :class="[compact ? 'min-w-[1.5rem] text-xs mt-0.5' : 'min-w-[2rem]']"
+            >
+              {{ index + 1 }}.
+            </span>
 
             <!-- Album Art (only loads when expanded) -->
             <div v-if="getAlbumArt(track.artist, track.song)" class="flex-shrink-0">
               <img
                 :src="getAlbumArt(track.artist, track.song)!"
                 :alt="`${track.song} by ${track.artist}`"
-                class="w-12 h-12 rounded shadow-sm object-cover"
+                class="rounded shadow-sm object-cover"
+                :class="[compact ? 'w-10 h-10' : 'w-12 h-12']"
                 loading="lazy"
               />
             </div>
-            <div v-else class="flex-shrink-0 w-12 h-12 bg-gray-700 rounded flex items-center justify-center">
-              <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div v-else class="flex-shrink-0 bg-gray-700 rounded flex items-center justify-center" :class="[compact ? 'w-10 h-10' : 'w-12 h-12']">
+              <svg class="text-gray-500" :class="[compact ? 'w-5 h-5' : 'w-6 h-6']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
               </svg>
             </div>
 
             <div class="flex-1 min-w-0">
-              <p class="text-sm font-medium text-white">{{ track.song }}</p>
-              <p class="text-xs text-gray-400">{{ track.artist }}</p>
+              <p class="font-medium text-white break-words leading-tight" :class="[compact ? 'text-xs' : 'text-sm']">{{ track.song }}</p>
+              <p class="text-gray-400 leading-tight mt-0.5" :class="[compact ? 'text-[10px]' : 'text-xs']">{{ track.artist }}</p>
             </div>
             
             <!-- Actions: Share & Stream -->
-            <div class="flex items-center gap-2 flex-shrink-0">
+            <div class="flex items-center gap-1 flex-shrink-0" :class="{ 'flex-col': compact }">
               <button
                 @click.stop="copyTrackLink(track.song, index)"
-                class="p-1.5 text-gray-400 hover:text-white rounded hover:bg-gray-600 transition-colors relative"
+                class="text-gray-400 hover:text-white rounded hover:bg-gray-600 transition-colors relative"
+                :class="[compact ? 'p-1' : 'p-1.5']"
                 title="Copy link to track"
               >
                 <svg v-if="copiedTrackIndex === index" class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
