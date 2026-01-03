@@ -39,6 +39,13 @@ const spotifyTrackUri = computed(() => {
   return `spotify:track:${trackData.spotifyId}`
 })
 
+const filteredPlatforms = computed(() => {
+  if (spotifyTrackUri.value) {
+    return platforms.filter(platform => platform.name !== 'Spotify')
+  }
+  return platforms
+})
+
 const toggleDropdown = () => {
   toggle()
 }
@@ -124,7 +131,7 @@ onUnmounted(() => {
           >
             <div class="flex items-center">
               <span class="mr-2">▶️</span>
-              Play in Web Player
+              Spotify
             </div>
             <span
               v-if="isAuthenticated"
@@ -134,8 +141,9 @@ onUnmounted(() => {
               App
             </span>
           </button>
+
           <button
-            v-for="platform in platforms"
+            v-for="platform in filteredPlatforms"
             :key="platform.name"
             @click.stop="handlePlatformClick(platform)"
             class="flex items-center justify-between w-full px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition-colors"
@@ -145,11 +153,11 @@ onUnmounted(() => {
               {{ platform.name }}
             </div>
             <span
-              v-if="platform.name === 'Spotify' && hasSpotifyLink"
-              class="text-xs bg-blue-500 text-white px-2 py-0.5 rounded font-semibold"
-              title="Direct link available"
+              v-if="!spotifyTrackUri && platform.name === 'Spotify'"
+              class="text-[10px] bg-gray-700 text-gray-300 px-2 py-0.5 rounded font-semibold"
+              title="Spotify match not found; opens search"
             >
-              ✓
+              Search
             </span>
           </button>
         </div>

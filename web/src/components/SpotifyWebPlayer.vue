@@ -53,28 +53,12 @@ const albumArt = computed(() => {
         <div v-else class="flex items-center gap-2">
           <button
             type="button"
-            class="px-3 py-1 rounded-full bg-gray-800 text-gray-300 hover:text-white hover:bg-gray-700 transition-colors text-xs font-semibold"
-            @click="previousTrack"
-            title="Previous"
-          >
-            Prev
-          </button>
-          <button
-            type="button"
             class="px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 hover:text-blue-200 hover:bg-blue-500/30 transition-colors text-xs font-semibold"
             @click="togglePlay"
             title="Play/Pause"
             :disabled="!isReady"
           >
             {{ isPaused ? 'Play' : 'Pause' }}
-          </button>
-          <button
-            type="button"
-            class="px-3 py-1 rounded-full bg-gray-800 text-gray-300 hover:text-white hover:bg-gray-700 transition-colors text-xs font-semibold"
-            @click="nextTrack"
-            title="Next"
-          >
-            Next
           </button>
         </div>
       </div>

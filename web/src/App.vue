@@ -4,12 +4,14 @@ import { useRoute } from 'vue-router'
 import { usePlaylists } from './composables/usePlaylists'
 import { useOpenGraph } from './composables/useOpenGraph'
 import { useMobileMenu } from './composables/useMobileMenu'
+import { useSpotifyAuth } from './composables/useSpotifyAuth'
 import ToastContainer from './components/ToastContainer.vue'
 import SpotifyWebPlayer from './components/SpotifyWebPlayer.vue'
 
 const { fetchPlaylists } = usePlaylists()
 const { setOpenGraphTags, getDefaultOG } = useOpenGraph()
 const { isMenuOpen, toggleMenu, closeMenu } = useMobileMenu()
+const { isAuthenticated } = useSpotifyAuth()
 const route = useRoute()
 const scrollY = ref(0)
 
@@ -227,7 +229,10 @@ onUnmounted(() => {
       </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 min-h-[60vh] pb-24">
+    <main
+      class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 min-h-[60vh]"
+      :class="{ 'pb-24': isAuthenticated }"
+    >
       <router-view v-slot="{ Component }">
         <transition name="fade" mode="out-in">
           <component :is="Component" />
@@ -235,13 +240,16 @@ onUnmounted(() => {
       </router-view>
     </main>
 
-    <div class="fixed bottom-0 inset-x-0 z-40">
+    <div v-if="isAuthenticated" class="fixed bottom-0 inset-x-0 z-40">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4">
         <SpotifyWebPlayer />
       </div>
     </div>
 
-    <footer class="bg-gray-900 border-t border-gray-800 mt-6 pb-24">
+    <footer
+      class="bg-gray-900 border-t border-gray-800 mt-6"
+      :class="{ 'pb-24': isAuthenticated }"
+    >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div class="flex flex-col md:flex-row items-center justify-between gap-4">
           <p class="text-sm text-gray-400">
