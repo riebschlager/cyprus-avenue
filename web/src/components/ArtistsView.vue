@@ -185,7 +185,7 @@ const toggleArtist = (index: number) => {
     </div>
 
     <!-- Active Tag Indicator -->
-    <div v-if="selectedTag" class="mt-6 bg-blue-900/40 border border-blue-500/30 rounded-lg p-4 flex items-center justify-between">
+    <div v-if="selectedTag" class="mt-6 bg-blue-900/40 border border-blue-500/30 rounded-lg p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
       <div class="flex items-center gap-3">
         <span class="text-2xl">🏷️</span>
         <div>
@@ -193,17 +193,17 @@ const toggleArtist = (index: number) => {
           <h2 class="text-xl font-bold text-white">{{ selectedTag }}</h2>
         </div>
       </div>
-      <div class="flex gap-2">
+      <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
         <button
           @click="showTagPlaylistModal = true"
-          class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-green-500/20 hover:bg-green-500/30 text-green-300 hover:text-green-200 transition-colors text-sm font-medium border border-green-500/20"
+          class="flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-green-500/20 hover:bg-green-500/30 text-green-300 hover:text-green-200 transition-colors text-sm font-medium border border-green-500/20 w-full sm:w-auto"
         >
           <span>🎧</span>
           Create {{ selectedTag }} Playlist on Spotify
         </button>
         <button
           @click="clearTag"
-          class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 hover:text-blue-200 transition-colors text-sm font-medium"
+          class="flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 hover:text-blue-200 transition-colors text-sm font-medium w-full sm:w-auto"
         >
           <span>✕</span>
           Clear Filter
