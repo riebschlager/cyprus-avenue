@@ -170,7 +170,7 @@ const toggleArtist = (index: number) => {
           </p>
         </div>
         <div class="bg-gray-900 rounded-lg p-6 border-l-4 border-blue-500">
-          <p class="text-sm text-gray-400 mb-2">Unique Songs</p>
+          <p class="text-sm text-gray-400 mb-2">Songs</p>
           <p class="text-4xl font-bold text-white">
             {{ filteredArtists.reduce((sum, a) => sum + a.uniqueSongs.length, 0).toLocaleString() }}
           </p>

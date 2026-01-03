@@ -216,7 +216,7 @@ watch(() => props.isExpanded, (newVal) => {
 
       <!-- Unique Songs Section -->
       <div class="mt-4">
-        <h4 class="text-sm font-semibold text-white mb-3">Unique Songs</h4>
+        <h4 class="text-sm font-semibold text-white mb-3">Songs</h4>
         <div class="space-y-2">
           <div
             v-for="(song, index) in artist.uniqueSongs"
