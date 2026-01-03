@@ -205,11 +205,11 @@ watch(() => props.isExpanded, (newVal) => {
             </div>
             
             <!-- Actions: Share & Stream -->
-            <div class="flex items-center gap-1 flex-shrink-0" :class="{ 'flex-col': compact }">
+            <div class="flex items-center gap-2 flex-shrink-0">
               <button
+                v-if="!compact"
                 @click.stop="copyTrackLink(track.song, index)"
-                class="text-gray-400 hover:text-white rounded hover:bg-gray-600 transition-colors relative"
-                :class="[compact ? 'p-1' : 'p-1.5']"
+                class="p-1.5 text-gray-400 hover:text-white rounded hover:bg-gray-600 transition-colors relative"
                 title="Copy link to track"
               >
                 <svg v-if="copiedTrackIndex === index" class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
