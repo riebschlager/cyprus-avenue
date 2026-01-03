@@ -137,12 +137,23 @@ const navigateToRandomArtist = () => {
 <template>
   <div class="space-y-12">
     <!-- Hero Section -->
-    <div class="text-center">
-      <h1 class="text-5xl font-bold text-white mb-4">Cyprus Avenue Archive</h1>
-      <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-        A digital archive of playlists from KCUR's legendary Cyprus Avenue radio show,
-        preserving nearly 8 years of musical cultural heritage curated by Bill Shapiro.
-      </p>
+    <div class="relative py-20 sm:py-28 overflow-hidden rounded-2xl">
+      <!-- Background Decorative Elements -->
+      <div class="absolute inset-0 bg-gradient-to-b from-blue-600/10 to-transparent pointer-events-none"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[120px] pointer-events-none"></div>
+      
+      <div class="relative z-10 text-center px-6">
+        <h1 class="text-5xl sm:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-gray-400 mb-8 tracking-tight">
+          Cyprus Avenue Archive
+        </h1>
+        <p class="text-xl sm:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-light">
+          A digital preservation of Bill Shapiro's legendary KCUR radio show, 
+          celebrating over 40 years of musical discovery and cultural heritage.
+        </p>
+        <div class="mt-10 flex justify-center gap-4">
+          <div class="h-1 w-20 bg-blue-500 rounded-full"></div>
+        </div>
+      </div>
     </div>
 
     <!-- Main Content Grid -->
