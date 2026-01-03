@@ -13,7 +13,7 @@ const props = defineProps<{
 }>()
 
 const router = useRouter()
-const { searchQuery, filteredArtists } = useArtists(props.playlists)
+const { searchQuery, selectedGenre, filteredArtists, availableGenres } = useArtists(props.playlists)
 const expandedArtistIndex = ref<number | null>(null)
 
 // Pagination
@@ -55,7 +55,7 @@ watch(() => props.autoExpandArtist, (artist) => {
 }, { immediate: true })
 
 // Reset to first page when search changes
-watch(searchQuery, () => {
+watch([searchQuery, selectedGenre], () => {
   currentPage.value = 1
 })
 
@@ -102,9 +102,24 @@ const toggleArtist = (index: number) => {
       </div>
     </div>
 
-    <!-- Search -->
-    <div class="mt-8">
-      <SearchBar v-model="searchQuery" placeholder="Search artists or songs..." />
+    <!-- Search & Filter -->
+    <div class="mt-8 flex flex-col sm:flex-row gap-4">
+      <div class="flex-1">
+        <SearchBar v-model="searchQuery" placeholder="Search artists or songs..." />
+      </div>
+      
+      <div class="sm:w-64">
+        <select
+          v-model="selectedGenre"
+          class="w-full bg-gray-800 border border-gray-700 text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none cursor-pointer"
+          style="background-image: url(&quot;data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e&quot;); background-position: right 0.5rem center; background-repeat: no-repeat; background-size: 1.5em 1.5em; padding-right: 2.5rem;"
+        >
+          <option value="">All Genres</option>
+          <option v-for="genre in availableGenres" :key="genre" :value="genre">
+            {{ genre.charAt(0).toUpperCase() + genre.slice(1) }}
+          </option>
+        </select>
+      </div>
     </div>
 
     <!-- Artists List -->

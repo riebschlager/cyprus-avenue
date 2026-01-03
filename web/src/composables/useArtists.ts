@@ -1,5 +1,6 @@
 import { computed, ref, toValue, type MaybeRefOrGetter } from 'vue'
 import type { Playlist } from '../types/playlist'
+import { useStreamingLinks } from './useStreamingLinks'
 
 export interface ArtistTrack {
   song: string
@@ -12,41 +13,55 @@ export interface Artist {
   tracks: ArtistTrack[]
   uniqueSongs: string[]
   playlistCount: number
+  genres: string[]
 }
 
 export function useArtists(playlists: MaybeRefOrGetter<Playlist[]>) {
   const searchQuery = ref('')
+  const selectedGenre = ref<string>('')
+  const { spotifyIndex } = useStreamingLinks()
 
   // Build artist map
   const artists = computed(() => {
-    const artistMap = new Map<string, ArtistTrack[]>()
+    const artistMap = new Map<string, { tracks: ArtistTrack[], genres: Set<string> }>()
     const playlistsValue = toValue(playlists)
+    const index = spotifyIndex.value // Access for reactivity
 
     playlistsValue.forEach(playlist => {
       playlist.tracks.forEach(track => {
         const artistName = track.artist
         if (!artistMap.has(artistName)) {
-          artistMap.set(artistName, [])
+          artistMap.set(artistName, { tracks: [], genres: new Set() })
         }
-        artistMap.get(artistName)!.push({
+        
+        const entry = artistMap.get(artistName)!
+        entry.tracks.push({
           song: track.song,
           playlistTitle: playlist.title,
           playlistDate: playlist.date
         })
+
+        // Collect genres from Spotify index
+        const key = `${track.artist}|${track.song}`
+        const trackData = index[key]
+        if (trackData && trackData.genres) {
+          trackData.genres.forEach(g => entry.genres.add(g))
+        }
       })
     })
 
     // Convert to Artist array
     const artistList: Artist[] = []
-    artistMap.forEach((tracks, name) => {
-      const uniqueSongs = [...new Set(tracks.map(t => t.song))]
-      const uniquePlaylists = new Set(tracks.map(t => `${t.playlistDate}|${t.playlistTitle}`))
+    artistMap.forEach((data, name) => {
+      const uniqueSongs = [...new Set(data.tracks.map(t => t.song))]
+      const uniquePlaylists = new Set(data.tracks.map(t => `${t.playlistDate}|${t.playlistTitle}`))
 
       artistList.push({
         name,
-        tracks,
+        tracks: data.tracks,
         uniqueSongs,
-        playlistCount: uniquePlaylists.size
+        playlistCount: uniquePlaylists.size,
+        genres: Array.from(data.genres).sort()
       })
     })
 
@@ -54,22 +69,41 @@ export function useArtists(playlists: MaybeRefOrGetter<Playlist[]>) {
     return artistList.sort((a, b) => a.name.localeCompare(b.name))
   })
 
-  // Filter artists by search query
+  // Get all available genres across all artists
+  const availableGenres = computed(() => {
+    const genreSet = new Set<string>()
+    artists.value.forEach(artist => {
+      artist.genres.forEach(genre => genreSet.add(genre))
+    })
+    return Array.from(genreSet).sort()
+  })
+
+  // Filter artists by search query and genre
   const filteredArtists = computed(() => {
-    if (!searchQuery.value) {
-      return artists.value
+    let result = artists.value
+
+    // Filter by genre
+    if (selectedGenre.value) {
+      result = result.filter(artist => artist.genres.includes(selectedGenre.value))
     }
 
-    const query = searchQuery.value.toLowerCase()
-    return artists.value.filter(artist => {
-      return artist.name.toLowerCase().includes(query) ||
-             artist.uniqueSongs.some(song => song.toLowerCase().includes(query))
-    })
+    // Filter by search query
+    if (searchQuery.value) {
+      const query = searchQuery.value.toLowerCase()
+      result = result.filter(artist => {
+        return artist.name.toLowerCase().includes(query) ||
+               artist.uniqueSongs.some(song => song.toLowerCase().includes(query))
+      })
+    }
+
+    return result
   })
 
   return {
     searchQuery,
+    selectedGenre,
     artists,
-    filteredArtists
+    filteredArtists,
+    availableGenres
   }
 }

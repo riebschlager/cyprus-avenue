@@ -13,6 +13,7 @@ export interface SpotifyTrackData {
   albumArt: string | null
   artistName: string
   trackName: string
+  genres?: string[]
   confidence: 'high' | 'medium' | 'low'
 }
 
