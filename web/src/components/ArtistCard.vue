@@ -191,10 +191,6 @@ watch(() => props.isExpanded, (newVal) => {
           <!-- Bio Text -->
           <div class="flex-1 min-w-0">
             <p class="text-sm text-gray-300 leading-relaxed lastfm-bio" v-html="artistBio.bioSummary"></p>
-            <div v-if="artistBio.listeners && artistBio.playcount" class="mt-3 flex gap-4 text-xs text-gray-400">
-              <span>{{ artistBio.listeners.toLocaleString() }} listeners</span>
-              <span>{{ artistBio.playcount.toLocaleString() }} plays</span>
-            </div>
           </div>
         </div>
       </div>
