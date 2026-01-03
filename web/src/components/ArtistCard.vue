@@ -120,7 +120,7 @@ watch(() => props.isExpanded, (newVal) => {
           class="w-full bg-green-500/20 hover:bg-green-500/30 text-green-300 border border-green-500/50 font-semibold py-2 px-4 rounded-lg text-sm transition-colors flex items-center justify-center gap-2"
         >
           <span>🎧</span>
-          Create Artist Playlist on Spotify
+          Create {{ artist.name }} Playlist on Spotify
         </button>
       </div>
 
