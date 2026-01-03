@@ -30,8 +30,7 @@ const trackTitle = computed(() => {
 })
 
 const albumArt = computed(() => {
-  if (!currentTrack.value?.album?.images?.length) return null
-  return currentTrack.value.album.images[0].url
+  return currentTrack.value?.album?.images?.[0]?.url ?? null
 })
 </script>
 
