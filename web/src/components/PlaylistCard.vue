@@ -5,7 +5,7 @@ import type { Playlist } from '../types/playlist'
 import StreamingLinks from './StreamingLinks.vue'
 import SpotifyPlaylistModal from './SpotifyPlaylistModal.vue'
 import { useStreamingLinks } from '../composables/useStreamingLinks'
-import { generatePlaylistSlug } from '../utils/slug'
+import { generateArtistSlug, generatePlaylistSlug } from '../utils/slug'
 
 const props = defineProps<{
   playlist: Playlist
@@ -231,7 +231,13 @@ watch(() => props.isExpanded, (newVal) => {
 
             <div class="flex-1 min-w-0">
               <p class="font-medium text-white break-words leading-tight" :class="[compact ? 'text-xs' : 'text-xs sm:text-sm']">{{ track.song }}</p>
-              <p class="text-gray-400 leading-tight mt-0.5" :class="[compact ? 'text-[10px]' : 'text-[10px] sm:text-xs']">{{ track.artist }}</p>
+              <router-link
+                :to="`/artist/${generateArtistSlug(track.artist)}`"
+                class="text-gray-400 leading-tight mt-0.5 inline-block hover:text-blue-300 transition-colors"
+                :class="[compact ? 'text-[10px]' : 'text-[10px] sm:text-xs']"
+              >
+                {{ track.artist }}
+              </router-link>
             </div>
             
             <!-- Actions: Share & Stream -->
