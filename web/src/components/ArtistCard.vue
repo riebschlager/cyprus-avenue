@@ -139,23 +139,45 @@ watch(() => props.isExpanded, (newVal) => {
     </button>
 
     <div v-if="isExpanded" class="px-6 pb-4 border-t border-gray-700">
+      <!-- Actions Section (Only shown if NO bio, otherwise it's in the bio header) -->
+      <div v-if="!artistBio || !artistBio.bioSummary" class="mt-4 pb-4 border-b border-gray-700 flex justify-end">
+        <button
+          @click="showSpotifyModal = true"
+          class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-green-500/10 hover:bg-green-500/20 text-green-400 border border-green-500/20 text-xs font-medium transition-colors"
+        >
+          <span>🎧</span>
+          Create {{ artist.name }} Playlist on Spotify
+        </button>
+      </div>
+
       <!-- Artist Bio Section -->
       <div v-if="artistBio && artistBio.bioSummary" class="mt-4 pb-4 border-b border-gray-700">
-        <h4 class="text-sm font-semibold text-white mb-3 flex items-center gap-2">
-          <span>About</span>
-          <a
-            v-if="artistBio.url"
-            :href="artistBio.url"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-xs text-gray-400 hover:text-blue-400 transition-colors"
-            title="View on Last.fm"
+        <div class="flex items-center justify-between mb-3 gap-4">
+          <h4 class="text-sm font-semibold text-white flex items-center gap-2">
+            <span>About</span>
+            <a
+              v-if="artistBio.url"
+              :href="artistBio.url"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-xs text-gray-400 hover:text-blue-400 transition-colors"
+              title="View on Last.fm"
+            >
+              <svg class="w-3.5 h-3.5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          </h4>
+          
+          <button
+            @click="showSpotifyModal = true"
+            class="inline-flex items-center gap-2 px-2.5 py-1 rounded-lg bg-green-500/10 hover:bg-green-500/20 text-green-400 border border-green-500/20 text-[10px] font-bold uppercase tracking-wider transition-colors"
           >
-            <svg class="w-3.5 h-3.5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-            </svg>
-          </a>
-        </h4>
+            <span>🎧</span>
+            Create {{ artist.name }} Playlist on Spotify
+          </button>
+        </div>
+        
         <div class="flex gap-4">
           <!-- Artist Image -->
           <div v-if="artistBio.image" class="flex-shrink-0">
@@ -175,17 +197,6 @@ watch(() => props.isExpanded, (newVal) => {
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- Actions Section -->
-      <div class="mt-4 pb-4 border-b border-gray-700 flex justify-end">
-        <button
-          @click="showSpotifyModal = true"
-          class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-green-500/10 hover:bg-green-500/20 text-green-400 border border-green-500/20 text-xs font-medium transition-colors"
-        >
-          <span>🎧</span>
-          Create {{ artist.name }} Playlist on Spotify
-        </button>
       </div>
 
 
