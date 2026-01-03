@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watch, computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { useArtists, type Artist } from '../composables/useArtists'
 import type { Playlist } from '../types/playlist'
 import ArtistCard from './ArtistCard.vue'
@@ -13,6 +13,7 @@ const props = defineProps<{
 }>()
 
 const router = useRouter()
+const route = useRoute()
 const { searchQuery, selectedGenre, filteredArtists, availableGenres } = useArtists(props.playlists)
 const expandedArtistIndex = ref<number | null>(null)
 
@@ -54,14 +55,37 @@ watch(() => props.autoExpandArtist, (artist) => {
   }
 }, { immediate: true })
 
+// Sync URL query to selectedGenre
+watch(() => route.query.genre, (genre) => {
+  if (typeof genre === 'string') {
+    selectedGenre.value = genre
+    document.title = `${genre.charAt(0).toUpperCase() + genre.slice(1)} Artists - Cyprus Avenue Archive`
+  } else {
+    selectedGenre.value = ''
+    if (!props.autoExpandArtist) {
+      document.title = 'Artists - Cyprus Avenue Archive'
+    }
+  }
+}, { immediate: true })
+
 // Reset to first page when search changes
 watch([searchQuery, selectedGenre], () => {
   currentPage.value = 1
 })
 
 const handleGenreSelect = (genre: string) => {
-  selectedGenre.value = genre
+  // Collapse currently expanded artist
+  expandedArtistIndex.value = null
+  
+  // Update URL to reflect genre state
+  router.push({ query: { ...route.query, genre } })
   window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
+const clearGenre = () => {
+  const query = { ...route.query }
+  delete query.genre
+  router.push({ query })
 }
 
 const toggleArtist = (index: number) => {
@@ -71,13 +95,13 @@ const toggleArtist = (index: number) => {
   // Update URL without triggering scroll behavior
   if (wasExpanded) {
     // Collapsed - go back to artists view
-    router.replace('/artists')
+    router.replace({ path: '/artists', query: route.query })
   } else {
     // Expanded - navigate to artist permalink
     const artist = filteredArtists.value[index]
     if (artist) {
       const slug = generateArtistSlug(artist.name)
-      router.replace(`/artist/${slug}`)
+      router.replace({ path: `/artist/${slug}`, query: route.query })
     }
   }
 }
@@ -115,7 +139,8 @@ const toggleArtist = (index: number) => {
       
       <div class="sm:w-64">
         <select
-          v-model="selectedGenre"
+          :value="selectedGenre"
+          @change="(e) => handleGenreSelect((e.target as HTMLSelectElement).value)"
           class="w-full bg-gray-800 border border-gray-700 text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none cursor-pointer"
           style="background-image: url(&quot;data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e&quot;); background-position: right 0.5rem center; background-repeat: no-repeat; background-size: 1.5em 1.5em; padding-right: 2.5rem;"
         >
@@ -125,6 +150,24 @@ const toggleArtist = (index: number) => {
           </option>
         </select>
       </div>
+    </div>
+
+    <!-- Active Genre Indicator -->
+    <div v-if="selectedGenre" class="mt-6 bg-blue-900/40 border border-blue-500/30 rounded-lg p-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span class="text-2xl">🏷️</span>
+        <div>
+          <p class="text-blue-200 text-sm font-medium uppercase tracking-wider">Viewing Genre</p>
+          <h2 class="text-xl font-bold text-white">{{ selectedGenre.charAt(0).toUpperCase() + selectedGenre.slice(1) }}</h2>
+        </div>
+      </div>
+      <button 
+        @click="clearGenre"
+        class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 hover:text-blue-200 transition-colors text-sm font-medium"
+      >
+        <span>✕</span>
+        Clear Filter
+      </button>
     </div>
 
     <!-- Artists List -->
