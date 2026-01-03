@@ -301,7 +301,7 @@ watch(() => props.isExpanded, (newVal) => {
   height: 0.75rem;
   margin-left: 0.25rem;
   background-color: currentColor;
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14' /%3E%3C/svg%3E");
+  mask-image: url('@/assets/external-link.svg');
   mask-size: contain;
   mask-repeat: no-repeat;
   vertical-align: middle;

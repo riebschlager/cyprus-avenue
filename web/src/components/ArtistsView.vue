@@ -188,8 +188,7 @@ const toggleArtist = (index: number) => {
         <select
           :value="selectedTag"
           @change="(e) => handleTagSelect((e.target as HTMLSelectElement).value)"
-          class="w-full bg-gray-800 border border-gray-700 text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none cursor-pointer"
-          style="background-image: url(&quot;data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e&quot;); background-position: right 0.5rem center; background-repeat: no-repeat; background-size: 1.5em 1.5em; padding-right: 2.5rem;"
+          class="w-full bg-gray-800 border border-gray-700 text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none cursor-pointer select-chevron"
         >
           <option value="">All Tags</option>
           <option v-for="tag in availableTags" :key="tag" :value="tag">
@@ -301,3 +300,13 @@ const toggleArtist = (index: number) => {
     />
   </div>
 </template>
+
+<style scoped>
+.select-chevron {
+  background-image: url('@/assets/chevron-down.svg');
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+}
+</style>
