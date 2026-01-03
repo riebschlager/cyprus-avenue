@@ -42,7 +42,7 @@ onMounted(() => {
 })
 
 // Pagination
-const itemsPerPage = 50
+const itemsPerPage = 20
 const currentPage = ref(1)
 
 const totalArtists = computed(() => filteredArtists.value.length)

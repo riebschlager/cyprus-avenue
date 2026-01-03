@@ -12,7 +12,7 @@ const props = defineProps<{
 const { searchQuery, sortField, sortDirection, sortedTracks, setSortField } = useTracks(props.playlists)
 
 // Pagination
-const itemsPerPage = 50
+const itemsPerPage = 20
 const currentPage = ref(1)
 
 const totalTracks = computed(() => sortedTracks.value.length)

@@ -15,7 +15,7 @@ const router = useRouter()
 const expandedPlaylist = ref<string | null>(null)
 
 // Pagination
-const itemsPerPage = 50
+const itemsPerPage = 20
 const currentPage = ref(1)
 
 const totalPlaylists = computed(() => props.playlists.length)
