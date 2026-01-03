@@ -179,7 +179,7 @@ watch(() => props.isExpanded, (newVal) => {
           </div>
           <!-- Bio Text -->
           <div class="flex-1 min-w-0">
-            <p class="text-sm text-gray-300 leading-relaxed" v-html="artistBio.bioSummary"></p>
+            <p class="text-sm text-gray-300 leading-relaxed lastfm-bio" v-html="artistBio.bioSummary"></p>
             <div v-if="artistBio.listeners && artistBio.playcount" class="mt-3 flex gap-4 text-xs text-gray-400">
               <span>{{ artistBio.listeners.toLocaleString() }} listeners</span>
               <span>{{ artistBio.playcount.toLocaleString() }} plays</span>
@@ -276,3 +276,35 @@ watch(() => props.isExpanded, (newVal) => {
     />
   </div>
 </template>
+
+<style scoped>
+/* Style the Last.fm "Read more" link that comes in the v-html */
+:deep(.lastfm-bio a) {
+  color: #60a5fa; /* blue-400 */
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: 500;
+  transition: color 0.2s;
+  display: inline-flex;
+  items-center: center;
+  gap: 0.25rem;
+}
+
+:deep(.lastfm-bio a:hover) {
+  color: #93c5fd; /* blue-300 */
+}
+
+/* Add an external link icon after the link */
+:deep(.lastfm-bio a::after) {
+  content: "";
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.75rem;
+  margin-left: 0.25rem;
+  background-color: currentColor;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14' /%3E%3C/svg%3E");
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  vertical-align: middle;
+}
+</style>

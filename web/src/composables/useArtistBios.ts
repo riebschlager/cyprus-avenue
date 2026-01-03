@@ -80,8 +80,8 @@ export function useArtistBios() {
    */
   const getStats = () => {
     const artists = Object.keys(biosIndex.value)
-    const withImages = artists.filter(name => biosIndex.value[name].image).length
-    const withTags = artists.filter(name => biosIndex.value[name].tags.length > 0).length
+    const withImages = artists.filter(name => biosIndex.value[name]?.image).length
+    const withTags = artists.filter(name => (biosIndex.value[name]?.tags?.length ?? 0) > 0).length
 
     return {
       totalArtists: artists.length,
