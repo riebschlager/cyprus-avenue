@@ -61,13 +61,30 @@ async function fetchArtistBio(artistName) {
       return text.replace(/<a href="https:\/\/www\.last\.fm\/music\/[^"]+">Read more on Last\.fm<\/a>\.\s*/gi, '').trim()
     }
 
+    // Robust image selection
+    const getBestImage = (images) => {
+      if (!images || !Array.isArray(images) || images.length === 0) return ''
+      
+      // Preferred order: large formats first
+      const sizes = ['extralarge', 'large', 'mega', 'medium', 'small']
+      for (const size of sizes) {
+        const found = images.find(img => img.size === size && img['#text'])
+        if (found) return found['#text']
+      }
+      
+      // Fallback: first one with content
+      const any = images.find(img => img['#text'])
+      return any ? any['#text'] : ''
+    }
+
+    const imageUrl = getBestImage(artist.image)
+
     return {
       bio: cleanBio(artist.bio?.content || ''),
       bioSummary: cleanBio(artist.bio?.summary || ''),
       tags: artist.tags?.tag?.map(t => t.name).slice(0, 10) || [], // Limit to top 10 tags
       url: artist.url || '',
-      image: artist.image?.find(img => img.size === 'extralarge')?.[  '#text'] ||
-             artist.image?.find(img => img.size === 'large')?.['#text'] || '',
+      image: imageUrl,
       listeners: parseInt(artist.stats?.listeners || 0),
       playcount: parseInt(artist.stats?.playcount || 0)
     }
@@ -108,7 +125,8 @@ async function main() {
 
       // Show progress with bio snippet
       const snippet = bio.bioSummary.substring(0, 60).replace(/\n/g, ' ')
-      console.log(`  ✓ ${artist}`)
+      const imageStatus = bio.image ? '🖼️' : '👤 (no image)'
+      console.log(`  ✓ ${artist} ${imageStatus}`)
       if (snippet) {
         console.log(`    "${snippet}..."`)
       }
