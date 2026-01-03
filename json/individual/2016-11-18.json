@@ -5,35 +5,23 @@
   "tracks": [
     {
       "artist": "Alicia Keys",
-      "song": "In The Beginning"
-    },
-    {
-      "artist": "Alicia Keys",
       "song": "Blended Family"
-    },
-    {
-      "artist": "Alicia Keys",
-      "song": "Work On It"
     },
     {
       "artist": "Alicia Keys",
       "song": "Holy War"
     },
     {
-      "artist": "St Paul & The Broken Bones",
-      "song": "I’m Your Man"
+      "artist": "Alicia Keys",
+      "song": "In The Beginning"
     },
     {
-      "artist": "St Paul & The Broken Bones",
-      "song": "I’ll Be Your Woman"
+      "artist": "Alicia Keys",
+      "song": "Work On It"
     },
     {
-      "artist": "St Paul & The Broken Bones",
-      "song": "All I Ever Wonder"
-    },
-    {
-      "artist": "St Paul & The Broken Bones",
-      "song": "Is It Me"
+      "artist": "Leon Russell",
+      "song": "A Song For You"
     },
     {
       "artist": "Leon Russell",
@@ -41,21 +29,33 @@
     },
     {
       "artist": "Leon Russell",
-      "song": "Jammin’ With Eric                                                    4:14"
+      "song": "Hummingbird"
     },
     {
       "artist": "Leon Russell",
-      "song": "Hummingbird"
+      "song": "Jammin’ With Eric"
     },
     {
       "artist": "Leon Russell",
       "song": "Rolling Away The Stone"
     },
     {
-      "artist": "Leon Russell",
-      "song": "A Song For You"
+      "artist": "St Paul & The Broken Bones",
+      "song": "All I Ever Wonder"
+    },
+    {
+      "artist": "St Paul & The Broken Bones",
+      "song": "I’ll Be Your Woman"
+    },
+    {
+      "artist": "St Paul & The Broken Bones",
+      "song": "I’m Your Man"
+    },
+    {
+      "artist": "St Paul & The Broken Bones",
+      "song": "Is It Me"
     }
   ],
   "source_url": "https://www.kcur.org/tags/cyprus-avenue",
-  "archived_date": "2026-01-01"
+  "archived_date": "2026-01-03"
 }
