@@ -9,6 +9,8 @@ export const TAG_BLACKLIST = new Set([
   'All',
   'Audiobooks',
   'Audiobook',
+  'Books',
+  'Book',
   'Unknown',
   'Various Artists',
   'Favorite',
@@ -22,7 +24,10 @@ export const TAG_BLACKLIST = new Set([
   'Checked Out',
   'Top',
   'User',
-  'Check'
+  'Check',
+  'Spotify',
+  'Discover',
+  'Archive'
 ])
 
 /**
@@ -30,6 +35,7 @@ export const TAG_BLACKLIST = new Set([
  * Format: 'Source Tag': 'Canonical Tag'
  */
 export const TAG_MAPPINGS: Record<string, string> = {
+  'Acapella': 'A Cappella',
   'RnB': 'R&B',
   'Rhythm and Blues': 'R&B',
   'Hip Hop': 'Hip-Hop',
@@ -42,7 +48,10 @@ export const TAG_MAPPINGS: Record<string, string> = {
   'Alt-Country': 'Alternative Country',
   'Rock N Roll': 'Rock & Roll',
   'Rock and Roll': 'Rock & Roll',
-  'Soul Music': 'Soul'
+  'Soul Music': 'Soul',
+  'Americana Music': 'Americana',
+  'Jazz Music': 'Jazz',
+  'Classical Music': 'Classical'
 }
 
 /**
