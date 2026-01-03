@@ -68,10 +68,28 @@ The generated `artist-bios.json` file has this structure:
 
 For each artist:
 - ✅ Biography (full and summary versions)
-- ✅ Artist image (extralarge/large size)
+- ⚠️ Artist image (extralarge/large size) - **Currently unavailable due to Last.fm API limitation**
 - ✅ Genre tags (top 10)
 - ✅ Last.fm URL
 - ✅ Listener and playcount statistics
+
+### Note on Artist Images
+
+As of January 2025, Last.fm's free API tier no longer provides actual artist images. All artists return the same placeholder image hash (`2a96cbd8b46e442fc41c2b86b821562f`). The script now filters out these placeholder images and stores empty strings instead.
+
+**Solution**: Use the Spotify enrichment script to add artist images:
+
+```bash
+node scripts/spotify/enrich-artist-images.js
+```
+
+This script:
+- Fetches high-quality artist images from Spotify
+- Only updates artists without existing images
+- Achieves ~100% coverage (276/277 artists in our archive)
+- Adds bonus data: Spotify ID, URL, popularity, and follower counts
+
+See [../spotify/README.md](../spotify/README.md#enriching-artist-images) for details.
 
 ## Troubleshooting
 

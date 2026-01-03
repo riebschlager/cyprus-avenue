@@ -287,6 +287,73 @@ This means you can safely:
 - Run the main indexer later when you add new playlists
 - Your manual work won't be lost!
 
+## Enriching Artist Images
+
+Since Last.fm's free API no longer provides artist images (as of January 2025), we use Spotify to fetch high-quality artist images.
+
+### Usage
+
+```bash
+# From the project root directory
+node scripts/spotify/enrich-artist-images.js
+```
+
+### What It Does
+
+1. **Reads** `web/public/artist-bios.json` created by the Last.fm script
+2. **Skips** artists that already have images
+3. **Searches** Spotify for each artist
+4. **Fetches** the largest available artist image
+5. **Enriches** the bio data with:
+   - High-resolution artist image URL
+   - Spotify artist ID
+   - Spotify artist URL
+   - Popularity score (0-100)
+   - Follower count
+
+### Results
+
+For the Cyprus Avenue archive:
+- **276/277 artists** have images (99.6% coverage)
+- Only 1 obscure gospel artist not found on Spotify
+- Images are high quality (typically 640x640 or larger)
+
+### Output Format
+
+The enriched `artist-bios.json` includes both Last.fm and Spotify data:
+
+```json
+{
+  "Bob Dylan": {
+    "bio": "Full biography from Last.fm...",
+    "bioSummary": "Short summary...",
+    "tags": ["folk", "singer-songwriter", "rock"],
+    "url": "https://www.last.fm/music/Bob+Dylan",
+    "image": "https://i.scdn.co/image/...",
+    "listeners": 4210627,
+    "playcount": 286857662,
+    "spotifyId": "74ASZWbe4lXaubB36ztrGX",
+    "spotifyUrl": "https://open.spotify.com/artist/74ASZWbe4lXaubB36ztrGX",
+    "popularity": 82,
+    "followers": 6428197
+  }
+}
+```
+
+### Re-running
+
+The script is **idempotent** - you can run it multiple times safely:
+- Artists with images are skipped
+- Only missing images are fetched
+- Perfect for updating after adding new artists
+
+### Rate Limiting
+
+- Spotify allows ~10 requests/second for free tier
+- Script includes 100ms delay between requests
+- Automatic retry handling for rate limit errors
+- Token auto-refresh every 58 minutes
+
 ## Notes
 
 - The Spotify API has a rate limit of 100 requests per 30 seconds

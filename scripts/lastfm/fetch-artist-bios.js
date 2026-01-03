@@ -110,16 +110,29 @@ async function fetchArtistBio(artistName) {
     // Robust image selection
     const getBestImage = (images) => {
       if (!images || !Array.isArray(images) || images.length === 0) return ''
-      
+
+      // Last.fm placeholder image hash (their default "no image" placeholder)
+      const LASTFM_PLACEHOLDER_HASH = '2a96cbd8b46e442fc41c2b86b821562f'
+
       // Preferred order: large formats first
       const sizes = ['extralarge', 'large', 'mega', 'medium', 'small']
       for (const size of sizes) {
         const found = images.find(img => img.size === size && img['#text'])
-        if (found) return found['#text']
+        if (found) {
+          const url = found['#text']
+          // Reject Last.fm placeholder images
+          if (url.includes(LASTFM_PLACEHOLDER_HASH)) {
+            return ''
+          }
+          return url
+        }
       }
-      
-      // Fallback: first one with content
-      const any = images.find(img => img['#text'])
+
+      // Fallback: first one with content (but not placeholder)
+      const any = images.find(img => {
+        const url = img['#text']
+        return url && !url.includes(LASTFM_PLACEHOLDER_HASH)
+      })
       return any ? any['#text'] : ''
     }
 
@@ -171,7 +184,7 @@ async function main() {
 
       // Show progress with bio snippet
       const snippet = bio.bioSummary.substring(0, 60).replace(/\n/g, ' ')
-      const imageStatus = bio.image ? '🖼️' : '👤 (no image)'
+      const imageStatus = bio.image ? '🖼️' : '⚠️ (no image - Last.fm API limitation)'
       console.log(`  ✓ ${artist} ${imageStatus}`)
       if (snippet) {
         console.log(`    "${snippet}..."`)
