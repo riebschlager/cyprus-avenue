@@ -1,6 +1,7 @@
 import { computed, ref, toValue, type MaybeRefOrGetter } from 'vue'
 import type { Playlist } from '../types/playlist'
 import { useArtistBios } from './useArtistBios'
+import { normalizeAndFilterTag } from '../utils/tagFilters'
 
 export interface ArtistTrack {
   song: string
@@ -52,12 +53,15 @@ export function useArtists(playlists: MaybeRefOrGetter<Playlist[]>) {
       const bio = biosIndex.value[name]
       const rawTags = bio?.tags || bio?.lastfmTags || []
       
-      // Normalize tags to Title Case
-      const tags = rawTags.map(tag => 
-        tag.split(' ')
-          .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-          .join(' ')
-      )
+      // Normalize and filter tags
+      const tagSet = new Set<string>()
+      rawTags.forEach(rawTag => {
+        const normalized = normalizeAndFilterTag(rawTag)
+        if (normalized) {
+          tagSet.add(normalized)
+        }
+      })
+      const tags = Array.from(tagSet).sort()
 
       artistList.push({
         name,
@@ -76,14 +80,7 @@ export function useArtists(playlists: MaybeRefOrGetter<Playlist[]>) {
   const availableTags = computed(() => {
     const tagSet = new Set<string>()
     artists.value.forEach(artist => {
-      artist.tags.forEach(tag => {
-        // Convert to Title Case
-        const titleCasedTag = tag
-          .split(' ')
-          .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-          .join(' ')
-        tagSet.add(titleCasedTag)
-      })
+      artist.tags.forEach(tag => tagSet.add(tag))
     })
     return Array.from(tagSet).sort((a, b) => a.localeCompare(b))
   })

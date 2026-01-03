@@ -6,6 +6,7 @@ import { useStreamingLinks } from './useStreamingLinks'
 import { useArtistBios } from './useArtistBios'
 import { SpotifyApiClient } from '../utils/spotifyApi'
 import { TrackMatcher, deduplicateTracks } from '../utils/trackMatching'
+import { normalizeAndFilterTag } from '../utils/tagFilters'
 import { PLAYLIST_NAME_INDIVIDUAL, PLAYLIST_NAME_ALL_TRACKS, PLAYLIST_NAME_TAG, PLAYLIST_NAME_ARTIST } from '../utils/spotifyConstants'
 
 const creationState = ref<'idle' | 'creating' | 'completed' | 'error'>('idle')
@@ -207,9 +208,12 @@ export function useSpotifyPlaylistCreation() {
       // Collect all tracks for this tag by checking artist bios
       const tagTracks = playlists.flatMap(p => p.tracks).filter(track => {
         const artistBio = biosIndex.value[track.artist]
-        // Check consolidated tags first, fall back to lastfmTags
-        const artistTags = artistBio?.tags || artistBio?.lastfmTags || []
-        return artistTags.includes(tag)
+        // Get raw tags
+        const rawTags = artistBio?.tags || artistBio?.lastfmTags || []
+        // Normalize them all
+        const normalizedTags = rawTags.map(t => normalizeAndFilterTag(t)).filter(Boolean)
+        // Check for match
+        return normalizedTags.includes(tag)
       })
 
       const uniqueTracks = deduplicateTracks(tagTracks)
