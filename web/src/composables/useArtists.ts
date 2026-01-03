@@ -17,8 +17,11 @@ export interface Artist {
   tags: string[]
 }
 
+export type ArtistSearchFilter = 'artist' | 'song'
+
 export function useArtists(playlists: MaybeRefOrGetter<Playlist[]>) {
   const searchQuery = ref('')
+  const searchFilters = ref<ArtistSearchFilter[]>(['artist'])
   const selectedTag = ref<string>('')
   const { biosIndex } = useArtistBios()
 
@@ -98,8 +101,11 @@ export function useArtists(playlists: MaybeRefOrGetter<Playlist[]>) {
     if (searchQuery.value) {
       const query = searchQuery.value.toLowerCase()
       result = result.filter(artist => {
-        return artist.name.toLowerCase().includes(query) ||
-               artist.uniqueSongs.some(song => song.toLowerCase().includes(query))
+        const matchesArtist = searchFilters.value.includes('artist') &&
+          artist.name.toLowerCase().includes(query)
+        const matchesSong = searchFilters.value.includes('song') &&
+          artist.uniqueSongs.some(song => song.toLowerCase().includes(query))
+        return matchesArtist || matchesSong
       })
     }
 
@@ -108,6 +114,7 @@ export function useArtists(playlists: MaybeRefOrGetter<Playlist[]>) {
 
   return {
     searchQuery,
+    searchFilters,
     selectedTag,
     artists,
     filteredArtists,

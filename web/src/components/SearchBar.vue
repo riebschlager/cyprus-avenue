@@ -1,26 +1,53 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { usePlaylists, type SearchFilter } from '../composables/usePlaylists'
 
-defineProps<{
+const props = defineProps<{
   modelValue: string
+  filters?: SearchFilter[]
+  filterOptions?: Array<{ id: SearchFilter; label: string }>
+  placeholder?: string
 }>()
 
 const emit = defineEmits<{
   'update:modelValue': [value: string]
+  'update:filters': [value: SearchFilter[]]
 }>()
 
-const { toggleSearchFilter, isFilterActive } = usePlaylists()
+const { toggleSearchFilter, searchFilters } = usePlaylists()
 
 const handleInput = (event: Event) => {
   const target = event.target as HTMLInputElement
   emit('update:modelValue', target.value)
 }
 
-const filters: Array<{ id: SearchFilter; label: string }> = [
+const defaultFilterOptions: Array<{ id: SearchFilter; label: string }> = [
   { id: 'playlist', label: 'Playlists' },
   { id: 'artist', label: 'Artists' },
   { id: 'song', label: 'Songs' }
 ]
+
+const resolvedFilters = computed(() => props.filters ?? searchFilters.value)
+const resolvedOptions = computed(() => props.filterOptions ?? defaultFilterOptions)
+const resolvedPlaceholder = computed(() => props.placeholder ?? 'Search playlists, artists, or songs...')
+
+const toggleFilter = (filter: SearchFilter) => {
+  if (props.filters) {
+    const isActive = resolvedFilters.value.includes(filter)
+    const nextFilters = isActive
+      ? resolvedFilters.value.filter(active => active !== filter)
+      : [...resolvedFilters.value, filter]
+    if (nextFilters.length === 0) return
+    emit('update:filters', nextFilters)
+    return
+  }
+
+  toggleSearchFilter(filter)
+}
+
+const isFilterActive = (filter: SearchFilter) => {
+  return resolvedFilters.value.includes(filter)
+}
 </script>
 
 <template>
@@ -38,7 +65,7 @@ const filters: Array<{ id: SearchFilter; label: string }> = [
           :value="modelValue"
           @input="handleInput"
           class="block w-full pl-10 pr-3 py-3 border border-gray-700 rounded-lg leading-5 bg-gray-900 text-white placeholder-gray-400 focus:outline-none focus:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-          placeholder="Search playlists, artists, or songs..."
+          :placeholder="resolvedPlaceholder"
         />
       </div>
 
@@ -46,9 +73,9 @@ const filters: Array<{ id: SearchFilter; label: string }> = [
       <div class="flex items-center gap-2 justify-end">
         <div class="flex flex-wrap gap-2">
           <button
-            v-for="filter in filters"
+            v-for="filter in resolvedOptions"
             :key="filter.id"
-            @click="toggleSearchFilter(filter.id)"
+            @click="toggleFilter(filter.id)"
             :class="[
               'px-3 py-2 rounded text-sm font-medium transition-colors flex-1 sm:flex-none flex items-center gap-2',
               isFilterActive(filter.id)

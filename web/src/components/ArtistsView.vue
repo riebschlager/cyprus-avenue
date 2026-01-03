@@ -15,7 +15,7 @@ const props = defineProps<{
 
 const router = useRouter()
 const route = useRoute()
-const { searchQuery, selectedTag, filteredArtists, availableTags } = useArtists(props.playlists)
+const { searchQuery, searchFilters, selectedTag, filteredArtists, availableTags } = useArtists(props.playlists)
 const expandedArtistIndex = ref<number | null>(null)
 const showTagPlaylistModal = ref(false)
 const bannerRef = ref<HTMLElement | null>(null)
@@ -175,7 +175,15 @@ const toggleArtist = (index: number) => {
     <!-- Search & Filter -->
     <div class="mt-8 flex flex-col sm:flex-row gap-4">
       <div class="flex-1">
-        <SearchBar v-model="searchQuery" placeholder="Search artists or songs..." />
+        <SearchBar
+          v-model="searchQuery"
+          v-model:filters="searchFilters"
+          :filter-options="[
+            { id: 'artist', label: 'Artists' },
+            { id: 'song', label: 'Songs' }
+          ]"
+          placeholder="Search artists or songs..."
+        />
       </div>
       
       <div class="sm:w-64">
