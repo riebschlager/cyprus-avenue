@@ -7,6 +7,7 @@
  */
 export const TAG_BLACKLIST = new Set([
   'All',
+  'Funk_add_to_lidarr_batch_4',
   'Audiobooks',
   'Audiobook',
   'Books',
@@ -36,6 +37,8 @@ export const TAG_BLACKLIST = new Set([
  */
 export const TAG_MAPPINGS: Record<string, string> = {
   'Acapella': 'A Cappella',
+  'Acousic': 'Acoustic',
+  'Female Vocalists': 'Female Vocalist',
   'RnB': 'R&B',
   'Rhythm and Blues': 'R&B',
   'Hip Hop': 'Hip-Hop',
