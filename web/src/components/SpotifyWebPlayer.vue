@@ -35,7 +35,7 @@ const albumArt = computed(() => {
 </script>
 
 <template>
-  <div class="bg-gray-900/70 border border-gray-800 rounded-lg px-4 py-3">
+  <div class="bg-gray-900 border border-gray-800 rounded-lg px-4 py-3">
     <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
       <div class="flex items-center gap-3 min-w-0">
         <div class="w-10 h-10 rounded bg-gray-800 flex items-center justify-center overflow-hidden text-xs font-semibold text-gray-400">

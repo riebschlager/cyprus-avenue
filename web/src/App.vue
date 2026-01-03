@@ -227,7 +227,7 @@ onUnmounted(() => {
       </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 min-h-[60vh]">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 min-h-[60vh] pb-24">
       <router-view v-slot="{ Component }">
         <transition name="fade" mode="out-in">
           <component :is="Component" />
@@ -235,11 +235,13 @@ onUnmounted(() => {
       </router-view>
     </main>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
-      <SpotifyWebPlayer />
+    <div class="fixed bottom-0 inset-x-0 z-40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4">
+        <SpotifyWebPlayer />
+      </div>
     </div>
 
-    <footer class="bg-gray-900 border-t border-gray-800 mt-6">
+    <footer class="bg-gray-900 border-t border-gray-800 mt-6 pb-24">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div class="flex flex-col md:flex-row items-center justify-between gap-4">
           <p class="text-sm text-gray-400">
