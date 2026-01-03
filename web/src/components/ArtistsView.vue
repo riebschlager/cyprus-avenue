@@ -158,19 +158,13 @@ const toggleArtist = (index: number) => {
   <div>
     <!-- Stats -->
     <div class="bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-700">
-      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
         <div class="bg-gray-900 rounded-lg p-6 border-l-4 border-purple-500">
           <p class="text-sm text-gray-400 mb-2">Total Artists</p>
           <p class="text-4xl font-bold text-white">{{ filteredArtists.length }}</p>
         </div>
-        <div class="bg-gray-900 rounded-lg p-6 border-l-4 border-green-500">
-          <p class="text-sm text-gray-400 mb-2">Total Tracks</p>
-          <p class="text-4xl font-bold text-white">
-            {{ filteredArtists.reduce((sum, a) => sum + a.tracks.length, 0).toLocaleString() }}
-          </p>
-        </div>
         <div class="bg-gray-900 rounded-lg p-6 border-l-4 border-blue-500">
-          <p class="text-sm text-gray-400 mb-2">Unique Songs</p>
+          <p class="text-sm text-gray-400 mb-2">Total Songs</p>
           <p class="text-4xl font-bold text-white">
             {{ filteredArtists.reduce((sum, a) => sum + a.uniqueSongs.length, 0).toLocaleString() }}
           </p>
