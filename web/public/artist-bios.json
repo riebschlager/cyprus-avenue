@@ -7,7 +7,9 @@
       "blues",
       "funk",
       "New Orleans",
-      "rhythm and blues"
+      "rhythm and blues",
+      "classic soul",
+      "country blues"
     ],
     "url": "https://www.last.fm/music/Aaron+Neville",
     "image": "https://i.scdn.co/image/ab6761610000e5ebcfb3d4b01d0ddfd6dc94d251",
@@ -31,6 +33,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 2,
       "total": 7
+    },
+    "lastfmTags": [
+      "soul",
+      "blues",
+      "funk",
+      "New Orleans",
+      "rhythm and blues"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 2,
+      "total": 7
     }
   },
   "Al Green": {
@@ -41,7 +56,10 @@
       "funk",
       "rhythm and blues",
       "70s",
-      "rnb"
+      "rnb",
+      "classic soul",
+      "motown",
+      "soul blues"
     ],
     "url": "https://www.last.fm/music/Al+Green",
     "image": "https://i.scdn.co/image/ab6761610000e5eb95368fba7c1ebfeb929dcbdf",
@@ -66,6 +84,19 @@
       "spotifyArtist": 4,
       "spotifyTracks": 4,
       "total": 8
+    },
+    "lastfmTags": [
+      "soul",
+      "funk",
+      "rhythm and blues",
+      "70s",
+      "rnb"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 4,
+      "total": 8
     }
   },
   "Alejandro Escovedo": {
@@ -76,7 +107,9 @@
       "Alt-country",
       "americana",
       "rock",
-      "austin"
+      "austin",
+      "alt country",
+      "roots rock"
     ],
     "url": "https://www.last.fm/music/Alejandro+Escovedo",
     "image": "https://i.scdn.co/image/ab6761610000e5eb4df8c33545d3a32d635ddf88",
@@ -100,6 +133,19 @@
       "spotifyArtist": 3,
       "spotifyTracks": 3,
       "total": 7
+    },
+    "lastfmTags": [
+      "singer-songwriter",
+      "Alt-country",
+      "americana",
+      "rock",
+      "austin"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 7
     }
   },
   "Alicia Keys": {
@@ -110,7 +156,9 @@
       "rnb",
       "female vocalists",
       "pop",
-      "singer-songwriter"
+      "singer-songwriter",
+      "r&b",
+      "neo soul"
     ],
     "url": "https://www.last.fm/music/Alicia+Keys",
     "image": "https://i.scdn.co/image/ab6761610000e5eb4518cf16a45e35fc0cc82862",
@@ -134,6 +182,19 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 7
+    },
+    "lastfmTags": [
+      "soul",
+      "rnb",
+      "female vocalists",
+      "pop",
+      "singer-songwriter"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 7
     }
   },
   "Allen Toussaint": {
@@ -144,7 +205,8 @@
       "New Orleans",
       "funk",
       "rhythm and blues",
-      "jazz"
+      "jazz",
+      "cajun"
     ],
     "url": "https://www.last.fm/music/Allen+Toussaint",
     "image": "https://i.scdn.co/image/ab6772690000c46c61a6c79755b7a5e51db409f8",
@@ -167,6 +229,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 6
+    },
+    "lastfmTags": [
+      "soul",
+      "New Orleans",
+      "funk",
+      "rhythm and blues",
+      "jazz"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 6
     }
   },
   "Amos Milburn": {
@@ -177,7 +252,11 @@
       "rhythm and blues",
       "boogie woogie",
       "jump blues",
-      "50s"
+      "50s",
+      "boogie-woogie",
+      "swing music",
+      "classic blues",
+      "boogie"
     ],
     "url": "https://www.last.fm/music/Amos+Milburn",
     "image": "https://i.scdn.co/image/ab67616d0000b27330f4ac16d2fd59d267cc39d0",
@@ -203,6 +282,19 @@
       "spotifyArtist": 5,
       "spotifyTracks": 5,
       "total": 9
+    },
+    "lastfmTags": [
+      "blues",
+      "rhythm and blues",
+      "boogie woogie",
+      "jump blues",
+      "50s"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 5,
+      "spotifyTracks": 5,
+      "total": 9
     }
   },
   "Amy Helm": {
@@ -213,7 +305,8 @@
       "country",
       "blues",
       "folk",
-      "folk rock"
+      "folk rock",
+      "modern blues"
     ],
     "url": "https://www.last.fm/music/Amy+Helm",
     "image": "https://i.scdn.co/image/ab6761610000e5eb8c22b289b35c0327251521a3",
@@ -236,6 +329,19 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 6
+    },
+    "lastfmTags": [
+      "americana",
+      "country",
+      "blues",
+      "folk",
+      "folk rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 6
     }
   },
   "Andy Williams": {
@@ -246,7 +352,9 @@
       "60s",
       "pop",
       "easy listening",
-      "male vocalists"
+      "male vocalists",
+      "christmas",
+      "adult standards"
     ],
     "url": "https://www.last.fm/music/Andy+Williams",
     "image": "https://i.scdn.co/image/ab6761610000e5eb5888acdca5e748e796b4e69b",
@@ -270,6 +378,19 @@
       "spotifyArtist": 2,
       "spotifyTracks": 0,
       "total": 7
+    },
+    "lastfmTags": [
+      "oldies",
+      "60s",
+      "pop",
+      "easy listening",
+      "male vocalists"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 0,
+      "total": 7
     }
   },
   "Aretha Franklin": {
@@ -280,7 +401,9 @@
       "jazz",
       "female vocalists",
       "blues",
-      "rhythm and blues"
+      "rhythm and blues",
+      "motown",
+      "classic soul"
     ],
     "url": "https://www.last.fm/music/Aretha+Franklin",
     "image": "https://i.scdn.co/image/ab6761610000e5ebf12270128127ba170f90097d",
@@ -300,6 +423,19 @@
       "classic soul"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 7
+    },
+    "lastfmTags": [
+      "soul",
+      "jazz",
+      "female vocalists",
+      "blues",
+      "rhythm and blues"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 3,
       "spotifyTracks": 3,
@@ -336,6 +472,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "soul",
+      "country-soul",
+      "Southern Soul",
+      "60s",
+      "Deep Soul"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Arthur Conley": {
@@ -346,7 +495,10 @@
       "funk",
       "60s",
       "Southern Soul",
-      "rhythm and blues"
+      "rhythm and blues",
+      "northern soul",
+      "motown",
+      "classic soul"
     ],
     "url": "https://www.last.fm/music/Arthur+Conley",
     "image": "https://i.scdn.co/image/ab67616d0000b273835216c247f4a6787177f075",
@@ -367,6 +519,19 @@
       "classic soul"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 4,
+      "total": 8
+    },
+    "lastfmTags": [
+      "soul",
+      "funk",
+      "60s",
+      "Southern Soul",
+      "rhythm and blues"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 4,
       "spotifyTracks": 4,
@@ -403,6 +568,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 5
+    },
+    "lastfmTags": [
+      "country",
+      "singer-songwriter",
+      "female vocalists",
+      "00s",
+      "ashley monroe"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 5
     }
   },
   "B.B. King": {
@@ -413,7 +591,9 @@
       "blues rock",
       "jazz",
       "guitar",
-      "classic rock"
+      "classic rock",
+      "classic blues",
+      "soul blues"
     ],
     "url": "https://www.last.fm/music/B.B.+King",
     "image": "https://i.scdn.co/image/ffb3ff26238fe635a230bb0feb59dd0a5b209b6f",
@@ -433,6 +613,19 @@
       "soul blues"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 4,
+      "total": 7
+    },
+    "lastfmTags": [
+      "blues",
+      "blues rock",
+      "jazz",
+      "guitar",
+      "classic rock"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 4,
       "spotifyTracks": 4,
@@ -469,6 +662,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "pop",
+      "classic rock",
+      "singer-songwriter",
+      "rock",
+      "Disco"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Beach Boys": {
@@ -479,7 +685,8 @@
       "60s",
       "pop",
       "Surf",
-      "rock"
+      "rock",
+      "baroque pop"
     ],
     "url": "https://www.last.fm/music/The+Beach+Boys",
     "image": "https://i.scdn.co/image/ab6761610000e5eb6839f0edd42e4aea88c9baf6",
@@ -502,6 +709,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 6
+    },
+    "lastfmTags": [
+      "classic rock",
+      "60s",
+      "pop",
+      "Surf",
+      "rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 6
     }
   },
   "Ben E. King": {
@@ -512,7 +732,9 @@
       "60s",
       "blues",
       "oldies",
-      "classic rock"
+      "classic rock",
+      "doo-wop",
+      "motown"
     ],
     "url": "https://www.last.fm/music/Ben+E.+King",
     "image": "https://i.scdn.co/image/809b501cb89a3f6557d5532d983875f4dea1877d",
@@ -536,6 +758,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 2,
       "total": 7
+    },
+    "lastfmTags": [
+      "soul",
+      "60s",
+      "blues",
+      "oldies",
+      "classic rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 2,
+      "total": 7
     }
   },
   "Betty Swann": {
@@ -546,7 +781,8 @@
       "female vocalists",
       "northern soul",
       "rhythm and blues",
-      "oldies"
+      "oldies",
+      "classic soul"
     ],
     "url": "https://www.last.fm/music/Bettye+Swann",
     "image": "https://i.scdn.co/image/89075f762c28dc8179c71217b1b989ef2cb7914c",
@@ -569,6 +805,19 @@
       "spotifyArtist": 3,
       "spotifyTracks": 3,
       "total": 6
+    },
+    "lastfmTags": [
+      "soul",
+      "female vocalists",
+      "northern soul",
+      "rhythm and blues",
+      "oldies"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 6
     }
   },
   "Bettye LaVette": {
@@ -579,7 +828,8 @@
       "blues",
       "female vocalists",
       "northern soul",
-      "oldies"
+      "oldies",
+      "soul blues"
     ],
     "url": "https://www.last.fm/music/Bettye+LaVette",
     "image": "https://i.scdn.co/image/ab6761610000e5eb1dbdb1a340c7fcad71936975",
@@ -602,6 +852,19 @@
       "spotifyArtist": 2,
       "spotifyTracks": 0,
       "total": 6
+    },
+    "lastfmTags": [
+      "soul",
+      "blues",
+      "female vocalists",
+      "northern soul",
+      "oldies"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 0,
+      "total": 6
     }
   },
   "Big Bopper": {
@@ -612,7 +875,8 @@
       "rockabilly",
       "oldies",
       "Rock and Roll",
-      "rock n roll"
+      "rock n roll",
+      "doo-wop"
     ],
     "url": "https://www.last.fm/music/The+Big+Bopper",
     "image": "https://i.scdn.co/image/ab67616d0000b27348d18e159a1b99329343be14",
@@ -631,6 +895,19 @@
       "doo-wop"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 6
+    },
+    "lastfmTags": [
+      "50s",
+      "rockabilly",
+      "oldies",
+      "Rock and Roll",
+      "rock n roll"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 3,
       "spotifyTracks": 3,
@@ -667,6 +944,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 5
+    },
+    "lastfmTags": [
+      "soul",
+      "funk",
+      "70s",
+      "rhythm and blues",
+      "rnb"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 5
     }
   },
   "Billie Holiday": {
@@ -699,12 +989,27 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 5
+    },
+    "lastfmTags": [
+      "jazz",
+      "blues",
+      "female vocalists",
+      "vocal jazz",
+      "jazz vocal"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 5
     }
   },
   "Billie Joe Armstrong and Norah Jones": {
     "bio": "",
     "bioSummary": "<a href=\"https://www.last.fm/music/Billie+Joe+++Norah\">Read more on Last.fm</a>",
-    "tags": [],
+    "tags": [
+      "jazz pop"
+    ],
     "url": "https://www.last.fm/music/Billie+Joe+++Norah",
     "image": "https://i.scdn.co/image/ab6761610000e5ebed83d3ea063d87ce7e708f00",
     "listeners": 18,
@@ -721,6 +1026,13 @@
       "spotifyArtist": 1,
       "spotifyTracks": 0,
       "total": 1
+    },
+    "lastfmTags": [],
+    "tagSources": {
+      "lastfm": 0,
+      "spotifyArtist": 1,
+      "spotifyTracks": 0,
+      "total": 1
     }
   },
   "Billy Joel": {
@@ -731,7 +1043,8 @@
       "singer-songwriter",
       "rock",
       "pop",
-      "piano"
+      "piano",
+      "soft rock"
     ],
     "url": "https://www.last.fm/music/Billy+Joel",
     "image": "https://i.scdn.co/image/ab6761610000e5ebb34057d59275011032ef8bc8",
@@ -754,6 +1067,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 6
+    },
+    "lastfmTags": [
+      "classic rock",
+      "singer-songwriter",
+      "rock",
+      "pop",
+      "piano"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 6
     }
   },
   "Bob B. Soxx and The Blue Jeans": {
@@ -764,7 +1090,8 @@
       "60s",
       "oldies",
       "wall of sound",
-      "soul"
+      "soul",
+      "christmas"
     ],
     "url": "https://www.last.fm/music/Bob+B.+Soxx+&+The+Blue+Jeans",
     "image": "https://i.scdn.co/image/ab67616d0000b2739de667afdec61811511d84af",
@@ -787,6 +1114,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 6
+    },
+    "lastfmTags": [
+      "pop",
+      "60s",
+      "oldies",
+      "wall of sound",
+      "soul"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 6
     }
   },
   "Bob Dylan": {
@@ -797,7 +1137,8 @@
       "singer-songwriter",
       "classic rock",
       "folk rock",
-      "rock"
+      "rock",
+      "roots rock"
     ],
     "url": "https://www.last.fm/music/Bob+Dylan",
     "image": "https://i.scdn.co/image/ab6761610000e5eb791742524609864273747ef5",
@@ -816,6 +1157,19 @@
       "roots rock"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 4,
+      "total": 6
+    },
+    "lastfmTags": [
+      "folk",
+      "singer-songwriter",
+      "classic rock",
+      "folk rock",
+      "rock"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 4,
       "spotifyTracks": 4,
@@ -852,12 +1206,27 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 5
+    },
+    "lastfmTags": [
+      "reggae",
+      "roots reggae",
+      "ska",
+      "Bob Marley",
+      "rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 5
     }
   },
   "Bob Marley & Marcia Griffiths": {
     "bio": "",
     "bioSummary": "<a href=\"https://www.last.fm/music/Bob+Marley+&+Marcia+Griffiths\">Read more on Last.fm</a>",
-    "tags": [],
+    "tags": [
+      "rocksteady"
+    ],
     "url": "https://www.last.fm/music/Bob+Marley+&+Marcia+Griffiths",
     "image": "",
     "listeners": 67,
@@ -870,6 +1239,13 @@
       "rocksteady"
     ],
     "genreSources": {
+      "lastfm": 0,
+      "spotifyArtist": 1,
+      "spotifyTracks": 0,
+      "total": 1
+    },
+    "lastfmTags": [],
+    "tagSources": {
       "lastfm": 0,
       "spotifyArtist": 1,
       "spotifyTracks": 0,
@@ -906,6 +1282,19 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 5
+    },
+    "lastfmTags": [
+      "reggae",
+      "roots reggae",
+      "ska",
+      "roots",
+      "classic rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 5
     }
   },
   "Bob Schneider": {
@@ -938,6 +1327,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "singer-songwriter",
+      "rock",
+      "alternative",
+      "texas",
+      "austin"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Bob Weir": {
@@ -948,7 +1350,10 @@
       "classic rock",
       "blues rock",
       "country rock",
-      "Jam"
+      "Jam",
+      "jam band",
+      "newgrass",
+      "bluegrass"
     ],
     "url": "https://www.last.fm/music/Bob+Weir",
     "image": "https://i.scdn.co/image/ab6761610000e5eb22ae1d6d22e4a98470a2246c",
@@ -969,6 +1374,19 @@
       "bluegrass"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 3,
+      "total": 8
+    },
+    "lastfmTags": [
+      "rock",
+      "classic rock",
+      "blues rock",
+      "country rock",
+      "Jam"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 1,
       "spotifyTracks": 3,
@@ -1005,6 +1423,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "country",
+      "female vocalists",
+      "soul",
+      "60s",
+      "singer-songwriter"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Bobby Bare": {
@@ -1015,7 +1446,11 @@
       "classic country",
       "bobby bare",
       "singer-songwriter",
-      "old country"
+      "old country",
+      "alt country",
+      "americana",
+      "outlaw country",
+      "traditional country"
     ],
     "url": "https://www.last.fm/music/Bobby+Bare",
     "image": "https://i.scdn.co/image/08edc4b4a84ad1f2221a32f9a3d9c35e2ac69b6f",
@@ -1041,6 +1476,19 @@
       "spotifyArtist": 3,
       "spotifyTracks": 3,
       "total": 9
+    },
+    "lastfmTags": [
+      "country",
+      "classic country",
+      "bobby bare",
+      "singer-songwriter",
+      "old country"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 9
     }
   },
   "Bobby Charles": {
@@ -1051,7 +1499,9 @@
       "blues",
       "New Orleans",
       "rhythm and blues",
-      "soul"
+      "soul",
+      "cajun",
+      "zydeco"
     ],
     "url": "https://www.last.fm/music/Bobby+Charles",
     "image": "https://i.scdn.co/image/6a28cf9e87bbcb2b75a0f06764a61d6084c37b5b",
@@ -1075,6 +1525,19 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 7
+    },
+    "lastfmTags": [
+      "singer-songwriter",
+      "blues",
+      "New Orleans",
+      "rhythm and blues",
+      "soul"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 7
     }
   },
   "Bobby Darin": {
@@ -1085,7 +1548,11 @@
       "swing",
       "oldies",
       "male vocalists",
-      "easy listening"
+      "easy listening",
+      "big band",
+      "adult standards",
+      "swing music",
+      "doo-wop"
     ],
     "url": "https://www.last.fm/music/Bobby+Darin",
     "image": "https://i.scdn.co/image/ab6772690000c46c92f83e9f6b9f4b89c56c5811",
@@ -1107,6 +1574,19 @@
       "doo-wop"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 4,
+      "total": 9
+    },
+    "lastfmTags": [
+      "jazz",
+      "swing",
+      "oldies",
+      "male vocalists",
+      "easy listening"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 4,
       "spotifyTracks": 4,
@@ -1143,6 +1623,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "country",
+      "female vocalists",
+      "soul",
+      "60s",
+      "singer-songwriter"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Bobby Moore & The Rhythm Aces": {
@@ -1153,7 +1646,8 @@
       "rhythm and blues",
       "Chess Records",
       "rnb",
-      "USA"
+      "USA",
+      "classic soul"
     ],
     "url": "https://www.last.fm/music/Bobby+Moore+&+The+Rhythm+Aces",
     "image": "https://i.scdn.co/image/ab67616d0000b273d78bb43a188f632de29fe34c",
@@ -1176,6 +1670,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 6
+    },
+    "lastfmTags": [
+      "soul",
+      "rhythm and blues",
+      "Chess Records",
+      "rnb",
+      "USA"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 6
     }
   },
   "Bonnie Bishop": {
@@ -1186,7 +1693,9 @@
       "indie",
       "singer-songwriter",
       "americana",
-      "female vocalists"
+      "female vocalists",
+      "red dirt",
+      "texas country"
     ],
     "url": "https://www.last.fm/music/Bonnie+Bishop",
     "image": "https://i.scdn.co/image/ab6761610000e5eb8f266783211984e56baa1b75",
@@ -1206,6 +1715,19 @@
       "texas country"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 7
+    },
+    "lastfmTags": [
+      "country",
+      "indie",
+      "singer-songwriter",
+      "americana",
+      "female vocalists"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 3,
       "spotifyTracks": 3,
@@ -1242,6 +1764,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 5
+    },
+    "lastfmTags": [
+      "blues",
+      "female vocalists",
+      "singer-songwriter",
+      "country",
+      "rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 5
     }
   },
   "Booker T. Jones": {
@@ -1274,6 +1809,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "soul",
+      "funk",
+      "blues",
+      "instrumental",
+      "blues rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Booker T. Washington": {
@@ -1282,7 +1830,8 @@
     "tags": [
       "Audiobooks",
       "books",
-      "united states of america"
+      "united states of america",
+      "spoken word"
     ],
     "url": "https://www.last.fm/music/Booker+T.+Washington",
     "image": "https://i.scdn.co/image/ab67616d0000b273748e7f083ef4fa5054c17db2",
@@ -1303,6 +1852,17 @@
       "spotifyArtist": 1,
       "spotifyTracks": 0,
       "total": 4
+    },
+    "lastfmTags": [
+      "Audiobooks",
+      "books",
+      "united states of america"
+    ],
+    "tagSources": {
+      "lastfm": 3,
+      "spotifyArtist": 1,
+      "spotifyTracks": 0,
+      "total": 4
     }
   },
   "Boz Skaggs": {
@@ -1313,7 +1873,9 @@
       "classic rock",
       "adult contemporary",
       "rock",
-      "blues"
+      "blues",
+      "yacht rock",
+      "aor"
     ],
     "url": "https://www.last.fm/music/Boz+Scaggs",
     "image": "https://i.scdn.co/image/ab6761610000e5eb143feea39a3275bfc4ea5f11",
@@ -1333,6 +1895,19 @@
       "aor"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 7
+    },
+    "lastfmTags": [
+      "soft rock",
+      "classic rock",
+      "adult contemporary",
+      "rock",
+      "blues"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 2,
       "spotifyTracks": 2,
@@ -1369,6 +1944,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "jazz",
+      "singer",
+      "smooth jazz cafe",
+      "strong voice",
+      "funk_add_to_lidarr_batch_4"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Brook Benton": {
@@ -1379,7 +1967,8 @@
       "rhythm and blues",
       "blues",
       "50s",
-      "rnb"
+      "rnb",
+      "classic soul"
     ],
     "url": "https://www.last.fm/music/Brook+Benton",
     "image": "https://i.scdn.co/image/4ada684f556acdc024c09dac0e172d92a3f94a5a",
@@ -1402,6 +1991,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 6
+    },
+    "lastfmTags": [
+      "soul",
+      "rhythm and blues",
+      "blues",
+      "50s",
+      "rnb"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 6
     }
   },
   "Brother Will Hairston": {
@@ -1414,6 +2016,13 @@
     "playcount": 1057,
     "genres": [],
     "genreSources": {
+      "lastfm": 0,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 0
+    },
+    "lastfmTags": [],
+    "tagSources": {
       "lastfm": 0,
       "spotifyArtist": 0,
       "spotifyTracks": 0,
@@ -1450,6 +2059,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "rock",
+      "classic rock",
+      "singer-songwriter",
+      "folk",
+      "80s"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Buddy Guy": {
@@ -1460,7 +2082,12 @@
       "Chicago Blues",
       "guitar",
       "classic rock",
-      "rock"
+      "rock",
+      "classic blues",
+      "blues rock",
+      "modern blues",
+      "soul blues",
+      "country blues"
     ],
     "url": "https://www.last.fm/music/Buddy+Guy",
     "image": "https://i.scdn.co/image/ab6761610000e5eb0e5d3c1e98c2c1c659f34748",
@@ -1487,6 +2114,19 @@
       "spotifyArtist": 6,
       "spotifyTracks": 6,
       "total": 10
+    },
+    "lastfmTags": [
+      "blues",
+      "Chicago Blues",
+      "guitar",
+      "classic rock",
+      "rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 6,
+      "spotifyTracks": 6,
+      "total": 10
     }
   },
   "Buddy Holly": {
@@ -1497,7 +2137,8 @@
       "Rock and Roll",
       "50s",
       "oldies",
-      "rock"
+      "rock",
+      "doo-wop"
     ],
     "url": "https://www.last.fm/music/Buddy+Holly",
     "image": "https://i.scdn.co/image/ff6c6ecd90618f5fb0f8fbf51bf8477586c8843b",
@@ -1520,6 +2161,19 @@
       "spotifyArtist": 3,
       "spotifyTracks": 3,
       "total": 6
+    },
+    "lastfmTags": [
+      "rockabilly",
+      "Rock and Roll",
+      "50s",
+      "oldies",
+      "rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 6
     }
   },
   "Buddy Miller": {
@@ -1530,7 +2184,9 @@
       "americana",
       "Alt-country",
       "singer-songwriter",
-      "rock"
+      "rock",
+      "alt country",
+      "outlaw country"
     ],
     "url": "https://www.last.fm/music/Buddy+Miller",
     "image": "https://i.scdn.co/image/ab6761610000e5eb3f53c34dcb3a43c9ccbc069b",
@@ -1554,12 +2210,29 @@
       "spotifyArtist": 3,
       "spotifyTracks": 3,
       "total": 7
+    },
+    "lastfmTags": [
+      "country",
+      "americana",
+      "Alt-country",
+      "singer-songwriter",
+      "rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 7
     }
   },
   "Buddy Miller & Friends": {
     "bio": "",
     "bioSummary": "<a href=\"https://www.last.fm/music/Buddy+Miller+&+Friends\">Read more on Last.fm</a>",
-    "tags": [],
+    "tags": [
+      "alt country",
+      "americana",
+      "outlaw country"
+    ],
     "url": "https://www.last.fm/music/Buddy+Miller+&+Friends",
     "image": "https://i.scdn.co/image/ab6761610000e5eb3f53c34dcb3a43c9ccbc069b",
     "listeners": 812,
@@ -1578,6 +2251,13 @@
       "spotifyArtist": 3,
       "spotifyTracks": 3,
       "total": 3
+    },
+    "lastfmTags": [],
+    "tagSources": {
+      "lastfm": 0,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 3
     }
   },
   "Calexico": {
@@ -1588,7 +2268,9 @@
       "indie",
       "folk",
       "americana",
-      "indie rock"
+      "indie rock",
+      "alt country",
+      "roots rock"
     ],
     "url": "https://www.last.fm/music/Calexico",
     "image": "https://i.scdn.co/image/ab6761610000e5ebba3713c77f20b1a8a85a399d",
@@ -1612,6 +2294,19 @@
       "spotifyArtist": 3,
       "spotifyTracks": 0,
       "total": 7
+    },
+    "lastfmTags": [
+      "Alt-country",
+      "indie",
+      "folk",
+      "americana",
+      "indie rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 0,
+      "total": 7
     }
   },
   "CeeLo Green": {
@@ -1622,7 +2317,10 @@
       "funk",
       "Hip-Hop",
       "rnb",
-      "hip hop"
+      "hip hop",
+      "motown",
+      "quiet storm",
+      "classic soul"
     ],
     "url": "https://www.last.fm/music/CeeLo+Green",
     "image": "https://i.scdn.co/image/ab6761610000e5eb8079989370c50963b60ee7bc",
@@ -1647,6 +2345,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 3,
       "total": 8
+    },
+    "lastfmTags": [
+      "soul",
+      "funk",
+      "Hip-Hop",
+      "rnb",
+      "hip hop"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 3,
+      "total": 8
     }
   },
   "Charles Brown": {
@@ -1657,7 +2368,8 @@
       "jazz",
       "rhythm and blues",
       "soul",
-      "oldies"
+      "oldies",
+      "christmas"
     ],
     "url": "https://www.last.fm/music/Charles+Brown",
     "image": "https://i.scdn.co/image/66295f4c2d97d8100613cd3cd3f2ec5e50b0d39a",
@@ -1676,6 +2388,19 @@
       "christmas"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 6
+    },
+    "lastfmTags": [
+      "blues",
+      "jazz",
+      "rhythm and blues",
+      "soul",
+      "oldies"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 1,
       "spotifyTracks": 1,
@@ -1712,6 +2437,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "rock",
+      "blues",
+      "singer-songwriter",
+      "80s",
+      "pop"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Chris Smither": {
@@ -1722,7 +2460,8 @@
       "singer-songwriter",
       "folk",
       "americana",
-      "Folk Blues"
+      "Folk Blues",
+      "country blues"
     ],
     "url": "https://www.last.fm/music/Chris+Smither",
     "image": "https://i.scdn.co/image/ab6761610000e5eb417552d79f541836a1fb7344",
@@ -1745,6 +2484,19 @@
       "spotifyArtist": 3,
       "spotifyTracks": 3,
       "total": 6
+    },
+    "lastfmTags": [
+      "blues",
+      "singer-songwriter",
+      "folk",
+      "americana",
+      "Folk Blues"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 6
     }
   },
   "Chris Stapleton": {
@@ -1755,7 +2507,8 @@
       "americana",
       "singer-songwriter",
       "folk",
-      "bluegrass"
+      "bluegrass",
+      "outlaw country"
     ],
     "url": "https://www.last.fm/music/Chris+Stapleton",
     "image": "https://i.scdn.co/image/ab6761610000e5eba0c87c8f329b436eac8b9784",
@@ -1774,6 +2527,19 @@
       "outlaw country"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 6
+    },
+    "lastfmTags": [
+      "country",
+      "americana",
+      "singer-songwriter",
+      "folk",
+      "bluegrass"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 2,
       "spotifyTracks": 2,
@@ -1810,6 +2576,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "rock",
+      "female vocalists",
+      "female artists",
+      "Christine  Hynde",
+      "singer-songwriters"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Chuck Berry": {
@@ -1820,7 +2599,8 @@
       "classic rock",
       "blues",
       "rock n roll",
-      "rock"
+      "rock",
+      "rockabilly"
     ],
     "url": "https://www.last.fm/music/Chuck+Berry",
     "image": "https://i.scdn.co/image/d58323616d4f5d22b51e9dfe0ba53aedabe53cd4",
@@ -1843,6 +2623,19 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 6
+    },
+    "lastfmTags": [
+      "Rock and Roll",
+      "classic rock",
+      "blues",
+      "rock n roll",
+      "rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 6
     }
   },
   "Clarence Carter": {
@@ -1853,7 +2646,10 @@
       "rhythm and blues",
       "blues",
       "funk",
-      "oldies"
+      "oldies",
+      "classic blues",
+      "classic soul",
+      "motown"
     ],
     "url": "https://www.last.fm/music/Clarence+Carter",
     "image": "https://i.scdn.co/image/d9726c3e0ae6d3b5c55116ae1e857eda058ff309",
@@ -1878,12 +2674,28 @@
       "spotifyArtist": 4,
       "spotifyTracks": 4,
       "total": 8
+    },
+    "lastfmTags": [
+      "soul",
+      "rhythm and blues",
+      "blues",
+      "funk",
+      "oldies"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 4,
+      "total": 8
     }
   },
   "Clyde McPhatter and The Drifters": {
     "bio": "",
     "bioSummary": "<a href=\"https://www.last.fm/music/Clyde+Mcphatter+and+The+Drifters\">Read more on Last.fm</a>",
-    "tags": [],
+    "tags": [
+      "doo-wop",
+      "boogie-woogie"
+    ],
     "url": "https://www.last.fm/music/Clyde+Mcphatter+and+The+Drifters",
     "image": "https://i.scdn.co/image/ab67616d0000b273cb640b99695d56a793bc19c5",
     "listeners": 1749,
@@ -1897,6 +2709,13 @@
       "boogie-woogie"
     ],
     "genreSources": {
+      "lastfm": 0,
+      "spotifyArtist": 2,
+      "spotifyTracks": 0,
+      "total": 2
+    },
+    "lastfmTags": [],
+    "tagSources": {
       "lastfm": 0,
       "spotifyArtist": 2,
       "spotifyTracks": 0,
@@ -1933,6 +2752,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "oldies",
+      "female vocalists",
+      "50s",
+      "pop",
+      "60s"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Darlene Love": {
@@ -1965,12 +2797,28 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 5
+    },
+    "lastfmTags": [
+      "soul",
+      "pop",
+      "female vocalists",
+      "60s",
+      "christmas"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 5
     }
   },
   "Dave & Phil Alvin": {
     "bio": "",
     "bioSummary": "<a href=\"https://www.last.fm/music/Dave+&+Phil+Alvin\">Read more on Last.fm</a>",
-    "tags": [],
+    "tags": [
+      "americana",
+      "roots rock"
+    ],
     "url": "https://www.last.fm/music/Dave+&+Phil+Alvin",
     "image": "https://i.scdn.co/image/ab67616d0000b2736bd3913cc967210daff208cb",
     "listeners": 44,
@@ -1988,6 +2836,13 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 2
+    },
+    "lastfmTags": [],
+    "tagSources": {
+      "lastfm": 0,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 2
     }
   },
   "Dave Alvin": {
@@ -1998,7 +2853,9 @@
       "Alt-country",
       "singer-songwriter",
       "americana",
-      "roots rock"
+      "roots rock",
+      "alt country",
+      "outlaw country"
     ],
     "url": "https://www.last.fm/music/Dave+Alvin",
     "image": "https://i.scdn.co/image/ab6761610000e5eb8acbafb0c132cb98c603fc34",
@@ -2018,6 +2875,19 @@
       "outlaw country"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 4,
+      "total": 7
+    },
+    "lastfmTags": [
+      "country",
+      "Alt-country",
+      "singer-songwriter",
+      "americana",
+      "roots rock"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 4,
       "spotifyTracks": 4,
@@ -2054,6 +2924,19 @@
       "spotifyArtist": 2,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "country",
+      "americana",
+      "alt country",
+      "duets",
+      "country rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Dave Brubeck & Carmen McRae": {
@@ -2062,7 +2945,9 @@
     "tags": [
       "instrumental",
       "jazz",
-      "vocal"
+      "vocal",
+      "cool jazz",
+      "vocal jazz"
     ],
     "url": "https://www.last.fm/music/Dave+Brubeck+&+Carmen+McRae",
     "image": "https://i.scdn.co/image/a6a0e86fd68166c7cd4425bc0eadab5131f4fbd1",
@@ -2084,6 +2969,17 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 5
+    },
+    "lastfmTags": [
+      "instrumental",
+      "jazz",
+      "vocal"
+    ],
+    "tagSources": {
+      "lastfm": 3,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 5
     }
   },
   "David Grisman": {
@@ -2094,7 +2990,10 @@
       "mandolin",
       "jazz",
       "folk",
-      "acoustic"
+      "acoustic",
+      "newgrass",
+      "jam band",
+      "americana"
     ],
     "url": "https://www.last.fm/music/David+Grisman",
     "image": "https://i.scdn.co/image/ab6761610000e5eb89f0aaaa4c0c4db78b3c110b",
@@ -2115,6 +3014,19 @@
       "americana"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 2,
+      "total": 8
+    },
+    "lastfmTags": [
+      "bluegrass",
+      "mandolin",
+      "jazz",
+      "folk",
+      "acoustic"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 4,
       "spotifyTracks": 2,
@@ -2151,6 +3063,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "singer-songwriter",
+      "jazz",
+      "female vocalists",
+      "american",
+      "USA"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Def Leppard": {
@@ -2161,7 +3086,9 @@
       "classic rock",
       "rock",
       "80s",
-      "hair metal"
+      "hair metal",
+      "glam metal",
+      "glam rock"
     ],
     "url": "https://www.last.fm/music/Def+Leppard",
     "image": "https://i.scdn.co/image/ab6761610000e5eb732222a7a4c725918f485a42",
@@ -2185,6 +3112,19 @@
       "spotifyArtist": 3,
       "spotifyTracks": 3,
       "total": 7
+    },
+    "lastfmTags": [
+      "hard rock",
+      "classic rock",
+      "rock",
+      "80s",
+      "hair metal"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 7
     }
   },
   "Dion": {
@@ -2195,7 +3135,9 @@
       "doo wop",
       "60s",
       "rock n roll",
-      "rock"
+      "rock",
+      "doo-wop",
+      "rock and roll"
     ],
     "url": "https://www.last.fm/music/Dion",
     "image": "https://i.scdn.co/image/ab6772690000c46c3153219c77600d2d6d302cff",
@@ -2219,6 +3161,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 2,
       "total": 7
+    },
+    "lastfmTags": [
+      "oldies",
+      "doo wop",
+      "60s",
+      "rock n roll",
+      "rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 2,
+      "total": 7
     }
   },
   "Dolly Parton": {
@@ -2229,7 +3184,8 @@
       "female vocalists",
       "singer-songwriter",
       "folk",
-      "bluegrass"
+      "bluegrass",
+      "classic country"
     ],
     "url": "https://www.last.fm/music/Dolly+Parton",
     "image": "https://i.scdn.co/image/ab6761610000e5eb61aae76c2db6b8645f1553d0",
@@ -2252,6 +3208,19 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 6
+    },
+    "lastfmTags": [
+      "country",
+      "female vocalists",
+      "singer-songwriter",
+      "folk",
+      "bluegrass"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 6
     }
   },
   "Don Covey": {
@@ -2262,7 +3231,10 @@
       "rhythm and blues",
       "funk",
       "Southern Soul",
-      "Deep Soul"
+      "Deep Soul",
+      "northern soul",
+      "philly soul",
+      "classic soul"
     ],
     "url": "https://www.last.fm/music/Don+Covay",
     "image": "https://i.scdn.co/image/250ab3d449d184f477eb6d7460d6349553c25a25",
@@ -2287,6 +3259,19 @@
       "spotifyArtist": 4,
       "spotifyTracks": 0,
       "total": 8
+    },
+    "lastfmTags": [
+      "soul",
+      "rhythm and blues",
+      "funk",
+      "Southern Soul",
+      "Deep Soul"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 0,
+      "total": 8
     }
   },
   "Don Henley": {
@@ -2297,7 +3282,8 @@
       "rock",
       "80s",
       "singer-songwriter",
-      "soft rock"
+      "soft rock",
+      "yacht rock"
     ],
     "url": "https://www.last.fm/music/Don+Henley",
     "image": "https://i.scdn.co/image/e3bb4b09ffbf0a8f420ae14837208056cf64451e",
@@ -2320,6 +3306,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 6
+    },
+    "lastfmTags": [
+      "classic rock",
+      "rock",
+      "80s",
+      "singer-songwriter",
+      "soft rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 6
     }
   },
   "Dr. John": {
@@ -2330,7 +3329,9 @@
       "funk",
       "jazz",
       "New Orleans",
-      "soul"
+      "soul",
+      "cajun",
+      "zydeco"
     ],
     "url": "https://www.last.fm/music/Dr.+John",
     "image": "https://i.scdn.co/image/ab6761610000e5ebfed5626c008ba961a81dd218",
@@ -2354,6 +3355,19 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 7
+    },
+    "lastfmTags": [
+      "blues",
+      "funk",
+      "jazz",
+      "New Orleans",
+      "soul"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 7
     }
   },
   "Drifters": {
@@ -2364,7 +3378,9 @@
       "oldies",
       "60s",
       "rhythm and blues",
-      "doo wop"
+      "doo wop",
+      "doo-wop",
+      "motown"
     ],
     "url": "https://www.last.fm/music/The+Drifters",
     "image": "https://i.scdn.co/image/9cebb08480116550d85b6268d9adb1c2aee718f7",
@@ -2388,12 +3404,29 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 7
+    },
+    "lastfmTags": [
+      "soul",
+      "oldies",
+      "60s",
+      "rhythm and blues",
+      "doo wop"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 7
     }
   },
   "Earls Of Leicester": {
     "bio": "",
     "bioSummary": "<a href=\"https://www.last.fm/music/Earls+of+Leicester\">Read more on Last.fm</a>",
-    "tags": [],
+    "tags": [
+      "bluegrass",
+      "newgrass",
+      "christian bluegrass"
+    ],
     "url": "https://www.last.fm/music/Earls+of+Leicester",
     "image": "https://i.scdn.co/image/ab6761610000e5ebc5169292a9cecec2687698eb",
     "listeners": 176,
@@ -2412,6 +3445,13 @@
       "spotifyArtist": 3,
       "spotifyTracks": 3,
       "total": 3
+    },
+    "lastfmTags": [],
+    "tagSources": {
+      "lastfm": 0,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 3
     }
   },
   "Eilen Jewell": {
@@ -2422,7 +3462,9 @@
       "folk",
       "singer-songwriter",
       "americana",
-      "female vocalists"
+      "female vocalists",
+      "alt country",
+      "blues"
     ],
     "url": "https://www.last.fm/music/Eilen+Jewell",
     "image": "https://i.scdn.co/image/ab6761610000e5ebc0816a5a2d5e1a34237dc4f5",
@@ -2446,6 +3488,19 @@
       "spotifyArtist": 3,
       "spotifyTracks": 3,
       "total": 7
+    },
+    "lastfmTags": [
+      "Alt-country",
+      "folk",
+      "singer-songwriter",
+      "americana",
+      "female vocalists"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 7
     }
   },
   "Elizabeth King": {
@@ -2454,7 +3509,9 @@
     "tags": [
       "gospel",
       "soul",
-      "USA"
+      "USA",
+      "cantopop",
+      "soul blues"
     ],
     "url": "https://www.last.fm/music/Elizabeth+King",
     "image": "https://i.scdn.co/image/ab67616d0000b273145a73ecb5279b6018d29888",
@@ -2472,6 +3529,17 @@
       "soul blues"
     ],
     "genreSources": {
+      "lastfm": 3,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 5
+    },
+    "lastfmTags": [
+      "gospel",
+      "soul",
+      "USA"
+    ],
+    "tagSources": {
       "lastfm": 3,
       "spotifyArtist": 1,
       "spotifyTracks": 1,
@@ -2508,6 +3576,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "pop",
+      "classic rock",
+      "singer-songwriter",
+      "rock",
+      "piano"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Elvin Bishop": {
@@ -2518,7 +3599,8 @@
       "blues rock",
       "classic rock",
       "rock",
-      "Southern Rock"
+      "Southern Rock",
+      "yacht rock"
     ],
     "url": "https://www.last.fm/music/Elvin+Bishop",
     "image": "https://i.scdn.co/image/ab6761610000e5eb2f2e3f982b2cd24a798246c6",
@@ -2541,6 +3623,19 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 6
+    },
+    "lastfmTags": [
+      "blues",
+      "blues rock",
+      "classic rock",
+      "rock",
+      "Southern Rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 6
     }
   },
   "Elvis Costello": {
@@ -2551,7 +3646,8 @@
       "rock",
       "singer-songwriter",
       "classic rock",
-      "alternative"
+      "alternative",
+      "power pop"
     ],
     "url": "https://www.last.fm/music/Elvis+Costello",
     "image": "https://i.scdn.co/image/ab6761610000e5ebbd95594d3201ab9c7b0349e6",
@@ -2574,6 +3670,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 0,
       "total": 6
+    },
+    "lastfmTags": [
+      "new wave",
+      "rock",
+      "singer-songwriter",
+      "classic rock",
+      "alternative"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 0,
+      "total": 6
     }
   },
   "Elvis Presley": {
@@ -2584,7 +3693,8 @@
       "classic rock",
       "rock",
       "oldies",
-      "Rock and Roll"
+      "Rock and Roll",
+      "rockabilly"
     ],
     "url": "https://www.last.fm/music/Elvis+Presley",
     "image": "https://i.scdn.co/image/ab6761610000e5eb9a93e273380982dff84c0d7c",
@@ -2607,6 +3717,19 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 6
+    },
+    "lastfmTags": [
+      "rock n roll",
+      "classic rock",
+      "rock",
+      "oldies",
+      "Rock and Roll"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 6
     }
   },
   "Etta James": {
@@ -2617,7 +3740,9 @@
       "soul",
       "jazz",
       "female vocalists",
-      "rhythm and blues"
+      "rhythm and blues",
+      "soul blues",
+      "vocal jazz"
     ],
     "url": "https://www.last.fm/music/Etta+James",
     "image": "https://i.scdn.co/image/ab6761610000e5eb058531dfd9746a96ad85265f",
@@ -2641,6 +3766,19 @@
       "spotifyArtist": 4,
       "spotifyTracks": 4,
       "total": 7
+    },
+    "lastfmTags": [
+      "blues",
+      "soul",
+      "jazz",
+      "female vocalists",
+      "rhythm and blues"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 4,
+      "total": 7
     }
   },
   "Everly Brothers": {
@@ -2651,7 +3789,8 @@
       "60s",
       "rock n roll",
       "Rock and Roll",
-      "pop"
+      "pop",
+      "doo-wop"
     ],
     "url": "https://www.last.fm/music/The+Everly+Brothers",
     "image": "https://i.scdn.co/image/ab6761610000e5ebea4e50a3c95e9024bb990fb9",
@@ -2674,6 +3813,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 6
+    },
+    "lastfmTags": [
+      "oldies",
+      "60s",
+      "rock n roll",
+      "Rock and Roll",
+      "pop"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 6
     }
   },
   "Fabian": {
@@ -2684,7 +3836,8 @@
       "50s",
       "rockabilly",
       "synthpop",
-      "pop"
+      "pop",
+      "doo-wop"
     ],
     "url": "https://www.last.fm/music/Fabian",
     "image": "https://i.scdn.co/image/5601440a6c0da961c0778096ab7749684926fe35",
@@ -2707,6 +3860,19 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 6
+    },
+    "lastfmTags": [
+      "electronic",
+      "50s",
+      "rockabilly",
+      "synthpop",
+      "pop"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 6
     }
   },
   "Frank Sinatra": {
@@ -2717,7 +3883,11 @@
       "swing",
       "oldies",
       "vocal jazz",
-      "easy listening"
+      "easy listening",
+      "christmas",
+      "big band",
+      "adult standards",
+      "swing music"
     ],
     "url": "https://www.last.fm/music/Frank+Sinatra",
     "image": "https://i.scdn.co/image/fc4e0f474fb4c4cb83617aa884dc9fd9822d4411",
@@ -2743,6 +3913,19 @@
       "spotifyArtist": 6,
       "spotifyTracks": 6,
       "total": 9
+    },
+    "lastfmTags": [
+      "jazz",
+      "swing",
+      "oldies",
+      "vocal jazz",
+      "easy listening"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 6,
+      "spotifyTracks": 6,
+      "total": 9
     }
   },
   "Frankie Ford": {
@@ -2753,7 +3936,9 @@
       "rhythm and blues",
       "rock n roll",
       "Rock and Roll",
-      "60s"
+      "60s",
+      "doo-wop",
+      "rockabilly"
     ],
     "url": "https://www.last.fm/music/Frankie+Ford",
     "image": "https://i.scdn.co/image/d73399e7bea41a6c2abc1632125c7d4d60179ecd",
@@ -2777,6 +3962,19 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 7
+    },
+    "lastfmTags": [
+      "oldies",
+      "rhythm and blues",
+      "rock n roll",
+      "Rock and Roll",
+      "60s"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 7
     }
   },
   "Gary Stewart": {
@@ -2787,7 +3985,8 @@
       "Honky Tonk",
       "gary stewart",
       "outlaw country",
-      "singer-songwriter"
+      "singer-songwriter",
+      "classic country"
     ],
     "url": "https://www.last.fm/music/Gary+Stewart",
     "image": "https://i.scdn.co/image/d735e79404f13d6c8bcde7a23c2a9675a274e7e2",
@@ -2810,6 +4009,19 @@
       "spotifyArtist": 3,
       "spotifyTracks": 3,
       "total": 6
+    },
+    "lastfmTags": [
+      "country",
+      "Honky Tonk",
+      "gary stewart",
+      "outlaw country",
+      "singer-songwriter"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 6
     }
   },
   "Gary U.S. Bonds": {
@@ -2820,7 +4032,8 @@
       "Rock and Roll",
       "60s",
       "rhythm and blues",
-      "rock"
+      "rock",
+      "doo-wop"
     ],
     "url": "https://www.last.fm/music/Gary+%22U.S.%22+Bonds",
     "image": "https://i.scdn.co/image/447ffc0cffcbbb85de66a63d7887bc8f67f7c0bc",
@@ -2843,6 +4056,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 6
+    },
+    "lastfmTags": [
+      "oldies",
+      "Rock and Roll",
+      "60s",
+      "rhythm and blues",
+      "rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 6
     }
   },
   "George Jones": {
@@ -2853,7 +4079,11 @@
       "classic country",
       "singer-songwriter",
       "george jones",
-      "americana"
+      "americana",
+      "outlaw country",
+      "honky tonk",
+      "traditional country",
+      "country christian"
     ],
     "url": "https://www.last.fm/music/George+Jones",
     "image": "https://i.scdn.co/image/ab6761610000e5eb5f79cb1d93cfa9684c1f6dc9",
@@ -2875,6 +4105,19 @@
       "country christian"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 6,
+      "spotifyTracks": 6,
+      "total": 9
+    },
+    "lastfmTags": [
+      "country",
+      "classic country",
+      "singer-songwriter",
+      "george jones",
+      "americana"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 6,
       "spotifyTracks": 6,
@@ -2903,6 +4146,17 @@
       "gospel"
     ],
     "genreSources": {
+      "lastfm": 3,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 3
+    },
+    "lastfmTags": [
+      "soul",
+      "blues",
+      "gospel"
+    ],
+    "tagSources": {
       "lastfm": 3,
       "spotifyArtist": 0,
       "spotifyTracks": 0,
@@ -2939,6 +4193,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 5
+    },
+    "lastfmTags": [
+      "country",
+      "singer-songwriter",
+      "folk",
+      "classic country",
+      "pop"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 5
     }
   },
   "Greg Allman": {
@@ -2949,7 +4216,9 @@
       "blues rock",
       "classic rock",
       "blues",
-      "rock"
+      "rock",
+      "country rock",
+      "jam band"
     ],
     "url": "https://www.last.fm/music/Gregg+Allman",
     "image": "https://i.scdn.co/image/ab6772690000c46caa4fc55d68af642bcfe35463",
@@ -2973,6 +4242,19 @@
       "spotifyArtist": 5,
       "spotifyTracks": 5,
       "total": 7
+    },
+    "lastfmTags": [
+      "Southern Rock",
+      "blues rock",
+      "classic rock",
+      "blues",
+      "rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 5,
+      "spotifyTracks": 5,
+      "total": 7
     }
   },
   "Heart": {
@@ -2983,7 +4265,8 @@
       "rock",
       "hard rock",
       "female vocalists",
-      "80s"
+      "80s",
+      "aor"
     ],
     "url": "https://www.last.fm/music/Heart",
     "image": "https://i.scdn.co/image/ab6772690000c46c469d216a8920e0df099e4621",
@@ -3006,6 +4289,19 @@
       "spotifyArtist": 3,
       "spotifyTracks": 3,
       "total": 6
+    },
+    "lastfmTags": [
+      "classic rock",
+      "rock",
+      "hard rock",
+      "female vocalists",
+      "80s"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 6
     }
   },
   "Hurray For The Riff Raff": {
@@ -3016,7 +4312,8 @@
       "americana",
       "blues",
       "female vocalist",
-      "female vocalists"
+      "female vocalists",
+      "alt country"
     ],
     "url": "https://www.last.fm/music/Hurray+For+The+Riff+Raff",
     "image": "https://i.scdn.co/image/ab6761610000e5eb057068ad79970a943dc50686",
@@ -3035,6 +4332,19 @@
       "alt country"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 6
+    },
+    "lastfmTags": [
+      "folk",
+      "americana",
+      "blues",
+      "female vocalist",
+      "female vocalists"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 2,
       "spotifyTracks": 2,
@@ -3071,6 +4381,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "folk",
+      "female vocalists",
+      "singer-songwriter",
+      "acoustic",
+      "rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "J.J. Cale": {
@@ -3081,7 +4404,8 @@
       "blues rock",
       "singer-songwriter",
       "rock",
-      "classic rock"
+      "classic rock",
+      "roots rock"
     ],
     "url": "https://www.last.fm/music/J.J.+Cale",
     "image": "https://i.scdn.co/image/ab6761610000e5ebbe1b2ad861e0148a1540b107",
@@ -3104,6 +4428,19 @@
       "spotifyArtist": 3,
       "spotifyTracks": 3,
       "total": 6
+    },
+    "lastfmTags": [
+      "blues",
+      "blues rock",
+      "singer-songwriter",
+      "rock",
+      "classic rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 6
     }
   },
   "J.J. Cale & Eric Clapton": {
@@ -3114,7 +4451,8 @@
       "blues rock",
       "rock",
       "guitar",
-      "classic rock"
+      "classic rock",
+      "roots rock"
     ],
     "url": "https://www.last.fm/music/J.J.+Cale+&+Eric+Clapton",
     "image": "https://i.scdn.co/image/ab6761610000e5ebbe1b2ad861e0148a1540b107",
@@ -3137,6 +4475,19 @@
       "spotifyArtist": 3,
       "spotifyTracks": 4,
       "total": 6
+    },
+    "lastfmTags": [
+      "blues",
+      "blues rock",
+      "rock",
+      "guitar",
+      "classic rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 4,
+      "total": 6
     }
   },
   "Jack White": {
@@ -3147,7 +4498,9 @@
       "blues",
       "singer-songwriter",
       "indie",
-      "folk"
+      "folk",
+      "blues rock",
+      "garage rock"
     ],
     "url": "https://www.last.fm/music/Jack+White",
     "image": "https://i.scdn.co/image/ab6761610000e5eb16204ddc5822afc3e4a1cecf",
@@ -3171,6 +4524,19 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 7
+    },
+    "lastfmTags": [
+      "rock",
+      "blues",
+      "singer-songwriter",
+      "indie",
+      "folk"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 7
     }
   },
   "Jackson Browne": {
@@ -3181,7 +4547,9 @@
       "classic rock",
       "folk",
       "rock",
-      "soft rock"
+      "soft rock",
+      "yacht rock",
+      "folk rock"
     ],
     "url": "https://www.last.fm/music/Jackson+Browne",
     "image": "https://i.scdn.co/image/ab6761610000e5ebef4b0122d50775167339c7c2",
@@ -3201,6 +4569,19 @@
       "folk rock"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 4,
+      "total": 7
+    },
+    "lastfmTags": [
+      "singer-songwriter",
+      "classic rock",
+      "folk",
+      "rock",
+      "soft rock"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 4,
       "spotifyTracks": 4,
@@ -3237,6 +4618,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "folk",
+      "british",
+      "indie",
+      "singer-songwriter",
+      "alternative"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "James & Bobby Purify": {
@@ -3247,7 +4641,9 @@
       "funk",
       "rhythm and blues",
       "northern soul",
-      "Southern Soul"
+      "Southern Soul",
+      "motown",
+      "classic soul"
     ],
     "url": "https://www.last.fm/music/James+&+Bobby+Purify",
     "image": "https://i.scdn.co/image/ab67616d0000b27359aee4bbda119d8ce5712ef3",
@@ -3271,6 +4667,19 @@
       "spotifyArtist": 3,
       "spotifyTracks": 3,
       "total": 7
+    },
+    "lastfmTags": [
+      "soul",
+      "funk",
+      "rhythm and blues",
+      "northern soul",
+      "Southern Soul"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 7
     }
   },
   "James Brown": {
@@ -3281,7 +4690,9 @@
       "soul",
       "rhythm and blues",
       "blues",
-      "rnb"
+      "rnb",
+      "motown",
+      "classic soul"
     ],
     "url": "https://www.last.fm/music/James+Brown",
     "image": "https://i.scdn.co/image/ab6761610000e5eb158342aa8bb8a192c778f2a5",
@@ -3305,6 +4716,19 @@
       "spotifyArtist": 4,
       "spotifyTracks": 4,
       "total": 7
+    },
+    "lastfmTags": [
+      "funk",
+      "soul",
+      "rhythm and blues",
+      "blues",
+      "rnb"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 4,
+      "total": 7
     }
   },
   "James McMurtry": {
@@ -3315,7 +4739,12 @@
       "Alt-country",
       "americana",
       "folk",
-      "texas"
+      "texas",
+      "alt country",
+      "outlaw country",
+      "red dirt",
+      "texas country",
+      "roots rock"
     ],
     "url": "https://www.last.fm/music/James+McMurtry",
     "image": "https://i.scdn.co/image/ab6761610000e5ebcdb24f2ab31c0739c346dacf",
@@ -3342,6 +4771,19 @@
       "spotifyArtist": 6,
       "spotifyTracks": 6,
       "total": 10
+    },
+    "lastfmTags": [
+      "singer-songwriter",
+      "Alt-country",
+      "americana",
+      "folk",
+      "texas"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 6,
+      "spotifyTracks": 6,
+      "total": 10
     }
   },
   "Janis Joplin": {
@@ -3352,7 +4794,9 @@
       "classic rock",
       "female vocalists",
       "60s",
-      "rock"
+      "rock",
+      "psychedelic rock",
+      "acid rock"
     ],
     "url": "https://www.last.fm/music/Janis+Joplin",
     "image": "https://i.scdn.co/image/ab6761610000e5ebbf0ee2c099003f6886e4da0c",
@@ -3376,6 +4820,19 @@
       "spotifyArtist": 3,
       "spotifyTracks": 3,
       "total": 7
+    },
+    "lastfmTags": [
+      "blues",
+      "classic rock",
+      "female vocalists",
+      "60s",
+      "rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 7
     }
   },
   "Jason Isbell": {
@@ -3386,7 +4843,10 @@
       "americana",
       "singer-songwriter",
       "Southern Rock",
-      "country"
+      "country",
+      "alt country",
+      "roots rock",
+      "red dirt"
     ],
     "url": "https://www.last.fm/music/Jason+Isbell",
     "image": "https://i.scdn.co/image/ab6761610000e5eb9c4def51159843ebc3182b11",
@@ -3411,6 +4871,19 @@
       "spotifyArtist": 4,
       "spotifyTracks": 4,
       "total": 8
+    },
+    "lastfmTags": [
+      "Alt-country",
+      "americana",
+      "singer-songwriter",
+      "Southern Rock",
+      "country"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 4,
+      "total": 8
     }
   },
   "Jeanie C. Riley": {
@@ -3421,7 +4894,8 @@
       "female vocalists",
       "60s",
       "oldies",
-      "texas"
+      "texas",
+      "classic country"
     ],
     "url": "https://www.last.fm/music/Jeannie+C.+Riley",
     "image": "https://i.scdn.co/image/f2bc09eb649e9e96035c0aea38380b9a8f14cc73",
@@ -3444,6 +4918,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 0,
       "total": 6
+    },
+    "lastfmTags": [
+      "country",
+      "female vocalists",
+      "60s",
+      "oldies",
+      "texas"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 0,
+      "total": 6
     }
   },
   "Jefferson Airplane": {
@@ -3454,7 +4941,8 @@
       "classic rock",
       "60s",
       "psychedelic",
-      "rock"
+      "rock",
+      "acid rock"
     ],
     "url": "https://www.last.fm/music/Jefferson+Airplane",
     "image": "https://i.scdn.co/image/ab6761610000e5eb0c739f8231961acda83a4bf8",
@@ -3473,6 +4961,19 @@
       "acid rock"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 6
+    },
+    "lastfmTags": [
+      "Psychedelic Rock",
+      "classic rock",
+      "60s",
+      "psychedelic",
+      "rock"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 2,
       "spotifyTracks": 2,
@@ -3509,6 +5010,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 5
+    },
+    "lastfmTags": [
+      "south african",
+      "folk",
+      "acousic",
+      "indie",
+      "folk pop"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 5
     }
   },
   "Jerry Lawson": {
@@ -3529,6 +5043,13 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 0
+    },
+    "lastfmTags": [],
+    "tagSources": {
+      "lastfm": 0,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 0
     }
   },
   "Jerry Lee Lewis": {
@@ -3539,7 +5060,8 @@
       "Rock and Roll",
       "rock n roll",
       "oldies",
-      "classic rock"
+      "classic rock",
+      "boogie-woogie"
     ],
     "url": "https://www.last.fm/music/Jerry+Lee+Lewis",
     "image": "https://i.scdn.co/image/ab6761610000e5eb01ff3e4f94ff73cab6c4c0bb",
@@ -3562,6 +5084,19 @@
       "spotifyArtist": 3,
       "spotifyTracks": 3,
       "total": 6
+    },
+    "lastfmTags": [
+      "rockabilly",
+      "Rock and Roll",
+      "rock n roll",
+      "oldies",
+      "classic rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 6
     }
   },
   "Jim James": {
@@ -3572,7 +5107,11 @@
       "indie",
       "dream pop",
       "rock",
-      "New Weird America"
+      "New Weird America",
+      "funk",
+      "soul",
+      "motown",
+      "classic soul"
     ],
     "url": "https://www.last.fm/music/Jim+James",
     "image": "https://i.scdn.co/image/ab6761610000e5eb79370683389d0ff862870bcd",
@@ -3598,6 +5137,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 4,
       "total": 9
+    },
+    "lastfmTags": [
+      "folk",
+      "indie",
+      "dream pop",
+      "rock",
+      "New Weird America"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 4,
+      "total": 9
     }
   },
   "Jim White": {
@@ -3608,7 +5160,8 @@
       "americana",
       "singer-songwriter",
       "folk",
-      "southern gothic"
+      "southern gothic",
+      "alt country"
     ],
     "url": "https://www.last.fm/music/Jim+White",
     "image": "https://i.scdn.co/image/ab6772690000c46c055588de0be3d2931c5f88cf",
@@ -3631,6 +5184,19 @@
       "spotifyArtist": 3,
       "spotifyTracks": 3,
       "total": 6
+    },
+    "lastfmTags": [
+      "Alt-country",
+      "americana",
+      "singer-songwriter",
+      "folk",
+      "southern gothic"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 6
     }
   },
   "Jimi Hendrix": {
@@ -3641,7 +5207,10 @@
       "rock",
       "blues",
       "psychedelic",
-      "guitar"
+      "guitar",
+      "psychedelic rock",
+      "acid rock",
+      "blues rock"
     ],
     "url": "https://www.last.fm/music/Jimi+Hendrix",
     "image": "https://i.scdn.co/image/ab6761610000e5eb90c8b988fa6e6b40e0d0bf81",
@@ -3666,6 +5235,19 @@
       "spotifyArtist": 4,
       "spotifyTracks": 4,
       "total": 8
+    },
+    "lastfmTags": [
+      "classic rock",
+      "rock",
+      "blues",
+      "psychedelic",
+      "guitar"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 4,
+      "total": 8
     }
   },
   "Jimmy Cliff": {
@@ -3676,7 +5258,8 @@
       "ska",
       "roots reggae",
       "jamaica",
-      "roots"
+      "roots",
+      "rocksteady"
     ],
     "url": "https://www.last.fm/music/Jimmy+Cliff",
     "image": "https://i.scdn.co/image/ab6761610000e5eb11bdad2b191ac35053d34bd2",
@@ -3695,6 +5278,19 @@
       "rocksteady"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 6
+    },
+    "lastfmTags": [
+      "reggae",
+      "ska",
+      "roots reggae",
+      "jamaica",
+      "roots"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 3,
       "spotifyTracks": 3,
@@ -3731,6 +5327,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "classic rock",
+      "blues",
+      "rock",
+      "blues rock",
+      "soul"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Joe Ely": {
@@ -3741,7 +5350,12 @@
       "Alt-country",
       "americana",
       "singer-songwriter",
-      "texas"
+      "texas",
+      "outlaw country",
+      "alt country",
+      "texas country",
+      "country rock",
+      "rockabilly"
     ],
     "url": "https://www.last.fm/music/Joe+Ely",
     "image": "https://i.scdn.co/image/ab6772690000c46c3ce83fdae135873cbdc04360",
@@ -3768,6 +5382,19 @@
       "spotifyArtist": 6,
       "spotifyTracks": 6,
       "total": 10
+    },
+    "lastfmTags": [
+      "country",
+      "Alt-country",
+      "americana",
+      "singer-songwriter",
+      "texas"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 6,
+      "spotifyTracks": 6,
+      "total": 10
     }
   },
   "Joe Tex": {
@@ -3778,7 +5405,9 @@
       "funk",
       "rhythm and blues",
       "blues",
-      "oldies"
+      "oldies",
+      "northern soul",
+      "classic soul"
     ],
     "url": "https://www.last.fm/music/Joe+Tex",
     "image": "https://i.scdn.co/image/2313fad43bc64283c63c84a0570e4e3bd879b695",
@@ -3802,6 +5431,19 @@
       "spotifyArtist": 3,
       "spotifyTracks": 0,
       "total": 7
+    },
+    "lastfmTags": [
+      "soul",
+      "funk",
+      "rhythm and blues",
+      "blues",
+      "oldies"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 0,
+      "total": 7
     }
   },
   "Joe Townsend": {
@@ -3809,7 +5451,8 @@
     "bioSummary": "<a href=\"https://www.last.fm/music/Joe+Townsend\">Read more on Last.fm</a>",
     "tags": [
       "blues",
-      "gospel"
+      "gospel",
+      "southern gothic"
     ],
     "url": "https://www.last.fm/music/Joe+Townsend",
     "image": "https://i.scdn.co/image/ab67616d0000b273e4e53b2c47b8ec4013491c04",
@@ -3829,6 +5472,16 @@
       "spotifyArtist": 0,
       "spotifyTracks": 1,
       "total": 3
+    },
+    "lastfmTags": [
+      "blues",
+      "gospel"
+    ],
+    "tagSources": {
+      "lastfm": 2,
+      "spotifyArtist": 0,
+      "spotifyTracks": 1,
+      "total": 3
     }
   },
   "John Lee Hooker": {
@@ -3839,7 +5492,10 @@
       "delta blues",
       "Classic Blues",
       "guitar",
-      "jazz"
+      "jazz",
+      "blues rock",
+      "soul blues",
+      "country blues"
     ],
     "url": "https://www.last.fm/music/John+Lee+Hooker",
     "image": "https://i.scdn.co/image/6bcff0a9ed464621c433fb5d369c2164ebd3d2d0",
@@ -3864,6 +5520,19 @@
       "spotifyArtist": 5,
       "spotifyTracks": 5,
       "total": 8
+    },
+    "lastfmTags": [
+      "blues",
+      "delta blues",
+      "Classic Blues",
+      "guitar",
+      "jazz"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 5,
+      "spotifyTracks": 5,
+      "total": 8
     }
   },
   "John Lennon": {
@@ -3874,7 +5543,8 @@
       "rock",
       "singer-songwriter",
       "british",
-      "pop"
+      "pop",
+      "christmas"
     ],
     "url": "https://www.last.fm/music/John+Lennon",
     "image": "https://i.scdn.co/image/ab6761610000e5ebe336079626f2a1be7456486c",
@@ -3893,6 +5563,19 @@
       "christmas"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 6
+    },
+    "lastfmTags": [
+      "classic rock",
+      "rock",
+      "singer-songwriter",
+      "british",
+      "pop"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 1,
       "spotifyTracks": 1,
@@ -3929,6 +5612,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 5
+    },
+    "lastfmTags": [
+      "rock",
+      "classic rock",
+      "singer-songwriter",
+      "80s",
+      "pop"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 5
     }
   },
   "Johnnie Taylor": {
@@ -3939,7 +5635,11 @@
       "blues",
       "rhythm and blues",
       "funk",
-      "stax"
+      "stax",
+      "soul blues",
+      "footwork",
+      "zydeco",
+      "classic soul"
     ],
     "url": "https://www.last.fm/music/Johnnie+Taylor",
     "image": "https://i.scdn.co/image/ab6761610000e5eb28b0efbfff58852c5d139830",
@@ -3965,6 +5665,19 @@
       "spotifyArtist": 6,
       "spotifyTracks": 6,
       "total": 9
+    },
+    "lastfmTags": [
+      "soul",
+      "blues",
+      "rhythm and blues",
+      "funk",
+      "stax"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 6,
+      "spotifyTracks": 6,
+      "total": 9
     }
   },
   "Johnny Adams": {
@@ -3975,7 +5688,8 @@
       "soul",
       "New Orleans",
       "rhythm and blues",
-      "jazz"
+      "jazz",
+      "soul blues"
     ],
     "url": "https://www.last.fm/music/Johnny+Adams",
     "image": "https://i.scdn.co/image/f8f7ae78048b646731dbb19365298816197a8fed",
@@ -3998,6 +5712,19 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 6
+    },
+    "lastfmTags": [
+      "blues",
+      "soul",
+      "New Orleans",
+      "rhythm and blues",
+      "jazz"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 6
     }
   },
   "Johnny Cash": {
@@ -4008,7 +5735,9 @@
       "folk",
       "singer-songwriter",
       "classic rock",
-      "rock"
+      "rock",
+      "classic country",
+      "outlaw country"
     ],
     "url": "https://www.last.fm/music/Johnny+Cash",
     "image": "https://i.scdn.co/image/ab6761610000e5eb94a8326675bfcafb20f0a235",
@@ -4028,6 +5757,19 @@
       "outlaw country"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 7
+    },
+    "lastfmTags": [
+      "country",
+      "folk",
+      "singer-songwriter",
+      "classic rock",
+      "rock"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 3,
       "spotifyTracks": 3,
@@ -4064,6 +5806,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "reggae",
+      "soul",
+      "pop",
+      "60s",
+      "oldies"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Johnny Winter": {
@@ -4074,7 +5829,10 @@
       "blues rock",
       "rock",
       "guitar",
-      "classic rock"
+      "classic rock",
+      "classic blues",
+      "modern blues",
+      "southern rock"
     ],
     "url": "https://www.last.fm/music/Johnny+Winter",
     "image": "https://i.scdn.co/image/49d41e640134e0247ee9f6cce849bc36395273bd",
@@ -4099,12 +5857,31 @@
       "spotifyArtist": 5,
       "spotifyTracks": 5,
       "total": 8
+    },
+    "lastfmTags": [
+      "blues",
+      "blues rock",
+      "rock",
+      "guitar",
+      "classic rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 5,
+      "spotifyTracks": 5,
+      "total": 8
     }
   },
   "Johnny Winter, Bob Dylan": {
     "bio": "",
     "bioSummary": "<a href=\"https://www.last.fm/music/Johnny+Winter,+Bob+Dylan\">Read more on Last.fm</a>",
-    "tags": [],
+    "tags": [
+      "blues",
+      "blues rock",
+      "classic blues",
+      "modern blues",
+      "southern rock"
+    ],
     "url": "https://www.last.fm/music/Johnny+Winter,+Bob+Dylan",
     "image": "https://i.scdn.co/image/49d41e640134e0247ee9f6cce849bc36395273bd",
     "listeners": 2,
@@ -4125,6 +5902,13 @@
       "spotifyArtist": 5,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [],
+    "tagSources": {
+      "lastfm": 0,
+      "spotifyArtist": 5,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Josh White": {
@@ -4135,7 +5919,10 @@
       "folk",
       "piedmont blues",
       "Folk Blues",
-      "All"
+      "All",
+      "country blues",
+      "classic blues",
+      "ragtime"
     ],
     "url": "https://www.last.fm/music/Josh+White",
     "image": "https://i.scdn.co/image/85a31b3720f5e03a9103ac78a5b2a51616d78100",
@@ -4160,6 +5947,19 @@
       "spotifyArtist": 4,
       "spotifyTracks": 4,
       "total": 8
+    },
+    "lastfmTags": [
+      "blues",
+      "folk",
+      "piedmont blues",
+      "Folk Blues",
+      "All"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 4,
+      "total": 8
     }
   },
   "June Carter Cash & Johnny Cash": {
@@ -4170,7 +5970,8 @@
       "classic country",
       "duets",
       "classic rock",
-      "country duets"
+      "country duets",
+      "outlaw country"
     ],
     "url": "https://www.last.fm/music/Johnny+Cash+&+June+Carter",
     "image": "https://i.scdn.co/image/ab6761610000e5eb94a8326675bfcafb20f0a235",
@@ -4189,6 +5990,19 @@
       "outlaw country"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 6
+    },
+    "lastfmTags": [
+      "country",
+      "classic country",
+      "duets",
+      "classic rock",
+      "country duets"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 3,
       "spotifyTracks": 3,
@@ -4225,6 +6039,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "country",
+      "female vocalists",
+      "pop",
+      "singer-songwriter",
+      "contemporary country"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Kasey Chambers": {
@@ -4235,7 +6062,8 @@
       "female vocalists",
       "Alt-country",
       "singer-songwriter",
-      "australian"
+      "australian",
+      "alt country"
     ],
     "url": "https://www.last.fm/music/Kasey+Chambers",
     "image": "https://i.scdn.co/image/ab6761610000e5eb03e0a082ff5fcffc9f316c9e",
@@ -4254,6 +6082,19 @@
       "alt country"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 6
+    },
+    "lastfmTags": [
+      "country",
+      "female vocalists",
+      "Alt-country",
+      "singer-songwriter",
+      "australian"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 1,
       "spotifyTracks": 1,
@@ -4290,6 +6131,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "rock",
+      "classic rock",
+      "blues rock",
+      "blues",
+      "guitar"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Kelley Hunt": {
@@ -4300,7 +6154,12 @@
       "piano",
       "singer-songwriter",
       "boogie woogie",
-      "under 2000 listeners"
+      "under 2000 listeners",
+      "zydeco",
+      "modern blues",
+      "cha cha cha",
+      "soul blues",
+      "boogie-woogie"
     ],
     "url": "https://www.last.fm/music/Kelley+Hunt",
     "image": "https://i.scdn.co/image/ab6761610000e5ebc6b037ef3570acae8196683c",
@@ -4327,13 +6186,29 @@
       "spotifyArtist": 6,
       "spotifyTracks": 6,
       "total": 10
+    },
+    "lastfmTags": [
+      "blues",
+      "piano",
+      "singer-songwriter",
+      "boogie woogie",
+      "under 2000 listeners"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 6,
+      "spotifyTracks": 6,
+      "total": 10
     }
   },
   "Larry Campbell & Teresa Williams": {
     "bio": "Larry Campbell & Teresa Williams is American husband and wife multi-instrumentalist-vocalist Larry Campbell and singer-guitarist Teresa Williams. User-contributed text is available under the Creative Commons By-SA License; additional terms may apply.",
     "bioSummary": "Larry Campbell & Teresa Williams is American husband and wife multi-instrumentalist-vocalist Larry Campbell and singer-guitarist Teresa Williams. <a href=\"https://www.last.fm/music/Larry+Campbell+&+Teresa+Williams\">Read more on Last.fm</a>",
     "tags": [
-      "United States"
+      "United States",
+      "americana",
+      "outlaw country",
+      "roots rock"
     ],
     "url": "https://www.last.fm/music/Larry+Campbell+&+Teresa+Williams",
     "image": "https://i.scdn.co/image/ab6761610000e5eb3cc559ed1a0cd2fb67d03f6e",
@@ -4354,12 +6229,23 @@
       "spotifyArtist": 3,
       "spotifyTracks": 3,
       "total": 4
+    },
+    "lastfmTags": [
+      "United States"
+    ],
+    "tagSources": {
+      "lastfm": 1,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 4
     }
   },
   "Larry Don Wilson": {
     "bio": "",
     "bioSummary": "<a href=\"https://www.last.fm/music/Larry+Don+Wilson\">Read more on Last.fm</a>",
-    "tags": [],
+    "tags": [
+      "outlaw country"
+    ],
     "url": "https://www.last.fm/music/Larry+Don+Wilson",
     "image": "https://i.scdn.co/image/ab6761610000e5eb24336ecba48586bfeebac8d6",
     "listeners": 2,
@@ -4376,12 +6262,21 @@
       "spotifyArtist": 1,
       "spotifyTracks": 0,
       "total": 1
+    },
+    "lastfmTags": [],
+    "tagSources": {
+      "lastfm": 0,
+      "spotifyArtist": 1,
+      "spotifyTracks": 0,
+      "total": 1
     }
   },
   "Laura Bradley & the Famous Southland Singers": {
     "bio": "",
     "bioSummary": "<a href=\"https://www.last.fm/music/Laura+Bradley+&+The+Famous+Southland+Singers\">Read more on Last.fm</a>",
-    "tags": [],
+    "tags": [
+      "christmas"
+    ],
     "url": "https://www.last.fm/music/Laura+Bradley+&+The+Famous+Southland+Singers",
     "image": "https://i.scdn.co/image/ab6742d3000053b7dc26b2ffee1685e71c4dd417",
     "listeners": 1,
@@ -4398,6 +6293,13 @@
       "spotifyArtist": 1,
       "spotifyTracks": 0,
       "total": 1
+    },
+    "lastfmTags": [],
+    "tagSources": {
+      "lastfm": 0,
+      "spotifyArtist": 1,
+      "spotifyTracks": 0,
+      "total": 1
     }
   },
   "Led Zeppelin": {
@@ -4408,7 +6310,8 @@
       "hard rock",
       "rock",
       "70s",
-      "Progressive rock"
+      "Progressive rock",
+      "rock and roll"
     ],
     "url": "https://www.last.fm/music/Led+Zeppelin",
     "image": "https://i.scdn.co/image/207803ce008388d3427a685254f9de6a8f61dc2e",
@@ -4431,6 +6334,19 @@
       "spotifyArtist": 4,
       "spotifyTracks": 4,
       "total": 6
+    },
+    "lastfmTags": [
+      "classic rock",
+      "hard rock",
+      "rock",
+      "70s",
+      "Progressive rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 4,
+      "total": 6
     }
   },
   "Lee Clayton": {
@@ -4441,7 +6357,9 @@
       "singer-songwriter",
       "country",
       "guitar",
-      "country rock"
+      "country rock",
+      "outlaw country",
+      "reggae rock"
     ],
     "url": "https://www.last.fm/music/Lee+Clayton",
     "image": "https://i.scdn.co/image/9fdf54fe867f8d5f35e06a6da9a371c4e158d585",
@@ -4465,6 +6383,19 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 7
+    },
+    "lastfmTags": [
+      "rock",
+      "singer-songwriter",
+      "country",
+      "guitar",
+      "country rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 7
     }
   },
   "Leon Bridges": {
@@ -4475,7 +6406,8 @@
       "american",
       "rhythm and blues",
       "rnb",
-      "nu soul"
+      "nu soul",
+      "retro soul"
     ],
     "url": "https://www.last.fm/music/Leon+Bridges",
     "image": "https://i.scdn.co/image/ab6761610000e5ebd5112a5b16a01e971ebb049c",
@@ -4498,6 +6430,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 6
+    },
+    "lastfmTags": [
+      "soul",
+      "american",
+      "rhythm and blues",
+      "rnb",
+      "nu soul"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 6
     }
   },
   "Leon Russell": {
@@ -4508,7 +6453,8 @@
       "singer-songwriter",
       "blues",
       "rock",
-      "70s"
+      "70s",
+      "outlaw country"
     ],
     "url": "https://www.last.fm/music/Leon+Russell",
     "image": "https://i.scdn.co/image/803611243fd0decfaf6ac4c0ff4864fc04754c47",
@@ -4527,6 +6473,19 @@
       "outlaw country"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 6
+    },
+    "lastfmTags": [
+      "classic rock",
+      "singer-songwriter",
+      "blues",
+      "rock",
+      "70s"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 1,
       "spotifyTracks": 1,
@@ -4563,6 +6522,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 5
+    },
+    "lastfmTags": [
+      "folk",
+      "singer-songwriter",
+      "blues",
+      "Canadian",
+      "rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 5
     }
   },
   "Link Wray": {
@@ -4573,7 +6545,9 @@
       "surf rock",
       "Rock and Roll",
       "Surf",
-      "rock"
+      "rock",
+      "proto-punk",
+      "native american music"
     ],
     "url": "https://www.last.fm/music/Link+Wray",
     "image": "https://i.scdn.co/image/93609213bc0adbeecab83f8ab4731adbddab5d1c",
@@ -4597,6 +6571,19 @@
       "spotifyArtist": 4,
       "spotifyTracks": 4,
       "total": 7
+    },
+    "lastfmTags": [
+      "rockabilly",
+      "surf rock",
+      "Rock and Roll",
+      "Surf",
+      "rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 4,
+      "total": 7
     }
   },
   "Little Eva": {
@@ -4607,7 +6594,8 @@
       "soul",
       "oldies",
       "pop",
-      "female vocalists"
+      "female vocalists",
+      "doo-wop"
     ],
     "url": "https://www.last.fm/music/Little+Eva",
     "image": "https://i.scdn.co/image/ab67616d0000b273d7236f14544b3db88ed3f22b",
@@ -4630,6 +6618,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 6
+    },
+    "lastfmTags": [
+      "60s",
+      "soul",
+      "oldies",
+      "pop",
+      "female vocalists"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 6
     }
   },
   "Los Lobos": {
@@ -4640,7 +6641,8 @@
       "latin",
       "tex-mex",
       "americana",
-      "spanish"
+      "spanish",
+      "roots rock"
     ],
     "url": "https://www.last.fm/music/Los+Lobos",
     "image": "https://i.scdn.co/image/ab6761610000e5ebac4404f853105ca0ae098306",
@@ -4663,6 +6665,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 6
+    },
+    "lastfmTags": [
+      "rock",
+      "latin",
+      "tex-mex",
+      "americana",
+      "spanish"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 6
     }
   },
   "Lowell Fulson": {
@@ -4673,7 +6688,9 @@
       "rhythm and blues",
       "guitar",
       "funk",
-      "singer-songwriter"
+      "singer-songwriter",
+      "classic blues",
+      "soul blues"
     ],
     "url": "https://www.last.fm/music/Lowell+Fulson",
     "image": "https://i.scdn.co/image/7d4b1f790da17b85208da5f98f3b4570b36bf839",
@@ -4697,6 +6714,19 @@
       "spotifyArtist": 3,
       "spotifyTracks": 3,
       "total": 7
+    },
+    "lastfmTags": [
+      "blues",
+      "rhythm and blues",
+      "guitar",
+      "funk",
+      "singer-songwriter"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 7
     }
   },
   "Lucinda Williams": {
@@ -4707,7 +6737,10 @@
       "Alt-country",
       "country",
       "female vocalists",
-      "americana"
+      "americana",
+      "alt country",
+      "outlaw country",
+      "folk"
     ],
     "url": "https://www.last.fm/music/Lucinda+Williams",
     "image": "https://i.scdn.co/image/ab6761610000e5ebbf581205f66c4aeaac56b7ca",
@@ -4732,6 +6765,19 @@
       "spotifyArtist": 5,
       "spotifyTracks": 5,
       "total": 8
+    },
+    "lastfmTags": [
+      "singer-songwriter",
+      "Alt-country",
+      "country",
+      "female vocalists",
+      "americana"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 5,
+      "spotifyTracks": 5,
+      "total": 8
     }
   },
   "M. Ward": {
@@ -4742,7 +6788,8 @@
       "singer-songwriter",
       "indie",
       "Alt-country",
-      "indie rock"
+      "indie rock",
+      "indie folk"
     ],
     "url": "https://www.last.fm/music/M.+Ward",
     "image": "https://i.scdn.co/image/ab6761610000e5eb962b60d0bbfdcefb28dece35",
@@ -4761,6 +6808,19 @@
       "indie folk"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 6
+    },
+    "lastfmTags": [
+      "folk",
+      "singer-songwriter",
+      "indie",
+      "Alt-country",
+      "indie rock"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 1,
       "spotifyTracks": 1,
@@ -4797,6 +6857,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "soul",
+      "female vocalists",
+      "rnb",
+      "funk",
+      "pop"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Madeleine Peyroux": {
@@ -4807,7 +6880,9 @@
       "female vocalists",
       "blues",
       "vocal jazz",
-      "singer-songwriter"
+      "singer-songwriter",
+      "french jazz",
+      "jazz pop"
     ],
     "url": "https://www.last.fm/music/Madeleine+Peyroux",
     "image": "https://i.scdn.co/image/ab6761610000e5ebf878fa1f2dfe15aa758364b3",
@@ -4831,6 +6906,19 @@
       "spotifyArtist": 4,
       "spotifyTracks": 4,
       "total": 7
+    },
+    "lastfmTags": [
+      "jazz",
+      "female vocalists",
+      "blues",
+      "vocal jazz",
+      "singer-songwriter"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 4,
+      "total": 7
     }
   },
   "Mahalia Jackson": {
@@ -4841,7 +6929,9 @@
       "soul",
       "female vocalists",
       "jazz",
-      "jazz vocal"
+      "jazz vocal",
+      "traditional gospel",
+      "christmas"
     ],
     "url": "https://www.last.fm/music/Mahalia+Jackson",
     "image": "https://i.scdn.co/image/7eba64c0f27b073adbe7f0d0c46dd1880dd8658d",
@@ -4865,6 +6955,19 @@
       "spotifyArtist": 3,
       "spotifyTracks": 3,
       "total": 7
+    },
+    "lastfmTags": [
+      "gospel",
+      "soul",
+      "female vocalists",
+      "jazz",
+      "jazz vocal"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 7
     }
   },
   "Marcia Ball": {
@@ -4875,7 +6978,11 @@
       "piano",
       "female vocalists",
       "New Orleans",
-      "jazz"
+      "jazz",
+      "zydeco",
+      "cajun",
+      "boogie-woogie",
+      "modern blues"
     ],
     "url": "https://www.last.fm/music/Marcia+Ball",
     "image": "https://i.scdn.co/image/ab6761610000e5eb16855dcff10158a43620ec97",
@@ -4897,6 +7004,19 @@
       "modern blues"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 5,
+      "spotifyTracks": 5,
+      "total": 9
+    },
+    "lastfmTags": [
+      "blues",
+      "piano",
+      "female vocalists",
+      "New Orleans",
+      "jazz"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 5,
       "spotifyTracks": 5,
@@ -4933,6 +7053,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "folk",
+      "indie",
+      "folk rock",
+      "singer-songwriter",
+      "indie folk"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Maria Muldair": {
@@ -4943,7 +7076,8 @@
       "female vocalists",
       "folk",
       "country",
-      "pop"
+      "pop",
+      "yacht rock"
     ],
     "url": "https://www.last.fm/music/Maria+Muldaur",
     "image": "https://i.scdn.co/image/ab6761610000e5eb6c041247686af3498db9e2e2",
@@ -4966,6 +7100,19 @@
       "spotifyArtist": 2,
       "spotifyTracks": 0,
       "total": 6
+    },
+    "lastfmTags": [
+      "blues",
+      "female vocalists",
+      "folk",
+      "country",
+      "pop"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 0,
+      "total": 6
     }
   },
   "Marty Stuart": {
@@ -4976,7 +7123,16 @@
       "bluegrass",
       "Alt-country",
       "folk",
-      "marty stuart"
+      "marty stuart",
+      "classic country",
+      "traditional country",
+      "honky tonk",
+      "outlaw country",
+      "christian bluegrass",
+      "country christian",
+      "americana",
+      "southern gospel",
+      "alt country"
     ],
     "url": "https://www.last.fm/music/Marty+Stuart",
     "image": "https://i.scdn.co/image/ab6761610000e5ebc4331194bdb5544eb6f69978",
@@ -5007,6 +7163,19 @@
       "spotifyArtist": 7,
       "spotifyTracks": 11,
       "total": 14
+    },
+    "lastfmTags": [
+      "country",
+      "bluegrass",
+      "Alt-country",
+      "folk",
+      "marty stuart"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 7,
+      "spotifyTracks": 11,
+      "total": 14
     }
   },
   "Marvin Gaye": {
@@ -5017,7 +7186,10 @@
       "funk",
       "motown",
       "rhythm and blues",
-      "rnb"
+      "rnb",
+      "classic soul",
+      "northern soul",
+      "quiet storm"
     ],
     "url": "https://www.last.fm/music/Marvin+Gaye",
     "image": "https://i.scdn.co/image/cf79bd3e5c787e2ec152eeb1ea5538b0d4cf1434",
@@ -5042,6 +7214,19 @@
       "spotifyArtist": 5,
       "spotifyTracks": 5,
       "total": 8
+    },
+    "lastfmTags": [
+      "soul",
+      "funk",
+      "motown",
+      "rhythm and blues",
+      "rnb"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 5,
+      "spotifyTracks": 5,
+      "total": 8
     }
   },
   "Mary Gauthier": {
@@ -5052,7 +7237,8 @@
       "Alt-country",
       "female vocalists",
       "folk",
-      "americana"
+      "americana",
+      "alt country"
     ],
     "url": "https://www.last.fm/music/Mary+Gauthier",
     "image": "https://i.scdn.co/image/ab6761610000e5eb9d87eb01be131943865a735e",
@@ -5075,6 +7261,19 @@
       "spotifyArtist": 4,
       "spotifyTracks": 4,
       "total": 6
+    },
+    "lastfmTags": [
+      "singer-songwriter",
+      "Alt-country",
+      "female vocalists",
+      "folk",
+      "americana"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 4,
+      "total": 6
     }
   },
   "Mel Torme": {
@@ -5085,7 +7284,10 @@
       "swing",
       "vocal jazz",
       "male vocalists",
-      "jazz vocal"
+      "jazz vocal",
+      "adult standards",
+      "big band",
+      "christmas"
     ],
     "url": "https://www.last.fm/music/Mel+Torm%C3%A9",
     "image": "https://i.scdn.co/image/29de04b93c1e8e70ece8f13e41d99f63b16eb525",
@@ -5106,6 +7308,19 @@
       "christmas"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 4,
+      "total": 8
+    },
+    "lastfmTags": [
+      "jazz",
+      "swing",
+      "vocal jazz",
+      "male vocalists",
+      "jazz vocal"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 4,
       "spotifyTracks": 4,
@@ -5142,6 +7357,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "rock",
+      "female vocalists",
+      "singer-songwriter",
+      "folk",
+      "female vocalist"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Merle Haggard": {
@@ -5152,7 +7380,9 @@
       "classic country",
       "outlaw country",
       "singer-songwriter",
-      "americana"
+      "americana",
+      "traditional country",
+      "honky tonk"
     ],
     "url": "https://www.last.fm/music/Merle+Haggard",
     "image": "https://i.scdn.co/image/3c40c48783d62db32dff0bd510250d7532b856ee",
@@ -5172,6 +7402,19 @@
       "honky tonk"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 5,
+      "spotifyTracks": 5,
+      "total": 7
+    },
+    "lastfmTags": [
+      "country",
+      "classic country",
+      "outlaw country",
+      "singer-songwriter",
+      "americana"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 5,
       "spotifyTracks": 5,
@@ -5208,6 +7451,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "reggae",
+      "funk",
+      "Hip-Hop",
+      "political",
+      "rap"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Mickey & Sylvia": {
@@ -5240,6 +7496,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "rhythm and blues",
+      "oldies",
+      "Rock and Roll",
+      "pop",
+      "60s"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Nat King Cole": {
@@ -5250,7 +7519,10 @@
       "swing",
       "blues",
       "oldies",
-      "jazz vocal"
+      "jazz vocal",
+      "christmas",
+      "adult standards",
+      "vocal jazz"
     ],
     "url": "https://www.last.fm/music/Nat+King+Cole",
     "image": "https://i.scdn.co/image/ab6761610000e5eba30a36657c64cfaf49df85c3",
@@ -5275,6 +7547,19 @@
       "spotifyArtist": 3,
       "spotifyTracks": 3,
       "total": 8
+    },
+    "lastfmTags": [
+      "jazz",
+      "swing",
+      "blues",
+      "oldies",
+      "jazz vocal"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 8
     }
   },
   "Nathaniel Rateliff & The Night Sweats": {
@@ -5285,7 +7570,9 @@
       "blues rock",
       "rock",
       "USA",
-      "Southern Soul"
+      "Southern Soul",
+      "indie folk",
+      "americana"
     ],
     "url": "https://www.last.fm/music/Nathaniel+Rateliff+&+the+Night+Sweats",
     "image": "https://i.scdn.co/image/ab6761610000e5eb1189e3a131cdb8e423422bcc",
@@ -5309,6 +7596,19 @@
       "spotifyArtist": 2,
       "spotifyTracks": 0,
       "total": 7
+    },
+    "lastfmTags": [
+      "soul",
+      "blues rock",
+      "rock",
+      "USA",
+      "Southern Soul"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 0,
+      "total": 7
     }
   },
   "Neil Young": {
@@ -5319,7 +7619,8 @@
       "singer-songwriter",
       "folk",
       "rock",
-      "folk rock"
+      "folk rock",
+      "roots rock"
     ],
     "url": "https://www.last.fm/music/Neil+Young",
     "image": "https://i.scdn.co/image/ab6761610000e5ebbae8276dffd864ebac759b76",
@@ -5342,6 +7643,19 @@
       "spotifyArtist": 4,
       "spotifyTracks": 4,
       "total": 6
+    },
+    "lastfmTags": [
+      "classic rock",
+      "singer-songwriter",
+      "folk",
+      "rock",
+      "folk rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 4,
+      "total": 6
     }
   },
   "Nicole Atkins": {
@@ -5352,7 +7666,8 @@
       "indie",
       "singer-songwriter",
       "folk",
-      "american"
+      "american",
+      "pop soul"
     ],
     "url": "https://www.last.fm/music/Nicole+Atkins",
     "image": "https://i.scdn.co/image/ab6761610000e5eb62cba92676ae1c9e8a82b612",
@@ -5375,6 +7690,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 6
+    },
+    "lastfmTags": [
+      "female vocalists",
+      "indie",
+      "singer-songwriter",
+      "folk",
+      "american"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 6
     }
   },
   "Nina Simone": {
@@ -5385,7 +7713,8 @@
       "soul",
       "blues",
       "female vocalists",
-      "vocal jazz"
+      "vocal jazz",
+      "soul jazz"
     ],
     "url": "https://www.last.fm/music/Nina+Simone",
     "image": "https://i.scdn.co/image/ab6761610000e5eb136c51c848c26a6cce7f9e56",
@@ -5408,6 +7737,19 @@
       "spotifyArtist": 5,
       "spotifyTracks": 5,
       "total": 6
+    },
+    "lastfmTags": [
+      "jazz",
+      "soul",
+      "blues",
+      "female vocalists",
+      "vocal jazz"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 5,
+      "spotifyTracks": 5,
+      "total": 6
     }
   },
   "Norah Jones": {
@@ -5418,7 +7760,8 @@
       "female vocalists",
       "blues",
       "singer-songwriter",
-      "pop"
+      "pop",
+      "jazz pop"
     ],
     "url": "https://www.last.fm/music/Norah+Jones",
     "image": "https://i.scdn.co/image/ab6761610000e5ebed83d3ea063d87ce7e708f00",
@@ -5441,6 +7784,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 6
+    },
+    "lastfmTags": [
+      "jazz",
+      "female vocalists",
+      "blues",
+      "singer-songwriter",
+      "pop"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 6
     }
   },
   "O.V. Wright": {
@@ -5451,7 +7807,8 @@
       "Southern Soul",
       "Deep Soul",
       "rhythm and blues",
-      "blues"
+      "blues",
+      "classic soul"
     ],
     "url": "https://www.last.fm/music/O.V.+Wright",
     "image": "https://i.scdn.co/image/feb9c3cef9845c193b9c0ad43f1f2c42c68b1727",
@@ -5474,6 +7831,19 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 6
+    },
+    "lastfmTags": [
+      "soul",
+      "Southern Soul",
+      "Deep Soul",
+      "rhythm and blues",
+      "blues"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 6
     }
   },
   "Otis Redding": {
@@ -5484,7 +7854,10 @@
       "rhythm and blues",
       "blues",
       "60s",
-      "oldies"
+      "oldies",
+      "motown",
+      "classic soul",
+      "soul blues"
     ],
     "url": "https://www.last.fm/music/Otis+Redding",
     "image": "https://i.scdn.co/image/4ad89c805aff0fb76b01b6b62b39e21fcd8943c3",
@@ -5505,6 +7878,19 @@
       "soul blues"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 4,
+      "total": 8
+    },
+    "lastfmTags": [
+      "soul",
+      "rhythm and blues",
+      "blues",
+      "60s",
+      "oldies"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 4,
       "spotifyTracks": 4,
@@ -5541,12 +7927,27 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "electronic",
+      "indie",
+      "powerpop",
+      "electronica",
+      "pop"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Paul Kelly & Charlie Owen": {
     "bio": "",
     "bioSummary": "<a href=\"https://www.last.fm/music/Paul+Kelly+&+Charlie+Owen\">Read more on Last.fm</a>",
-    "tags": [],
+    "tags": [
+      "northern soul"
+    ],
     "url": "https://www.last.fm/music/Paul+Kelly+&+Charlie+Owen",
     "image": "https://i.scdn.co/image/f17d161a9e0f1ae1856f4bbbebe8403d3ad55862",
     "listeners": 125,
@@ -5559,6 +7960,13 @@
       "northern soul"
     ],
     "genreSources": {
+      "lastfm": 0,
+      "spotifyArtist": 1,
+      "spotifyTracks": 0,
+      "total": 1
+    },
+    "lastfmTags": [],
+    "tagSources": {
       "lastfm": 0,
       "spotifyArtist": 1,
       "spotifyTracks": 0,
@@ -5595,6 +8003,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "blues rock",
+      "classic rock",
+      "blues",
+      "rock",
+      "singer-songwriter"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Paul Thorn": {
@@ -5605,7 +8026,12 @@
       "americana",
       "Southern Rock",
       "acoustic",
-      "country"
+      "country",
+      "roots rock",
+      "alt country",
+      "red dirt",
+      "outlaw country",
+      "texas country"
     ],
     "url": "https://www.last.fm/music/Paul+Thorn",
     "image": "https://i.scdn.co/image/ab6761610000e5eb68cc5b0f272ed75affff1f18",
@@ -5632,6 +8058,19 @@
       "spotifyArtist": 7,
       "spotifyTracks": 7,
       "total": 10
+    },
+    "lastfmTags": [
+      "singer-songwriter",
+      "americana",
+      "Southern Rock",
+      "acoustic",
+      "country"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 7,
+      "spotifyTracks": 7,
+      "total": 10
     }
   },
   "Percy Sledge": {
@@ -5642,7 +8081,9 @@
       "rhythm and blues",
       "blues",
       "60s",
-      "oldies"
+      "oldies",
+      "motown",
+      "classic soul"
     ],
     "url": "https://www.last.fm/music/Percy+Sledge",
     "image": "https://i.scdn.co/image/f7f4c9cd6e8389824de99e80202caf249c9e013b",
@@ -5666,6 +8107,19 @@
       "spotifyArtist": 3,
       "spotifyTracks": 0,
       "total": 7
+    },
+    "lastfmTags": [
+      "soul",
+      "rhythm and blues",
+      "blues",
+      "60s",
+      "oldies"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 0,
+      "total": 7
     }
   },
   "Persuasions": {
@@ -5676,7 +8130,8 @@
       "Acapella",
       "a cappella",
       "vocal",
-      "All"
+      "All",
+      "doo-wop"
     ],
     "url": "https://www.last.fm/music/The+Persuasions",
     "image": "https://i.scdn.co/image/62595fc599d1295c64524c8247ff74a174fa609c",
@@ -5699,6 +8154,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 6
+    },
+    "lastfmTags": [
+      "soul",
+      "Acapella",
+      "a cappella",
+      "vocal",
+      "All"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 6
     }
   },
   "Pete Seeger": {
@@ -5709,7 +8177,9 @@
       "singer-songwriter",
       "political",
       "americana",
-      "banjo"
+      "banjo",
+      "traditional folk",
+      "folk rock"
     ],
     "url": "https://www.last.fm/music/Pete+Seeger",
     "image": "https://i.scdn.co/image/ab6761610000e5eb36c56a49814607d8035749b9",
@@ -5733,6 +8203,19 @@
       "spotifyArtist": 4,
       "spotifyTracks": 4,
       "total": 7
+    },
+    "lastfmTags": [
+      "folk",
+      "singer-songwriter",
+      "political",
+      "americana",
+      "banjo"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 4,
+      "total": 7
     }
   },
   "Peter Tosh": {
@@ -5743,7 +8226,10 @@
       "roots reggae",
       "Rasta",
       "roots",
-      "ska"
+      "ska",
+      "rocksteady",
+      "ragga",
+      "dub"
     ],
     "url": "https://www.last.fm/music/Peter+Tosh",
     "image": "https://i.scdn.co/image/c935305719f26d05c9d9b51b5b838d5448b44a27",
@@ -5768,12 +8254,27 @@
       "spotifyArtist": 5,
       "spotifyTracks": 5,
       "total": 8
+    },
+    "lastfmTags": [
+      "reggae",
+      "roots reggae",
+      "Rasta",
+      "roots",
+      "ska"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 5,
+      "spotifyTracks": 5,
+      "total": 8
     }
   },
   "Peter Wolfe": {
     "bio": "",
     "bioSummary": "<a href=\"https://www.last.fm/music/Peter+Wolfe\">Read more on Last.fm</a>",
-    "tags": [],
+    "tags": [
+      "roots rock"
+    ],
     "url": "https://www.last.fm/music/Peter+Wolfe",
     "image": "https://i.scdn.co/image/ab6772690000c46c1fa6949e34eb3075641227f3",
     "listeners": 126,
@@ -5790,6 +8291,13 @@
       "spotifyArtist": 1,
       "spotifyTracks": 0,
       "total": 1
+    },
+    "lastfmTags": [],
+    "tagSources": {
+      "lastfm": 0,
+      "spotifyArtist": 1,
+      "spotifyTracks": 0,
+      "total": 1
     }
   },
   "Phil Lesh": {
@@ -5800,7 +8308,10 @@
       "rock",
       "jimi hendrix",
       "The Doors",
-      "Velvet Underground"
+      "Velvet Underground",
+      "jam band",
+      "newgrass",
+      "bluegrass"
     ],
     "url": "https://www.last.fm/music/Phil+Lesh",
     "image": "https://i.scdn.co/image/ab67616d0000b273b3ac7c8436fc6c493221c6c7",
@@ -5825,12 +8336,30 @@
       "spotifyArtist": 1,
       "spotifyTracks": 3,
       "total": 8
+    },
+    "lastfmTags": [
+      "All",
+      "rock",
+      "jimi hendrix",
+      "The Doors",
+      "Velvet Underground"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 3,
+      "total": 8
     }
   },
   "Pop Staples": {
     "bio": "",
     "bioSummary": "<a href=\"https://www.last.fm/music/Pop+Staples\">Read more on Last.fm</a>",
-    "tags": [],
+    "tags": [
+      "blues",
+      "classic blues",
+      "blues rock",
+      "modern blues"
+    ],
     "url": "https://www.last.fm/music/Pop+Staples",
     "image": "https://i.scdn.co/image/ab67616d0000b273e3ea9d152e9ea95491b59b40",
     "listeners": 536,
@@ -5850,6 +8379,13 @@
       "spotifyArtist": 4,
       "spotifyTracks": 1,
       "total": 4
+    },
+    "lastfmTags": [],
+    "tagSources": {
+      "lastfm": 0,
+      "spotifyArtist": 4,
+      "spotifyTracks": 1,
+      "total": 4
     }
   },
   "Prince": {
@@ -5860,7 +8396,8 @@
       "pop",
       "soul",
       "rock",
-      "80s"
+      "80s",
+      "funk rock"
     ],
     "url": "https://www.last.fm/music/Prince",
     "image": "https://i.scdn.co/image/ab6761610000e5ebeaca358712b3fe4ed9814640",
@@ -5883,6 +8420,19 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 6
+    },
+    "lastfmTags": [
+      "funk",
+      "pop",
+      "soul",
+      "rock",
+      "80s"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 6
     }
   },
   "Puss n Boots": {
@@ -5893,7 +8443,8 @@
       "folk",
       "americana",
       "female vocalist",
-      "american"
+      "american",
+      "alt country"
     ],
     "url": "https://www.last.fm/music/Puss+N+Boots",
     "image": "https://i.scdn.co/image/ab6761610000e5eb1d95e25a2b185c7ce76460dc",
@@ -5912,6 +8463,19 @@
       "alt country"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 6
+    },
+    "lastfmTags": [
+      "country",
+      "folk",
+      "americana",
+      "female vocalist",
+      "american"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 2,
       "spotifyTracks": 2,
@@ -5948,6 +8512,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "new country",
+      "american",
+      "USA",
+      "folk",
+      "cowhat fav"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Ravi Shankar": {
@@ -5980,6 +8557,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "Indian",
+      "sitar",
+      "indian classical",
+      "world",
+      "World Music"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Ray Charles": {
@@ -5990,7 +8580,10 @@
       "soul",
       "blues",
       "rhythm and blues",
-      "piano"
+      "piano",
+      "soul blues",
+      "classic soul",
+      "vocal jazz"
     ],
     "url": "https://www.last.fm/music/Ray+Charles",
     "image": "https://i.scdn.co/image/ab6761610000e5eb6fc460f10177fa38af69b8bf",
@@ -6015,6 +8608,19 @@
       "spotifyArtist": 5,
       "spotifyTracks": 5,
       "total": 8
+    },
+    "lastfmTags": [
+      "jazz",
+      "soul",
+      "blues",
+      "rhythm and blues",
+      "piano"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 5,
+      "spotifyTracks": 5,
+      "total": 8
     }
   },
   "Rhiannon Giddens": {
@@ -6025,7 +8631,9 @@
       "country",
       "blues",
       "americana",
-      "banjo"
+      "banjo",
+      "southern gothic",
+      "bluegrass"
     ],
     "url": "https://www.last.fm/music/Rhiannon+Giddens",
     "image": "https://i.scdn.co/image/ab6761610000e5eb53c81e9caceb62ce9a6a6f76",
@@ -6049,12 +8657,30 @@
       "spotifyArtist": 4,
       "spotifyTracks": 4,
       "total": 7
+    },
+    "lastfmTags": [
+      "folk",
+      "country",
+      "blues",
+      "americana",
+      "banjo"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 4,
+      "total": 7
     }
   },
   "Rhianon Giddens": {
     "bio": "",
     "bioSummary": "<a href=\"https://www.last.fm/music/Rhianon+Giddens\">Read more on Last.fm</a>",
-    "tags": [],
+    "tags": [
+      "folk",
+      "americana",
+      "southern gothic",
+      "bluegrass"
+    ],
     "url": "https://www.last.fm/music/Rhianon+Giddens",
     "image": "https://i.scdn.co/image/ab6761610000e5eb53c81e9caceb62ce9a6a6f76",
     "listeners": 2,
@@ -6074,6 +8700,13 @@
       "spotifyArtist": 4,
       "spotifyTracks": 0,
       "total": 4
+    },
+    "lastfmTags": [],
+    "tagSources": {
+      "lastfm": 0,
+      "spotifyArtist": 4,
+      "spotifyTracks": 0,
+      "total": 4
     }
   },
   "Richard Thompson": {
@@ -6084,7 +8717,8 @@
       "singer-songwriter",
       "folk rock",
       "guitar",
-      "folk-rock"
+      "folk-rock",
+      "sea shanties"
     ],
     "url": "https://www.last.fm/music/Richard+Thompson",
     "image": "https://i.scdn.co/image/ab6761610000e5ebb3dbdec1592c785d341df182",
@@ -6103,6 +8737,19 @@
       "sea shanties"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 4,
+      "total": 6
+    },
+    "lastfmTags": [
+      "folk",
+      "singer-songwriter",
+      "folk rock",
+      "guitar",
+      "folk-rock"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 4,
       "spotifyTracks": 4,
@@ -6139,6 +8786,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "folk",
+      "singer-songwriter",
+      "acoustic",
+      "classic rock",
+      "rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Richie Valens": {
@@ -6149,7 +8809,8 @@
       "50s",
       "rockabilly",
       "oldies",
-      "rock"
+      "rock",
+      "doo-wop"
     ],
     "url": "https://www.last.fm/music/Ritchie+Valens",
     "image": "https://i.scdn.co/image/c0797b7eeb72ffd9760fa5a026641d14b3fd547a",
@@ -6172,6 +8833,19 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 6
+    },
+    "lastfmTags": [
+      "Rock and Roll",
+      "50s",
+      "rockabilly",
+      "oldies",
+      "rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 6
     }
   },
   "Robert Palmer": {
@@ -6182,7 +8856,8 @@
       "80s",
       "classic rock",
       "pop",
-      "british"
+      "british",
+      "yacht rock"
     ],
     "url": "https://www.last.fm/music/Robert+Palmer",
     "image": "https://i.scdn.co/image/d0f9136003814386988d37964be13b1da0b1c6e1",
@@ -6205,6 +8880,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 0,
       "total": 6
+    },
+    "lastfmTags": [
+      "rock",
+      "80s",
+      "classic rock",
+      "pop",
+      "british"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 0,
+      "total": 6
     }
   },
   "Roger McGuinn": {
@@ -6215,7 +8903,9 @@
       "classic rock",
       "singer-songwriter",
       "folk",
-      "rock"
+      "rock",
+      "country rock",
+      "roots rock"
     ],
     "url": "https://www.last.fm/music/Roger+McGuinn",
     "image": "https://i.scdn.co/image/751ce4cb4c3f2c5ea3ec53fd51fb6febb10751aa",
@@ -6239,6 +8929,19 @@
       "spotifyArtist": 3,
       "spotifyTracks": 3,
       "total": 7
+    },
+    "lastfmTags": [
+      "folk rock",
+      "classic rock",
+      "singer-songwriter",
+      "folk",
+      "rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 7
     }
   },
   "Rosanne Cash": {
@@ -6249,7 +8952,10 @@
       "singer-songwriter",
       "female vocalists",
       "Alt-country",
-      "americana"
+      "americana",
+      "classic country",
+      "alt country",
+      "folk"
     ],
     "url": "https://www.last.fm/music/Rosanne+Cash",
     "image": "https://i.scdn.co/image/ab6761610000e5eb09d23d5069404d2614347d07",
@@ -6274,6 +8980,19 @@
       "spotifyArtist": 4,
       "spotifyTracks": 4,
       "total": 8
+    },
+    "lastfmTags": [
+      "country",
+      "singer-songwriter",
+      "female vocalists",
+      "Alt-country",
+      "americana"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 4,
+      "total": 8
     }
   },
   "Ruth Brown": {
@@ -6284,7 +9003,10 @@
       "soul",
       "rhythm and blues",
       "jazz",
-      "female vocalists"
+      "female vocalists",
+      "boogie-woogie",
+      "swing music",
+      "rockabilly"
     ],
     "url": "https://www.last.fm/music/Ruth+Brown",
     "image": "https://i.scdn.co/image/9615fbc77469af0434ab1889a4ebf14e26b61f92",
@@ -6309,6 +9031,19 @@
       "spotifyArtist": 4,
       "spotifyTracks": 0,
       "total": 8
+    },
+    "lastfmTags": [
+      "blues",
+      "soul",
+      "rhythm and blues",
+      "jazz",
+      "female vocalists"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 0,
+      "total": 8
     }
   },
   "Ruthie Foster": {
@@ -6319,7 +9054,8 @@
       "soul",
       "female vocalists",
       "singer-songwriter",
-      "acoustic"
+      "acoustic",
+      "modern blues"
     ],
     "url": "https://www.last.fm/music/Ruthie+Foster",
     "image": "https://i.scdn.co/image/ab6761610000e5ebd8b40dc933741b664e5c36dd",
@@ -6342,6 +9078,19 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 6
+    },
+    "lastfmTags": [
+      "blues",
+      "soul",
+      "female vocalists",
+      "singer-songwriter",
+      "acoustic"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 6
     }
   },
   "Sam & Dave": {
@@ -6352,7 +9101,9 @@
       "rhythm and blues",
       "60s",
       "funk",
-      "rnb"
+      "rnb",
+      "motown",
+      "classic soul"
     ],
     "url": "https://www.last.fm/music/Sam+&+Dave",
     "image": "https://i.scdn.co/image/b1f68bdefbe49b474c9aac457114aac70d06f880",
@@ -6372,6 +9123,19 @@
       "classic soul"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 7
+    },
+    "lastfmTags": [
+      "soul",
+      "rhythm and blues",
+      "60s",
+      "funk",
+      "rnb"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 3,
       "spotifyTracks": 3,
@@ -6408,6 +9172,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 5
+    },
+    "lastfmTags": [
+      "soul",
+      "singer-songwriter",
+      "folk",
+      "americana",
+      "USA"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 5
     }
   },
   "Sam Cooke": {
@@ -6418,7 +9195,9 @@
       "rhythm and blues",
       "gospel",
       "oldies",
-      "rnb"
+      "rnb",
+      "motown",
+      "classic soul"
     ],
     "url": "https://www.last.fm/music/Sam+Cooke",
     "image": "https://i.scdn.co/image/ab6761610000e5eb41aaa3a05d2ddba59454273e",
@@ -6442,6 +9221,19 @@
       "spotifyArtist": 3,
       "spotifyTracks": 3,
       "total": 7
+    },
+    "lastfmTags": [
+      "soul",
+      "rhythm and blues",
+      "gospel",
+      "oldies",
+      "rnb"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 7
     }
   },
   "Sammy Hagar": {
@@ -6452,7 +9244,9 @@
       "rock",
       "classic rock",
       "heavy metal",
-      "metal"
+      "metal",
+      "glam metal",
+      "aor"
     ],
     "url": "https://www.last.fm/music/Sammy+Hagar",
     "image": "https://i.scdn.co/image/ab6761610000e5eb9dc3e6da940b26f4695adc3b",
@@ -6476,12 +9270,28 @@
       "spotifyArtist": 3,
       "spotifyTracks": 3,
       "total": 7
+    },
+    "lastfmTags": [
+      "hard rock",
+      "rock",
+      "classic rock",
+      "heavy metal",
+      "metal"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 7
     }
   },
   "Sara & Sean Watkins": {
     "bio": "",
     "bioSummary": "<a href=\"https://www.last.fm/music/Sara+&+Sean+Watkins\">Read more on Last.fm</a>",
-    "tags": [],
+    "tags": [
+      "newgrass",
+      "bluegrass"
+    ],
     "url": "https://www.last.fm/music/Sara+&+Sean+Watkins",
     "image": "https://i.scdn.co/image/9dc1b2a3e237b0278d36eaeaa7936f7d7d159380",
     "listeners": 78,
@@ -6499,6 +9309,13 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 2
+    },
+    "lastfmTags": [],
+    "tagSources": {
+      "lastfm": 0,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 2
     }
   },
   "Sarah Vaughn": {
@@ -6509,7 +9326,8 @@
       "female vocalists",
       "blues",
       "vocal jazz",
-      "jazz vocal"
+      "jazz vocal",
+      "jazz ballads"
     ],
     "url": "https://www.last.fm/music/Sarah+Vaughan",
     "image": "https://i.scdn.co/image/ab6761610000e5eb1443b3d0c1d38e982e49ec85",
@@ -6532,6 +9350,19 @@
       "spotifyArtist": 3,
       "spotifyTracks": 3,
       "total": 6
+    },
+    "lastfmTags": [
+      "jazz",
+      "female vocalists",
+      "blues",
+      "vocal jazz",
+      "jazz vocal"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 6
     }
   },
   "Sean McConnell": {
@@ -6542,7 +9373,10 @@
       "country",
       "pop",
       "americana",
-      "All"
+      "All",
+      "texas country",
+      "red dirt",
+      "folk pop"
     ],
     "url": "https://www.last.fm/music/Sean+McConnell",
     "image": "https://i.scdn.co/image/ab6761610000e5eb568738a364218c3cd99f16bd",
@@ -6563,6 +9397,19 @@
       "folk pop"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 4,
+      "total": 8
+    },
+    "lastfmTags": [
+      "folk",
+      "country",
+      "pop",
+      "americana",
+      "All"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 4,
       "spotifyTracks": 4,
@@ -6599,12 +9446,28 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "female vocalists",
+      "folk",
+      "singer-songwriter",
+      "pop",
+      "rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Shawn Colvin & Steve Earle": {
     "bio": "",
     "bioSummary": "<a href=\"https://www.last.fm/music/Shawn+Colvin+&+Steve+Earle\">Read more on Last.fm</a>",
-    "tags": [],
+    "tags": [
+      "americana",
+      "alt country"
+    ],
     "url": "https://www.last.fm/music/Shawn+Colvin+&+Steve+Earle",
     "image": "https://i.scdn.co/image/9ec4598a9518305e6568153cc535a4c9a6a9fc0f",
     "listeners": 116,
@@ -6622,6 +9485,13 @@
       "spotifyArtist": 2,
       "spotifyTracks": 0,
       "total": 2
+    },
+    "lastfmTags": [],
+    "tagSources": {
+      "lastfm": 0,
+      "spotifyArtist": 2,
+      "spotifyTracks": 0,
+      "total": 2
     }
   },
   "Shelby Lynne": {
@@ -6632,7 +9502,8 @@
       "singer-songwriter",
       "female vocalists",
       "Alt-country",
-      "soul"
+      "soul",
+      "alt country"
     ],
     "url": "https://www.last.fm/music/Shelby+Lynne",
     "image": "https://i.scdn.co/image/ab6761610000e5ebeb2b8bd1d90934661632f1a3",
@@ -6655,6 +9526,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 6
+    },
+    "lastfmTags": [
+      "country",
+      "singer-songwriter",
+      "female vocalists",
+      "Alt-country",
+      "soul"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 6
     }
   },
   "Shirelles": {
@@ -6665,7 +9549,9 @@
       "pop",
       "oldies",
       "female vocalists",
-      "Girl Groups"
+      "Girl Groups",
+      "doo-wop",
+      "motown"
     ],
     "url": "https://www.last.fm/music/The+Shirelles",
     "image": "https://i.scdn.co/image/9a51fe462a957dfe6b25a65a08bafcfcbbf5e673",
@@ -6689,6 +9575,19 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 7
+    },
+    "lastfmTags": [
+      "60s",
+      "pop",
+      "oldies",
+      "female vocalists",
+      "Girl Groups"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 7
     }
   },
   "Sly and the Family Stone": {
@@ -6699,7 +9598,10 @@
       "soul",
       "rhythm and blues",
       "rock",
-      "classic rock"
+      "classic rock",
+      "motown",
+      "classic soul",
+      "funk rock"
     ],
     "url": "https://www.last.fm/music/Sly+&+The+Family+Stone",
     "image": "https://i.scdn.co/image/9aef578389c4a9d27e15a627acb784c41094e79d",
@@ -6724,12 +9626,31 @@
       "spotifyArtist": 5,
       "spotifyTracks": 5,
       "total": 8
+    },
+    "lastfmTags": [
+      "funk",
+      "soul",
+      "rhythm and blues",
+      "rock",
+      "classic rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 5,
+      "spotifyTracks": 5,
+      "total": 8
     }
   },
   "Smokey Robinson & Ledisi": {
     "bio": "",
     "bioSummary": "<a href=\"https://www.last.fm/music/Smokey+Robinson+&+Ledisi\">Read more on Last.fm</a>",
-    "tags": [],
+    "tags": [
+      "motown",
+      "classic soul",
+      "northern soul",
+      "soul",
+      "quiet storm"
+    ],
     "url": "https://www.last.fm/music/Smokey+Robinson+&+Ledisi",
     "image": "https://i.scdn.co/image/cafa138375c190dc626b6fcb06079fb1c2954e7c",
     "listeners": 99,
@@ -6750,6 +9671,13 @@
       "spotifyArtist": 4,
       "spotifyTracks": 3,
       "total": 5
+    },
+    "lastfmTags": [],
+    "tagSources": {
+      "lastfm": 0,
+      "spotifyArtist": 4,
+      "spotifyTracks": 3,
+      "total": 5
     }
   },
   "Smokey Robinson & The Miracles": {
@@ -6760,7 +9688,9 @@
       "motown",
       "60s",
       "rhythm and blues",
-      "oldies"
+      "oldies",
+      "classic soul",
+      "northern soul"
     ],
     "url": "https://www.last.fm/music/Smokey+Robinson+and+The+Miracles",
     "image": "https://i.scdn.co/image/cafa138375c190dc626b6fcb06079fb1c2954e7c",
@@ -6784,12 +9714,30 @@
       "spotifyArtist": 4,
       "spotifyTracks": 4,
       "total": 7
+    },
+    "lastfmTags": [
+      "soul",
+      "motown",
+      "60s",
+      "rhythm and blues",
+      "oldies"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 4,
+      "total": 7
     }
   },
   "Smokey Robinson and Gary Barlow": {
     "bio": "",
     "bioSummary": "<a href=\"https://www.last.fm/music/Smokey+Robinson+and+Gary+Barlow\">Read more on Last.fm</a>",
-    "tags": [],
+    "tags": [
+      "motown",
+      "classic soul",
+      "northern soul",
+      "soul"
+    ],
     "url": "https://www.last.fm/music/Smokey+Robinson+and+Gary+Barlow",
     "image": "https://i.scdn.co/image/cafa138375c190dc626b6fcb06079fb1c2954e7c",
     "listeners": 1,
@@ -6809,12 +9757,24 @@
       "spotifyArtist": 4,
       "spotifyTracks": 0,
       "total": 4
+    },
+    "lastfmTags": [],
+    "tagSources": {
+      "lastfm": 0,
+      "spotifyArtist": 4,
+      "spotifyTracks": 0,
+      "total": 4
     }
   },
   "Smokey Robinson and James Taylor": {
     "bio": "",
     "bioSummary": "<a href=\"https://www.last.fm/music/Smokey+Robinson+and+James+Taylor\">Read more on Last.fm</a>",
-    "tags": [],
+    "tags": [
+      "motown",
+      "classic soul",
+      "northern soul",
+      "soul"
+    ],
     "url": "https://www.last.fm/music/Smokey+Robinson+and+James+Taylor",
     "image": "https://i.scdn.co/image/cafa138375c190dc626b6fcb06079fb1c2954e7c",
     "listeners": 1,
@@ -6834,12 +9794,24 @@
       "spotifyArtist": 4,
       "spotifyTracks": 0,
       "total": 4
+    },
+    "lastfmTags": [],
+    "tagSources": {
+      "lastfm": 0,
+      "spotifyArtist": 4,
+      "spotifyTracks": 0,
+      "total": 4
     }
   },
   "Smokey Robinson and Steven Tyler": {
     "bio": "",
     "bioSummary": "<a href=\"https://www.last.fm/music/Smokey+Robinson+and+Steven+Tyler\">Read more on Last.fm</a>",
-    "tags": [],
+    "tags": [
+      "motown",
+      "classic soul",
+      "northern soul",
+      "soul"
+    ],
     "url": "https://www.last.fm/music/Smokey+Robinson+and+Steven+Tyler",
     "image": "https://i.scdn.co/image/cafa138375c190dc626b6fcb06079fb1c2954e7c",
     "listeners": 3,
@@ -6859,6 +9831,13 @@
       "spotifyArtist": 4,
       "spotifyTracks": 0,
       "total": 4
+    },
+    "lastfmTags": [],
+    "tagSources": {
+      "lastfm": 0,
+      "spotifyArtist": 4,
+      "spotifyTracks": 0,
+      "total": 4
     }
   },
   "Solomon Burke": {
@@ -6869,7 +9848,10 @@
       "blues",
       "rhythm and blues",
       "Southern Soul",
-      "rnb"
+      "rnb",
+      "soul blues",
+      "classic soul",
+      "motown"
     ],
     "url": "https://www.last.fm/music/Solomon+Burke",
     "image": "https://i.scdn.co/image/ab6772690000c46c032ff716cd74e4faeba42330",
@@ -6894,6 +9876,19 @@
       "spotifyArtist": 4,
       "spotifyTracks": 4,
       "total": 8
+    },
+    "lastfmTags": [
+      "soul",
+      "blues",
+      "rhythm and blues",
+      "Southern Soul",
+      "rnb"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 4,
+      "total": 8
     }
   },
   "Spencer Wiggins": {
@@ -6904,7 +9899,9 @@
       "Southern Soul",
       "Goldwax",
       "70s",
-      "60s"
+      "60s",
+      "northern soul",
+      "classic soul"
     ],
     "url": "https://www.last.fm/music/Spencer+Wiggins",
     "image": "https://i.scdn.co/image/ab67616d0000b27366fe4fe331de7f0f9014c79a",
@@ -6924,6 +9921,19 @@
       "classic soul"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 0,
+      "total": 7
+    },
+    "lastfmTags": [
+      "soul",
+      "Southern Soul",
+      "Goldwax",
+      "70s",
+      "60s"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 3,
       "spotifyTracks": 0,
@@ -6960,6 +9970,19 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 5
+    },
+    "lastfmTags": [
+      "indie rock",
+      "indie",
+      "alternative",
+      "rock",
+      "indie pop"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 5
     }
   },
   "St Paul & The Broken Bones": {
@@ -6970,7 +9993,8 @@
       "blues",
       "american",
       "funk",
-      "indie"
+      "indie",
+      "retro soul"
     ],
     "url": "https://www.last.fm/music/St.+Paul+&+The+Broken+Bones",
     "image": "https://i.scdn.co/image/ab6761610000e5ebe25488bca4236e5ae6d5feb8",
@@ -6993,6 +10017,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 6
+    },
+    "lastfmTags": [
+      "soul",
+      "blues",
+      "american",
+      "funk",
+      "indie"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 6
     }
   },
   "Steeldrivers": {
@@ -7003,7 +10040,12 @@
       "country",
       "Alt-country",
       "folk",
-      "americana"
+      "americana",
+      "newgrass",
+      "outlaw country",
+      "red dirt",
+      "alt country",
+      "country blues"
     ],
     "url": "https://www.last.fm/music/The+SteelDrivers",
     "image": "https://i.scdn.co/image/ab6761610000e5ebdc908a34abcbb9b335b94c14",
@@ -7030,6 +10072,19 @@
       "spotifyArtist": 8,
       "spotifyTracks": 8,
       "total": 10
+    },
+    "lastfmTags": [
+      "bluegrass",
+      "country",
+      "Alt-country",
+      "folk",
+      "americana"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 8,
+      "spotifyTracks": 8,
+      "total": 10
     }
   },
   "Steve Earl": {
@@ -7040,7 +10095,10 @@
       "Alt-country",
       "singer-songwriter",
       "americana",
-      "rock"
+      "rock",
+      "alt country",
+      "outlaw country",
+      "country rock"
     ],
     "url": "https://www.last.fm/music/Steve+Earle",
     "image": "https://i.scdn.co/image/ab6761610000e5eb9df7776d38d37e7543548cad",
@@ -7065,6 +10123,19 @@
       "spotifyArtist": 4,
       "spotifyTracks": 4,
       "total": 8
+    },
+    "lastfmTags": [
+      "country",
+      "Alt-country",
+      "singer-songwriter",
+      "americana",
+      "rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 4,
+      "total": 8
     }
   },
   "Sturgill Simpson": {
@@ -7075,7 +10146,11 @@
       "singer-songwriter",
       "outlaw country",
       "Alt-country",
-      "americana"
+      "americana",
+      "alt country",
+      "bluegrass",
+      "red dirt",
+      "newgrass"
     ],
     "url": "https://www.last.fm/music/Sturgill+Simpson",
     "image": "https://i.scdn.co/image/ab6761610000e5eb1791f31121a24318e91cbda3",
@@ -7101,6 +10176,19 @@
       "spotifyArtist": 7,
       "spotifyTracks": 7,
       "total": 9
+    },
+    "lastfmTags": [
+      "country",
+      "singer-songwriter",
+      "outlaw country",
+      "Alt-country",
+      "americana"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 7,
+      "spotifyTracks": 7,
+      "total": 9
     }
   },
   "T-Bone Burnett": {
@@ -7111,7 +10199,10 @@
       "Alt-country",
       "americana",
       "rock",
-      "folk rock"
+      "folk rock",
+      "roots rock",
+      "alt country",
+      "southern gothic"
     ],
     "url": "https://www.last.fm/music/T-Bone+Burnett",
     "image": "https://i.scdn.co/image/ab6761610000e5ebda462e7d3d39592ebf9d51a5",
@@ -7136,6 +10227,19 @@
       "spotifyArtist": 4,
       "spotifyTracks": 0,
       "total": 8
+    },
+    "lastfmTags": [
+      "singer-songwriter",
+      "Alt-country",
+      "americana",
+      "rock",
+      "folk rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 0,
+      "total": 8
     }
   },
   "Taylor Goldsmith": {
@@ -7156,6 +10260,13 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 0
+    },
+    "lastfmTags": [],
+    "tagSources": {
+      "lastfm": 0,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 0
     }
   },
   "Teddy Thompson": {
@@ -7166,7 +10277,8 @@
       "folk",
       "british",
       "country",
-      "Alt-country"
+      "Alt-country",
+      "alt country"
     ],
     "url": "https://www.last.fm/music/Teddy+Thompson",
     "image": "https://i.scdn.co/image/ab6761610000e5ebc1b27335977921508515a6e9",
@@ -7189,12 +10301,27 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 6
+    },
+    "lastfmTags": [
+      "singer-songwriter",
+      "folk",
+      "british",
+      "country",
+      "Alt-country"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 6
     }
   },
   "Terry Woodford": {
     "bio": "",
     "bioSummary": "<a href=\"https://www.last.fm/music/Terry+Woodford\">Read more on Last.fm</a>",
-    "tags": [],
+    "tags": [
+      "lullaby"
+    ],
     "url": "https://www.last.fm/music/Terry+Woodford",
     "image": "https://i.scdn.co/image/ab67616d0000b2738a463e617bd6f58343fa6909",
     "listeners": 568,
@@ -7211,6 +10338,13 @@
       "spotifyArtist": 1,
       "spotifyTracks": 0,
       "total": 1
+    },
+    "lastfmTags": [],
+    "tagSources": {
+      "lastfm": 0,
+      "spotifyArtist": 1,
+      "spotifyTracks": 0,
+      "total": 1
     }
   },
   "The Avett Brothers": {
@@ -7221,7 +10355,11 @@
       "Alt-country",
       "bluegrass",
       "americana",
-      "country"
+      "country",
+      "indie folk",
+      "newgrass",
+      "alt country",
+      "folk rock"
     ],
     "url": "https://www.last.fm/music/The+Avett+Brothers",
     "image": "https://i.scdn.co/image/ab6761610000e5eba8258195e525b7a4c7fca7df",
@@ -7247,6 +10385,19 @@
       "spotifyArtist": 7,
       "spotifyTracks": 7,
       "total": 9
+    },
+    "lastfmTags": [
+      "folk",
+      "Alt-country",
+      "bluegrass",
+      "americana",
+      "country"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 7,
+      "spotifyTracks": 7,
+      "total": 9
     }
   },
   "The Band": {
@@ -7257,7 +10408,12 @@
       "folk rock",
       "rock",
       "folk",
-      "americana"
+      "americana",
+      "roots rock",
+      "southern rock",
+      "rockabilly",
+      "rock and roll",
+      "singer-songwriter"
     ],
     "url": "https://www.last.fm/music/The+Band",
     "image": "https://i.scdn.co/image/ab6761610000e5ebf4f262f1f5d28fcdc4c4226f",
@@ -7284,6 +10440,19 @@
       "spotifyArtist": 4,
       "spotifyTracks": 8,
       "total": 10
+    },
+    "lastfmTags": [
+      "classic rock",
+      "folk rock",
+      "rock",
+      "folk",
+      "americana"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 8,
+      "total": 10
     }
   },
   "The Beatles": {
@@ -7294,7 +10463,8 @@
       "rock",
       "british",
       "60s",
-      "pop"
+      "pop",
+      "psychedelic rock"
     ],
     "url": "https://www.last.fm/music/The+Beatles",
     "image": "https://i.scdn.co/image/ab6761610000e5ebe9348cc01ff5d55971b22433",
@@ -7313,6 +10483,19 @@
       "psychedelic rock"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 6
+    },
+    "lastfmTags": [
+      "classic rock",
+      "rock",
+      "british",
+      "60s",
+      "pop"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 2,
       "spotifyTracks": 2,
@@ -7337,6 +10520,13 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 0
+    },
+    "lastfmTags": [],
+    "tagSources": {
+      "lastfm": 0,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 0
     }
   },
   "The Byrds": {
@@ -7347,7 +10537,11 @@
       "60s",
       "psychedelic",
       "rock",
-      "folk"
+      "folk",
+      "folk rock",
+      "country rock",
+      "psychedelic rock",
+      "acid rock"
     ],
     "url": "https://www.last.fm/music/The+Byrds",
     "image": "https://i.scdn.co/image/f1cf7faba3223b4be7a0734f7c5cccaa39630570",
@@ -7373,6 +10567,19 @@
       "spotifyArtist": 4,
       "spotifyTracks": 4,
       "total": 9
+    },
+    "lastfmTags": [
+      "classic rock",
+      "60s",
+      "psychedelic",
+      "rock",
+      "folk"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 4,
+      "total": 9
     }
   },
   "The Coasters": {
@@ -7383,7 +10590,8 @@
       "oldies",
       "Rock and Roll",
       "60s",
-      "rockabilly"
+      "rockabilly",
+      "doo-wop"
     ],
     "url": "https://www.last.fm/music/The+Coasters",
     "image": "https://i.scdn.co/image/ab6761610000e5eb37e368b36ed346823cae7c82",
@@ -7406,6 +10614,19 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 6
+    },
+    "lastfmTags": [
+      "soul",
+      "oldies",
+      "Rock and Roll",
+      "60s",
+      "rockabilly"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 6
     }
   },
   "The Cookies": {
@@ -7416,7 +10637,9 @@
       "pop",
       "girl group",
       "female vocalists",
-      "Girl Groups"
+      "Girl Groups",
+      "doo-wop",
+      "northern soul"
     ],
     "url": "https://www.last.fm/music/The+Cookies",
     "image": "https://i.scdn.co/image/ab67616d0000b273066415f6d0e74f6f65f9eaf8",
@@ -7440,6 +10663,19 @@
       "spotifyArtist": 2,
       "spotifyTracks": 0,
       "total": 7
+    },
+    "lastfmTags": [
+      "60s",
+      "pop",
+      "girl group",
+      "female vocalists",
+      "Girl Groups"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 0,
+      "total": 7
     }
   },
   "The Crystals": {
@@ -7450,7 +10686,9 @@
       "pop",
       "soul",
       "oldies",
-      "female vocalists"
+      "female vocalists",
+      "doo-wop",
+      "motown"
     ],
     "url": "https://www.last.fm/music/The+Crystals",
     "image": "https://i.scdn.co/image/ce8e36caccc0fe528b69eae944e3a200ff46a788",
@@ -7474,12 +10712,29 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 7
+    },
+    "lastfmTags": [
+      "60s",
+      "pop",
+      "soul",
+      "oldies",
+      "female vocalists"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 7
     }
   },
   "The Del Rays": {
     "bio": "",
     "bioSummary": "<a href=\"https://www.last.fm/music/The+Del+Rays\">Read more on Last.fm</a>",
-    "tags": [],
+    "tags": [
+      "dream pop",
+      "britpop",
+      "doo-wop"
+    ],
     "url": "https://www.last.fm/music/The+Del+Rays",
     "image": "https://i.scdn.co/image/ab6761610000e5eb4e881f9a05bc3b4316106b0c",
     "listeners": 606,
@@ -7498,6 +10753,13 @@
       "spotifyArtist": 2,
       "spotifyTracks": 1,
       "total": 3
+    },
+    "lastfmTags": [],
+    "tagSources": {
+      "lastfm": 0,
+      "spotifyArtist": 2,
+      "spotifyTracks": 1,
+      "total": 3
     }
   },
   "The Dells": {
@@ -7508,7 +10770,11 @@
       "doo wop",
       "rhythm and blues",
       "northern soul",
-      "50s"
+      "50s",
+      "doo-wop",
+      "classic soul",
+      "philly soul",
+      "motown"
     ],
     "url": "https://www.last.fm/music/The+Dells",
     "image": "https://i.scdn.co/image/4f8d60f24089621efeb7dc2cd9c6760581a654a3",
@@ -7534,6 +10800,19 @@
       "spotifyArtist": 5,
       "spotifyTracks": 5,
       "total": 9
+    },
+    "lastfmTags": [
+      "soul",
+      "doo wop",
+      "rhythm and blues",
+      "northern soul",
+      "50s"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 5,
+      "spotifyTracks": 5,
+      "total": 9
     }
   },
   "The Dominoes": {
@@ -7544,7 +10823,11 @@
       "rnb",
       "indie",
       "rock",
-      "oldies"
+      "oldies",
+      "doo-wop",
+      "northern soul",
+      "boogie-woogie",
+      "rockabilly"
     ],
     "url": "https://www.last.fm/music/The+Dominoes",
     "image": "https://i.scdn.co/image/ab67616d0000b273b2f0c852ce47508239e374b6",
@@ -7570,6 +10853,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 4,
       "total": 9
+    },
+    "lastfmTags": [
+      "rhythm and blues",
+      "rnb",
+      "indie",
+      "rock",
+      "oldies"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 4,
+      "total": 9
     }
   },
   "The Gospel Stars": {
@@ -7580,7 +10876,8 @@
       "oldies",
       "motown",
       "soul",
-      "All"
+      "All",
+      "traditional gospel"
     ],
     "url": "https://www.last.fm/music/The+Gospel+Stars",
     "image": "https://i.scdn.co/image/ab67616d0000b273c75ed487c48c945a91694230",
@@ -7599,6 +10896,19 @@
       "traditional gospel"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 1,
+      "total": 6
+    },
+    "lastfmTags": [
+      "gospel",
+      "oldies",
+      "motown",
+      "soul",
+      "All"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 2,
       "spotifyTracks": 1,
@@ -7635,6 +10945,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "Psychedelic Rock",
+      "classic rock",
+      "60s",
+      "psychedelic",
+      "rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "The Judds": {
@@ -7645,7 +10968,9 @@
       "female vocalists",
       "the judds",
       "Country Favorites",
-      "pop"
+      "pop",
+      "classic country",
+      "traditional country"
     ],
     "url": "https://www.last.fm/music/The+Judds",
     "image": "https://i.scdn.co/image/ab6761610000e5ebe1b0441661329062ac0a03f6",
@@ -7665,6 +10990,19 @@
       "traditional country"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 0,
+      "total": 7
+    },
+    "lastfmTags": [
+      "country",
+      "female vocalists",
+      "the judds",
+      "Country Favorites",
+      "pop"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 3,
       "spotifyTracks": 0,
@@ -7695,6 +11033,16 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 2
+    },
+    "lastfmTags": [
+      "gospel",
+      "soul"
+    ],
+    "tagSources": {
+      "lastfm": 2,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 2
     }
   },
   "The Melody Kings": {
@@ -7711,6 +11059,13 @@
     "followers": 76,
     "genres": [],
     "genreSources": {
+      "lastfm": 0,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 0
+    },
+    "lastfmTags": [],
+    "tagSources": {
       "lastfm": 0,
       "spotifyArtist": 0,
       "spotifyTracks": 0,
@@ -7747,6 +11102,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "60s",
+      "classic rock",
+      "pop",
+      "rock",
+      "oldies"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "The Mosby Singers": {
@@ -7767,6 +11135,13 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 0
+    },
+    "lastfmTags": [],
+    "tagSources": {
+      "lastfm": 0,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 0
     }
   },
   "The Neville Brothers": {
@@ -7777,7 +11152,9 @@
       "funk",
       "New Orleans",
       "blues",
-      "rhythm and blues"
+      "rhythm and blues",
+      "cajun",
+      "zydeco"
     ],
     "url": "https://www.last.fm/music/The+Neville+Brothers",
     "image": "https://i.scdn.co/image/c29f9fb08a078ef6fcbcbb4d0993355ae2277fe9",
@@ -7801,6 +11178,19 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 7
+    },
+    "lastfmTags": [
+      "soul",
+      "funk",
+      "New Orleans",
+      "blues",
+      "rhythm and blues"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 7
     }
   },
   "The O’Jays": {
@@ -7811,7 +11201,9 @@
       "funk",
       "motown",
       "philly soul",
-      "rnb"
+      "rnb",
+      "classic soul",
+      "quiet storm"
     ],
     "url": "https://www.last.fm/music/The+O%27Jays",
     "image": "https://i.scdn.co/image/ab6761610000e5eb56ff1993c2aa3ca2c31b7a83",
@@ -7835,6 +11227,19 @@
       "spotifyArtist": 5,
       "spotifyTracks": 5,
       "total": 7
+    },
+    "lastfmTags": [
+      "soul",
+      "funk",
+      "motown",
+      "philly soul",
+      "rnb"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 5,
+      "spotifyTracks": 5,
+      "total": 7
     }
   },
   "The Paris Sisters": {
@@ -7845,7 +11250,8 @@
       "female vocalists",
       "60s",
       "Girl Groups",
-      "oldies"
+      "oldies",
+      "doo-wop"
     ],
     "url": "https://www.last.fm/music/The+Paris+Sisters",
     "image": "https://i.scdn.co/image/ab67616d0000b27306b74f59c1dbd3d30d73ce58",
@@ -7864,6 +11270,19 @@
       "doo-wop"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 6
+    },
+    "lastfmTags": [
+      "pop",
+      "female vocalists",
+      "60s",
+      "Girl Groups",
+      "oldies"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 1,
       "spotifyTracks": 1,
@@ -7900,6 +11319,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 5
+    },
+    "lastfmTags": [
+      "Disco",
+      "pop",
+      "soul",
+      "80s",
+      "female vocalists"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 5
     }
   },
   "The Revivalists": {
@@ -7932,6 +11364,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "rock",
+      "soul",
+      "funk",
+      "jazz",
+      "alternative rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "The Rolling Stones": {
@@ -7942,7 +11387,8 @@
       "rock",
       "british",
       "60s",
-      "blues"
+      "blues",
+      "big beat"
     ],
     "url": "https://www.last.fm/music/The+Rolling+Stones",
     "image": "https://i.scdn.co/image/ab6761610000e5ebe4cea917b68726aadb4854b8",
@@ -7965,6 +11411,19 @@
       "spotifyArtist": 2,
       "spotifyTracks": 3,
       "total": 6
+    },
+    "lastfmTags": [
+      "classic rock",
+      "rock",
+      "british",
+      "60s",
+      "blues"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 3,
+      "total": 6
     }
   },
   "The Ronettes": {
@@ -7975,7 +11434,8 @@
       "pop",
       "soul",
       "oldies",
-      "motown"
+      "motown",
+      "christmas"
     ],
     "url": "https://www.last.fm/music/The+Ronettes",
     "image": "https://i.scdn.co/image/ab6761610000e5ebc47897b69089f59e31817f26",
@@ -7998,6 +11458,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 6
+    },
+    "lastfmTags": [
+      "60s",
+      "pop",
+      "soul",
+      "oldies",
+      "motown"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 6
     }
   },
   "The Shaw Singers": {
@@ -8005,7 +11478,8 @@
     "bioSummary": "<a href=\"https://www.last.fm/music/Shaw+Singers\">Read more on Last.fm</a>",
     "tags": [
       "gospel",
-      "blues"
+      "blues",
+      "funk gospel"
     ],
     "url": "https://www.last.fm/music/Shaw+Singers",
     "image": "",
@@ -8025,6 +11499,16 @@
       "spotifyArtist": 1,
       "spotifyTracks": 0,
       "total": 3
+    },
+    "lastfmTags": [
+      "gospel",
+      "blues"
+    ],
+    "tagSources": {
+      "lastfm": 2,
+      "spotifyArtist": 1,
+      "spotifyTracks": 0,
+      "total": 3
     }
   },
   "The Shirelles": {
@@ -8035,7 +11519,9 @@
       "pop",
       "oldies",
       "female vocalists",
-      "Girl Groups"
+      "Girl Groups",
+      "doo-wop",
+      "motown"
     ],
     "url": "https://www.last.fm/music/The+Shirelles",
     "image": "https://i.scdn.co/image/9a51fe462a957dfe6b25a65a08bafcfcbbf5e673",
@@ -8059,12 +11545,27 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 7
+    },
+    "lastfmTags": [
+      "60s",
+      "pop",
+      "oldies",
+      "female vocalists",
+      "Girl Groups"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 7
     }
   },
   "The Souls of Solomon": {
     "bio": "",
     "bioSummary": "<a href=\"https://www.last.fm/music/The+Souls+Of+Solomon\">Read more on Last.fm</a>",
-    "tags": [],
+    "tags": [
+      "country blues"
+    ],
     "url": "https://www.last.fm/music/The+Souls+Of+Solomon",
     "image": "https://i.scdn.co/image/ab6761610000e5ebfeabd59ff40f5b7fede51531",
     "listeners": 3,
@@ -8081,6 +11582,13 @@
       "spotifyArtist": 1,
       "spotifyTracks": 0,
       "total": 1
+    },
+    "lastfmTags": [],
+    "tagSources": {
+      "lastfm": 0,
+      "spotifyArtist": 1,
+      "spotifyTracks": 0,
+      "total": 1
     }
   },
   "The Southern Sons": {
@@ -8091,7 +11599,9 @@
       "blues",
       "oldies",
       "vocals",
-      "religious"
+      "religious",
+      "country christian",
+      "southern gospel"
     ],
     "url": "https://www.last.fm/music/The+Southern+Sons",
     "image": "https://i.scdn.co/image/ab6761610000e5eb3366d4910b1dffc652deef63",
@@ -8115,6 +11625,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 7
+    },
+    "lastfmTags": [
+      "gospel",
+      "blues",
+      "oldies",
+      "vocals",
+      "religious"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 7
     }
   },
   "The Staples Singers": {
@@ -8125,7 +11648,9 @@
       "gospel",
       "rhythm and blues",
       "funk",
-      "stax"
+      "stax",
+      "motown",
+      "classic soul"
     ],
     "url": "https://www.last.fm/music/The+Staple+Singers",
     "image": "https://i.scdn.co/image/9de56ba0f97bd8a1cc7a42756dc58978c4f9962f",
@@ -8149,6 +11674,19 @@
       "spotifyArtist": 3,
       "spotifyTracks": 3,
       "total": 7
+    },
+    "lastfmTags": [
+      "soul",
+      "gospel",
+      "rhythm and blues",
+      "funk",
+      "stax"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 7
     }
   },
   "The Temptations": {
@@ -8159,7 +11697,8 @@
       "motown",
       "funk",
       "oldies",
-      "rnb"
+      "rnb",
+      "classic soul"
     ],
     "url": "https://www.last.fm/music/The+Temptations",
     "image": "https://i.scdn.co/image/ab6761610000e5ebec212a39ffa4182a0fff4e3c",
@@ -8178,6 +11717,19 @@
       "classic soul"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 6
+    },
+    "lastfmTags": [
+      "soul",
+      "motown",
+      "funk",
+      "oldies",
+      "rnb"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 3,
       "spotifyTracks": 3,
@@ -8214,6 +11766,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "60s",
+      "classic rock",
+      "rock",
+      "oldies",
+      "pop"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "The Who": {
@@ -8242,6 +11807,19 @@
       "hard rock"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 5
+    },
+    "lastfmTags": [
+      "classic rock",
+      "rock",
+      "british",
+      "60s",
+      "hard rock"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 2,
       "spotifyTracks": 2,
@@ -8278,6 +11856,19 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [
+      "pop",
+      "oldies",
+      "classic rock",
+      "male vocalists",
+      "rock"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Tom Petty & The Heartbreakers": {
@@ -8310,6 +11901,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 5
+    },
+    "lastfmTags": [
+      "classic rock",
+      "rock",
+      "80s",
+      "singer-songwriter",
+      "folk"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 5
     }
   },
   "Tom Waits": {
@@ -8320,7 +11924,8 @@
       "singer-songwriter",
       "experimental",
       "rock",
-      "alternative"
+      "alternative",
+      "southern gothic"
     ],
     "url": "https://www.last.fm/music/Tom+Waits",
     "image": "https://i.scdn.co/image/ab6761610000e5eb4679f0c1c8f862730c0b5109",
@@ -8339,6 +11944,19 @@
       "southern gothic"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 0,
+      "total": 6
+    },
+    "lastfmTags": [
+      "blues",
+      "singer-songwriter",
+      "experimental",
+      "rock",
+      "alternative"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 2,
       "spotifyTracks": 0,
@@ -8375,12 +11993,31 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 5
+    },
+    "lastfmTags": [
+      "blues",
+      "blues rock",
+      "swamp rock",
+      "rock",
+      "singer-songwriter"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 5
     }
   },
   "Toots and The Maytals (with Willie Nelson)": {
     "bio": "",
     "bioSummary": "<a href=\"https://www.last.fm/music/Toots+and+The+Maytals+(with+Willie+Nelson)\">Read more on Last.fm</a>",
-    "tags": [],
+    "tags": [
+      "reggae",
+      "rocksteady",
+      "ska",
+      "roots reggae",
+      "dub"
+    ],
     "url": "https://www.last.fm/music/Toots+and+The+Maytals+(with+Willie+Nelson)",
     "image": "https://i.scdn.co/image/ab6761610000e5eb346451ca43eb84f810f13b96",
     "listeners": 11,
@@ -8401,6 +12038,13 @@
       "spotifyArtist": 5,
       "spotifyTracks": 0,
       "total": 5
+    },
+    "lastfmTags": [],
+    "tagSources": {
+      "lastfm": 0,
+      "spotifyArtist": 5,
+      "spotifyTracks": 0,
+      "total": 5
     }
   },
   "Trampled By Turtles": {
@@ -8411,7 +12055,9 @@
       "folk",
       "americana",
       "country",
-      "Minnesota"
+      "Minnesota",
+      "newgrass",
+      "alt country"
     ],
     "url": "https://www.last.fm/music/Trampled+by+Turtles",
     "image": "https://i.scdn.co/image/ab6761610000e5ebd4cf2946b17505a08693a3d9",
@@ -8431,6 +12077,19 @@
       "alt country"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 5,
+      "spotifyTracks": 0,
+      "total": 7
+    },
+    "lastfmTags": [
+      "bluegrass",
+      "folk",
+      "americana",
+      "country",
+      "Minnesota"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 5,
       "spotifyTracks": 0,
@@ -8467,6 +12126,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 5
+    },
+    "lastfmTags": [
+      "rock",
+      "classic rock",
+      "irish",
+      "alternative",
+      "pop"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 5
     }
   },
   "Valerie June": {
@@ -8477,7 +12149,8 @@
       "blues",
       "country",
       "Alt-country",
-      "female vocalists"
+      "female vocalists",
+      "americana"
     ],
     "url": "https://www.last.fm/music/Valerie+June",
     "image": "https://i.scdn.co/image/ab6761610000e5eba4d591c3d5009ceddb94c822",
@@ -8500,6 +12173,19 @@
       "spotifyArtist": 2,
       "spotifyTracks": 2,
       "total": 6
+    },
+    "lastfmTags": [
+      "folk",
+      "blues",
+      "country",
+      "Alt-country",
+      "female vocalists"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 6
     }
   },
   "Van Morrison": {
@@ -8510,7 +12196,8 @@
       "classic rock",
       "folk",
       "blues",
-      "rock"
+      "rock",
+      "proto-punk"
     ],
     "url": "https://www.last.fm/music/Van+Morrison",
     "image": "https://i.scdn.co/image/ab6761610000e5eb5885f6c2d3ecf8e08bdfa472",
@@ -8529,6 +12216,19 @@
       "proto-punk"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 0,
+      "spotifyTracks": 1,
+      "total": 6
+    },
+    "lastfmTags": [
+      "singer-songwriter",
+      "classic rock",
+      "folk",
+      "blues",
+      "rock"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 0,
       "spotifyTracks": 1,
@@ -8553,6 +12253,13 @@
       "spotifyArtist": 0,
       "spotifyTracks": 0,
       "total": 0
+    },
+    "lastfmTags": [],
+    "tagSources": {
+      "lastfm": 0,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 0
     }
   },
   "War Child": {
@@ -8569,6 +12276,13 @@
     "followers": 113,
     "genres": [],
     "genreSources": {
+      "lastfm": 0,
+      "spotifyArtist": 0,
+      "spotifyTracks": 0,
+      "total": 0
+    },
+    "lastfmTags": [],
+    "tagSources": {
       "lastfm": 0,
       "spotifyArtist": 0,
       "spotifyTracks": 0,
@@ -8605,6 +12319,19 @@
       "spotifyArtist": 1,
       "spotifyTracks": 1,
       "total": 5
+    },
+    "lastfmTags": [
+      "singer-songwriter",
+      "rock",
+      "classic rock",
+      "folk",
+      "alternative"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 1,
+      "spotifyTracks": 1,
+      "total": 5
     }
   },
   "Wayland Jennings": {
@@ -8615,7 +12342,9 @@
       "outlaw country",
       "classic country",
       "Waylon Jennings",
-      "americana"
+      "americana",
+      "honky tonk",
+      "traditional country"
     ],
     "url": "https://www.last.fm/music/Waylon+Jennings",
     "image": "https://i.scdn.co/image/ab6761610000e5ebbb45c7bb750374d4e5a4577a",
@@ -8639,6 +12368,19 @@
       "spotifyArtist": 5,
       "spotifyTracks": 0,
       "total": 7
+    },
+    "lastfmTags": [
+      "country",
+      "outlaw country",
+      "classic country",
+      "Waylon Jennings",
+      "americana"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 5,
+      "spotifyTracks": 0,
+      "total": 7
     }
   },
   "Waylon Jennings": {
@@ -8649,7 +12391,9 @@
       "outlaw country",
       "classic country",
       "Waylon Jennings",
-      "americana"
+      "americana",
+      "honky tonk",
+      "traditional country"
     ],
     "url": "https://www.last.fm/music/Waylon+Jennings",
     "image": "https://i.scdn.co/image/ab6761610000e5ebbb45c7bb750374d4e5a4577a",
@@ -8673,6 +12417,19 @@
       "spotifyArtist": 5,
       "spotifyTracks": 5,
       "total": 7
+    },
+    "lastfmTags": [
+      "country",
+      "outlaw country",
+      "classic country",
+      "Waylon Jennings",
+      "americana"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 5,
+      "spotifyTracks": 5,
+      "total": 7
     }
   },
   "Wild Ponies": {
@@ -8681,7 +12438,9 @@
     "tags": [
       "country",
       "bluegrass",
-      "Blue Grass"
+      "Blue Grass",
+      "americana",
+      "newgrass"
     ],
     "url": "https://www.last.fm/music/Wild+Ponies",
     "image": "https://i.scdn.co/image/ab6761610000e5eb6d76efdd40c48cf621bd3f05",
@@ -8703,6 +12462,17 @@
       "spotifyArtist": 0,
       "spotifyTracks": 3,
       "total": 5
+    },
+    "lastfmTags": [
+      "country",
+      "bluegrass",
+      "Blue Grass"
+    ],
+    "tagSources": {
+      "lastfm": 3,
+      "spotifyArtist": 0,
+      "spotifyTracks": 3,
+      "total": 5
     }
   },
   "William Bell": {
@@ -8713,7 +12483,9 @@
       "stax",
       "rhythm and blues",
       "funk",
-      "Southern Soul"
+      "Southern Soul",
+      "classic soul",
+      "northern soul"
     ],
     "url": "https://www.last.fm/music/William+Bell",
     "image": "https://i.scdn.co/image/ab6761610000e5ebaa8961b85ea3306f34739a43",
@@ -8737,12 +12509,31 @@
       "spotifyArtist": 3,
       "spotifyTracks": 3,
       "total": 7
+    },
+    "lastfmTags": [
+      "soul",
+      "stax",
+      "rhythm and blues",
+      "funk",
+      "Southern Soul"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 3,
+      "spotifyTracks": 3,
+      "total": 7
     }
   },
   "Willie & Merle": {
     "bio": "",
     "bioSummary": "<a href=\"https://www.last.fm/music/Willie+&+Merle\">Read more on Last.fm</a>",
-    "tags": [],
+    "tags": [
+      "classic country",
+      "outlaw country",
+      "country",
+      "traditional country",
+      "honky tonk"
+    ],
     "url": "https://www.last.fm/music/Willie+&+Merle",
     "image": "",
     "listeners": 269,
@@ -8763,6 +12554,13 @@
       "spotifyArtist": 1,
       "spotifyTracks": 5,
       "total": 5
+    },
+    "lastfmTags": [],
+    "tagSources": {
+      "lastfm": 0,
+      "spotifyArtist": 1,
+      "spotifyTracks": 5,
+      "total": 5
     }
   },
   "Willie Nelson": {
@@ -8773,7 +12571,18 @@
       "folk",
       "singer-songwriter",
       "outlaw country",
-      "americana"
+      "americana",
+      "classic country",
+      "traditional country",
+      "honky tonk",
+      "texas country",
+      "red dirt",
+      "alt country",
+      "jazz",
+      "latin jazz",
+      "big band",
+      "jazz ballads",
+      "cool jazz"
     ],
     "url": "https://www.last.fm/music/Willie+Nelson",
     "image": "https://i.scdn.co/image/ab6772690000c46c82a531f8f5067e13517f5b15",
@@ -8806,6 +12615,19 @@
       "spotifyArtist": 5,
       "spotifyTracks": 14,
       "total": 16
+    },
+    "lastfmTags": [
+      "country",
+      "folk",
+      "singer-songwriter",
+      "outlaw country",
+      "americana"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 5,
+      "spotifyTracks": 14,
+      "total": 16
     }
   },
   "Wilson Pickett": {
@@ -8816,7 +12638,10 @@
       "rhythm and blues",
       "funk",
       "blues",
-      "oldies"
+      "oldies",
+      "motown",
+      "classic soul",
+      "northern soul"
     ],
     "url": "https://www.last.fm/music/Wilson+Pickett",
     "image": "https://i.scdn.co/image/6938996289924918a6f9bb96af0bde4af969cb1c",
@@ -8841,6 +12666,19 @@
       "spotifyArtist": 4,
       "spotifyTracks": 0,
       "total": 8
+    },
+    "lastfmTags": [
+      "soul",
+      "rhythm and blues",
+      "funk",
+      "blues",
+      "oldies"
+    ],
+    "tagSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 0,
+      "total": 8
     }
   },
   "Yarn": {
@@ -8851,7 +12689,10 @@
       "country",
       "americana",
       "electronic",
-      "ambient"
+      "ambient",
+      "newgrass",
+      "bluegrass",
+      "alt country"
     ],
     "url": "https://www.last.fm/music/Yarn",
     "image": "https://i.scdn.co/image/ab6761610000e5eb5370da5ea026e8d5d34c2828",
@@ -8872,6 +12713,19 @@
       "alt country"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 4,
+      "spotifyTracks": 4,
+      "total": 8
+    },
+    "lastfmTags": [
+      "psychill",
+      "country",
+      "americana",
+      "electronic",
+      "ambient"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 4,
       "spotifyTracks": 4,
@@ -8904,6 +12758,19 @@
       "contemporary reggae"
     ],
     "genreSources": {
+      "lastfm": 5,
+      "spotifyArtist": 2,
+      "spotifyTracks": 2,
+      "total": 5
+    },
+    "lastfmTags": [
+      "reggae",
+      "roots reggae",
+      "jamaica",
+      "jamaican",
+      "contemporary reggae"
+    ],
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 2,
       "spotifyTracks": 2,

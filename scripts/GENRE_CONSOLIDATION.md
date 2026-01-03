@@ -1,6 +1,6 @@
-# Genre/Tag Consolidation
+# Tag Consolidation
 
-This script consolidates genre and tag information from multiple sources to create a unified, comprehensive genre classification for each artist.
+This script consolidates tag information from multiple sources (Last.fm tags + Spotify genres) to create a unified, comprehensive tag classification for each artist.
 
 ## Data Sources
 
@@ -26,10 +26,10 @@ The Cyprus Avenue archive has genre/tag data from three different sources:
 
 ## The Problem
 
-Having genre data split across multiple files and formats creates several issues:
+Having tag/genre data split across multiple files and formats creates several issues:
 
-- **Fragmentation**: Genre info scattered across different data sources
-- **Duplication**: Same genres listed multiple times with different capitalization
+- **Fragmentation**: Tag/genre info scattered across different data sources
+- **Duplication**: Same tags listed multiple times with different capitalization
 - **Incompleteness**: Some artists have tags but no Spotify genres, or vice versa
 - **No single source of truth**: Frontend doesn't know which field to use
 
@@ -40,11 +40,11 @@ The `consolidate-genres.js` script:
 1. **Extracts** track genres from `spotify-index.json` and groups by artist
 2. **Fetches** artist genres from Spotify API for artists with `spotifyId`
 3. **Merges** all three sources with smart deduplication:
-   - Normalizes genre strings (lowercase, trimmed)
+   - Normalizes tag strings (lowercase, trimmed)
    - Removes exact duplicates (case-insensitive)
    - Preserves original capitalization from highest-priority source
-4. **Creates** unified `genres` field in `artist-bios.json`
-5. **Adds** `genreSources` metadata showing contribution from each source
+4. **Creates** unified `tags` field in `artist-bios.json`
+5. **Adds** `tagSources` metadata showing contribution from each source
 
 ## Usage
 
@@ -67,7 +67,7 @@ The script updates `artist-bios.json` with two new fields:
   "Bob Dylan": {
     "bio": "...",
     "bioSummary": "...",
-    "tags": ["folk", "singer-songwriter", "classic rock", "folk rock", "rock"],
+    "lastfmTags": ["folk", "singer-songwriter", "classic rock", "folk rock", "rock"],
     "url": "https://www.last.fm/music/Bob+Dylan",
     "image": "https://i.scdn.co/image/...",
     "listeners": 4210627,
@@ -77,7 +77,7 @@ The script updates `artist-bios.json` with two new fields:
     "popularity": 75,
     "followers": 7475190,
 
-    "genres": [
+    "tags": [
       "folk",
       "singer-songwriter",
       "classic rock",
@@ -85,7 +85,7 @@ The script updates `artist-bios.json` with two new fields:
       "rock",
       "roots rock"
     ],
-    "genreSources": {
+    "tagSources": {
       "lastfm": 5,
       "spotifyArtist": 4,
       "spotifyTracks": 4,
@@ -97,13 +97,13 @@ The script updates `artist-bios.json` with two new fields:
 
 ### Field Descriptions
 
-- **`tags`**: Original Last.fm tags (preserved for reference)
-- **`genres`**: Consolidated genres from all sources (use this in the UI)
-- **`genreSources`**: Metadata showing:
+- **`lastfmTags`**: Original Last.fm tags only (preserved for reference)
+- **`tags`**: Consolidated tags from all sources (use this in the UI)
+- **`tagSources`**: Metadata showing:
   - `lastfm`: Number of tags from Last.fm
   - `spotifyArtist`: Number of genres from Spotify artist API
   - `spotifyTracks`: Number of unique genres from artist's tracks
-  - `total`: Total unique genres after deduplication
+  - `total`: Total unique tags after deduplication
 
 ## Results
 
@@ -112,34 +112,35 @@ For the Cyprus Avenue archive:
 - **Total artists**: 277
 - **With Spotify artist genres**: 227 (82%)
 - **With track genres**: 193 (70%)
-- **Total genres added**: 457
-- **Average genres per artist**: 6
+- **Total tags added**: 457
+- **Average tags per artist**: 6
 
 ### Notable Improvements
 
-- **Willie Nelson**: 5 tags → 16 genres (+11)
+- **Willie Nelson**: 5 Last.fm tags → 16 total tags (+11)
   - Gained: "classic country", "traditional country", "honky tonk", "texas country", etc.
-- **Buddy Guy**: 5 tags → 10 genres (+5)
+- **Buddy Guy**: 5 Last.fm tags → 10 total tags (+5)
   - Gained: "classic blues", "blues rock", "modern blues", "electric blues", "chicago blues"
-- **Collaboration artists**: Many gained genres where Last.fm had none
-  - "Buddy Miller & Friends": 0 → 3 genres
-  - "Willie & Merle": 0 → 5 genres
+- **Collaboration artists**: Many gained tags where Last.fm had none
+  - "Buddy Miller & Friends": 0 → 3 tags
+  - "Willie & Merle": 0 → 5 tags
 
 ## Frontend Integration
 
-Update your components to use the consolidated `genres` field:
+Update your components to use the consolidated `tags` field:
 
 ```typescript
-// Before
+// Before (when fields were named differently)
 const artistTags = bio.tags
 
-// After (preferred)
-const artistGenres = bio.genres || bio.tags // Fallback to tags if genres not available
+// After (current naming)
+const artistTags = bio.tags || bio.lastfmTags // Fallback to lastfmTags if tags not available
 ```
 
 The TypeScript types in `web/src/types/artistBio.ts` have been updated to include:
-- `genres?: string[]`
-- `genreSources?: GenreSources`
+- `lastfmTags: string[]` (original Last.fm tags only)
+- `tags?: string[]` (consolidated from all sources)
+- `tagSources?: TagSources`
 
 ## Re-running
 
@@ -151,9 +152,9 @@ The script is **idempotent** and can be safely re-run:
   - Re-indexing tracks via Spotify script
   - Manual corrections to track data
 
-## Genre Priority
+## Tag Priority
 
-When multiple sources have the same genre (after normalization), the script uses this priority order for capitalization:
+When multiple sources have the same tag (after normalization), the script uses this priority order for capitalization:
 
 1. **Last.fm tags** (highest) - most human-curated
 2. **Spotify artist genres** (medium) - official but algorithmic
@@ -165,9 +166,9 @@ Example: If Last.fm has "Chicago Blues" and Spotify has "chicago blues", the fin
 
 ### Normalization
 
-Genres are normalized for comparison using:
+Tags are normalized for comparison using:
 ```javascript
-genre.toLowerCase().trim()
+tag.toLowerCase().trim()
 ```
 
 This catches duplicates like:
@@ -198,10 +199,10 @@ Safe for systems with 512MB+ RAM.
 **"Missing Spotify credentials"**
 - Ensure `.env` file has `SPOTIFY_CLIENT_ID` and `SPOTIFY_CLIENT_SECRET`
 
-**Genres look wrong for an artist**
-- Check the `genreSources` field to see which source contributed what
-- Consider manually editing `tags` in `artist-bios.json` for that artist
-- Re-run the consolidation script to regenerate `genres`
+**Tags look wrong for an artist**
+- Check the `tagSources` field to see which source contributed what
+- Consider manually editing `lastfmTags` in `artist-bios.json` for that artist
+- Re-run the consolidation script to regenerate `tags`
 
 **Want to exclude Spotify track genres**
 - Comment out the track genre extraction section in the script
@@ -211,9 +212,9 @@ Safe for systems with 512MB+ RAM.
 
 Potential improvements:
 
-1. **Genre hierarchies**: Map specific genres to broader categories
+1. **Tag hierarchies**: Map specific tags to broader categories
    - "chicago blues" → "blues" → "music"
 2. **Synonym detection**: Treat "r&b" and "rhythm and blues" as same
 3. **Weight by confidence**: Prioritize high-confidence sources
-4. **Manual overrides**: Support a `genre-overrides.json` file
-5. **Genre analytics**: Report most common genres, genre coverage by decade, etc.
+4. **Manual overrides**: Support a `tag-overrides.json` file
+5. **Tag analytics**: Report most common tags, tag coverage by decade, etc.

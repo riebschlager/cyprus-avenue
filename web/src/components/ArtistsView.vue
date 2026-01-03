@@ -15,9 +15,9 @@ const props = defineProps<{
 
 const router = useRouter()
 const route = useRoute()
-const { searchQuery, selectedGenre, filteredArtists, availableGenres } = useArtists(props.playlists)
+const { searchQuery, selectedTag, filteredArtists, availableTags } = useArtists(props.playlists)
 const expandedArtistIndex = ref<number | null>(null)
-const showGenrePlaylistModal = ref(false)
+const showTagPlaylistModal = ref(false)
 
 // Check for pending Spotify action after OAuth redirect
 onMounted(() => {
@@ -25,12 +25,12 @@ onMounted(() => {
   if (pendingAction) {
     try {
       const action = JSON.parse(pendingAction)
-      // Check if this was a genre modal
-      if (action.mode === 'genre' && action.genre) {
-        // Set the genre filter
-        selectedGenre.value = action.genre
+      // Check if this was a tag modal
+      if (action.mode === 'tag' && action.tag) {
+        // Set the tag filter
+        selectedTag.value = action.tag
         // Open the modal
-        showGenrePlaylistModal.value = true
+        showTagPlaylistModal.value = true
         sessionStorage.removeItem('spotify_pending_action')
       }
     } catch (err) {
@@ -78,13 +78,13 @@ watch(() => props.autoExpandArtist, (artist) => {
   }
 }, { immediate: true })
 
-// Sync URL query to selectedGenre
-watch(() => route.query.genre, (genre) => {
-  if (typeof genre === 'string') {
-    selectedGenre.value = genre
-    document.title = `${genre.charAt(0).toUpperCase() + genre.slice(1)} Artists - Cyprus Avenue Archive`
+// Sync URL query to selectedTag
+watch(() => route.query.tag, (tag) => {
+  if (typeof tag === 'string') {
+    selectedTag.value = tag
+    document.title = `${tag.charAt(0).toUpperCase() + tag.slice(1)} Artists - Cyprus Avenue Archive`
   } else {
-    selectedGenre.value = ''
+    selectedTag.value = ''
     if (!props.autoExpandArtist) {
       document.title = 'Artists - Cyprus Avenue Archive'
     }
@@ -92,22 +92,22 @@ watch(() => route.query.genre, (genre) => {
 }, { immediate: true })
 
 // Reset to first page when search changes
-watch([searchQuery, selectedGenre], () => {
+watch([searchQuery, selectedTag], () => {
   currentPage.value = 1
 })
 
-const handleGenreSelect = (genre: string) => {
+const handleTagSelect = (tag: string) => {
   // Collapse currently expanded artist
   expandedArtistIndex.value = null
-  
-  // Update URL to reflect genre state
-  router.push({ query: { ...route.query, genre } })
+
+  // Update URL to reflect tag state
+  router.push({ query: { ...route.query, tag } })
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
-const clearGenre = () => {
+const clearTag = () => {
   const query = { ...route.query }
-  delete query.genre
+  delete query.tag
   router.push({ query })
 }
 
@@ -162,38 +162,38 @@ const toggleArtist = (index: number) => {
       
       <div class="sm:w-64">
         <select
-          :value="selectedGenre"
-          @change="(e) => handleGenreSelect((e.target as HTMLSelectElement).value)"
+          :value="selectedTag"
+          @change="(e) => handleTagSelect((e.target as HTMLSelectElement).value)"
           class="w-full bg-gray-800 border border-gray-700 text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none cursor-pointer"
           style="background-image: url(&quot;data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e&quot;); background-position: right 0.5rem center; background-repeat: no-repeat; background-size: 1.5em 1.5em; padding-right: 2.5rem;"
         >
-          <option value="">All Genres</option>
-          <option v-for="genre in availableGenres" :key="genre" :value="genre">
-            {{ genre.charAt(0).toUpperCase() + genre.slice(1) }}
+          <option value="">All Tags</option>
+          <option v-for="tag in availableTags" :key="tag" :value="tag">
+            {{ tag.charAt(0).toUpperCase() + tag.slice(1) }}
           </option>
         </select>
       </div>
     </div>
 
-    <!-- Active Genre Indicator -->
-    <div v-if="selectedGenre" class="mt-6 bg-blue-900/40 border border-blue-500/30 rounded-lg p-4 flex items-center justify-between">
+    <!-- Active Tag Indicator -->
+    <div v-if="selectedTag" class="mt-6 bg-blue-900/40 border border-blue-500/30 rounded-lg p-4 flex items-center justify-between">
       <div class="flex items-center gap-3">
         <span class="text-2xl">🏷️</span>
         <div>
-          <p class="text-blue-200 text-sm font-medium uppercase tracking-wider">Viewing Genre</p>
-          <h2 class="text-xl font-bold text-white">{{ selectedGenre.charAt(0).toUpperCase() + selectedGenre.slice(1) }}</h2>
+          <p class="text-blue-200 text-sm font-medium uppercase tracking-wider">Viewing Tag</p>
+          <h2 class="text-xl font-bold text-white">{{ selectedTag.charAt(0).toUpperCase() + selectedTag.slice(1) }}</h2>
         </div>
       </div>
       <div class="flex gap-2">
-        <button 
-          @click="showGenrePlaylistModal = true"
+        <button
+          @click="showTagPlaylistModal = true"
           class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-green-500/20 hover:bg-green-500/30 text-green-300 hover:text-green-200 transition-colors text-sm font-medium border border-green-500/20"
         >
           <span>🎧</span>
-          Create {{ selectedGenre.charAt(0).toUpperCase() + selectedGenre.slice(1) }} Playlist on Spotify
+          Create {{ selectedTag.charAt(0).toUpperCase() + selectedTag.slice(1) }} Playlist on Spotify
         </button>
-        <button 
-          @click="clearGenre"
+        <button
+          @click="clearTag"
           class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 hover:text-blue-200 transition-colors text-sm font-medium"
         >
           <span>✕</span>
@@ -241,7 +241,7 @@ const toggleArtist = (index: number) => {
             :artist="artist"
             :is-expanded="expandedArtistIndex === ((currentPage - 1) * itemsPerPage + i)"
             @toggle="toggleArtist((currentPage - 1) * itemsPerPage + i)"
-            @select-genre="handleGenreSelect"
+            @select-tag="handleTagSelect"
           />
         </div>
 
@@ -268,12 +268,12 @@ const toggleArtist = (index: number) => {
       </div>
     </div>
 
-    <!-- Genre Playlist Modal -->
+    <!-- Tag Playlist Modal -->
     <SpotifyPlaylistModal
-      :is-open="showGenrePlaylistModal"
-      :genre="selectedGenre"
-      mode="genre"
-      @close="showGenrePlaylistModal = false"
+      :is-open="showTagPlaylistModal"
+      :tag="selectedTag"
+      mode="tag"
+      @close="showTagPlaylistModal = false"
     />
   </div>
 </template>

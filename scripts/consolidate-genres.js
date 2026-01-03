@@ -3,11 +3,11 @@ const path = require('path')
 
 /**
  * Consolidate genre/tag information from multiple sources:
- * 1. Last.fm tags (already in artist-bios.json)
+ * 1. Last.fm tags (already in artist-bios.json as lastfmTags)
  * 2. Spotify track genres (from spotify-index.json)
  * 3. Spotify artist genres (fetch from Spotify API)
  *
- * Creates a unified "genres" field that merges all sources.
+ * Creates a unified "tags" field that merges all sources.
  */
 
 // Load .env file if it exists
@@ -225,7 +225,12 @@ async function main() {
   console.log('⏳ Consolidating genres for each artist...\n')
 
   for (const [artistName, bio] of Object.entries(bios)) {
-    const lastfmTags = bio.tags || []
+    // Rename existing tags to lastfmTags if needed
+    if (bio.tags && !bio.lastfmTags) {
+      bio.lastfmTags = bio.tags
+    }
+
+    const lastfmTags = bio.lastfmTags || []
     const spotifyId = bio.spotifyId
     const trackGenres = trackGenresByArtist[artistName] || []
 
@@ -247,28 +252,25 @@ async function main() {
     }
 
     // Merge all genre sources
-    const mergedGenres = mergeGenres(lastfmTags, spotifyArtistGenres, trackGenres)
-    const genresAdded = mergedGenres.length - lastfmTags.length
+    const mergedTags = mergeGenres(lastfmTags, spotifyArtistGenres, trackGenres)
+    const tagsAdded = mergedTags.length - lastfmTags.length
 
-    // Update bio with consolidated genres
-    bio.genres = mergedGenres
-
-    // Keep original tags for reference
-    // bio.tags stays as is (Last.fm tags)
+    // Update bio with consolidated tags
+    bio.tags = mergedTags
 
     // Add source info for transparency
-    bio.genreSources = {
+    bio.tagSources = {
       lastfm: lastfmTags.length,
       spotifyArtist: spotifyArtistGenres.length,
       spotifyTracks: trackGenres.length,
-      total: mergedGenres.length
+      total: mergedTags.length
     }
 
-    if (genresAdded > 0) {
-      totalGenresAdded += genresAdded
-      console.log(`  ✓ ${artistName}: ${lastfmTags.length} → ${mergedGenres.length} genres (+${genresAdded})`)
+    if (tagsAdded > 0) {
+      totalGenresAdded += tagsAdded
+      console.log(`  ✓ ${artistName}: ${lastfmTags.length} → ${mergedTags.length} tags (+${tagsAdded})`)
     } else {
-      console.log(`  ⏭️  ${artistName}: ${mergedGenres.length} genres (no additions)`)
+      console.log(`  ⏭️  ${artistName}: ${mergedTags.length} tags (no additions)`)
     }
 
     processed++
@@ -284,25 +286,25 @@ async function main() {
 
   // Summary
   console.log(`\n${'='.repeat(60)}`)
-  console.log(`✅ Genre consolidation complete`)
+  console.log(`✅ Tag consolidation complete`)
   console.log(`${'='.repeat(60)}`)
   console.log(`📊 Statistics:`)
   console.log(`   Total artists: ${processed}`)
   console.log(`   With Spotify artist genres: ${withSpotifyGenres}`)
   console.log(`   With track genres: ${withTrackGenres}`)
-  console.log(`   Total genres added: ${totalGenresAdded}`)
-  console.log(`   Average genres per artist: ${Math.round(Object.values(bios).reduce((sum, bio) => sum + bio.genres.length, 0) / processed)}`)
+  console.log(`   Total tags added: ${totalGenresAdded}`)
+  console.log(`   Average tags per artist: ${Math.round(Object.values(bios).reduce((sum, bio) => sum + bio.tags.length, 0) / processed)}`)
   console.log(`   File size: ${(fs.statSync(biosPath).size / 1024).toFixed(2)} KB`)
 
   // Show some examples
-  console.log(`\n📝 Example consolidated genres:`)
+  console.log(`\n📝 Example consolidated tags:`)
   const examples = ['Bob Dylan', 'The Beatles', 'Aretha Franklin'].filter(name => bios[name])
   for (const name of examples.slice(0, 3)) {
     const bio = bios[name]
     console.log(`\n   ${name}:`)
-    console.log(`     Last.fm tags: ${bio.tags.slice(0, 3).join(', ')}...`)
-    console.log(`     Consolidated: ${bio.genres.slice(0, 5).join(', ')}${bio.genres.length > 5 ? '...' : ''}`)
-    console.log(`     Sources: ${bio.genreSources.lastfm} Last.fm + ${bio.genreSources.spotifyArtist} Spotify artist + ${bio.genreSources.spotifyTracks} track genres`)
+    console.log(`     Last.fm tags: ${bio.lastfmTags.slice(0, 3).join(', ')}...`)
+    console.log(`     Consolidated: ${bio.tags.slice(0, 5).join(', ')}${bio.tags.length > 5 ? '...' : ''}`)
+    console.log(`     Sources: ${bio.tagSources.lastfm} Last.fm + ${bio.tagSources.spotifyArtist} Spotify artist + ${bio.tagSources.spotifyTracks} track genres`)
   }
 
   console.log(`\n✨ Done!\n`)

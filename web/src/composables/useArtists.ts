@@ -13,12 +13,12 @@ export interface Artist {
   tracks: ArtistTrack[]
   uniqueSongs: string[]
   playlistCount: number
-  genres: string[]
+  tags: string[]
 }
 
 export function useArtists(playlists: MaybeRefOrGetter<Playlist[]>) {
   const searchQuery = ref('')
-  const selectedGenre = ref<string>('')
+  const selectedTag = ref<string>('')
   const { biosIndex } = useArtistBios()
 
   // Build artist map
@@ -48,16 +48,16 @@ export function useArtists(playlists: MaybeRefOrGetter<Playlist[]>) {
       const uniqueSongs = [...new Set(data.tracks.map(t => t.song))]
       const uniquePlaylists = new Set(data.tracks.map(t => `${t.playlistDate}|${t.playlistTitle}`))
 
-      // Get consolidated genres from artist bio (accessing biosIndex ensures reactivity)
+      // Get consolidated tags from artist bio (accessing biosIndex ensures reactivity)
       const bio = biosIndex.value[name]
-      const genres = bio?.genres || bio?.tags || []
+      const tags = bio?.tags || bio?.lastfmTags || []
 
       artistList.push({
         name,
         tracks: data.tracks,
         uniqueSongs,
         playlistCount: uniquePlaylists.size,
-        genres: genres
+        tags: tags
       })
     })
 
@@ -65,22 +65,22 @@ export function useArtists(playlists: MaybeRefOrGetter<Playlist[]>) {
     return artistList.sort((a, b) => a.name.localeCompare(b.name))
   })
 
-  // Get all available genres across all artists
-  const availableGenres = computed(() => {
-    const genreSet = new Set<string>()
+  // Get all available tags across all artists
+  const availableTags = computed(() => {
+    const tagSet = new Set<string>()
     artists.value.forEach(artist => {
-      artist.genres.forEach(genre => genreSet.add(genre))
+      artist.tags.forEach(tag => tagSet.add(tag))
     })
-    return Array.from(genreSet).sort()
+    return Array.from(tagSet).sort()
   })
 
-  // Filter artists by search query and genre
+  // Filter artists by search query and tag
   const filteredArtists = computed(() => {
     let result = artists.value
 
-    // Filter by genre
-    if (selectedGenre.value) {
-      result = result.filter(artist => artist.genres.includes(selectedGenre.value))
+    // Filter by tag
+    if (selectedTag.value) {
+      result = result.filter(artist => artist.tags.includes(selectedTag.value))
     }
 
     // Filter by search query
@@ -97,9 +97,9 @@ export function useArtists(playlists: MaybeRefOrGetter<Playlist[]>) {
 
   return {
     searchQuery,
-    selectedGenre,
+    selectedTag,
     artists,
     filteredArtists,
-    availableGenres
+    availableTags
   }
 }

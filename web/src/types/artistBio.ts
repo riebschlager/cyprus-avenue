@@ -1,4 +1,4 @@
-export interface GenreSources {
+export interface TagSources {
   lastfm: number
   spotifyArtist: number
   spotifyTracks: number
@@ -9,7 +9,7 @@ export interface ArtistBio {
   // Last.fm data
   bio: string
   bioSummary: string
-  tags: string[] // Original Last.fm tags
+  lastfmTags: string[] // Original Last.fm tags only
   url: string
   listeners: number
   playcount: number
@@ -21,9 +21,9 @@ export interface ArtistBio {
   popularity?: number
   followers?: number
 
-  // Consolidated genre data
-  genres?: string[] // Merged from Last.fm tags + Spotify artist genres + track genres
-  genreSources?: GenreSources
+  // Consolidated tag data
+  tags?: string[] // Merged from Last.fm tags + Spotify artist genres + track genres
+  tagSources?: TagSources
 }
 
 export interface ArtistBiosIndex {

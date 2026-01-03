@@ -13,7 +13,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   toggle: []
-  'select-genre': [genre: string]
+  'select-tag': [tag: string]
 }>()
 
 const cardRef = ref<HTMLElement | null>(null)
@@ -188,22 +188,22 @@ watch(() => props.isExpanded, (newVal) => {
         </div>
       </div>
 
-      <!-- Genres Section (Consolidated from Last.fm + Spotify) -->
-      <div v-if="artistBio && (artistBio.genres || artistBio.tags) && (artistBio.genres?.length || artistBio.tags?.length)" class="mt-4 pb-4 border-b border-gray-700">
+      <!-- Tags Section (Consolidated from Last.fm + Spotify) -->
+      <div v-if="artistBio && (artistBio.tags || artistBio.lastfmTags) && (artistBio.tags?.length || artistBio.lastfmTags?.length)" class="mt-4 pb-4 border-b border-gray-700">
         <h4 class="text-sm font-semibold text-white mb-3 flex items-center gap-2">
-          <span>Genres</span>
-          <span v-if="artistBio.genreSources" class="text-xs font-normal text-gray-500">
-            ({{ artistBio.genreSources.total }} from {{ artistBio.genreSources.lastfm + artistBio.genreSources.spotifyArtist + artistBio.genreSources.spotifyTracks > artistBio.genreSources.lastfm ? 'multiple sources' : 'Last.fm' }})
+          <span>Tags</span>
+          <span v-if="artistBio.tagSources" class="text-xs font-normal text-gray-500">
+            ({{ artistBio.tagSources.total }} from {{ artistBio.tagSources.lastfm + artistBio.tagSources.spotifyArtist + artistBio.tagSources.spotifyTracks > artistBio.tagSources.lastfm ? 'multiple sources' : 'Last.fm' }})
           </span>
         </h4>
         <div class="flex flex-wrap gap-2">
           <button
-            v-for="genre in (artistBio.genres || artistBio.tags).slice(0, 10)"
-            :key="genre"
-            @click.stop="emit('select-genre', genre)"
+            v-for="tag in (artistBio.tags || artistBio.lastfmTags).slice(0, 10)"
+            :key="tag"
+            @click.stop="emit('select-tag', tag)"
             class="px-3 py-1 rounded-full text-xs font-medium bg-gray-700 hover:bg-blue-600 text-gray-300 hover:text-white transition-colors"
           >
-            {{ genre }}
+            {{ tag }}
           </button>
         </div>
       </div>

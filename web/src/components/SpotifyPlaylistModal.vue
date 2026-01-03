@@ -14,9 +14,9 @@ export type ModalMode = 'closed' | 'authenticated' | 'playlist-selection' | 'cre
 const props = defineProps<{
   isOpen: boolean
   playlist?: Playlist
-  genre?: string
+  tag?: string
   artistName?: string
-  mode?: 'single' | 'all-tracks' | 'genre' | 'artist'
+  mode?: 'single' | 'all-tracks' | 'tag' | 'artist'
 }>()
 
 const emit = defineEmits<{
@@ -31,7 +31,7 @@ const {
   creationError,
   createPlaylistFromArchivePlaylist,
   createPlaylistFromAllTracks,
-  createPlaylistFromGenre,
+  createPlaylistFromTag,
   createPlaylistFromArtist,
   resetState
 } = useSpotifyPlaylistCreation()
@@ -46,12 +46,12 @@ const isError = computed(() => creationState.value === 'error')
 const modalState = computed(() => ({
   mode: props.mode,
   playlistSlug: props.playlist?.date,
-  genre: props.genre,
+  tag: props.tag,
   artistName: props.artistName
 }))
 
 const handleCreatePlaylist = async () => {
-  if (!props.playlist && props.mode !== 'all-tracks' && props.mode !== 'genre' && props.mode !== 'artist') {
+  if (!props.playlist && props.mode !== 'all-tracks' && props.mode !== 'tag' && props.mode !== 'artist') {
     showError('No source selected')
     return
   }
@@ -80,8 +80,8 @@ const handleCreatePlaylist = async () => {
     } else {
       showError(creationError.value || 'Failed to create playlist')
     }
-  } else if (props.mode === 'genre' && props.genre) {
-    const result = await createPlaylistFromGenre(props.genre, playlists.value)
+  } else if (props.mode === 'tag' && props.tag) {
+    const result = await createPlaylistFromTag(props.tag, playlists.value)
     if (result) {
       success(`Playlist created with ${result.tracksAdded} tracks!`)
       if (result.tracksFailed > 0) {
@@ -160,10 +160,10 @@ const handleClose = () => {
             <p class="text-xs text-gray-400">~{{ playlists.length }} shows with {{ (playlists.flatMap(p => p.tracks).length) }} total tracks</p>
           </div>
 
-          <div v-if="mode === 'genre' && genre" class="bg-gray-700/50 rounded-lg p-3">
-            <p class="text-xs text-gray-400 mb-1">Genre Based Playlist</p>
-            <p class="text-sm font-semibold text-white">{{ genre.charAt(0).toUpperCase() + genre.slice(1) }}</p>
-            <p class="text-xs text-gray-400">Tracks tagged with this genre in the archive</p>
+          <div v-if="mode === 'tag' && tag" class="bg-gray-700/50 rounded-lg p-3">
+            <p class="text-xs text-gray-400 mb-1">Tag Based Playlist</p>
+            <p class="text-sm font-semibold text-white">{{ tag.charAt(0).toUpperCase() + tag.slice(1) }}</p>
+            <p class="text-xs text-gray-400">Tracks tagged with this tag in the archive</p>
           </div>
 
           <div v-if="mode === 'artist' && artistName" class="bg-gray-700/50 rounded-lg p-3">

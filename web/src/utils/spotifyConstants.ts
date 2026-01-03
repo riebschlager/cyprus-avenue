@@ -16,7 +16,7 @@ export const SPOTIFY_SCOPES = [
 ]
 
 export const PLAYLIST_NAME_INDIVIDUAL = (date: string) => `Cyprus Avenue - ${date}`
-export const PLAYLIST_NAME_GENRE = (genre: string) => `Cyprus Avenue - ${genre.charAt(0).toUpperCase() + genre.slice(1)}`
+export const PLAYLIST_NAME_TAG = (tag: string) => `Cyprus Avenue - ${tag.charAt(0).toUpperCase() + tag.slice(1)}`
 export const PLAYLIST_NAME_ARTIST = (artist: string) => `Cyprus Avenue - ${artist}`
 export const PLAYLIST_NAME_ALL_TRACKS = 'Cyprus Avenue - Complete Archive'
 

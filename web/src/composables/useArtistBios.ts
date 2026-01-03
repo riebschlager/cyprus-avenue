@@ -81,14 +81,14 @@ export function useArtistBios() {
   const getStats = () => {
     const artists = Object.keys(biosIndex.value)
     const withImages = artists.filter(name => biosIndex.value[name]?.image).length
+    const withLastfmTags = artists.filter(name => (biosIndex.value[name]?.lastfmTags?.length ?? 0) > 0).length
     const withTags = artists.filter(name => (biosIndex.value[name]?.tags?.length ?? 0) > 0).length
-    const withGenres = artists.filter(name => (biosIndex.value[name]?.genres?.length ?? 0) > 0).length
 
     return {
       totalArtists: artists.length,
       withImages,
-      withTags,
-      withGenres, // Consolidated genres from all sources
+      withLastfmTags,
+      withTags, // Consolidated tags from all sources
       loaded: indexLoaded.value
     }
   }

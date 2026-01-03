@@ -5,7 +5,7 @@ import { useSpotifyAuth } from './useSpotifyAuth'
 import { useStreamingLinks } from './useStreamingLinks'
 import { SpotifyApiClient } from '../utils/spotifyApi'
 import { TrackMatcher, deduplicateTracks } from '../utils/trackMatching'
-import { PLAYLIST_NAME_INDIVIDUAL, PLAYLIST_NAME_ALL_TRACKS, PLAYLIST_NAME_GENRE, PLAYLIST_NAME_ARTIST } from '../utils/spotifyConstants'
+import { PLAYLIST_NAME_INDIVIDUAL, PLAYLIST_NAME_ALL_TRACKS, PLAYLIST_NAME_TAG, PLAYLIST_NAME_ARTIST } from '../utils/spotifyConstants'
 
 const creationState = ref<'idle' | 'creating' | 'completed' | 'error'>('idle')
 const creationProgress = ref<CreationProgress>({
@@ -181,8 +181,8 @@ export function useSpotifyPlaylistCreation() {
     }
   }
 
-  const createPlaylistFromGenre = async (
-    genre: string,
+  const createPlaylistFromTag = async (
+    tag: string,
     playlists: Playlist[]
   ): Promise<PlaylistCreationResult | null> => {
     resetState()
@@ -194,28 +194,28 @@ export function useSpotifyPlaylistCreation() {
     }
 
     const apiClient = SpotifyApiClient(accessToken)
-    // Use only index lookups for genre playlists
+    // Use only index lookups for tag playlists
     const matcher = TrackMatcher(spotifyIndex.value, apiClient, true)
 
     try {
       creationState.value = 'creating'
-      const playlistName = PLAYLIST_NAME_GENRE(genre)
+      const playlistName = PLAYLIST_NAME_TAG(tag)
       creationProgress.value.playlistName = playlistName
 
-      // Collect all tracks for this genre
-      const genreTracks = playlists.flatMap(p => p.tracks).filter(track => {
+      // Collect all tracks for this tag
+      const tagTracks = playlists.flatMap(p => p.tracks).filter(track => {
         const key = `${track.artist}|${track.song}`
         const trackData = spotifyIndex.value[key]
-        return trackData?.genres?.includes(genre)
+        return trackData?.genres?.includes(tag)
       })
-      
-      const uniqueTracks = deduplicateTracks(genreTracks)
+
+      const uniqueTracks = deduplicateTracks(tagTracks)
 
       // Get current user
       const user = await apiClient.getCurrentUser()
 
       // Create Spotify playlist
-      const description = `${genre.charAt(0).toUpperCase() + genre.slice(1)} music from the Cyprus Avenue archive`
+      const description = `${tag.charAt(0).toUpperCase() + tag.slice(1)} music from the Cyprus Avenue archive`
       const spotifyPlaylist = await apiClient.createPlaylist(user.id, playlistName, false, description)
 
       // Match and add tracks
@@ -353,7 +353,7 @@ export function useSpotifyPlaylistCreation() {
     creationError: computed(() => creationError.value),
     createPlaylistFromArchivePlaylist,
     createPlaylistFromAllTracks,
-    createPlaylistFromGenre,
+    createPlaylistFromTag,
     createPlaylistFromArtist,
     cancelCreation,
     resetState
