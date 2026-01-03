@@ -16,6 +16,7 @@ export const SPOTIFY_SCOPES = [
 ]
 
 export const PLAYLIST_NAME_INDIVIDUAL = (date: string) => `Cyprus Avenue - ${date}`
+export const PLAYLIST_NAME_GENRE = (genre: string) => `Cyprus Avenue - ${genre.charAt(0).toUpperCase() + genre.slice(1)}`
 export const PLAYLIST_NAME_ALL_TRACKS = 'Cyprus Avenue - Complete Archive'
 
 export const SPOTIFY_BATCH_SIZE = 100 // Max tracks per API call

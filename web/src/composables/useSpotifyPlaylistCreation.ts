@@ -5,7 +5,7 @@ import { useSpotifyAuth } from './useSpotifyAuth'
 import { useStreamingLinks } from './useStreamingLinks'
 import { SpotifyApiClient } from '../utils/spotifyApi'
 import { TrackMatcher, deduplicateTracks } from '../utils/trackMatching'
-import { PLAYLIST_NAME_INDIVIDUAL, PLAYLIST_NAME_ALL_TRACKS } from '../utils/spotifyConstants'
+import { PLAYLIST_NAME_INDIVIDUAL, PLAYLIST_NAME_ALL_TRACKS, PLAYLIST_NAME_GENRE } from '../utils/spotifyConstants'
 
 const creationState = ref<'idle' | 'creating' | 'completed' | 'error'>('idle')
 const creationProgress = ref<CreationProgress>({
@@ -181,6 +181,85 @@ export function useSpotifyPlaylistCreation() {
     }
   }
 
+  const createPlaylistFromGenre = async (
+    genre: string,
+    playlists: Playlist[]
+  ): Promise<PlaylistCreationResult | null> => {
+    resetState()
+    const accessToken = getAccessToken()
+    if (!accessToken) {
+      creationError.value = 'Not authenticated with Spotify'
+      creationState.value = 'error'
+      return null
+    }
+
+    const apiClient = SpotifyApiClient(accessToken)
+    // Use only index lookups for genre playlists
+    const matcher = TrackMatcher(spotifyIndex.value, apiClient, true)
+
+    try {
+      creationState.value = 'creating'
+      const playlistName = PLAYLIST_NAME_GENRE(genre)
+      creationProgress.value.playlistName = playlistName
+
+      // Collect all tracks for this genre
+      const genreTracks = playlists.flatMap(p => p.tracks).filter(track => {
+        const key = `${track.artist}|${track.song}`
+        const trackData = spotifyIndex.value[key]
+        return trackData?.genres?.includes(genre)
+      })
+      
+      const uniqueTracks = deduplicateTracks(genreTracks)
+
+      // Get current user
+      const user = await apiClient.getCurrentUser()
+
+      // Create Spotify playlist
+      const description = `${genre.charAt(0).toUpperCase() + genre.slice(1)} music from the Cyprus Avenue archive`
+      const spotifyPlaylist = await apiClient.createPlaylist(user.id, playlistName, false, description)
+
+      // Match and add tracks
+      creationProgress.value.totalTracks = uniqueTracks.length
+      const trackMatches: any[] = []
+      for (let i = 0; i < uniqueTracks.length; i++) {
+        const track = uniqueTracks[i]!
+        creationProgress.value.currentTrackIndex = i
+        creationProgress.value.currentTrackName = track.song
+        creationProgress.value.currentArtist = track.artist
+
+        const match = await matcher.matchTrack(track)
+        trackMatches.push(match)
+        await new Promise(resolve => setTimeout(resolve, 1))
+      }
+
+      const { uris, notFound } = matcher.getUrisFromMatches(trackMatches)
+
+      if (uris.length > 0) {
+        await apiClient.addTracksToPlaylist(spotifyPlaylist.id, uris)
+      }
+
+      creationState.value = 'completed'
+      const result: PlaylistCreationResult = {
+        success: true,
+        playlistId: spotifyPlaylist.id,
+        playlistUrl: spotifyPlaylist.external_urls.spotify,
+        playlistName,
+        tracksAdded: uris.length,
+        tracksFailed: notFound.length,
+        notFound
+      }
+
+      creationResult.value = result
+      return result
+    } catch (error) {
+      creationState.value = 'error'
+      const message = error instanceof Error ? error.message : 'Unknown error'
+      creationError.value = message
+      console.error('Playlist creation error:', error)
+      return null
+    }
+  }
+
   const cancelCreation = () => {
     if (creationState.value === 'creating') {
       creationState.value = 'idle'
@@ -196,6 +275,7 @@ export function useSpotifyPlaylistCreation() {
     creationError: computed(() => creationError.value),
     createPlaylistFromArchivePlaylist,
     createPlaylistFromAllTracks,
+    createPlaylistFromGenre,
     cancelCreation,
     resetState
   }

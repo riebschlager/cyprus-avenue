@@ -5,6 +5,7 @@ import { useArtists, type Artist } from '../composables/useArtists'
 import type { Playlist } from '../types/playlist'
 import ArtistCard from './ArtistCard.vue'
 import SearchBar from './SearchBar.vue'
+import SpotifyPlaylistModal from './SpotifyPlaylistModal.vue'
 import { generateArtistSlug } from '../utils/slug'
 
 const props = defineProps<{
@@ -16,6 +17,7 @@ const router = useRouter()
 const route = useRoute()
 const { searchQuery, selectedGenre, filteredArtists, availableGenres } = useArtists(props.playlists)
 const expandedArtistIndex = ref<number | null>(null)
+const showGenrePlaylistModal = ref(false)
 
 // Pagination
 const itemsPerPage = 50
@@ -161,13 +163,22 @@ const toggleArtist = (index: number) => {
           <h2 class="text-xl font-bold text-white">{{ selectedGenre.charAt(0).toUpperCase() + selectedGenre.slice(1) }}</h2>
         </div>
       </div>
-      <button 
-        @click="clearGenre"
-        class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 hover:text-blue-200 transition-colors text-sm font-medium"
-      >
-        <span>✕</span>
-        Clear Filter
-      </button>
+      <div class="flex gap-2">
+        <button 
+          @click="showGenrePlaylistModal = true"
+          class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-green-500/20 hover:bg-green-500/30 text-green-300 hover:text-green-200 transition-colors text-sm font-medium"
+        >
+          <span>🎧</span>
+          Add to Spotify
+        </button>
+        <button 
+          @click="clearGenre"
+          class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 hover:text-blue-200 transition-colors text-sm font-medium"
+        >
+          <span>✕</span>
+          Clear Filter
+        </button>
+      </div>
     </div>
 
     <!-- Artists List -->
@@ -235,5 +246,13 @@ const toggleArtist = (index: number) => {
         </div>
       </div>
     </div>
+
+    <!-- Genre Playlist Modal -->
+    <SpotifyPlaylistModal
+      :is-open="showGenrePlaylistModal"
+      :genre="selectedGenre"
+      mode="genre"
+      @close="showGenrePlaylistModal = false"
+    />
   </div>
 </template>
