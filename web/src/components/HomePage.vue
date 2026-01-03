@@ -115,6 +115,17 @@ const thisWeekPlaylists = computed(() => {
 
 // Track expanded state for the history cards
 const expandedHistoryId = ref<string | null>(null)
+
+// Auto-expand first history playlist by default
+watch(thisWeekPlaylists, (newList) => {
+  if (newList.length > 0 && !expandedHistoryId.value) {
+    const firstPlaylist = newList[0]
+    if (firstPlaylist) {
+      expandedHistoryId.value = firstPlaylist.date
+    }
+  }
+}, { immediate: true })
+
 const toggleHistoryCard = (date: string) => {
   expandedHistoryId.value = expandedHistoryId.value === date ? null : date
 }
