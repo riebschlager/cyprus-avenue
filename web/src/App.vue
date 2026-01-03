@@ -227,13 +227,21 @@ onUnmounted(() => {
     </main>
 
     <footer class="bg-gray-900 border-t border-gray-800 mt-12">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <p class="text-center text-sm text-gray-400">
-          Cyprus Avenue Archive &middot;
-          <a href="https://www.kcur.org/tags/cyprus-avenue" target="_blank" rel="noopener" class="text-blue-400 hover:text-blue-300">
-            KCUR Cyprus Avenue
-          </a>
-        </p>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+          <p class="text-sm text-gray-400">
+            Cyprus Avenue Archive &middot;
+            <a href="https://www.kcur.org/tags/cyprus-avenue" target="_blank" rel="noopener" class="text-blue-400 hover:text-blue-300">
+              KCUR Cyprus Avenue
+            </a>
+          </p>
+          <p class="text-sm text-gray-500">
+            Created by 
+            <a href="https://the816.com" target="_blank" rel="noopener" class="text-gray-400 hover:text-blue-400 transition-colors font-medium">
+              Chris Riebschlager
+            </a>
+          </p>
+        </div>
       </div>
     </footer>
 
