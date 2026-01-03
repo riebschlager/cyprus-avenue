@@ -1,6 +1,6 @@
 import { computed, ref, toValue, type MaybeRefOrGetter } from 'vue'
 import type { Playlist } from '../types/playlist'
-import { useStreamingLinks } from './useStreamingLinks'
+import { useArtistBios } from './useArtistBios'
 
 export interface ArtistTrack {
   song: string
@@ -19,34 +19,26 @@ export interface Artist {
 export function useArtists(playlists: MaybeRefOrGetter<Playlist[]>) {
   const searchQuery = ref('')
   const selectedGenre = ref<string>('')
-  const { spotifyIndex } = useStreamingLinks()
+  const { biosIndex } = useArtistBios()
 
   // Build artist map
   const artists = computed(() => {
-    const artistMap = new Map<string, { tracks: ArtistTrack[], genres: Set<string> }>()
+    const artistMap = new Map<string, { tracks: ArtistTrack[] }>()
     const playlistsValue = toValue(playlists)
-    const index = spotifyIndex.value // Access for reactivity
 
     playlistsValue.forEach(playlist => {
       playlist.tracks.forEach(track => {
         const artistName = track.artist
         if (!artistMap.has(artistName)) {
-          artistMap.set(artistName, { tracks: [], genres: new Set() })
+          artistMap.set(artistName, { tracks: [] })
         }
-        
+
         const entry = artistMap.get(artistName)!
         entry.tracks.push({
           song: track.song,
           playlistTitle: playlist.title,
           playlistDate: playlist.date
         })
-
-        // Collect genres from Spotify index
-        const key = `${track.artist}|${track.song}`
-        const trackData = index[key]
-        if (trackData && trackData.genres) {
-          trackData.genres.forEach(g => entry.genres.add(g))
-        }
       })
     })
 
@@ -56,12 +48,16 @@ export function useArtists(playlists: MaybeRefOrGetter<Playlist[]>) {
       const uniqueSongs = [...new Set(data.tracks.map(t => t.song))]
       const uniquePlaylists = new Set(data.tracks.map(t => `${t.playlistDate}|${t.playlistTitle}`))
 
+      // Get consolidated genres from artist bio (accessing biosIndex ensures reactivity)
+      const bio = biosIndex.value[name]
+      const genres = bio?.genres || bio?.tags || []
+
       artistList.push({
         name,
         tracks: data.tracks,
         uniqueSongs,
         playlistCount: uniquePlaylists.size,
-        genres: Array.from(data.genres).sort()
+        genres: genres
       })
     })
 
