@@ -75,27 +75,38 @@ function toTitleCase(tag: string): string {
 
 /**
  * Processes a raw tag:
- * 1. Converts to Title Case
- * 2. Applies mappings to canonical versions
- * 3. Checks against blacklist
+ * 1. Checks against blacklist (case-insensitive)
+ * 2. Applies mappings to canonical versions (case-insensitive)
+ * 3. Normalizes to Title Case
  * 
  * Returns the normalized tag or null if it should be filtered out
  */
 export function normalizeAndFilterTag(rawTag: string): string | null {
   if (!rawTag) return null
 
-  // 1. Initial Title Case conversion for consistent mapping keys
-  let tag = toTitleCase(rawTag.trim())
+  const trimmed = rawTag.trim()
+  const lowercase = trimmed.toLowerCase()
 
-  // 2. Apply Mappings
-  const mapped = TAG_MAPPINGS[tag]
-  if (mapped) {
-    tag = mapped
+  // 1. Check Blacklist (case-insensitive)
+  const isBlacklisted = Array.from(TAG_BLACKLIST).some(b => b.toLowerCase() === lowercase)
+  if (isBlacklisted) {
+    return null
   }
 
-  // 3. Check Blacklist
-  if (TAG_BLACKLIST.has(tag)) {
-    return null
+  // 2. Apply Mappings (case-insensitive)
+  let tag: string | null = null
+  
+  // Look for a mapping key that matches (case-insensitive)
+  for (const [source, canonical] of Object.entries(TAG_MAPPINGS)) {
+    if (source.toLowerCase() === lowercase) {
+      tag = canonical
+      break
+    }
+  }
+
+  // 3. If no mapping found, use Title Case of the original
+  if (!tag) {
+    tag = toTitleCase(trimmed)
   }
 
   // 4. Final check for very short or numeric tags that are usually garbage
