@@ -59,7 +59,8 @@ export const TAG_MAPPINGS: Record<string, string> = {
   'Soul Music': 'Soul',
   'Americana Music': 'Americana',
   'Jazz Music': 'Jazz',
-  'Classical Music': 'Classical'
+  'Classical Music': 'Classical',
+  "rnb": "R&B"
 }
 
 /**
