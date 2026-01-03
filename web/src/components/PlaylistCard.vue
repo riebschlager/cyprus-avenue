@@ -165,7 +165,12 @@ watch(() => props.isExpanded, (newVal) => {
       <!-- Track List -->
       <div class="mt-4">
         <h4 class="text-sm font-semibold text-white mb-3">Track List</h4>
-        <div class="space-y-2">
+        <div 
+          class="space-y-2"
+          :class="{ 
+            'max-h-80 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-black/20': compact 
+          }"
+        >
           <div
             v-for="(track, index) in playlist.tracks"
             :key="index"
