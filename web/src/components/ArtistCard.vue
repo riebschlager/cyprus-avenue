@@ -139,17 +139,6 @@ watch(() => props.isExpanded, (newVal) => {
     </button>
 
     <div v-if="isExpanded" class="px-6 pb-4 border-t border-gray-700">
-      <!-- Actions Section -->
-      <div class="mt-4 pb-4 border-b border-gray-700">
-        <button
-          @click="showSpotifyModal = true"
-          class="w-full bg-green-500/20 hover:bg-green-500/30 text-green-300 border border-green-500/50 font-semibold py-2 px-4 rounded-lg text-sm transition-colors flex items-center justify-center gap-2"
-        >
-          <span>🎧</span>
-          Create {{ artist.name }} Playlist on Spotify
-        </button>
-      </div>
-
       <!-- Artist Bio Section -->
       <div v-if="artistBio && artistBio.bioSummary" class="mt-4 pb-4 border-b border-gray-700">
         <h4 class="text-sm font-semibold text-white mb-3 flex items-center gap-2">
@@ -187,6 +176,19 @@ watch(() => props.isExpanded, (newVal) => {
           </div>
         </div>
       </div>
+
+      <!-- Actions Section -->
+      <div class="mt-4 pb-4 border-b border-gray-700 flex justify-end">
+        <button
+          @click="showSpotifyModal = true"
+          class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-green-500/10 hover:bg-green-500/20 text-green-400 border border-green-500/20 text-xs font-medium transition-colors"
+        >
+          <span>🎧</span>
+          Create {{ artist.name }} Playlist on Spotify
+        </button>
+      </div>
+
+
 
       <!-- Tags Section (Consolidated from Last.fm + Spotify) -->
       <div v-if="artistBio && (artistBio.tags || artistBio.lastfmTags) && (artistBio.tags?.length || artistBio.lastfmTags?.length)" class="mt-4 pb-4 border-b border-gray-700">
