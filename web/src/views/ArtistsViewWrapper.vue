@@ -3,16 +3,19 @@ import { ref, computed, watch, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { usePlaylists } from '../composables/usePlaylists'
 import { useArtists } from '../composables/useArtists'
+import { useArtistBios } from '../composables/useArtistBios'
 import { useOpenGraph } from '../composables/useOpenGraph'
 import ArtistsView from '../components/ArtistsView.vue'
 import { findArtistBySlug } from '../utils/slug'
 
 const route = useRoute()
 const { playlists, loading, error, fetchPlaylists } = usePlaylists()
+const { loadBiosIndex } = useArtistBios()
 const { setOpenGraphTags, getArtistOG, getDefaultOG } = useOpenGraph()
 
 onMounted(() => {
   fetchPlaylists()
+  loadBiosIndex()
 })
 
 // Compute artists reactively from playlists - pass ref, not value

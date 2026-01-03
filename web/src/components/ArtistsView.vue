@@ -81,8 +81,10 @@ watch(() => props.autoExpandArtist, (artist) => {
 // Sync URL query to selectedTag
 watch(() => route.query.tag, (tag) => {
   if (typeof tag === 'string') {
-    selectedTag.value = tag
-    document.title = `${tag.charAt(0).toUpperCase() + tag.slice(1)} Artists - Cyprus Avenue Archive`
+    // Standardize: replace plus signs with spaces if they exist
+    const normalizedTag = tag.replace(/\+/g, ' ')
+    selectedTag.value = normalizedTag
+    document.title = `${normalizedTag.charAt(0).toUpperCase() + normalizedTag.slice(1)} Artists - Cyprus Avenue Archive`
   } else {
     selectedTag.value = ''
     if (!props.autoExpandArtist) {
