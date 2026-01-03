@@ -438,37 +438,37 @@ const navigateToRandomArtist = () => {
               <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
-              <span><strong class="text-white">Browse Playlists:</strong> View all {{ stats.totalPlaylists }} archived playlists with full track listings</span>
+              <span><strong class="text-white">Browse Playlists:</strong> View all archived playlists with full track listings and original air dates</span>
             </li>
             <li class="flex items-start">
               <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
-              <span><strong class="text-white">Search Everything:</strong> Find playlists, artists, or songs across the entire archive</span>
+              <span><strong class="text-white">Artist Biographies:</strong> Explore rich background info, images, and listener stats for archive artists</span>
             </li>
             <li class="flex items-start">
               <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
-              <span><strong class="text-white">Spotify Integration:</strong> Direct links to listen to tracks on Spotify (89.9% match rate)</span>
+              <span><strong class="text-white">Search & Filter:</strong> Find anything by keyword or browse by smart tags and musical genres</span>
             </li>
             <li class="flex items-start">
               <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
-              <span><strong class="text-white">Album Artwork:</strong> View album covers for tracks found on Spotify</span>
+              <span><strong class="text-white">Spotify Integration:</strong> Direct links to listen to tracks, complete with album artwork</span>
             </li>
             <li class="flex items-start">
               <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
-              <span><strong class="text-white">Sortable Track View:</strong> Browse and sort all tracks by artist, song, playlist, or date</span>
+              <span><strong class="text-white">Flexible Export:</strong> Generate Spotify playlists from shows, artists, genres, or the entire archive</span>
             </li>
             <li class="flex items-start">
               <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
-              <span><strong class="text-white">Export to Spotify:</strong> Create Spotify playlists from any archive show or from all unique tracks</span>
+              <span><strong class="text-white">Random Discovery:</strong> Explore the collection through suggested content and "I'm feeling lucky" navigation</span>
             </li>
           </ul>
         </div>
