@@ -253,8 +253,8 @@ watch(() => props.isExpanded, (newVal) => {
                   Copied!
                 </span>
               </button>
-              
-              <StreamingLinks :artist="track.artist" :song="track.song" />
+
+              <StreamingLinks :artist="track.artist" :song="track.song" :compact="compact" />
             </div>
           </div>
         </div>
@@ -271,16 +271,20 @@ watch(() => props.isExpanded, (newVal) => {
         </button>
 
         <!-- Footer -->
-        <div 
-          class="flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between"
-          :class="{ 'sm:flex-col sm:items-start': compact }"
+        <div
+          :class="[
+            'flex gap-3',
+            compact
+              ? 'flex-col items-start'
+              : 'flex-col sm:flex-row sm:items-center sm:justify-between'
+          ]"
         >
-          <p class="text-[10px] sm:text-xs text-gray-400">
+          <p :class="[compact ? 'text-[10px]' : 'text-[10px] sm:text-xs', 'text-gray-400']">
             Original broadcast: {{ formatDate(playlist.date) }}
           </p>
           <a
             :href="`mailto:chris@the816.com?subject=Cyprus Avenue Archive - Issue Report&body=Regarding playlist: ${playlist.title} (${playlist.date})%0D%0A%0D%0APlease describe the issue:%0D%0A`"
-            class="text-[10px] sm:text-xs text-blue-400 hover:text-blue-300 underline"
+            :class="[compact ? 'text-[10px]' : 'text-[10px] sm:text-xs', 'text-blue-400 hover:text-blue-300 underline']"
           >
             Report an issue
           </a>
