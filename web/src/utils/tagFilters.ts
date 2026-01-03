@@ -115,7 +115,8 @@ export const TAG_MAPPINGS: Record<string, string> = {
   'Tex-Mex': 'Tex-Mex',
   'vocals': 'Vocal',
   'rnb': 'R&B',
-  'r&b': 'R&B'
+  'r&b': 'R&B',
+  'Girl Groups': 'Girl Group',
 }
 
 /**
