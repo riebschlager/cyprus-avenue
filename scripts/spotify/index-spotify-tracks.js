@@ -348,7 +348,6 @@ async function indexAllTracks() {
   }
 
   // Save index
-  const outputPath = 'web/public/spotify-index.json'
   fs.mkdirSync('web/public', { recursive: true })
   fs.writeFileSync(outputPath, JSON.stringify(trackIndex, null, 2))
 
