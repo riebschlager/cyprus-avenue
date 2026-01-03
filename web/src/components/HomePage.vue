@@ -249,6 +249,32 @@ const navigateToRandomArtist = () => {
             </div>
           </div>
         </div>
+
+        <!-- Archive Statistics -->
+        <div class="bg-gray-800 rounded-lg shadow-lg p-8 border border-gray-700">
+          <h2 class="text-3xl font-bold text-white mb-6">Archive Statistics</h2>
+
+          <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="bg-gray-900 rounded-lg p-6 border-l-4 border-blue-500">
+              <p class="text-sm text-gray-400 mb-2">Total Playlists</p>
+              <p class="text-4xl font-bold text-white">{{ stats.totalPlaylists }}</p>
+            </div>
+            <div class="bg-gray-900 rounded-lg p-6 border-l-4 border-green-500">
+              <p class="text-sm text-gray-400 mb-2">Total Tracks</p>
+              <p class="text-4xl font-bold text-white">{{ stats.totalTracks.toLocaleString() }}</p>
+            </div>
+            <div class="bg-gray-900 rounded-lg p-6 border-l-4 border-purple-500">
+              <p class="text-sm text-gray-400 mb-2">Avg Tracks/Show</p>
+              <p class="text-4xl font-bold text-white">{{ stats.avgTracksPerShow.toFixed(1) }}</p>
+            </div>
+            <div v-if="stats.dateRange" class="bg-gray-900 rounded-lg p-6 border-l-4 border-orange-500">
+              <p class="text-sm text-gray-400 mb-2">Date Range</p>
+              <p class="text-lg font-semibold text-white">
+                {{ stats.dateRange.start }}<br>to {{ stats.dateRange.end }}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Right Column: This Week in History -->
@@ -363,33 +389,6 @@ const navigateToRandomArtist = () => {
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-
-
-    <!-- Archive Statistics -->
-    <div class="bg-gray-800 rounded-lg shadow-lg p-8 border border-gray-700">
-      <h2 class="text-3xl font-bold text-white mb-6">Archive Statistics</h2>
-
-      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-8">
-        <div class="bg-gray-900 rounded-lg p-6 border-l-4 border-blue-500">
-          <p class="text-sm text-gray-400 mb-2">Total Playlists</p>
-          <p class="text-4xl font-bold text-white">{{ stats.totalPlaylists }}</p>
-        </div>
-        <div class="bg-gray-900 rounded-lg p-6 border-l-4 border-green-500">
-          <p class="text-sm text-gray-400 mb-2">Total Tracks</p>
-          <p class="text-4xl font-bold text-white">{{ stats.totalTracks.toLocaleString() }}</p>
-        </div>
-        <div class="bg-gray-900 rounded-lg p-6 border-l-4 border-purple-500">
-          <p class="text-sm text-gray-400 mb-2">Avg Tracks/Show</p>
-          <p class="text-4xl font-bold text-white">{{ stats.avgTracksPerShow.toFixed(1) }}</p>
-        </div>
-        <div v-if="stats.dateRange" class="bg-gray-900 rounded-lg p-6 border-l-4 border-orange-500">
-          <p class="text-sm text-gray-400 mb-2">Date Range</p>
-          <p class="text-lg font-semibold text-white">
-            {{ stats.dateRange.start }}<br>to {{ stats.dateRange.end }}
-          </p>
         </div>
       </div>
     </div>
