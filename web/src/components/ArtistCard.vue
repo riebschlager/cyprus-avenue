@@ -11,6 +11,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   toggle: []
+  'select-genre': [genre: string]
 }>()
 
 const cardRef = ref<HTMLElement | null>(null)
@@ -108,6 +109,21 @@ watch(() => props.isExpanded, (newVal) => {
     </button>
 
     <div v-if="isExpanded" class="px-6 pb-4 border-t border-gray-700">
+      <!-- Genres Section -->
+      <div v-if="artist.genres && artist.genres.length > 0" class="mt-4 pb-4 border-b border-gray-700">
+        <h4 class="text-sm font-semibold text-white mb-3">Genres</h4>
+        <div class="flex flex-wrap gap-2">
+          <button
+            v-for="genre in artist.genres"
+            :key="genre"
+            @click.stop="emit('select-genre', genre)"
+            class="px-3 py-1 rounded-full text-xs font-medium bg-gray-700 hover:bg-blue-600 text-gray-300 hover:text-white transition-colors"
+          >
+            {{ genre.charAt(0).toUpperCase() + genre.slice(1) }}
+          </button>
+        </div>
+      </div>
+
       <!-- Unique Songs Section -->
       <div class="mt-4">
         <h4 class="text-sm font-semibold text-white mb-3">Unique Songs</h4>

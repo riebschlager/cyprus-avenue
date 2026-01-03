@@ -59,6 +59,11 @@ watch([searchQuery, selectedGenre], () => {
   currentPage.value = 1
 })
 
+const handleGenreSelect = (genre: string) => {
+  selectedGenre.value = genre
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
 const toggleArtist = (index: number) => {
   const wasExpanded = expandedArtistIndex.value === index
   expandedArtistIndex.value = wasExpanded ? null : index
@@ -161,6 +166,7 @@ const toggleArtist = (index: number) => {
             :artist="artist"
             :is-expanded="expandedArtistIndex === ((currentPage - 1) * itemsPerPage + i)"
             @toggle="toggleArtist((currentPage - 1) * itemsPerPage + i)"
+            @select-genre="handleGenreSelect"
           />
         </div>
 
