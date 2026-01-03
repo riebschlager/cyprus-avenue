@@ -12,6 +12,7 @@ const props = defineProps<{
   isExpanded: boolean
   searchQuery: string
   compact?: boolean
+  disableScroll?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -27,8 +28,10 @@ const copiedTrackIndex = ref<number | null>(null)
 // Check for pending Spotify action on mount
 onMounted(() => {
   if (props.isExpanded) {
-    scrollToCard()
-    scrollToTrack()
+    if (!props.disableScroll) {
+      scrollToCard()
+      scrollToTrack()
+    }
 
     // Check if we should auto-reopen the Spotify modal after OAuth redirect
     const pendingAction = sessionStorage.getItem('spotify_pending_action')
@@ -59,6 +62,7 @@ const getAlbumArt = (artist: string, song: string): string | null => {
 }
 
 const scrollToCard = () => {
+  if (props.disableScroll) return
   if (cardRef.value) {
     nextTick(() => {
       // If we have a track deep link, don't scroll to card top, let the track scrolling handle it

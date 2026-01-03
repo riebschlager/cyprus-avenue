@@ -312,6 +312,7 @@ const navigateToRandomArtist = () => {
                         :search-query="''"
                         :is-expanded="expandedHistoryId === playlist.date"
                         :compact="true"
+                        :disable-scroll="true"
                         @toggle="toggleHistoryCard(playlist.date)"
                       />
                     </div>
