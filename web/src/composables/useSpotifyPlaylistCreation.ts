@@ -3,6 +3,7 @@ import type { Playlist } from '../types/playlist'
 import type { PlaylistCreationResult, CreationProgress } from '../types/spotify'
 import { useSpotifyAuth } from './useSpotifyAuth'
 import { useStreamingLinks } from './useStreamingLinks'
+import { useArtistBios } from './useArtistBios'
 import { SpotifyApiClient } from '../utils/spotifyApi'
 import { TrackMatcher, deduplicateTracks } from '../utils/trackMatching'
 import { PLAYLIST_NAME_INDIVIDUAL, PLAYLIST_NAME_ALL_TRACKS, PLAYLIST_NAME_TAG, PLAYLIST_NAME_ARTIST } from '../utils/spotifyConstants'
@@ -21,6 +22,7 @@ const creationError = ref<string | null>(null)
 export function useSpotifyPlaylistCreation() {
   const { getAccessToken } = useSpotifyAuth()
   const { spotifyIndex } = useStreamingLinks()
+  const { biosIndex } = useArtistBios()
 
   const resetState = () => {
     creationState.value = 'idle'
@@ -202,11 +204,12 @@ export function useSpotifyPlaylistCreation() {
       const playlistName = PLAYLIST_NAME_TAG(tag)
       creationProgress.value.playlistName = playlistName
 
-      // Collect all tracks for this tag
+      // Collect all tracks for this tag by checking artist bios
       const tagTracks = playlists.flatMap(p => p.tracks).filter(track => {
-        const key = `${track.artist}|${track.song}`
-        const trackData = spotifyIndex.value[key]
-        return trackData?.genres?.includes(tag)
+        const artistBio = biosIndex.value[track.artist]
+        // Check consolidated tags first, fall back to lastfmTags
+        const artistTags = artistBio?.tags || artistBio?.lastfmTags || []
+        return artistTags.includes(tag)
       })
 
       const uniqueTracks = deduplicateTracks(tagTracks)
