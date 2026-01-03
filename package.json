@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "intersection-observer": "^0.12.2",
+    "scrollama": "^3.2.0"
+  }
+}

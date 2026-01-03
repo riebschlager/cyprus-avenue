@@ -142,6 +142,24 @@ onUnmounted(() => {
                   Artists
                 </button>
               </router-link>
+              <router-link
+                to="/timeline"
+                custom
+                v-slot="{ navigate, isActive }"
+              >
+                <button
+                  @click="navigate"
+                  :style="{
+                    color: isActive ? '#60a5fa' : '#9ca3af',
+                    borderBottomColor: isActive ? '#3b82f6' : 'transparent',
+                    borderBottomWidth: isActive ? '2px' : '2px',
+                    transition: 'color 300ms cubic-bezier(0.4, 0, 0.2, 1), border-color 300ms cubic-bezier(0.4, 0, 0.2, 1)'
+                  }"
+                  class="whitespace-nowrap font-medium text-sm py-4 px-1"
+                >
+                  Timeline
+                </button>
+              </router-link>
             </nav>
           </div>
 
@@ -215,6 +233,19 @@ onUnmounted(() => {
                 class="w-full text-left px-4 py-2 rounded font-medium text-sm hover:bg-gray-800/50 transition-colors"
               >
                 Artists
+              </button>
+            </router-link>
+            <router-link
+              to="/timeline"
+              custom
+              v-slot="{ navigate, isActive }"
+            >
+              <button
+                @click="navigate"
+                :style="{ color: isActive ? '#60a5fa' : '#9ca3af' }"
+                class="w-full text-left px-4 py-2 rounded font-medium text-sm hover:bg-gray-800/50 transition-colors"
+              >
+                Timeline
               </button>
             </router-link>
           </nav>

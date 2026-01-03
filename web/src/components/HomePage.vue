@@ -115,6 +115,64 @@ const showAllTracksModal = ref(false)
       </div>
     </div>
 
+    <!-- Quick Links -->
+    <div class="bg-gradient-to-r from-blue-900/30 to-purple-900/30 rounded-lg shadow-lg p-8 border border-blue-700/50">
+      <h2 class="text-3xl font-bold text-white mb-6">Explore the Archive</h2>
+
+      <!-- Featured Story Link -->
+      <button
+        @click="router.push('/story')"
+        class="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 rounded-lg p-8 mb-6 transition-all text-left group border border-purple-500/50"
+      >
+        <div class="flex items-center gap-4">
+          <div class="text-5xl">📖</div>
+          <div class="flex-1">
+            <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-purple-200 transition-colors">The Story of Cyprus Avenue</h3>
+            <p class="text-purple-100">Scroll through 7.5 years of musical discovery • A narrative journey</p>
+          </div>
+          <div class="text-white opacity-50 group-hover:opacity-100 transition-opacity text-2xl">→</div>
+        </div>
+      </button>
+
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <button
+          @click="router.push('/playlists')"
+          class="bg-gray-800 hover:bg-gray-700 border border-gray-600 rounded-lg p-6 transition-colors text-left group"
+        >
+          <div class="text-3xl mb-3">📻</div>
+          <h3 class="text-lg font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">Browse Playlists</h3>
+          <p class="text-sm text-gray-400">View all {{ stats.totalPlaylists }} archived shows</p>
+        </button>
+
+        <button
+          @click="router.push('/timeline')"
+          class="bg-gray-800 hover:bg-gray-700 border border-gray-600 rounded-lg p-6 transition-colors text-left group"
+        >
+          <div class="text-3xl mb-3">📊</div>
+          <h3 class="text-lg font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">Timeline View</h3>
+          <p class="text-sm text-gray-400">Visualize 7.5 years of discovery</p>
+        </button>
+
+        <button
+          @click="router.push('/artists')"
+          class="bg-gray-800 hover:bg-gray-700 border border-gray-600 rounded-lg p-6 transition-colors text-left group"
+        >
+          <div class="text-3xl mb-3">🎤</div>
+          <h3 class="text-lg font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">Browse Artists</h3>
+          <p class="text-sm text-gray-400">Explore by featured artists</p>
+        </button>
+
+        <button
+          @click="router.push('/tracks')"
+          class="bg-gray-800 hover:bg-gray-700 border border-gray-600 rounded-lg p-6 transition-colors text-left group"
+        >
+          <div class="text-3xl mb-3">🎵</div>
+          <h3 class="text-lg font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">All Tracks</h3>
+          <p class="text-sm text-gray-400">Search and sort {{ (stats.totalTracks || 0).toLocaleString() }} songs</p>
+        </button>
+      </div>
+    </div>
+
     <!-- About This Project -->
     <div class="bg-gray-800 rounded-lg shadow-lg p-8 border border-gray-700">
       <h2 class="text-3xl font-bold text-white mb-6">About This Project</h2>
@@ -173,6 +231,12 @@ const showAllTracksModal = ref(false)
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
               <span><strong class="text-white">Sortable Track View:</strong> Browse and sort all tracks by artist, song, playlist, or date</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span><strong class="text-white">Interactive Timeline:</strong> Visualize 7.5 years of musical discovery across {{ stats.totalPlaylists }} episodes</span>
             </li>
             <li class="flex items-start">
               <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">

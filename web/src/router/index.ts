@@ -3,6 +3,8 @@ import HomePage from '../components/HomePage.vue'
 import PlaylistsView from '../views/PlaylistsView.vue'
 import TracksViewWrapper from '../views/TracksViewWrapper.vue'
 import ArtistsViewWrapper from '../views/ArtistsViewWrapper.vue'
+import TimelineView from '../views/TimelineView.vue'
+import ScrollyTimelineView from '../views/ScrollyTimelineView.vue'
 import SpotifyCallback from '../views/SpotifyCallback.vue'
 
 const router = createRouter({
@@ -45,6 +47,18 @@ const router = createRouter({
       component: ArtistsViewWrapper,
       props: true,
       meta: { title: 'Artist - Cyprus Avenue Archive' }
+    },
+    {
+      path: '/timeline',
+      name: 'timeline',
+      component: TimelineView,
+      meta: { title: 'Timeline - Cyprus Avenue Archive' }
+    },
+    {
+      path: '/story',
+      name: 'story',
+      component: ScrollyTimelineView,
+      meta: { title: 'The Story - Cyprus Avenue Archive' }
     },
     {
       path: '/auth/callback',
