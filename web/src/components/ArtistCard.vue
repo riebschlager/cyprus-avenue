@@ -2,6 +2,7 @@
 import { ref, watch, nextTick, computed, onMounted } from 'vue'
 import type { Artist } from '../composables/useArtists'
 import StreamingLinks from './StreamingLinks.vue'
+import SpotifyPlaylistModal from './SpotifyPlaylistModal.vue'
 import { generatePlaylistSlug } from '../utils/slug'
 
 const props = defineProps<{
@@ -15,6 +16,7 @@ const emit = defineEmits<{
 }>()
 
 const cardRef = ref<HTMLElement | null>(null)
+const showSpotifyModal = ref(false)
 
 // Generate playlist permalink
 const getPlaylistUrl = (title: string, date: string) => {
@@ -92,9 +94,11 @@ watch(() => props.isExpanded, (newVal) => {
         <h3 class="text-lg font-semibold text-white">
           {{ artist.name }}
         </h3>
-        <div class="flex gap-4 text-xs text-gray-400">
-          <span>{{ artist.uniqueSongs.length }} unique song{{ artist.uniqueSongs.length === 1 ? '' : 's' }}</span>
-          <span>{{ artist.playlistCount }} playlist{{ artist.playlistCount === 1 ? '' : 's' }}</span>
+        <div class="flex gap-4 items-center">
+          <div class="hidden sm:flex gap-4 text-xs text-gray-400">
+            <span>{{ artist.uniqueSongs.length }} unique song{{ artist.uniqueSongs.length === 1 ? '' : 's' }}</span>
+            <span>{{ artist.playlistCount }} playlist{{ artist.playlistCount === 1 ? '' : 's' }}</span>
+          </div>
         </div>
       </div>
       <svg
@@ -109,6 +113,17 @@ watch(() => props.isExpanded, (newVal) => {
     </button>
 
     <div v-if="isExpanded" class="px-6 pb-4 border-t border-gray-700">
+      <!-- Actions Section -->
+      <div class="mt-4 pb-4 border-b border-gray-700">
+        <button
+          @click="showSpotifyModal = true"
+          class="w-full bg-green-500/20 hover:bg-green-500/30 text-green-300 border border-green-500/50 font-semibold py-2 px-4 rounded-lg text-sm transition-colors flex items-center justify-center gap-2"
+        >
+          <span>🎧</span>
+          Create Artist Playlist on Spotify
+        </button>
+      </div>
+
       <!-- Genres Section -->
       <div v-if="artist.genres && artist.genres.length > 0" class="mt-4 pb-4 border-b border-gray-700">
         <h4 class="text-sm font-semibold text-white mb-3">Genres</h4>
@@ -175,5 +190,13 @@ watch(() => props.isExpanded, (newVal) => {
         </div>
       </div>
     </div>
+
+    <!-- Artist Playlist Modal -->
+    <SpotifyPlaylistModal
+      :is-open="showSpotifyModal"
+      :artist-name="artist.name"
+      mode="artist"
+      @close="showSpotifyModal = false"
+    />
   </div>
 </template>
