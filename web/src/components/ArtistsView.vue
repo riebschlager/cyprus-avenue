@@ -83,8 +83,15 @@ watch(() => route.query.tag, (tag) => {
   if (typeof tag === 'string') {
     // Standardize: replace plus signs with spaces if they exist
     const normalizedTag = tag.replace(/\+/g, ' ')
-    selectedTag.value = normalizedTag
-    document.title = `${normalizedTag.charAt(0).toUpperCase() + normalizedTag.slice(1)} Artists - Cyprus Avenue Archive`
+    
+    // Convert to Title Case to match normalized data
+    const titleCasedTag = normalizedTag
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(' ')
+      
+    selectedTag.value = titleCasedTag
+    document.title = `${titleCasedTag} Artists - Cyprus Avenue Archive`
   } else {
     selectedTag.value = ''
     if (!props.autoExpandArtist) {
@@ -171,7 +178,7 @@ const toggleArtist = (index: number) => {
         >
           <option value="">All Tags</option>
           <option v-for="tag in availableTags" :key="tag" :value="tag">
-            {{ tag.charAt(0).toUpperCase() + tag.slice(1) }}
+            {{ tag }}
           </option>
         </select>
       </div>
@@ -183,7 +190,7 @@ const toggleArtist = (index: number) => {
         <span class="text-2xl">🏷️</span>
         <div>
           <p class="text-blue-200 text-sm font-medium uppercase tracking-wider">Viewing Tag</p>
-          <h2 class="text-xl font-bold text-white">{{ selectedTag.charAt(0).toUpperCase() + selectedTag.slice(1) }}</h2>
+          <h2 class="text-xl font-bold text-white">{{ selectedTag }}</h2>
         </div>
       </div>
       <div class="flex gap-2">
@@ -192,7 +199,7 @@ const toggleArtist = (index: number) => {
           class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-green-500/20 hover:bg-green-500/30 text-green-300 hover:text-green-200 transition-colors text-sm font-medium border border-green-500/20"
         >
           <span>🎧</span>
-          Create {{ selectedTag.charAt(0).toUpperCase() + selectedTag.slice(1) }} Playlist on Spotify
+          Create {{ selectedTag }} Playlist on Spotify
         </button>
         <button
           @click="clearTag"

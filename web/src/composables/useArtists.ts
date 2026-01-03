@@ -50,7 +50,14 @@ export function useArtists(playlists: MaybeRefOrGetter<Playlist[]>) {
 
       // Get consolidated tags from artist bio (accessing biosIndex ensures reactivity)
       const bio = biosIndex.value[name]
-      const tags = bio?.tags || bio?.lastfmTags || []
+      const rawTags = bio?.tags || bio?.lastfmTags || []
+      
+      // Normalize tags to Title Case
+      const tags = rawTags.map(tag => 
+        tag.split(' ')
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+          .join(' ')
+      )
 
       artistList.push({
         name,
@@ -69,9 +76,16 @@ export function useArtists(playlists: MaybeRefOrGetter<Playlist[]>) {
   const availableTags = computed(() => {
     const tagSet = new Set<string>()
     artists.value.forEach(artist => {
-      artist.tags.forEach(tag => tagSet.add(tag))
+      artist.tags.forEach(tag => {
+        // Convert to Title Case
+        const titleCasedTag = tag
+          .split(' ')
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+          .join(' ')
+        tagSet.add(titleCasedTag)
+      })
     })
-    return Array.from(tagSet).sort()
+    return Array.from(tagSet).sort((a, b) => a.localeCompare(b))
   })
 
   // Filter artists by search query and tag
