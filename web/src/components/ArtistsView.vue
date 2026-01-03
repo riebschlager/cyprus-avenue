@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, computed, onMounted } from 'vue'
+import { ref, watch, computed, onMounted, nextTick } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useArtists, type Artist } from '../composables/useArtists'
 import type { Playlist } from '../types/playlist'
@@ -18,6 +18,7 @@ const route = useRoute()
 const { searchQuery, selectedTag, filteredArtists, availableTags } = useArtists(props.playlists)
 const expandedArtistIndex = ref<number | null>(null)
 const showTagPlaylistModal = ref(false)
+const bannerRef = ref<HTMLElement | null>(null)
 
 // Check for pending Spotify action after OAuth redirect
 onMounted(() => {
@@ -111,7 +112,21 @@ const handleTagSelect = (tag: string) => {
 
   // Update URL to reflect tag state
   router.push({ query: { ...route.query, tag } })
-  window.scrollTo({ top: 0, behavior: 'smooth' })
+  
+  // Wait for banner to render and scroll to it
+  nextTick(() => {
+    if (bannerRef.value) {
+      const header = document.querySelector('header')
+      const headerHeight = header?.clientHeight || 80
+      const elementPosition = bannerRef.value.getBoundingClientRect().top + window.scrollY
+      const offsetPosition = elementPosition - headerHeight - 24 // 24px buffer
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
+    }
+  })
 }
 
 const clearTag = () => {
@@ -185,7 +200,7 @@ const toggleArtist = (index: number) => {
     </div>
 
     <!-- Active Tag Indicator -->
-    <div v-if="selectedTag" class="mt-6 bg-blue-900/40 border border-blue-500/30 rounded-lg p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div v-if="selectedTag" ref="bannerRef" class="mt-6 bg-blue-900/40 border border-blue-500/30 rounded-lg p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
       <div class="flex items-center gap-3">
         <span class="text-2xl">🏷️</span>
         <div>
