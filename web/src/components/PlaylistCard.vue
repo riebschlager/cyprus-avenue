@@ -249,7 +249,10 @@ watch(() => props.isExpanded, (newVal) => {
         </button>
 
         <!-- Footer -->
-        <div class="flex items-center justify-between">
+        <div 
+          class="flex"
+          :class="[compact ? 'flex-col items-start gap-2' : 'items-center justify-between']"
+        >
           <p class="text-xs text-gray-400">
             Original broadcast: {{ formatDate(playlist.date) }}
           </p>
