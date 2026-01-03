@@ -432,7 +432,7 @@ const navigateToRandomArtist = () => {
           all {{ (stats.totalTracks || 0).toLocaleString() }} unique tracks from the entire archive.
         </p>
 
-        <div class="grid gap-6 md:grid-cols-2">
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <!-- Individual Playlist Card -->
           <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-6">
             <h3 class="text-lg font-semibold text-white mb-3">Create from Show</h3>
@@ -441,9 +441,23 @@ const navigateToRandomArtist = () => {
             </p>
             <button
               @click="router.push('/playlists')"
-              class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
+              class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors mt-auto"
             >
               Browse Shows →
+            </button>
+          </div>
+
+          <!-- Genre Card -->
+          <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-6 flex flex-col">
+            <h3 class="text-lg font-semibold text-white mb-3">Create from Genre</h3>
+            <p class="text-sm text-gray-300 mb-4">
+              Filter the archive by musical genre and create a collection of tracks from that style.
+            </p>
+            <button
+              @click="router.push('/artists')"
+              class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors mt-auto"
+            >
+              Browse Genres →
             </button>
           </div>
 
