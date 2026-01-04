@@ -7,6 +7,7 @@ defineProps<{
   tracks: TrackWithPlaylist[]
   sortField: SortField
   sortDirection: SortDirection
+  focusedIndex?: number | null
 }>()
 
 const emit = defineEmits<{
@@ -92,7 +93,13 @@ const getPlaylistUrl = (title: string, date: string) => {
           <tr
             v-for="(track, index) in tracks"
             :key="`${track.playlistDate}-${index}`"
-            class="hover:bg-gray-700/50 transition-colors"
+            :data-index="index"
+            class="transition-colors"
+            :class="[
+              focusedIndex === index
+                ? 'bg-blue-900/40 ring-1 ring-inset ring-blue-500/50'
+                : 'hover:bg-gray-700/50'
+            ]"
           >
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
               <router-link

@@ -9,6 +9,7 @@ import { useArtistBios } from '../composables/useArtistBios'
 const props = defineProps<{
   artist: Artist
   isExpanded: boolean
+  isFocused?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -110,7 +111,15 @@ watch(() => props.isExpanded, (newVal) => {
 </script>
 
 <template>
-  <div ref="cardRef" class="bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-gray-700">
+  <div
+    ref="cardRef"
+    class="bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-all border"
+    :class="[
+      isFocused
+        ? 'border-blue-500 ring-2 ring-blue-500/50 shadow-blue-500/20'
+        : 'border-gray-700'
+    ]"
+  >
     <button
       @click="emit('toggle')"
       class="w-full px-6 py-4 text-left flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg"

@@ -7,6 +7,7 @@ import ArtistCard from './ArtistCard.vue'
 import SearchBar from './SearchBar.vue'
 import SpotifyPlaylistModal from './SpotifyPlaylistModal.vue'
 import { generateArtistSlug } from '../utils/slug'
+import { useKeyboardNavigation } from '../composables/useKeyboardNavigation'
 
 const props = defineProps<{
   playlists: Playlist[]
@@ -19,6 +20,7 @@ const { searchQuery, searchFilters, selectedTag, filteredArtists, availableTags 
 const expandedArtistIndex = ref<number | null>(null)
 const showTagPlaylistModal = ref(false)
 const bannerRef = ref<HTMLElement | null>(null)
+const cardRefs = ref<InstanceType<typeof ArtistCard>[]>([])
 
 // Check for pending Spotify action after OAuth redirect
 onMounted(() => {
@@ -151,6 +153,37 @@ const toggleArtist = (index: number) => {
     }
   }
 }
+
+// Keyboard navigation
+const { focusedIndex } = useKeyboardNavigation({
+  itemCount: totalArtists,
+  currentPage,
+  itemsPerPage,
+  onPageChange: changePage,
+  onSelect: (index) => {
+    // Convert page-local index to global index
+    const globalIndex = (currentPage.value - 1) * itemsPerPage + index
+    toggleArtist(globalIndex)
+  }
+})
+
+// Scroll focused item into view
+watch(focusedIndex, async (index) => {
+  if (index !== null) {
+    await nextTick()
+    const card = cardRefs.value[index]
+    if (card?.$el) {
+      const rect = card.$el.getBoundingClientRect()
+      const headerHeight = 100
+      if (rect.top < headerHeight || rect.bottom > window.innerHeight) {
+        window.scrollTo({
+          top: window.scrollY + rect.top - headerHeight - 20,
+          behavior: 'smooth'
+        })
+      }
+    }
+  }
+})
 </script>
 
 <template>
@@ -234,9 +267,16 @@ const toggleArtist = (index: number) => {
 
       <div v-else>
         <div class="flex items-center justify-between text-sm text-gray-400 mb-4">
-          <p>
-            Showing {{ displayedRange }} of {{ totalArtists.toLocaleString() }} artists
-          </p>
+          <div class="flex items-center gap-3">
+            <p>
+              Showing {{ displayedRange }} of {{ totalArtists.toLocaleString() }} artists
+            </p>
+            <span class="hidden sm:inline-flex items-center gap-1 text-xs text-gray-500">
+              <kbd class="px-1.5 py-0.5 bg-gray-700 rounded text-gray-400 font-mono text-[10px]">j</kbd>
+              <kbd class="px-1.5 py-0.5 bg-gray-700 rounded text-gray-400 font-mono text-[10px]">k</kbd>
+              to navigate
+            </span>
+          </div>
           
           <!-- Pagination Controls (Top) -->
           <div v-if="totalPages > 1" class="flex gap-2">
@@ -261,9 +301,11 @@ const toggleArtist = (index: number) => {
         <div class="space-y-4">
           <ArtistCard
             v-for="(artist, i) in paginatedArtists"
+            :ref="(el) => { if (el) cardRefs[i] = el as InstanceType<typeof ArtistCard> }"
             :key="artist.name"
             :artist="artist"
             :is-expanded="expandedArtistIndex === ((currentPage - 1) * itemsPerPage + i)"
+            :is-focused="focusedIndex === i"
             @toggle="toggleArtist((currentPage - 1) * itemsPerPage + i)"
             @select-tag="handleTagSelect"
           />

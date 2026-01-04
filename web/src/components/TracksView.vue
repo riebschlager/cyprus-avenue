@@ -1,15 +1,20 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, nextTick } from 'vue'
 import type { Playlist } from '../types/playlist'
 import { useTracks } from '../composables/useTracks'
 import SearchBar from './SearchBar.vue'
 import TracksTable from './TracksTable.vue'
+import { useKeyboardNavigation } from '../composables/useKeyboardNavigation'
+import { useRouter } from 'vue-router'
+import { generateArtistSlug } from '../utils/slug'
 
 const props = defineProps<{
   playlists: Playlist[]
 }>()
 
+const router = useRouter()
 const { searchQuery, sortField, sortDirection, sortedTracks, setSortField } = useTracks(props.playlists)
+const tableRef = ref<InstanceType<typeof TracksTable> | null>(null)
 
 // Pagination
 const itemsPerPage = 20
@@ -42,6 +47,39 @@ const changePage = (page: number) => {
 watch([searchQuery, sortField, sortDirection], () => {
   currentPage.value = 1
 })
+
+// Keyboard navigation
+const { focusedIndex } = useKeyboardNavigation({
+  itemCount: totalTracks,
+  currentPage,
+  itemsPerPage,
+  onPageChange: changePage,
+  onSelect: (index) => {
+    // Navigate to artist page on Enter
+    const track = paginatedTracks.value[index]
+    if (track) {
+      router.push(`/artist/${generateArtistSlug(track.artist)}`)
+    }
+  }
+})
+
+// Scroll focused row into view
+watch(focusedIndex, async (index) => {
+  if (index !== null && tableRef.value) {
+    await nextTick()
+    const row = tableRef.value.$el?.querySelector(`tr[data-index="${index}"]`)
+    if (row) {
+      const rect = row.getBoundingClientRect()
+      const headerHeight = 100
+      if (rect.top < headerHeight || rect.bottom > window.innerHeight) {
+        window.scrollTo({
+          top: window.scrollY + rect.top - headerHeight - 20,
+          behavior: 'smooth'
+        })
+      }
+    }
+  }
+})
 </script>
 
 <template>
@@ -58,8 +96,13 @@ watch([searchQuery, sortField, sortDirection], () => {
     </div>
 
     <div class="mb-4 flex items-center justify-between text-sm text-gray-400">
-      <div>
-        Showing {{ displayedRange }} of {{ totalTracks.toLocaleString() }} tracks
+      <div class="flex items-center gap-3">
+        <span>Showing {{ displayedRange }} of {{ totalTracks.toLocaleString() }} tracks</span>
+        <span class="hidden sm:inline-flex items-center gap-1 text-xs text-gray-500">
+          <kbd class="px-1.5 py-0.5 bg-gray-700 rounded text-gray-400 font-mono text-[10px]">j</kbd>
+          <kbd class="px-1.5 py-0.5 bg-gray-700 rounded text-gray-400 font-mono text-[10px]">k</kbd>
+          to navigate
+        </span>
       </div>
       
       <!-- Pagination Controls (Top) -->
@@ -83,9 +126,11 @@ watch([searchQuery, sortField, sortDirection], () => {
     </div>
 
     <TracksTable
+      ref="tableRef"
       :tracks="paginatedTracks"
       :sort-field="sortField"
       :sort-direction="sortDirection"
+      :focused-index="focusedIndex"
       @sort="setSortField"
     />
 

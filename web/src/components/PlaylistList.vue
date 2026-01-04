@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { ref, watch, computed } from 'vue'
+import { ref, watch, computed, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import type { Playlist } from '../types/playlist'
 import PlaylistCard from './PlaylistCard.vue'
 import { generatePlaylistSlug } from '../utils/slug'
+import { useKeyboardNavigation } from '../composables/useKeyboardNavigation'
 
 const props = defineProps<{
   playlists: Playlist[]
@@ -13,6 +14,7 @@ const props = defineProps<{
 
 const router = useRouter()
 const expandedPlaylist = ref<string | null>(null)
+const cardRefs = ref<InstanceType<typeof PlaylistCard>[]>([])
 
 // Pagination
 const itemsPerPage = 20
@@ -75,6 +77,38 @@ const togglePlaylist = (date: string) => {
     }
   }
 }
+
+// Keyboard navigation
+const { focusedIndex } = useKeyboardNavigation({
+  itemCount: totalPlaylists,
+  currentPage,
+  itemsPerPage,
+  onPageChange: changePage,
+  onSelect: (index) => {
+    const playlist = paginatedPlaylists.value[index]
+    if (playlist) {
+      togglePlaylist(playlist.date)
+    }
+  }
+})
+
+// Scroll focused item into view
+watch(focusedIndex, async (index) => {
+  if (index !== null) {
+    await nextTick()
+    const card = cardRefs.value[index]
+    if (card?.$el) {
+      const rect = card.$el.getBoundingClientRect()
+      const headerHeight = 100
+      if (rect.top < headerHeight || rect.bottom > window.innerHeight) {
+        window.scrollTo({
+          top: window.scrollY + rect.top - headerHeight - 20,
+          behavior: 'smooth'
+        })
+      }
+    }
+  }
+})
 </script>
 
 <template>
@@ -91,9 +125,16 @@ const togglePlaylist = (date: string) => {
 
     <div v-else class="space-y-4">
       <div class="flex items-center justify-between text-sm text-gray-400">
-        <p>
-          Showing {{ displayedRange }} of {{ playlists.length }} playlist{{ playlists.length === 1 ? '' : 's' }}
-        </p>
+        <div class="flex items-center gap-3">
+          <p>
+            Showing {{ displayedRange }} of {{ playlists.length }} playlist{{ playlists.length === 1 ? '' : 's' }}
+          </p>
+          <span class="hidden sm:inline-flex items-center gap-1 text-xs text-gray-500">
+            <kbd class="px-1.5 py-0.5 bg-gray-700 rounded text-gray-400 font-mono text-[10px]">j</kbd>
+            <kbd class="px-1.5 py-0.5 bg-gray-700 rounded text-gray-400 font-mono text-[10px]">k</kbd>
+            to navigate
+          </span>
+        </div>
 
         <!-- Pagination Controls (Top) -->
         <div v-if="totalPages > 1" class="flex gap-2">
@@ -117,10 +158,12 @@ const togglePlaylist = (date: string) => {
 
       <div class="space-y-3">
         <PlaylistCard
-          v-for="playlist in paginatedPlaylists"
+          v-for="(playlist, index) in paginatedPlaylists"
+          :ref="(el) => { if (el) cardRefs[index] = el as InstanceType<typeof PlaylistCard> }"
           :key="playlist.date"
           :playlist="playlist"
           :is-expanded="expandedPlaylist === playlist.date"
+          :is-focused="focusedIndex === index"
           :search-query="searchQuery"
           @toggle="togglePlaylist(playlist.date)"
         />
