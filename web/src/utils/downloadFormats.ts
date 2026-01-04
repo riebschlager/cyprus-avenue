@@ -1,4 +1,4 @@
-import type { Playlist, Track } from '../types/playlist'
+import type { Playlist } from '../types/playlist'
 
 /**
  * Download utilities for exporting playlists in various formats
