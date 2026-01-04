@@ -7,6 +7,7 @@ import PlaylistCard from './PlaylistCard.vue'
 import { generatePlaylistSlug, generateArtistSlug } from '../utils/slug'
 import { useArtistBios } from '../composables/useArtistBios'
 import type { Playlist } from '../types/playlist'
+import { downloadAllPlaylists } from '../utils/downloadFormats'
 
 const { stats, playlists } = usePlaylists()
 const { loadBiosIndex, getBio } = useArtistBios()
@@ -574,6 +575,79 @@ const navigateToRandomArtist = () => {
       mode="all-tracks"
       @close="showAllTracksModal = false"
     />
+
+    <!-- Download Archive Section -->
+    <div class="bg-blue-900/20 rounded-lg shadow-lg p-8 border border-blue-700/50">
+      <h2 class="text-3xl font-bold text-white mb-6">Download Archive</h2>
+
+      <div class="space-y-6">
+        <p class="text-gray-300">
+          Download the complete Cyprus Avenue archive in various formats for offline use, analysis, or archival purposes.
+          All {{ (stats.totalPlaylists || 0).toLocaleString() }} playlists with {{ (stats.totalTracks || 0).toLocaleString() }} tracks included.
+        </p>
+
+        <div class="grid gap-6 md:grid-cols-3">
+          <!-- JSON Format -->
+          <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-6 flex flex-col">
+            <h3 class="text-lg font-semibold text-white mb-3">JSON Format</h3>
+            <p class="text-sm text-gray-300 mb-4 flex-grow">
+              Structured data format perfect for developers, data analysis, and importing into other applications.
+            </p>
+            <button
+              @click="downloadAllPlaylists(playlists, 'json')"
+              class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors mt-auto flex items-center justify-center gap-2"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              Download JSON
+            </button>
+          </div>
+
+          <!-- CSV Format -->
+          <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-6 flex flex-col">
+            <h3 class="text-lg font-semibold text-white mb-3">CSV Format</h3>
+            <p class="text-sm text-gray-300 mb-4 flex-grow">
+              Spreadsheet-compatible format ideal for Excel, Google Sheets, or database imports.
+            </p>
+            <button
+              @click="downloadAllPlaylists(playlists, 'csv')"
+              class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors mt-auto flex items-center justify-center gap-2"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              Download CSV
+            </button>
+          </div>
+
+          <!-- Text Format -->
+          <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-6 flex flex-col">
+            <h3 class="text-lg font-semibold text-white mb-3">Text Format</h3>
+            <p class="text-sm text-gray-300 mb-4 flex-grow">
+              Human-readable plain text format for easy reading and printing.
+            </p>
+            <button
+              @click="downloadAllPlaylists(playlists, 'txt')"
+              class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors mt-auto flex items-center justify-center gap-2"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              Download TXT
+            </button>
+          </div>
+        </div>
+
+        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 mt-6">
+          <p class="text-sm text-blue-200">
+            💡 <strong>Note:</strong> You can also download individual playlists by expanding any show in the
+            <router-link to="/playlists" class="text-blue-300 hover:text-blue-200 underline">Playlists</router-link> view
+            and clicking the download button.
+          </p>
+        </div>
+      </div>
+    </div>
 
     <!-- Call to Action -->
     <div class="bg-gradient-to-r from-blue-900/50 to-purple-900/50 rounded-lg shadow-lg p-8 border border-blue-700/50 text-center">

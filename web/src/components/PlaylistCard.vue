@@ -6,6 +6,7 @@ import StreamingLinks from './StreamingLinks.vue'
 import SpotifyPlaylistModal from './SpotifyPlaylistModal.vue'
 import { useStreamingLinks } from '../composables/useStreamingLinks'
 import { generateArtistSlug, generatePlaylistSlug } from '../utils/slug'
+import { downloadPlaylist } from '../utils/downloadFormats'
 
 const props = defineProps<{
   playlist: Playlist
@@ -25,6 +26,7 @@ const { getTrackData } = useStreamingLinks()
 const cardRef = ref<HTMLElement | null>(null)
 const showSpotifyModal = ref(false)
 const copiedTrackIndex = ref<number | null>(null)
+const showDownloadMenu = ref(false)
 
 // Check for pending Spotify action on mount
 onMounted(() => {
@@ -279,14 +281,56 @@ watch(() => props.isExpanded, (newVal) => {
       </div>
 
       <div class="mt-4 pt-4 border-t border-gray-700 space-y-3">
-        <!-- Spotify Creation Button -->
-        <button
-          @click="showSpotifyModal = true"
-          class="w-full bg-green-500/20 hover:bg-green-500/30 text-green-300 border border-green-500/50 font-semibold py-2 px-4 rounded-lg text-sm transition-colors flex items-center justify-center gap-2"
-        >
-          <span>🎧</span>
-          {{ compact ? 'Add to Spotify' : 'Add this Playlist to Spotify' }}
-        </button>
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row gap-2">
+          <!-- Spotify Creation Button -->
+          <button
+            @click="showSpotifyModal = true"
+            class="flex-1 bg-green-500/20 hover:bg-green-500/30 text-green-300 border border-green-500/50 font-semibold py-2 px-4 rounded-lg text-sm transition-colors flex items-center justify-center gap-2"
+          >
+            <span>🎧</span>
+            {{ compact ? 'Add to Spotify' : 'Add this Playlist to Spotify' }}
+          </button>
+
+          <!-- Download Button with Dropdown -->
+          <div class="relative">
+            <button
+              @click="showDownloadMenu = !showDownloadMenu"
+              class="w-full sm:w-auto bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 border border-blue-500/50 font-semibold py-2 px-4 rounded-lg text-sm transition-colors flex items-center justify-center gap-2"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              Download
+            </button>
+
+            <!-- Download Format Menu -->
+            <div
+              v-if="showDownloadMenu"
+              @click="showDownloadMenu = false"
+              class="absolute right-0 mt-2 w-40 bg-gray-900 border border-gray-700 rounded-lg shadow-lg z-10"
+            >
+              <button
+                @click="downloadPlaylist(playlist, 'json')"
+                class="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 transition-colors rounded-t-lg"
+              >
+                JSON
+              </button>
+              <button
+                @click="downloadPlaylist(playlist, 'csv')"
+                class="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 transition-colors"
+              >
+                CSV
+              </button>
+              <button
+                @click="downloadPlaylist(playlist, 'txt')"
+                class="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 transition-colors rounded-b-lg"
+              >
+                Text
+              </button>
+            </div>
+          </div>
+        </div>
 
         <!-- Footer -->
         <div
