@@ -1,10 +1,38 @@
 # Cyprus Avenue Playlist Archive
 
-A comprehensive archive of playlists from KCUR's legendary **Cyprus Avenue** radio show, hosted by Bill Shapiro for over 40 years (1978-2018).
+A comprehensive archive of playlists from KCUR's legendary **Cyprus Avenue** radio show, hosted by Bill Shapiro for over 40 years (1978-2018). Includes a modern web application for browsing playlists, artists, and tracks with integrated Spotify playback.
 
 ## About Cyprus Avenue
 
 Cyprus Avenue was a Saturday night institution on KCUR 89.3 FM in Kansas City, featuring "the world of popular music from gospel to rock - from country to reggae - from a different point of view." Bill Shapiro, a Kansas City tax attorney by day and music enthusiast by night, curated unique playlists introducing listeners to both classic and contemporary artists across all genres. He passed away in January 2020 at age 82.
+
+## 🌐 Web Application
+
+The archive includes a full-featured Vue 3 web application:
+
+**Live Demo**: [cyprus-avenue.netlify.app](https://cyprus-avenue.netlify.app) *(if deployed)*
+
+### Features
+
+- **Browse Playlists** - View all 125 shows with expandable track lists
+- **Artist Discovery** - Explore 277+ artists with bios, images, and tag filtering
+- **Track Search** - Search across all 1,506 tracks instantly
+- **Spotify Integration**:
+  - 🎧 **Web Player** - Listen to tracks directly in the browser
+  - 📋 **Playlist Creation** - Create Spotify playlists with one click
+  - Four playlist modes: individual shows, complete archive, by artist, by tag
+- **Multi-Platform Streaming** - Links to Spotify, Apple Music, and YouTube Music
+- **"This Week in History"** - See what Bill Shapiro played on this date
+- **Artist Metadata** - Bios and tags from Last.fm, images from Spotify
+
+### Run Locally
+
+```bash
+cd web
+npm install
+npm run dev
+# Open http://localhost:5173
+```
 
 ## Archive Contents
 
@@ -12,8 +40,9 @@ This archive preserves **125 Cyprus Avenue playlists** spanning nearly 8 years:
 
 - **Total Playlists**: 125
 - **Total Tracks**: 1,506
+- **Unique Artists**: 277+
 - **Date Range**: December 12, 2009 to July 14, 2017
-- **Average Tracks per Show**: 12.0
+- **Spotify Coverage**: 89.9% of tracks found on Spotify
 
 ## Data Format
 
@@ -86,6 +115,16 @@ console.log(`${artists.size} unique artists`);
 
 ```
 cyprus-avenue/
+├── web/                     # Vue 3 web application
+│   ├── src/
+│   │   ├── components/      # 17 Vue components
+│   │   ├── composables/     # 12 reusable composables
+│   │   ├── views/           # Route views
+│   │   └── utils/           # Utility functions
+│   └── public/
+│       ├── playlists.json   # Playlist data for web app
+│       ├── spotify-index.json    # Spotify track mappings
+│       └── artist-bios.json # Artist metadata (Last.fm + Spotify)
 ├── json/
 │   ├── individual/          # 125 individual playlist JSON files
 │   └── playlists.json       # Consolidated file with all playlists
@@ -93,12 +132,18 @@ cyprus-avenue/
 │   └── txt/                 # Original copy/pasted text files
 ├── scripts/
 │   ├── parsing/             # Parser tools
-│   │   └── parse_playlists.py
+│   │   ├── parse_playlists.py
+│   │   └── validate_playlists.py
 │   ├── discovery/           # Discovery and fetching tools
 │   │   ├── discover_playlists.py
 │   │   └── fetch_missing_playlists.py
-│   └── spotify/             # Spotify integration scripts
-│       └── index-spotify-tracks.js
+│   ├── spotify/             # Spotify integration scripts
+│   │   ├── index-spotify-tracks.js
+│   │   ├── recover-missing-tracks.js
+│   │   └── enrich-artist-images.js
+│   ├── lastfm/              # Last.fm integration
+│   │   └── fetch-artist-bios.js
+│   └── consolidate-genres.js # Tag consolidation from multiple sources
 ├── docker/                  # Docker environments
 │   ├── Dockerfile.parse     # Parser environment
 │   ├── Dockerfile.discover  # Discovery environment
@@ -106,7 +151,8 @@ cyprus-avenue/
 ├── data/                    # Generated analysis data
 │   ├── discovered_playlists.json
 │   └── gap_analysis.json
-├── ARCHIVE_REPORT.md        # Detailed archive report
+├── QUICKSTART.md            # Quick start guide
+├── WORKFLOW.md              # Detailed workflow documentation
 ├── CLAUDE.md                # Development process documentation
 └── README.md                # This file
 ```
@@ -126,6 +172,15 @@ cyprus-avenue/
 
 # Index tracks with Spotify (very slow - ~7-10 minutes)
 ./index-spotify.sh
+
+# Fetch artist bios from Last.fm (~5 minutes)
+node scripts/lastfm/fetch-artist-bios.js
+
+# Enrich artist images from Spotify (~2 minutes)
+node scripts/spotify/enrich-artist-images.js
+
+# Consolidate tags from all sources (~1 minute)
+node scripts/consolidate-genres.js
 ```
 
 ### Common Tasks
@@ -144,52 +199,61 @@ See [WORKFLOW.md](WORKFLOW.md) for complete documentation.
 
 ## Tools & Scripts
 
-### Parser (`scripts/parsing/parse_playlists.py`)
+### Data Pipeline Scripts
+
+#### Parser (`scripts/parsing/parse_playlists.py`)
 Converts raw text files to structured JSON. Handles multiple playlist formats and extracts artist/song information.
 
-**Via convenience script (recommended):**
 ```bash
 ./update-playlists.sh
 ```
 
-**Or directly with Docker:**
-```bash
-docker build -f docker/Dockerfile.parse -t cyprus-avenue-parser .
-docker run --rm \
-  -v /path/to/project/archive/txt:/app/txt \
-  -v /path/to/project/json:/app/json \
-  -v /path/to/project/web/public:/app/web/public \
-  cyprus-avenue-parser
-```
-
-### Discovery Tool (`scripts/discovery/discover_playlists.py`)
+#### Discovery Tool (`scripts/discovery/discover_playlists.py`)
 Scrapes KCUR website to find available playlists and identify gaps in the archive.
 
-**Via convenience script (recommended):**
 ```bash
 ./discover.sh
 ```
 
-**Or directly with Docker:**
-```bash
-docker build -f docker/Dockerfile.discover -t cyprus-avenue-discover .
-docker run --rm -v /path/to/project:/app cyprus-avenue-discover
-```
+### API Integration Scripts
 
-### Spotify Indexer (`scripts/spotify/index-spotify-tracks.js`)
+All API scripts require credentials in a `.env` file. See [scripts/spotify/README.md](scripts/spotify/README.md) for setup.
+
+#### Spotify Track Indexer (`scripts/spotify/index-spotify-tracks.js`)
 Indexes all tracks with Spotify API to provide direct track links in the web app.
 
-**Via convenience script (recommended):**
 ```bash
 ./index-spotify.sh
+# or: node scripts/spotify/index-spotify-tracks.js
 ```
 
-**Or directly with Node.js:**
+#### Spotify Track Recovery (`scripts/spotify/recover-missing-tracks.js`)
+Interactive tool to manually match tracks that weren't found automatically.
+
 ```bash
-node scripts/spotify/index-spotify-tracks.js
+node scripts/spotify/recover-missing-tracks.js
 ```
 
-See [scripts/spotify/README.md](scripts/spotify/README.md) for Spotify API setup.
+#### Last.fm Artist Bios (`scripts/lastfm/fetch-artist-bios.js`)
+Fetches artist biographies, tags, and statistics from Last.fm API.
+
+```bash
+LASTFM_API_KEY=your_key node scripts/lastfm/fetch-artist-bios.js
+```
+
+#### Spotify Artist Images (`scripts/spotify/enrich-artist-images.js`)
+Enriches artist data with high-quality images from Spotify (since Last.fm no longer provides images).
+
+```bash
+node scripts/spotify/enrich-artist-images.js
+```
+
+#### Tag Consolidation (`scripts/consolidate-genres.js`)
+Merges tags from multiple sources (Last.fm tags, Spotify artist genres, track genres) into a unified tag system.
+
+```bash
+node scripts/consolidate-genres.js
+```
 
 ## Historical Significance
 
@@ -205,6 +269,14 @@ This archive is particularly valuable because:
 - Original playlists: [KCUR Cyprus Avenue Tag](https://www.kcur.org/tags/cyprus-avenue)
 - About the show: [Cyprus Avenue on KCUR](https://www.kcur.org/show/cyprus-avenue)
 
+## Technology Stack
+
+- **Web Application**: Vue 3, TypeScript, Vite, Tailwind CSS
+- **Backend Scripts**: Python 3, Node.js
+- **APIs**: Spotify Web API, Last.fm API
+- **Deployment**: Netlify (SPA mode)
+- **Containerization**: Docker for reproducible parsing
+
 ## License
 
 This archive is created for preservation and educational purposes. The original content is © KCUR Kansas City Public Radio. Track listings and metadata are provided as-is for archival purposes.
@@ -212,3 +284,5 @@ This archive is created for preservation and educational purposes. The original 
 ---
 
 *This archive represents an important preservation effort of Kansas City's musical cultural heritage and the legacy of Bill Shapiro's Cyprus Avenue.*
+
+*Built with [Claude Code](https://claude.com/claude-code) - see [CLAUDE.md](CLAUDE.md) for development history.*

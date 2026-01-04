@@ -5,16 +5,22 @@ This document explains how to maintain and update the Cyprus Avenue playlist arc
 ## Quick Reference
 
 ```bash
+# Data Pipeline
 ./update-playlists.sh   # Fast (~1 sec) - Parse txt → json
 ./discover.sh           # Slow (~30 sec) - Find missing playlists online
 ./index-spotify.sh      # Very slow (~7-10 min) - Index tracks with Spotify
+
+# Artist Metadata (run in order after adding new artists)
+node scripts/lastfm/fetch-artist-bios.js      # (~5 min) - Fetch artist bios
+node scripts/spotify/enrich-artist-images.js  # (~2 min) - Add artist images
+node scripts/consolidate-genres.js            # (~1 min) - Merge tags from sources
 ```
 
 ---
 
 ## Workflow Overview
 
-The Cyprus Avenue archive uses a three-stage data pipeline:
+The Cyprus Avenue archive uses a multi-stage data pipeline:
 
 ```
 ┌─────────────┐
@@ -32,6 +38,12 @@ The Cyprus Avenue archive uses a three-stage data pipeline:
 ┌─────────────┐
 │   Spotify   │  web/public/spotify-index.json
 │    Index    │  (Direct track links)
+└──────┬──────┘
+       │ Step 4-6: Artist metadata enrichment
+       ↓
+┌─────────────┐
+│ Artist Bios │  web/public/artist-bios.json
+│             │  (Bios, images, tags, stats)
 └─────────────┘
 
        Step 2: ./discover.sh (separate - finds new content)
@@ -169,6 +181,89 @@ Get credentials from: https://developer.spotify.com/dashboard
 
 ---
 
+## Step 4: Fetch Artist Bios (Slow 🐌)
+
+**When to use:** After adding new artists to the archive
+
+**What it does:**
+- Fetches artist biographies from Last.fm API
+- Collects tags, listener counts, and play statistics
+- Cleans bio text (removes Last.fm footer links)
+- Rate-limited to 60 requests/minute
+
+**Prerequisites:**
+```bash
+# Get a Last.fm API key from: https://www.last.fm/api/account/create
+
+# Option 1: Add to .env file
+echo "LASTFM_API_KEY=your_key_here" >> .env
+
+# Option 2: Set environment variable
+export LASTFM_API_KEY=your_key_here
+```
+
+**Usage:**
+```bash
+node scripts/lastfm/fetch-artist-bios.js
+```
+
+**Time:** ~5 minutes (for ~277 artists)
+
+**Output:** Updates `web/public/artist-bios.json`
+
+---
+
+## Step 5: Enrich Artist Images (Medium 🕐)
+
+**When to use:** After running the artist bios script
+
+**What it does:**
+- Fetches high-quality artist images from Spotify
+- Adds Spotify artist ID, URL, popularity, and followers
+- Skips artists that already have images (idempotent)
+- Note: Last.fm no longer provides artist images (as of January 2025)
+
+**Prerequisites:** Spotify credentials in `.env` (same as Step 3)
+
+**Usage:**
+```bash
+node scripts/spotify/enrich-artist-images.js
+```
+
+**Time:** ~2 minutes
+
+**Results:**
+- 99.6% image coverage (276/277 artists)
+- High-quality images (typically 640x640)
+- Spotify metadata added to each artist
+
+---
+
+## Step 6: Consolidate Tags (Fast ⚡)
+
+**When to use:** After running artist bios and image enrichment
+
+**What it does:**
+- Merges tags from multiple sources:
+  - Last.fm tags (highest priority)
+  - Spotify artist genres
+  - Spotify track genres
+- Deduplicates using case-insensitive matching
+- Preserves source attribution
+
+**Prerequisites:** Spotify credentials in `.env`
+
+**Usage:**
+```bash
+node scripts/consolidate-genres.js
+```
+
+**Time:** ~1 minute
+
+**Output:** Updates `web/public/artist-bios.json` with consolidated `tags` field
+
+---
+
 ## Common Scenarios
 
 ### Scenario 1: Fix Errors in Existing Playlists
@@ -212,9 +307,33 @@ echo "Artist - Song" >> archive/txt/2024-01-15.txt
 
 # 4. Re-index Spotify
 ./index-spotify.sh
+
+# 5. Update artist metadata (if new artists added)
+node scripts/lastfm/fetch-artist-bios.js
+node scripts/spotify/enrich-artist-images.js
+node scripts/consolidate-genres.js
 ```
 
-### Scenario 4: Just Testing Changes
+### Scenario 4: Add New Artists to Archive
+
+```bash
+# 1. Add playlists with new artists
+./update-playlists.sh
+
+# 2. Index new tracks with Spotify
+./index-spotify.sh
+
+# 3. Fetch bios for new artists (existing ones are skipped)
+node scripts/lastfm/fetch-artist-bios.js
+
+# 4. Add images (skips artists that already have them)
+node scripts/spotify/enrich-artist-images.js
+
+# 5. Consolidate tags from all sources
+node scripts/consolidate-genres.js
+```
+
+### Scenario 5: Just Testing Changes
 
 ```bash
 # Parse without re-indexing Spotify
@@ -266,11 +385,14 @@ cyprus-avenue/
 ├── web/
 │   └── public/
 │       ├── playlists.json      # Copy for web app (auto-generated)
-│       └── spotify-index.json  # Spotify track mappings (from Step 3)
+│       ├── spotify-index.json  # Spotify track mappings (from Step 3)
+│       └── artist-bios.json    # Artist metadata (from Steps 4-6)
 │
 ├── data/
 │   ├── discovered_playlists.json  # From ./discover.sh
-│   └── gap_analysis.json          # Missing playlists report
+│   ├── gap_analysis.json          # Missing playlists report
+│   ├── spotify-not-found.json     # Tracks not found on Spotify
+│   └── spotify-recovery-report.json  # Track recovery results
 │
 ├── scripts/
 │   ├── parsing/
@@ -279,8 +401,13 @@ cyprus-avenue/
 │   ├── discovery/
 │   │   ├── discover_playlists.py  # Web scraper
 │   │   └── fetch_missing_playlists.py
-│   └── spotify/
-│       └── index-spotify-tracks.js  # Spotify indexer
+│   ├── spotify/
+│   │   ├── index-spotify-tracks.js    # Spotify track indexer
+│   │   ├── recover-missing-tracks.js  # Interactive track recovery
+│   │   └── enrich-artist-images.js    # Spotify artist images
+│   ├── lastfm/
+│   │   └── fetch-artist-bios.js       # Last.fm artist bios
+│   └── consolidate-genres.js          # Tag consolidation
 │
 ├── update-playlists.sh         # Step 1: Parse txt → json
 ├── discover.sh                 # Step 2: Find new content
@@ -329,6 +456,14 @@ cp .env.example .env
 # Edit .env with your credentials
 ```
 
+### "LASTFM_API_KEY environment variable is required"
+
+Get a Last.fm API key and add it to your `.env` file:
+```bash
+# Get key from: https://www.last.fm/api/account/create
+echo "LASTFM_API_KEY=your_key_here" >> .env
+```
+
 ### Web app not showing updates
 
 Make sure `web/public/playlists.json` was updated:
@@ -362,6 +497,16 @@ ls -lh web/public/playlists.json
 5. **Check validation reports**
    - Fix critical issues before committing
    - Warnings are okay but try to minimize them
+
+6. **Run artist metadata scripts in order**
+   - First: `fetch-artist-bios.js` (gets bios and tags from Last.fm)
+   - Second: `enrich-artist-images.js` (adds images from Spotify)
+   - Third: `consolidate-genres.js` (merges tags from all sources)
+   - All scripts are idempotent - safe to re-run
+
+7. **Keep your `.env` file secure**
+   - Never commit `.env` to git (it's in `.gitignore`)
+   - Contains API credentials for Spotify and Last.fm
 
 ---
 

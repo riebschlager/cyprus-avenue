@@ -363,6 +363,169 @@ This project was created entirely through a collaborative session with **Claude 
 
 **Result**: Users can now create Spotify playlists in seconds without rate limiting errors, with individual playlists getting quality API fallbacks and mega-playlists optimized for speed.
 
+### Phase 8: Artist Bios & Metadata Enrichment
+
+**Challenge**: Enhance the archive with rich artist metadata including biographies, images, tags, and statistics.
+
+**Claude Code Actions**:
+
+1. **Last.fm API Integration**
+   - Built `scripts/lastfm/fetch-artist-bios.js` to fetch artist data
+   - Extracts biographies, tags, listener counts, and play statistics
+   - Rate-limited requests (60/minute) to respect API limits
+   - Cleans bio text by removing Last.fm footer links
+   - Handles missing artists gracefully with error reporting
+
+2. **Spotify Artist Image Enrichment**
+   - Created `scripts/spotify/enrich-artist-images.js`
+   - Last.fm no longer provides images (as of January 2025), so Spotify fills the gap
+   - Fetches high-quality artist images (typically 640x640)
+   - Adds Spotify artist ID, URL, popularity score, and follower count
+   - Idempotent - skips artists that already have images
+   - Achieved 99.6% image coverage (276/277 artists)
+
+3. **Tag Consolidation System**
+   - Built `scripts/consolidate-genres.js` to merge tags from multiple sources:
+     - Last.fm tags (highest priority - most specific)
+     - Spotify artist genres
+     - Spotify track genres
+   - Deduplicates using case-insensitive normalization
+   - Preserves source attribution in `tagSources` field
+
+4. **Tag Filtering & Normalization**
+   - Created `web/src/utils/tagFilters.ts` for tag management
+   - Case-insensitive blacklist for irrelevant tags (e.g., "seen live", "favourites")
+   - Tag mappings to consolidate variants (e.g., "female vocalists" → "Female Vocalists")
+   - Normalizes all tags to Title Case for display consistency
+   - Alphabetical sorting for predictable display
+
+5. **Artist Card Enhancements**
+   - Updated `ArtistCard.vue` with rich metadata display:
+     - Spotify artist images with fallback placeholder
+     - Bio summary with link to full Last.fm page
+     - Consolidated tags as clickable filters
+     - Listener and play count statistics
+     - Spotify artist link for direct profile access
+
+6. **Tag-Based Artist Discovery**
+   - Added tag filtering to Artists view
+   - Click any tag to filter all artists with that tag
+   - Active tag banner with clear filter option
+   - Tag persists across page navigation via URL
+   - Enables genre-based exploration of the archive
+
+**Key Files Created**:
+- `scripts/lastfm/fetch-artist-bios.js` - Last.fm bio fetcher
+- `scripts/spotify/enrich-artist-images.js` - Spotify image enricher
+- `scripts/consolidate-genres.js` - Multi-source tag merger
+- `web/src/utils/tagFilters.ts` - Tag normalization and filtering
+- `web/src/composables/useArtistBios.ts` - Artist bio data composable
+- `web/public/artist-bios.json` - Consolidated artist metadata (~1.4 MB)
+
+**Data Output Format**:
+```json
+{
+  "Bob Dylan": {
+    "bio": "Full biography from Last.fm...",
+    "bioSummary": "Short summary for card display...",
+    "tags": ["Rock", "Folk", "Singer-Songwriter"],
+    "lastfmTags": ["rock", "folk", "singer-songwriter"],
+    "tagSources": { "lastfm": 10, "spotifyArtist": 5, "spotifyTracks": 3, "total": 15 },
+    "url": "https://www.last.fm/music/Bob+Dylan",
+    "image": "https://i.scdn.co/image/...",
+    "listeners": 4210627,
+    "playcount": 286857662,
+    "spotifyId": "74ASZWbe4lXaubB36ztrGX",
+    "spotifyUrl": "https://open.spotify.com/artist/74ASZWbe4lXaubB36ztrGX",
+    "popularity": 82,
+    "followers": 6428197
+  }
+}
+```
+
+**Result**: Rich artist profiles with images, bios, and filterable tags enable music discovery beyond simple track listings.
+
+### Phase 9: Spotify Web Player & Enhanced Playlist Modes
+
+**Challenge**: Enable in-app music playback and expand Spotify playlist creation with artist and tag-based modes.
+
+**Claude Code Actions**:
+
+1. **Spotify Web Playback SDK Integration**
+   - Created `SpotifyWebPlayer.vue` component for in-browser playback
+   - Built `useSpotifyPlayback.ts` composable for player state management
+   - Requires Spotify Premium for playback (Web Playback SDK limitation)
+   - Real-time track information display (artist, song, album art)
+   - Play/pause controls with state synchronization
+
+2. **EQ Animation Visualization**
+   - Added animated equalizer bars when music is playing
+   - 7 bars with varying animation durations (0.8s - 1.4s)
+   - Blue gradient color scheme matching app theme
+   - Subtle glow effect for visual polish
+   - CSS-only animation (no JavaScript overhead)
+
+3. **Enhanced Spotify Playlist Modal**
+   - Expanded from 2 modes to 4 playlist creation modes:
+     - **Individual Show**: Create playlist from specific archive episode
+     - **Complete Archive**: All unique tracks (~1,300+ tracks)
+     - **By Artist**: All tracks by a specific artist across all shows
+     - **By Tag**: All tracks by artists with a specific tag
+   - Smart track deduplication across all modes
+   - Mode-specific playlist naming conventions
+
+4. **Artist-Based Playlist Creation**
+   - Added "Create Spotify Playlist" button to ArtistCard
+   - Collects all tracks by artist across entire archive
+   - Handles artists appearing on multiple shows
+   - Names playlist "Cyprus Avenue - [Artist Name]"
+
+5. **Tag-Based Playlist Creation**
+   - Added button when tag filter is active in Artists view
+   - Collects all tracks by all artists matching the tag
+   - Example: "Rock" tag → all tracks by rock artists
+   - Names playlist "Cyprus Avenue - [Tag] Artists"
+   - Powerful for genre-based playlist generation
+
+6. **Home Page Enhancements**
+   - "This Week in History" feature shows playlists from same date in past years
+   - Smart date wrapping for December/January edge cases
+   - "Suggested for You" section with random playlist and artist
+   - Artist suggestion includes thumbnail and bio snippet
+   - Dynamic refresh on each page load
+
+7. **Improved Auth Flow**
+   - Enhanced token refresh handling
+   - Better error states and user feedback
+   - Graceful degradation when not authenticated
+   - Session persistence across page reloads
+
+**Key Files Created/Modified**:
+- `web/src/components/SpotifyWebPlayer.vue` - Music player with EQ animation
+- `web/src/composables/useSpotifyPlayback.ts` - Playback state management
+- `web/src/components/SpotifyPlaylistModal.vue` - Enhanced 4-mode modal
+- `web/src/components/HomePage.vue` - This Week in History + Suggestions
+- `web/src/components/ArtistCard.vue` - Artist playlist creation button
+
+**Technical Challenges Solved**:
+
+1. **Web Playback SDK Initialization**
+   - Problem: SDK requires specific initialization timing
+   - Solution: Dynamic script loading with ready callback
+   - Handles player device registration with Spotify Connect
+
+2. **Tag Filter URL Persistence**
+   - Problem: Tag filter lost on page reload
+   - Solution: Store active tag in URL query parameter
+   - Restored on component mount via route query
+
+3. **Date Wrapping for "This Week in History"**
+   - Problem: January playlists should match December dates
+   - Solution: Look for ±3 days accounting for year boundaries
+   - Uses modular date arithmetic for edge cases
+
+**Result**: Full-featured music application with in-browser playback, rich artist discovery, and flexible playlist creation spanning individual shows, complete archive, specific artists, and genre tags.
+
 ### Documentation & Polish
 
 **Claude Code Actions**:
@@ -442,7 +605,7 @@ Every step validated results:
 - Docker - Containerized tooling
 - Netlify - Web hosting and deployment
 
-**AI Assistant**: Claude Code (Sonnet 4.5)
+**AI Assistant**: Claude Code (Sonnet 4.5, Opus 4.5)
 
 ## Metrics
 
@@ -450,32 +613,38 @@ Every step validated results:
 
 **Backend Scripts**:
 - `scripts/parsing/parse_playlists.py`: ~200 lines
+- `scripts/parsing/validate_playlists.py`: ~100 lines
 - `scripts/discovery/discover_playlists.py`: ~180 lines
 - `scripts/discovery/fetch_missing_playlists.py`: ~210 lines
 - `scripts/spotify/index-spotify-tracks.js`: ~300 lines
-- Total Python: ~590 lines
-- Total JavaScript (scripts): ~300 lines
+- `scripts/spotify/recover-missing-tracks.js`: ~400 lines
+- `scripts/spotify/enrich-artist-images.js`: ~200 lines
+- `scripts/lastfm/fetch-artist-bios.js`: ~230 lines
+- `scripts/consolidate-genres.js`: ~320 lines
+- Total Python: ~690 lines
+- Total JavaScript (scripts): ~1,450 lines
 
 **Web Application**:
-- Vue components: 18 files, ~2,100 lines
-- Composables: 6 files, ~450 lines
-- Router & utilities: 3 files, ~180 lines
-- TypeScript types: ~120 lines
+- Vue components: 17 files, ~3,500 lines
+- Composables: 12 files, ~1,200 lines
+- Router & utilities: 6 files, ~400 lines
+- TypeScript types: ~200 lines
 - Configuration files: ~150 lines
-- Total TypeScript/Vue: ~3,000 lines
+- Total TypeScript/Vue: ~5,450 lines
 
 **Infrastructure & Config**:
 - Dockerfiles: 3 files
 - Vite/Tailwind/Netlify configs: ~200 lines
 
 **Documentation**:
-- README.md: ~200 lines
-- ARCHIVE_REPORT.md: ~180 lines
-- CLAUDE.md: ~450 lines
-- Spotify README: ~120 lines
-- Total documentation: ~950 lines
+- README.md: ~290 lines
+- WORKFLOW.md: ~370 lines
+- QUICKSTART.md: ~50 lines
+- CLAUDE.md: ~850 lines
+- Spotify README: ~360 lines
+- Total documentation: ~1,920 lines
 
-**Grand Total**: ~5,190 lines of code + documentation
+**Grand Total**: ~9,710 lines of code + documentation
 
 ### Development Time
 Completed across multiple collaborative sessions, including:
@@ -497,13 +666,18 @@ Completed across multiple collaborative sessions, including:
 - **6 missing playlists recovered** from KCUR
 - **89.9% Spotify match rate** (1,302 of 1,449 unique tracks found)
 - **88.3% high-confidence matches** on Spotify
+- **99.6% artist image coverage** (276/277 artists from Spotify)
+- **277+ unique artists** with metadata
 
 **Web Application**:
-- **18 Vue components** with TypeScript
-- **6 composables** for reusable logic
+- **17 Vue components** with TypeScript
+- **12 composables** for reusable logic
 - **7 routes** with deep linking support
-- **3 main views**: Playlists, Artists, Tracks
+- **4 main views**: Home, Playlists, Artists, Tracks
+- **4 Spotify playlist modes**: Individual, Complete Archive, By Artist, By Tag
 - **Multi-platform streaming** (Spotify, Apple Music, YouTube Music)
+- **Spotify Web Player** for in-browser playback
+- **Tag-based artist filtering** with normalized tags
 - **100% TypeScript coverage** (no build errors)
 - **Responsive design** (mobile & desktop)
 - **Production deployed** on Netlify
@@ -580,25 +754,35 @@ Completed across multiple collaborative sessions, including:
 
 14. **Icon choice affects usability** - Emoji selection matters for contrast and visibility on different backgrounds (🎧 over 🎵 on dark themes)
 
+15. **Multi-source data enrichment adds value** - Combining Last.fm (bios, tags) with Spotify (images, genres) creates richer metadata than either source alone
+
+16. **API changes require adaptation** - Last.fm stopped providing images in January 2025, requiring pivot to Spotify for artist images
+
+17. **Tag normalization is essential** - Case-insensitive matching, blacklists, and mappings turn messy crowdsourced tags into usable filters
+
+18. **URL state enables shareable filters** - Storing filter state (like active tag) in URL query params enables deep linking and browser back/forward
+
+19. **Date edge cases need explicit handling** - "This Week in History" required special logic for December/January boundary dates
+
 ## Reproducibility
 
 Every step can be reproduced:
 
 ```bash
 # Phase 1: Parse existing text files
-docker build -f docker/Dockerfile.parse -t cyprus-avenue-parser .
-docker run --rm -v "$(pwd)/archive/txt:/app/txt" -v "$(pwd)/json:/app/json" cyprus-avenue-parser
+./update-playlists.sh
+# or: docker build -f docker/Dockerfile.parse -t cyprus-avenue-parser . && docker run ...
 
 # Phase 2: Discover available playlists
-docker build -f docker/Dockerfile.discover -t cyprus-avenue-discover .
-docker run --rm -v "$(pwd):/app" cyprus-avenue-discover
+./discover.sh
 
 # Phase 3: Fetch missing playlists
 docker build -f docker/Dockerfile.fetch -t cyprus-avenue-fetch .
 docker run --rm -v "$(pwd):/app" cyprus-avenue-fetch
 
 # Phase 4: Index tracks with Spotify
-SPOTIFY_CLIENT_ID=xxx SPOTIFY_CLIENT_SECRET=yyy node scripts/spotify/index-spotify-tracks.js
+./index-spotify.sh
+# or: node scripts/spotify/index-spotify-tracks.js
 
 # Phase 5: Build and run web interface
 cd web
@@ -606,6 +790,24 @@ npm install
 npm run dev          # Development server
 npm run build        # Production build
 npm run preview      # Preview production build
+
+# Phase 8: Enrich artist metadata
+LASTFM_API_KEY=xxx node scripts/lastfm/fetch-artist-bios.js
+node scripts/spotify/enrich-artist-images.js
+node scripts/consolidate-genres.js
+```
+
+### Environment Variables
+
+Create a `.env` file in the project root:
+
+```bash
+# Spotify API (required for indexing and web player)
+SPOTIFY_CLIENT_ID=your_client_id
+SPOTIFY_CLIENT_SECRET=your_client_secret
+
+# Last.fm API (required for artist bios)
+LASTFM_API_KEY=your_api_key
 ```
 
 ## Impact
@@ -638,6 +840,17 @@ Many of these playlists are no longer easily accessible on KCUR's website, makin
 - ✓ Real-time progress tracking for playlist creation
 - ✓ Rate-limiting and performance optimizations
 - ✓ Toast notification system for user feedback
+- ✓ **Artist bios and metadata from Last.fm API**
+- ✓ **Artist images from Spotify (99.6% coverage)**
+- ✓ **Consolidated tag system from multiple sources**
+- ✓ **Tag-based artist filtering and discovery**
+- ✓ **Spotify Web Player for in-browser playback**
+- ✓ **EQ animation visualization during playback**
+- ✓ **Artist-based Spotify playlist creation**
+- ✓ **Tag-based Spotify playlist creation**
+- ✓ **"This Week in History" feature on home page**
+- ✓ **"Suggested for You" with random playlist/artist recommendations**
+- ✓ **Interactive track recovery tool for missing Spotify matches**
 
 **Future Possibilities**:
 - Creating collaborative Spotify/Apple Music playlists
@@ -647,17 +860,20 @@ Many of these playlists are no longer easily accessible on KCUR's website, makin
 - Generating music recommendations based on listening history
 - Adding user comments and favorites
 - Social sharing features (Twitter cards, Open Graph)
-- Genre tagging and categorization
 - Export playlists to various formats
 - Dark mode theme support
-- Advanced filtering (by year, genre, etc.)
-- Audio preview integration with Spotify Web Playback SDK
+- Advanced filtering (by year, date range)
+- Related artist recommendations based on tag similarity
+- Playlist comparison tools
+- Audio waveform visualization
 
 ---
 
-**Project Completed**: December 31, 2025
+**Project Started**: December 31, 2025
 
-**AI Assistant**: Claude Code (Sonnet 4.5) by Anthropic
+**Last Updated**: January 3, 2026
+
+**AI Assistant**: Claude Code (Sonnet 4.5, Opus 4.5) by Anthropic
 
 **Human Collaborator**: Project initiator and domain expert
 

@@ -37,7 +37,8 @@
       "Bash(else echo \"No artist-bios.json found\")",
       "Bash(pkill:*)",
       "Bash(node scripts/spotify/enrich-artist-images.js:*)",
-      "Bash(node scripts/consolidate-genres.js:*)"
+      "Bash(node scripts/consolidate-genres.js:*)",
+      "Bash(git log:*)"
     ]
   }
 }
