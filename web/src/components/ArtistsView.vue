@@ -32,7 +32,6 @@ onMounted(() => {
         selectedTag.value = action.tag
         // Open the modal
         showTagPlaylistModal.value = true
-        sessionStorage.removeItem('spotify_pending_action')
       }
     } catch (err) {
       console.error('Failed to parse pending Spotify action', err)

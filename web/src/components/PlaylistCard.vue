@@ -41,7 +41,6 @@ onMounted(() => {
         // Check if this is the playlist that should have the modal opened
         if (action.mode === 'single' && action.playlistSlug === props.playlist.date) {
           showSpotifyModal.value = true
-          sessionStorage.removeItem('spotify_pending_action')
         }
       } catch (err) {
         console.error('Failed to parse pending Spotify action', err)

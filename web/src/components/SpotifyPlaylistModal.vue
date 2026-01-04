@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 import type { Playlist } from '../types/playlist'
 import { useSpotifyAuth } from '../composables/useSpotifyAuth'
 import { useSpotifyPlaylistCreation } from '../composables/useSpotifyPlaylistCreation'
@@ -44,11 +44,51 @@ const isError = computed(() => creationState.value === 'error')
 
 // Create modal state object to preserve context through OAuth flow
 const modalState = computed(() => ({
+  action: 'create-playlist',
   mode: props.mode,
   playlistSlug: props.playlist?.date,
   tag: props.tag,
   artistName: props.artistName
 }))
+
+const getPendingAction = () => {
+  const raw = sessionStorage.getItem('spotify_pending_action')
+  if (!raw) return null
+  try {
+    return JSON.parse(raw)
+  } catch (err) {
+    sessionStorage.removeItem('spotify_pending_action')
+    return null
+  }
+}
+
+const matchesPendingAction = (action: any): boolean => {
+  if (!action || action.action !== 'create-playlist' || action.mode !== props.mode) {
+    return false
+  }
+
+  if (props.mode === 'single') {
+    return action.playlistSlug && action.playlistSlug === props.playlist?.date
+  }
+  if (props.mode === 'tag') {
+    return action.tag && action.tag === props.tag
+  }
+  if (props.mode === 'artist') {
+    return action.artistName && action.artistName === props.artistName
+  }
+  return props.mode === 'all-tracks'
+}
+
+const consumePendingAction = async () => {
+  const action = getPendingAction()
+  if (!matchesPendingAction(action)) return
+  try {
+    await handleCreatePlaylist()
+    sessionStorage.removeItem('spotify_pending_action')
+  } catch (err) {
+    console.error('Failed to consume pending playlist action', err)
+  }
+}
 
 const handleCreatePlaylist = async () => {
   if (!props.playlist && props.mode !== 'all-tracks' && props.mode !== 'tag' && props.mode !== 'artist') {
@@ -108,8 +148,22 @@ const handleClose = () => {
   if (creationState.value !== 'idle') {
     resetState()
   }
+  const pendingAction = getPendingAction()
+  if (matchesPendingAction(pendingAction)) {
+    sessionStorage.removeItem('spotify_pending_action')
+  }
   emit('close')
 }
+
+watch(
+  [() => props.isOpen, isAuthenticated, creationState],
+  ([isOpen, authenticated, state]) => {
+    if (!isOpen || !authenticated || state !== 'idle') return
+    consumePendingAction().catch((err) => {
+      console.error('Failed to resume pending playlist action', err)
+    })
+  }
+)
 </script>
 
 <template>

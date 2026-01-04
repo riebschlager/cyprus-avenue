@@ -92,7 +92,6 @@ onMounted(async () => {
         // Check if this is the artist that should have the modal opened
         if (action.mode === 'artist' && action.artistName === props.artist.name) {
           showSpotifyModal.value = true
-          sessionStorage.removeItem('spotify_pending_action')
         }
       } catch (err) {
         console.error('Failed to parse pending Spotify action', err)

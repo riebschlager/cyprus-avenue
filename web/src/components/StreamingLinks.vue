@@ -50,7 +50,12 @@ const handlePlatformClick = (platform: typeof platforms[0]) => {
 const handleSpotifyPlay = async () => {
   if (!spotifyTrackUri.value) return
   if (!isAuthenticated.value) {
-    await initiateLogin(router.currentRoute.value.fullPath)
+    await initiateLogin(router.currentRoute.value.fullPath, {
+      action: 'playback',
+      spotifyUri: spotifyTrackUri.value,
+      artist: props.artist,
+      song: props.song
+    })
     return
   }
 

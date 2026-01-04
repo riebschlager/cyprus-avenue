@@ -67,7 +67,6 @@ onMounted(async () => {
       // Check if this was the all-tracks modal
       if (action.mode === 'all-tracks') {
         showAllTracksModal.value = true
-        sessionStorage.removeItem('spotify_pending_action')
       }
     } catch (err) {
       console.error('Failed to parse pending Spotify action', err)

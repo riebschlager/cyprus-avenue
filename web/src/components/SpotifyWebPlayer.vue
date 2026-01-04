@@ -5,20 +5,41 @@ import { useSpotifyAuth } from '../composables/useSpotifyAuth'
 import { useSpotifyPlayback } from '../composables/useSpotifyPlayback'
 
 const { isAuthenticated } = useSpotifyAuth()
-const { isReady, isPaused, currentTrack, initializePlayer, togglePlay } = useSpotifyPlayback()
+const { isReady, isPaused, currentTrack, initializePlayer, togglePlay, playTrack } = useSpotifyPlayback()
+
+const consumePendingPlayback = async () => {
+  const raw = sessionStorage.getItem('spotify_pending_action')
+  if (!raw) return
+  try {
+    const action = JSON.parse(raw)
+    if (action?.action !== 'playback' || !action.spotifyUri) return
+    await playTrack(action.spotifyUri)
+    sessionStorage.removeItem('spotify_pending_action')
+  } catch (err) {
+    console.error('Failed to consume pending playback action', err)
+  }
+}
+
+const initializeIfAuthenticated = async () => {
+  if (!isAuthenticated.value) return
+  try {
+    await initializePlayer()
+    await consumePendingPlayback()
+  } catch (err) {
+    console.error('Failed to initialize Spotify playback', err)
+  }
+}
 
 onMounted(() => {
-  if (isAuthenticated.value) {
-    initializePlayer().catch((err) => {
-      console.error('Failed to initialize Spotify player', err)
-    })
-  }
+  initializeIfAuthenticated().catch((err) => {
+    console.error('Failed to resume playback on mount', err)
+  })
 })
 
 watch(isAuthenticated, (value) => {
   if (value) {
-    initializePlayer().catch((err) => {
-      console.error('Failed to initialize Spotify player', err)
+    initializeIfAuthenticated().catch((err) => {
+      console.error('Failed to resume playback after auth', err)
     })
   }
 })
