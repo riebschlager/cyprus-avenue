@@ -48,7 +48,7 @@ export const streamingPlatforms: StreamingPlatform[] = [
     icon: '🍎',
     getUrl: (artist: string, song: string) => {
       const query = encodeURIComponent(`${artist} ${song}`)
-      return `https://music.apple.com/us/search?term=${query}`
+      return `music://search?term=${query}`
     }
   },
   {
