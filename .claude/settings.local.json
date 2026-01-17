@@ -38,7 +38,13 @@
       "Bash(pkill:*)",
       "Bash(node scripts/spotify/enrich-artist-images.js:*)",
       "Bash(node scripts/consolidate-genres.js:*)",
-      "Bash(git log:*)"
+      "Bash(git log:*)",
+      "Bash(node -e:*)",
+      "Bash(timeout 5 node:*)",
+      "Bash(gtimeout 5 node:*)",
+      "Bash(node:*)",
+      "Bash(wc:*)",
+      "Bash(volta which:*)"
     ]
   }
 }

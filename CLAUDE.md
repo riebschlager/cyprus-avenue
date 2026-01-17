@@ -526,6 +526,108 @@ This project was created entirely through a collaborative session with **Claude 
 
 **Result**: Full-featured music application with in-browser playback, rich artist discovery, and flexible playlist creation spanning individual shows, complete archive, specific artists, and genre tags.
 
+### Phase 10: MCP Server for LLM-Powered Music Discovery
+
+**Challenge**: Expose the rich archive data through an MCP (Model Context Protocol) server, enabling LLM-powered natural language queries for music exploration and discovery.
+
+**Claude Code Actions**:
+
+1. **MCP Server Architecture**
+   - Built TypeScript MCP server using `@modelcontextprotocol/sdk`
+   - Implemented 21 tools across four categories
+   - Designed read-only architecture for safe data exploration
+   - Created dual-output format (Markdown + JSON) for artifact tools
+
+2. **Core Query Tools (6 tools)**
+   - `search_playlists` - Search by date range, title, description
+   - `get_playlist` - Get full playlist with all tracks and Spotify links
+   - `search_artists` - Search by name, bio content, or tags
+   - `get_artist` - Detailed profile with appearances and stats
+   - `search_tracks` - Search by artist, song name, or genre
+   - `get_track` - Track details with Spotify data
+
+3. **Discovery Tools (6 tools)**
+   - `discover_by_tag` - Find artists/tracks by genre tags
+   - `this_week_in_history` - Historical playlists from same week in past years
+   - `similar_artists` - Tag-based similarity ranking
+   - `random_discovery` - Serendipitous exploration
+   - `find_artist_connections` - Co-occurrence network (who played alongside whom)
+   - `suggest_by_mood_or_era` - Natural language mood/era to playlist matching
+
+4. **Curation Analysis Tools (5 tools)**
+   - `get_statistics` - Archive overview (125 playlists, 1,211 unique tracks, 304 artists)
+   - `analyze_top_artists` - Most featured artists with dedicated shows
+   - `analyze_genre_trends` - Genre evolution over time
+   - `analyze_themes` - Thematic patterns (tributes, best-of, holiday specials)
+   - `get_curation_summary` - Comprehensive Bill Shapiro curation analysis
+
+5. **Artifact Generation Tools (4 tools)**
+   - `generate_playlist_document` - Shareable playlist with Spotify links
+   - `generate_artist_profile` - Comprehensive artist research document
+   - `generate_discovery_report` - Themed music discovery by tags
+   - `generate_year_in_review` - Annual summary with stats and trends
+
+6. **Data Loading & Indexing**
+   - Load all JSON data at startup (~2MB total)
+   - Pre-computed indexes for fast queries:
+     - Artist → playlist appearances
+     - Tag → artists
+     - Date → playlist
+     - Co-occurrence matrix for artist connections
+
+7. **Mood/Era Mapping System**
+   - Mood keywords mapped to tags: "soulful" → [soul, classic soul, gospel, r&b]
+   - Era keywords mapped to tags: "60s" → [60s, motown, british invasion, folk]
+   - Auto-detection of query type with manual override
+
+8. **Docker Integration**
+   - `docker/Dockerfile.mcp` - Node.js 22 slim container
+   - `mcp-server.sh` - Run script supporting both direct and Docker modes
+   - Copies compiled JS and data files into container
+   - stdio transport for MCP communication
+
+**Key Files Created**:
+- `mcp/src/index.ts` - MCP server entry point with 21 tool definitions
+- `mcp/src/tools/search.ts` - Core query tool implementations
+- `mcp/src/tools/discovery.ts` - Discovery tool implementations
+- `mcp/src/tools/analysis.ts` - Curation analysis implementations
+- `mcp/src/tools/artifacts.ts` - Artifact generation with dual output
+- `mcp/src/data/loader.ts` - JSON loading and index building
+- `mcp/src/data/tagMappings.ts` - Mood/era to tag mappings
+- `mcp/src/utils/similarity.ts` - Tag similarity and connection scoring
+- `mcp/src/utils/fuzzyMatch.ts` - Artist name fuzzy matching
+- `mcp/src/utils/formatters.ts` - Markdown/JSON output formatters
+- `mcp/src/types.ts` - TypeScript interfaces
+- `mcp/package.json` - Dependencies (@modelcontextprotocol/sdk)
+- `mcp/tsconfig.json` - TypeScript configuration
+- `docker/Dockerfile.mcp` - Container definition
+- `mcp-server.sh` - Run script
+
+**Technical Challenges Solved**:
+
+1. **Artist Connection Graph**
+   - Problem: How to find artists who played together
+   - Solution: Build co-occurrence matrix at startup from all playlists
+   - Connection strength = (co-occurrences × 0.6) + (shared tags × 0.4)
+
+2. **Natural Language Mood Mapping**
+   - Problem: Convert "I want something soulful" to useful queries
+   - Solution: Mood → tag mappings with match scoring
+   - Playlists ranked by % of tracks with matching artist tags
+
+3. **Fuzzy Artist Matching**
+   - Problem: Users may not type exact artist names
+   - Solution: Levenshtein distance with threshold + suggestions for failed matches
+
+**Example Queries the MCP Server Enables**:
+- "I like Bob Dylan, who else should I listen to?" → `find_artist_connections`
+- "What were Bill Shapiro's favorite artists?" → `analyze_top_artists`
+- "Create a document about blues music in the archive" → `generate_discovery_report`
+- "What was playing this week in past years?" → `this_week_in_history`
+- "I want something soulful for a rainy day" → `suggest_by_mood_or_era`
+
+**Result**: LLM-powered music discovery interface enabling natural language exploration of 8 years of curated radio playlists, artist connections, and genre trends.
+
 ### Documentation & Polish
 
 **Claude Code Actions**:
@@ -632,19 +734,28 @@ Every step validated results:
 - Configuration files: ~150 lines
 - Total TypeScript/Vue: ~5,450 lines
 
+**MCP Server**:
+- `mcp/src/index.ts`: ~400 lines (server entry + 21 tool definitions)
+- `mcp/src/tools/*.ts`: ~1,500 lines (tool implementations)
+- `mcp/src/data/*.ts`: ~350 lines (data loading, tag mappings)
+- `mcp/src/utils/*.ts`: ~400 lines (similarity, fuzzy matching, formatters)
+- `mcp/src/types.ts`: ~100 lines
+- Total MCP TypeScript: ~2,750 lines
+
 **Infrastructure & Config**:
-- Dockerfiles: 3 files
+- Dockerfiles: 4 files
 - Vite/Tailwind/Netlify configs: ~200 lines
+- Shell scripts: ~100 lines
 
 **Documentation**:
 - README.md: ~290 lines
 - WORKFLOW.md: ~370 lines
 - QUICKSTART.md: ~50 lines
-- CLAUDE.md: ~850 lines
+- CLAUDE.md: ~980 lines
 - Spotify README: ~360 lines
-- Total documentation: ~1,920 lines
+- Total documentation: ~2,050 lines
 
-**Grand Total**: ~9,710 lines of code + documentation
+**Grand Total**: ~12,600 lines of code + documentation
 
 ### Development Time
 Completed across multiple collaborative sessions, including:
@@ -655,6 +766,7 @@ Completed across multiple collaborative sessions, including:
 - Spotify API integration
 - Web interface development
 - Project reorganization
+- MCP server design and implementation
 - Full documentation
 
 ### Quality Metrics
@@ -795,6 +907,11 @@ npm run preview      # Preview production build
 LASTFM_API_KEY=xxx node scripts/lastfm/fetch-artist-bios.js
 node scripts/spotify/enrich-artist-images.js
 node scripts/consolidate-genres.js
+
+# Phase 10: Run MCP server
+cd mcp && npm install && npm run build && cd ..
+./mcp-server.sh                    # Direct Node.js mode
+./mcp-server.sh --docker           # Docker mode
 ```
 
 ### Environment Variables
@@ -851,27 +968,26 @@ Many of these playlists are no longer easily accessible on KCUR's website, makin
 - ✓ **"This Week in History" feature on home page**
 - ✓ **"Suggested for You" with random playlist/artist recommendations**
 - ✓ **Interactive track recovery tool for missing Spotify matches**
+- ✓ **MCP Server with 21 tools for LLM-powered music discovery**
+- ✓ **Artist connection network (who played alongside whom)**
+- ✓ **Mood/era-based playlist suggestions**
+- ✓ **Curation analysis tools (top artists, genre trends, themes)**
+- ✓ **Artifact generation (markdown + JSON documents)**
 
 **Future Possibilities**:
 - Creating collaborative Spotify/Apple Music playlists
-- Analyzing music trends and patterns over time
-- Studying radio playlist curation techniques
-- Exploring artist connections and relationships
-- Generating music recommendations based on listening history
 - Adding user comments and favorites
 - Social sharing features (Twitter cards, Open Graph)
 - Export playlists to various formats
 - Dark mode theme support
-- Advanced filtering (by year, date range)
-- Related artist recommendations based on tag similarity
-- Playlist comparison tools
 - Audio waveform visualization
+- MCP-driven playlist generation across streaming platforms
 
 ---
 
 **Project Started**: December 31, 2025
 
-**Last Updated**: January 3, 2026
+**Last Updated**: January 17, 2026
 
 **AI Assistant**: Claude Code (Sonnet 4.5, Opus 4.5) by Anthropic
 
