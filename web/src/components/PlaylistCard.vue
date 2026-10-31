@@ -7,6 +7,7 @@ import StreamingLinks from './StreamingLinks.vue'
 import SpotifyPlaylistModal from './SpotifyPlaylistModal.vue'
 import { useStreamingLinks } from '../composables/useStreamingLinks'
 import { generateArtistSlug, generatePlaylistSlug } from '../utils/slug'
+import { getPublicUrl } from '../utils/urls'
 import { downloadPlaylist } from '../utils/downloadFormats'
 
 const props = defineProps<{
@@ -94,7 +95,7 @@ const scrollToCard = () => {
 
 const copyTrackLink = async (song: string, index: number) => {
   const slug = generatePlaylistSlug(props.playlist.title, props.playlist.date)
-  const url = `${window.location.origin}${import.meta.env.BASE_URL}playlist/${slug}?track=${encodeURIComponent(song)}`
+  const url = getPublicUrl(`/playlist/${slug}?track=${encodeURIComponent(song)}`)
   try {
     await navigator.clipboard.writeText(url)
     copiedTrackIndex.value = index

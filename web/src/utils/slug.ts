@@ -1,4 +1,5 @@
 import { parseArchiveDate } from './archiveDate'
+import type { Artist } from '../composables/useArtists'
 import type { Playlist } from '../types/playlist'
 
 /**
@@ -56,6 +57,6 @@ export function generateArtistSlug(name: string): string {
 /**
  * Finds an artist by slug
  */
-export function findArtistBySlug(artists: any[], slug: string): any | null {
+export function findArtistBySlug(artists: Artist[], slug: string): Artist | null {
   return artists.find(a => generateArtistSlug(a.name) === slug) || null
 }

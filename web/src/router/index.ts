@@ -69,9 +69,4 @@ const router = createRouter({
   }
 })
 
-// Update page title on route change
-router.afterEach((to) => {
-  document.title = (to.meta.title as string) || 'Cyprus Avenue Archive'
-})
-
 export default router

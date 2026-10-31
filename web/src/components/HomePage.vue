@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { parseArchiveDate } from '../utils/archiveDate'
+import { isWithinArchiveWeek } from '../utils/archiveDate'
 import { ref, computed, watch, onMounted } from 'vue'
 import { usePlaylists } from '../composables/usePlaylists'
 import { useRouter } from 'vue-router'
@@ -92,26 +92,8 @@ const navigateToSuggestedArtist = () => {
 // Logic for "This Week in History"
 const thisWeekPlaylists = computed(() => {
   const today = new Date()
-  const currentMonth = today.getMonth() // 0-11
-  const currentDate = today.getDate() // 1-31
-
-  // Define "This Week" as +/- 3 days from today
-  return playlists.value.filter(p => {
-    if (!p.date) return false
-    const pDate = parseArchiveDate(p.date)
-    
-    // Normalize both dates to the same leap year (2000) to handle Feb 29 correctly
-    const target = new Date(2000, currentMonth, currentDate)
-    const check = new Date(2000, pDate.getUTCMonth(), pDate.getUTCDate())
-    
-    // Calculate difference in days
-    const diffTime = Math.abs(target.getTime() - check.getTime())
-    const diffDays = diffTime / (1000 * 60 * 60 * 24)
-    
-    // Check direct difference OR wrap-around difference (for Dec/Jan boundary)
-    // 366 because 2000 is a leap year
-    return diffDays <= 3 || (366 - diffDays) <= 3
-  }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  return playlists.value.filter(p => isWithinArchiveWeek(p.date, today))
+    .sort((a, b) => b.date.localeCompare(a.date))
 })
 
 // Track expanded state for the history cards

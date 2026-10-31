@@ -1,17 +1,15 @@
 <script setup lang="ts">
-import { ref, computed, watch, onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { usePlaylists } from '../composables/usePlaylists'
 import { useArtists } from '../composables/useArtists'
 import { useArtistBios } from '../composables/useArtistBios'
-import { useOpenGraph } from '../composables/useOpenGraph'
 import ArtistsView from '../components/ArtistsView.vue'
 import { findArtistBySlug } from '../utils/slug'
 
 const route = useRoute()
 const { playlists, loading, error, fetchPlaylists } = usePlaylists()
 const { loadBiosIndex } = useArtistBios()
-const { setOpenGraphTags, getArtistOG, getDefaultOG } = useOpenGraph()
 
 onMounted(() => {
   fetchPlaylists()
@@ -21,39 +19,11 @@ onMounted(() => {
 // Compute artists reactively from playlists - pass ref, not value
 const { artists } = useArtists(playlists)
 
-// Track which artist should be auto-expanded from URL
-const autoExpandSlug = ref<string | null>(null)
-
-// Watch for slug parameter in route
-watch(() => route.params.slug, (slug) => {
-  if (typeof slug === 'string') {
-    autoExpandSlug.value = slug
-    // Update OG tags when viewing a specific artist
-    const artist = findArtistBySlug(artists.value, slug)
-    if (artist && artist.appearances) {
-      const trackCount = artist.appearances.length
-      setOpenGraphTags(getArtistOG(artist.name, trackCount))
-    }
-  } else {
-    autoExpandSlug.value = null
-    setOpenGraphTags(getDefaultOG())
-  }
-}, { immediate: true })
-
-// Find the artist to auto-expand - this computed will react to changes in artists
+// Resolve again when either the route or the archive changes (including cold loads).
 const artistToExpand = computed(() => {
-  if (!autoExpandSlug.value || !artists.value || artists.value.length === 0) return null
-  return findArtistBySlug(artists.value, autoExpandSlug.value)
+  const slug = route.params.slug
+  return typeof slug === 'string' ? findArtistBySlug(artists.value, slug) : null
 })
-
-// Update page title when viewing a specific artist
-watch(artistToExpand, (artist) => {
-  if (artist) {
-    document.title = `${artist.name} - Cyprus Avenue Archive`
-  } else {
-    document.title = 'Artists - Cyprus Avenue Archive'
-  }
-}, { immediate: true })
 </script>
 
 <template>

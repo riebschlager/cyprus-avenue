@@ -6,6 +6,7 @@ export type SearchFilter = 'playlist' | 'artist' | 'song'
 // Create singleton state outside the function
 const playlists = ref<Playlist[]>([])
 const loading = ref(false)
+const loaded = ref(false)
 const error = ref<string | null>(null)
 const searchQuery = ref('')
 const searchFilters = ref<SearchFilter[]>(['playlist', 'artist', 'song'])
@@ -13,8 +14,8 @@ const searchFilters = ref<SearchFilter[]>(['playlist', 'artist', 'song'])
 let fetchPromise: Promise<void> | null = null
 
 export function usePlaylists() {
-  const fetchPlaylists = async () => {
-    if (playlists.value.length > 0) return
+  const fetchPlaylists = (): Promise<void> => {
+    if (loaded.value) return Promise.resolve()
     // Return existing promise if already fetching
     if (fetchPromise) return fetchPromise
 
@@ -28,6 +29,7 @@ export function usePlaylists() {
           throw new Error('Failed to fetch playlists')
         }
         playlists.value = await response.json()
+        loaded.value = true
       } catch (err) {
         error.value = err instanceof Error ? err.message : 'An error occurred'
       } finally {
@@ -116,6 +118,7 @@ export function usePlaylists() {
   return {
     playlists,
     loading,
+    loaded,
     error,
     searchQuery,
     searchFilters,

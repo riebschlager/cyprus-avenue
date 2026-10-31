@@ -16,7 +16,7 @@ const props = defineProps<{
 
 const router = useRouter()
 const route = useRoute()
-const { searchQuery, searchFilters, selectedTag, filteredArtists, availableTags } = useArtists(props.playlists)
+const { searchQuery, searchFilters, selectedTag, filteredArtists, availableTags } = useArtists(() => props.playlists)
 const expandedArtistIndex = ref<number | null>(null)
 const showTagPlaylistModal = ref(false)
 const bannerRef = ref<HTMLElement | null>(null)
@@ -93,12 +93,8 @@ watch(() => route.query.tag, (tag) => {
       .join(' ')
       
     selectedTag.value = titleCasedTag
-    document.title = `${titleCasedTag} Artists - Cyprus Avenue Archive`
   } else {
     selectedTag.value = ''
-    if (!props.autoExpandArtist) {
-      document.title = 'Artists - Cyprus Avenue Archive'
-    }
   }
 }, { immediate: true })
 
@@ -346,7 +342,7 @@ watch(focusedIndex, async (index) => {
 
 <style scoped>
 .select-chevron {
-  background-image: url('@/assets/chevron-down.svg');
+  background-image: url('../assets/chevron-down.svg');
   background-position: right 0.5rem center;
   background-repeat: no-repeat;
   background-size: 1.5em 1.5em;

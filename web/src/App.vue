@@ -9,7 +9,7 @@ import ToastContainer from './components/ToastContainer.vue'
 import SpotifyWebPlayer from './components/SpotifyWebPlayer.vue'
 
 const { fetchPlaylists } = usePlaylists()
-const { setOpenGraphTags, getDefaultOG } = useOpenGraph()
+useOpenGraph()
 const { isMenuOpen, toggleMenu, closeMenu } = useMobileMenu()
 const { isAuthenticated } = useSpotifyAuth()
 const route = useRoute()
@@ -39,8 +39,6 @@ watch(() => route.path, () => {
 
 onMounted(() => {
   fetchPlaylists()
-  // Initialize default OG tags
-  setOpenGraphTags(getDefaultOG())
   window.addEventListener('scroll', handleScroll, { passive: true })
 })
 

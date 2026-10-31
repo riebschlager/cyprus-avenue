@@ -5,6 +5,8 @@ import type { ArtistBio, ArtistBiosIndex } from '../types/artistBio'
 const biosIndex = ref<ArtistBiosIndex>({})
 const indexLoaded = ref(false)
 const isLoading = ref(false)
+const error = ref<string | null>(null)
+let loadPromise: Promise<void> | null = null
 const cacheTimestamp = ref<number>(0)
 
 // Cache duration: 15 minutes (same as Spotify index)
@@ -14,55 +16,37 @@ export function useArtistBios() {
   /**
    * Load the artist bios index from JSON file
    */
-  const loadBiosIndex = async (): Promise<void> => {
-    // Check if we have a fresh cache
-    const now = Date.now()
-    if (indexLoaded.value && now - cacheTimestamp.value < CACHE_DURATION) {
-      return
-    }
-
-    // Prevent concurrent loading
-    if (isLoading.value) {
-      // Wait for existing load to complete
-      while (isLoading.value) {
-        await new Promise(resolve => setTimeout(resolve, 100))
-      }
-      return
+  const loadBiosIndex = (): Promise<void> => {
+    if (loadPromise) return loadPromise
+    if (indexLoaded.value && Date.now() - cacheTimestamp.value < CACHE_DURATION) {
+      return Promise.resolve()
     }
 
     isLoading.value = true
-
-    try {
-      const response = await fetch(`${import.meta.env.BASE_URL}artist-bios.json`)
-      if (!response.ok) {
-        console.warn('Artist bios file not found, using empty index')
-        biosIndex.value = {}
+    error.value = null
+    loadPromise = (async () => {
+      try {
+        const response = await fetch(`${import.meta.env.BASE_URL}artist-bios.json`)
+        if (!response.ok) throw new Error(`Artist bios: HTTP ${response.status}`)
+        biosIndex.value = await response.json()
         indexLoaded.value = true
-        return
+        cacheTimestamp.value = Date.now()
+      } catch (err) {
+        // Enrichment is optional. Retain successful data and allow the next call to retry.
+        error.value = err instanceof Error ? err.message : 'Artist bios unavailable'
+      } finally {
+        isLoading.value = false
+        loadPromise = null
       }
-
-      const data = await response.json()
-      biosIndex.value = data
-      indexLoaded.value = true
-      cacheTimestamp.value = now
-      console.log(`✓ Loaded ${Object.keys(data).length} artist bios`)
-    } catch (error) {
-      console.error('Failed to load artist bios:', error)
-      biosIndex.value = {}
-      indexLoaded.value = true
-    } finally {
-      isLoading.value = false
-    }
+    })()
+    return loadPromise
   }
 
   /**
    * Get bio for a specific artist
    */
   const getBio = (artistName: string): ArtistBio | null => {
-    if (!indexLoaded.value) {
-      console.warn('Artist bios index not loaded yet')
-      return null
-    }
+    if (!indexLoaded.value) return null
 
     return biosIndex.value[artistName] || null
   }
@@ -96,6 +80,8 @@ export function useArtistBios() {
   return {
     biosIndex,
     indexLoaded,
+    isLoading,
+    error,
     loadBiosIndex,
     getBio,
     hasBio,

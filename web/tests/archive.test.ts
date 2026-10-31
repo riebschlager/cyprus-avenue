@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { formatArchiveDate, parseArchiveDate } from '../src/utils/archiveDate'
+import { formatArchiveDate, parseArchiveDate, isWithinArchiveWeek } from '../src/utils/archiveDate'
 import { generatePlaylistSlug, findPlaylistBySlug, generateArtistSlug } from '../src/utils/slug'
 import { normalizeAndFilterTag, normalizeTags } from '../src/utils/tagFilters'
 import type { Playlist } from '../src/types/playlist'
@@ -32,4 +32,19 @@ it('normalizes aliases and removes provider noise without duplicate categories',
   expect(normalizeAndFilterTag('Blue Grass')).toBe('Bluegrass')
   const tags = normalizeTags(['Singer-Songwriters', 'Alt-Country', 'Boogie-Woogie', 'R&B'])
   expect(normalizeTags(tags)).toEqual(tags)
+})
+
+it('compares this-week anniversaries across year, leap-day, and DST boundaries', () => {
+  expect(isWithinArchiveWeek('2015-12-31', new Date(2026, 0, 2))).toBe(true)
+  expect(isWithinArchiveWeek('2015-12-28', new Date(2026, 0, 2))).toBe(false)
+  expect(isWithinArchiveWeek('2016-02-29', new Date(2026, 1, 28))).toBe(true)
+  expect(isWithinArchiveWeek('2015-03-06', new Date(2026, 2, 9))).toBe(true)
+  expect(isWithinArchiveWeek('2015-03-05', new Date(2026, 2, 9))).toBe(false)
+})
+
+it('prefers canonical matches over legacy aliases and preserves links across year boundaries', () => {
+  const newYear = { ...playlist, date: '2015-01-01' }
+  expect(findPlaylistBySlug([newYear], '2014-favorites-december-31-2014')).toBe(newYear)
+  const nextDay = { ...playlist, date: '2015-01-04' }
+  expect(findPlaylistBySlug([nextDay, playlist], '2014-favorites-january-3-2015')).toBe(playlist)
 })
