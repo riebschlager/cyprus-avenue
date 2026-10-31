@@ -6,9 +6,8 @@ export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   return {
     plugins: [vue()],
-    // GitHub Pages serves the site from /cyprus-avenue/. Override with BASE_PATH
-    // (e.g. BASE_PATH=/ for a custom domain). Dev server always uses /.
-    base: command === 'build' ? (process.env.BASE_PATH ?? '/cyprus-avenue/') : '/',
+    // The custom domain serves the site at /. Override BASE_PATH for subpath deployments.
+    base: command === 'build' ? (process.env.BASE_PATH ?? '/') : '/',
     define: {
       'import.meta.env.VITE_SPOTIFY_CLIENT_ID': JSON.stringify(env.VITE_SPOTIFY_CLIENT_ID || env.SPOTIFY_CLIENT_ID || '')
     }

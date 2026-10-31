@@ -46,15 +46,17 @@ For optional playback and playlist creation, put the public client ID in
 ```bash
 VITE_SPOTIFY_CLIENT_ID=your_public_client_id
 # Optional canonical origin; otherwise use the current browser origin:
-# VITE_SITE_URL=https://riebschlager.github.io
+# VITE_SITE_URL=https://cyprus-avenue.the816.com
 # Optional exact registered callback override:
 # VITE_SPOTIFY_REDIRECT_URI=http://localhost:5173/auth/callback
 ```
 
 Register the exact callback URL with your Spotify application. By default it is
 `<site origin><Vite base>/auth/callback`: local development uses `/auth/callback`,
-and the default production build uses `/cyprus-avenue/auth/callback`.
-`BASE_PATH=/` also changes the default callback for custom-domain deployments.
+and the default production build uses
+`https://cyprus-avenue.the816.com/auth/callback`. Register this URL in the Spotify
+developer dashboard when moving to the custom domain. `BASE_PATH` overrides also
+change the default callback path.
 `SPOTIFY_CLIENT_ID` remains supported as a build-environment alias for existing CI.
 There is no built-in client ID fallback. Never put a client secret in browser
 configuration; secrets belong only to the separate archive maintenance scripts.
@@ -71,7 +73,21 @@ Live OAuth and playback still require a configured Spotify application/account.
 
 ## Deployment
 
-Deployed to GitHub Pages by `.github/workflows/deploy.yml` on every push to `master`. The build uses base path `/cyprus-avenue/` (override with `BASE_PATH`) and copies `index.html` to `404.html` for SPA deep links.
+Deployed to GitHub Pages by `.github/workflows/deploy.yml` on every push to `master`.
+The production domain is `cyprus-avenue.the816.com`; the build uses base path `/`
+and copies `index.html` to `404.html` for SPA deep links. For a subpath deployment,
+override `BASE_PATH` when building.
+
+In repository Settings → Pages, set the custom domain to
+`cyprus-avenue.the816.com` and enable Enforce HTTPS once the certificate is ready.
+In the Route 53 public hosted zone for `the816.com`, configure:
+
+| Record name | Type | Value | TTL |
+| --- | --- | --- | --- |
+| `cyprus-avenue` | CNAME | `riebschlager.github.io` | 300 |
+
+The CNAME target has no repository path. This site deploys through GitHub Actions,
+so the custom domain is stored in GitHub Pages settings rather than a `CNAME` file.
 
 ```bash
 npm run build

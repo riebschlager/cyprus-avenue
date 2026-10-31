@@ -33,6 +33,7 @@ jobs:
 
       - run: npm run build
         env:
+          BASE_PATH: /
           SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
 
       # GitHub Pages has no SPA rewrites; serving index.html as the 404 page

@@ -5,7 +5,7 @@ appearances, and 304 artists, spanning December 2009–July 2017. Biographies co
 277 artists. Browse shows, search tracks, discover artists by tag, and download
 the archive. Optional Spotify integration supports playback and playlist creation.
 
-[Browse the archive](https://riebschlager.github.io/cyprus-avenue/).
+[Browse the archive](https://cyprus-avenue.the816.com/).
 
 ## Run locally
 
