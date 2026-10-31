@@ -1,0 +1,56 @@
+:root {
+  /* Spacing — 4px base */
+  --space-0: 0;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* Layout */
+  --container-max: 1240px;
+  --container-text: 680px;
+  --gutter: 24px;
+  --gutter-mobile: 16px;
+  --header-h: 64px;
+  --player-h: 64px;
+  --row-h: 52px;          /* track row */
+
+  /* Radii — editorial, nearly square */
+  --radius-0: 0;
+  --radius-1: 2px;        /* inputs, buttons, tags */
+  --radius-2: 4px;        /* menus, dialogs, toasts */
+  --radius-pill: 999px;   /* play button & EQ only */
+
+  /* Rules */
+  --rule-hair: 1px solid var(--border-hairline);
+  --rule-strong: 1px solid var(--border-strong);
+  --rule-ink: 2px solid var(--border-ink);
+  --rule-heavy: 4px solid var(--border-ink);
+
+  /* Elevation — only floating layers get shadows */
+  --shadow-0: none;
+  --shadow-pop: 0 1px 2px rgba(22,21,19,.06), 0 8px 24px -6px rgba(22,21,19,.18);
+  --shadow-dialog: 0 2px 4px rgba(22,21,19,.06), 0 24px 64px -12px rgba(22,21,19,.32);
+  --scrim: rgba(13,12,11,.55);
+
+  /* Motion */
+  --ease-out: cubic-bezier(.2,.7,.2,1);
+  --ease-in-out: cubic-bezier(.6,0,.3,1);
+  --dur-fast: 120ms;
+  --dur-base: 180ms;
+  --dur-slow: 320ms;
+
+  --z-header: 50;
+  --z-player: 40;
+  --z-pop: 60;
+  --z-dialog: 80;
+  --z-toast: 90;
+}

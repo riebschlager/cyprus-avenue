@@ -1,0 +1,39 @@
+<!-- @dsCard group="Components" viewport="700x330" name="Core" subtitle="Buttons, icon buttons, play, tags, badges, labels, dates" -->
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<style>body{padding:24px;background:var(--bg-page)} .row{display:flex;flex-wrap:wrap;gap:12px;align-items:center} .stack{display:flex;flex-direction:column;gap:16px}</style>
+</head><body><div id="root"></div>
+<script src="../../assets/ds-loader.js"></script>
+<script type="text/ca-jsx">
+function Demo(){  return (
+<div className="stack">
+  <div className="row">
+    <Button variant="primary">Browse shows</Button>
+    <Button variant="accent" icon="list-music">Add to Spotify</Button>
+    <Button variant="secondary" iconRight="arrow-right">All artists</Button>
+    <Button variant="ghost" icon="download">Download</Button>
+    <Button variant="link">Report an issue</Button>
+  </div>
+  <div className="row">
+    <Button size="sm" variant="primary">Small</Button>
+    <Button size="lg" variant="accent" icon="shuffle">Surprise me</Button>
+    <Button variant="secondary" disabled>Disabled</Button>
+    <IconButton icon="link" label="Copy link" />
+    <IconButton icon="share" label="Share" variant="outline" />
+    <IconButton icon="more-horizontal" label="More" size="sm" />
+    <PlayButton size="sm" /><PlayButton /><PlayButton size="lg" playing />
+  </div>
+  <div className="row">
+    <Tag count={42}>soul</Tag><Tag active count={18}>gospel</Tag><Tag>americana</Tag><Tag size="sm">blues</Tag>
+    <Badge tone="accent">On this day</Badge><Badge>Not on Spotify</Badge><Badge tone="ink">New</Badge><Badge tone="success">Added</Badge>
+  </div>
+  <div className="row" style={{gap:24}}>
+    <Label tone="accent">This week in history</Label><Label>13 tracks</Label>
+    <DateStamp date="2015-01-03" weekday />
+    <DateStamp date="2014-11-01" variant="block" weekday />
+  </div>
+</div>); }
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+</script>
+</body></html>

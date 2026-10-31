@@ -1,0 +1,47 @@
+:root {
+  --font-display: 'Schibsted Grotesk', 'Helvetica Neue', Arial, sans-serif;
+  --font-ui: 'Schibsted Grotesk', 'Helvetica Neue', Arial, sans-serif;
+  --font-text: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+
+  /* Scale (px, 1.25 ratio at the top, tighter below) */
+  --fs-display-xl: 88px;
+  --fs-display-l: 64px;
+  --fs-display-m: 44px;
+  --fs-h1: 34px;
+  --fs-h2: 26px;
+  --fs-h3: 20px;
+  --fs-body-l: 20px;   /* editorial serif lede */
+  --fs-body: 17px;     /* editorial serif body */
+  --fs-ui: 15px;       /* UI sans */
+  --fs-ui-s: 13px;
+  --fs-meta: 12px;     /* mono labels */
+  --fs-micro: 11px;
+
+  --lh-tight: 0.95;
+  --lh-heading: 1.1;
+  --lh-ui: 1.35;
+  --lh-text: 1.55;
+
+  --tracking-display: -0.035em;
+  --tracking-heading: -0.02em;
+  --tracking-ui: -0.005em;
+  --tracking-label: 0.08em;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-black: 850;
+
+  /* Semantic */
+  --type-display: var(--fw-black) var(--fs-display-l)/var(--lh-tight) var(--font-display);
+  --type-h1: var(--fw-bold) var(--fs-h1)/var(--lh-heading) var(--font-display);
+  --type-h2: var(--fw-bold) var(--fs-h2)/var(--lh-heading) var(--font-display);
+  --type-h3: var(--fw-semibold) var(--fs-h3)/var(--lh-heading) var(--font-display);
+  --type-lede: var(--fw-regular) var(--fs-body-l)/var(--lh-text) var(--font-text);
+  --type-body: var(--fw-regular) var(--fs-body)/var(--lh-text) var(--font-text);
+  --type-ui: var(--fw-medium) var(--fs-ui)/var(--lh-ui) var(--font-ui);
+  --type-ui-s: var(--fw-medium) var(--fs-ui-s)/var(--lh-ui) var(--font-ui);
+  --type-meta: var(--fw-medium) var(--fs-meta)/1.3 var(--font-mono);
+}

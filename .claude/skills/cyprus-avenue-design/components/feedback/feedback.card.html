@@ -1,0 +1,24 @@
+<!-- @dsCard group="Components" viewport="700x420" name="Feedback" subtitle="Dialog, toast, menu, tooltip" -->
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<style>body{padding:24px;background:var(--bg-page)} .row{display:flex;flex-wrap:wrap;gap:12px;align-items:center} .stack{display:flex;flex-direction:column;gap:16px}</style>
+</head><body><div id="root"></div>
+<script src="../../assets/ds-loader.js"></script>
+<script type="text/ca-jsx">
+function Demo(){  return (
+<div style={{display:'grid',gridTemplateColumns:'1fr 220px',gap:24,alignItems:'start'}}>
+  <Dialog inline title="Add to Spotify" footer={<><Button variant="ghost">Cancel</Button><Button variant="accent" icon="list-music">Create playlist</Button></>}>
+    Creates a private playlist named <em>Cyprus Avenue · Rosanne Returns</em> with 13 of 13 tracks.
+  </Dialog>
+  <div className="stack">
+    <Menu label="Download as" items={[{label:'JSON',icon:'braces',hint:'.json'},{label:'CSV',icon:'sheet',hint:'.csv'},{label:'Text',icon:'file-text',hint:'.txt'}]} />
+    <div style={{paddingTop:28}}><Tooltip open text="Link copied"><IconButton icon="check" label="Copied" variant="outline" /></Tooltip></div>
+  </div>
+  <div className="stack" style={{gridColumn:'1 / -1'}}>
+    <div className="row"><Toast tone="success" action="Open" onClose={()=>{}}>Playlist created · 13 tracks</Toast><Toast tone="error">Spotify connection expired</Toast></div>
+  </div>
+</div>); }
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+</script>
+</body></html>

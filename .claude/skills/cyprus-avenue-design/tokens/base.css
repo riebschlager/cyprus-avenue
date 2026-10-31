@@ -1,0 +1,15 @@
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+body {
+  margin: 0;
+  background: var(--bg-page);
+  color: var(--fg-1);
+  font: var(--type-ui);
+  letter-spacing: var(--tracking-ui);
+}
+a { color: var(--fg-link); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: var(--border-strong); transition: color var(--dur-fast) var(--ease-out), text-decoration-color var(--dur-fast) var(--ease-out); }
+a:hover { color: var(--fg-link-hover); text-decoration-color: currentColor; }
+:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+::selection { background: var(--orange-300); color: var(--ink-900); }
+h1, h2, h3, h4, p { margin: 0; }
+button { font: inherit; color: inherit; }

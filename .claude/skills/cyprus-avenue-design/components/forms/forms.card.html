@@ -1,0 +1,22 @@
+<!-- @dsCard group="Components" viewport="700x300" name="Forms" subtitle="Search, select, segmented control, checkbox" -->
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<style>body{padding:24px;background:var(--bg-page)} .row{display:flex;flex-wrap:wrap;gap:12px;align-items:center} .stack{display:flex;flex-direction:column;gap:16px}</style>
+</head><body><div id="root"></div>
+<script src="../../assets/ds-loader.js"></script>
+<script type="text/ca-jsx">
+function Demo(){ const [q,setQ]=React.useState(''); const [q2,setQ2]=React.useState('Rosanne'); const [s,setS]=React.useState('Newest'); const [v,setV]=React.useState('list'); const [c,setC]=React.useState(true); const [y,setY]=React.useState('All years'); return (
+<div className="stack">
+  <SearchField size="lg" value={q2} onChange={setQ2} placeholder="Search the archive" />
+  <div className="row">
+    <div style={{flex:'1 1 240px'}}><SearchField value={q} onChange={setQ} placeholder="Filter shows" /></div>
+    <Select value={y} onChange={setY} options={['All years','2017','2016','2015','2014']} />
+    <SegmentedControl value={s} onChange={setS} options={['Newest','Oldest','A–Z']} />
+    <SegmentedControl value={v} onChange={setV} options={[{value:'list',icon:'list'},{value:'grid',icon:'layout-grid'}]} />
+  </div>
+  <Checkbox checked={c} onChange={setC}>Only tracks on Spotify</Checkbox>
+</div>); }
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+</script>
+</body></html>

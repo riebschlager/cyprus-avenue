@@ -1,0 +1,33 @@
+<!-- @dsCard group="Components" viewport="700x720" name="Music" subtitle="Track list, show row, show card, artist row, player bar" -->
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<style>body{padding:24px;background:var(--bg-page)} .row{display:flex;flex-wrap:wrap;gap:12px;align-items:center} .stack{display:flex;flex-direction:column;gap:16px}</style>
+</head><body><div id="root"></div>
+<script src="../../assets/ds-loader.js"></script>
+<script type="text/ca-jsx">
+function Demo(){ const [p,setP]=React.useState(1); return (
+<div className="stack" style={{gap:28}}>
+  <TrackList playingIndex={p} highlightIndex={3} onPlay={i=>setP(i)} tracks={[
+    {song:'A Feather’s Not A Bird',artist:'Rosanne Cash'},
+    {song:'Modern Blues',artist:'Rosanne Cash'},
+    {song:'Kansas City',artist:'Jim James'},
+    {song:'Family Affair',artist:'Sly and the Family Stone'},
+    {song:'Massachusetts-',artist:'The Harmonizers of Newton',unavailable:true}]} />
+  <ShowList>
+    <ShowRow date="2015-03-21" title="The Soul Of Designer Records" trackCount={17} description="The gospel music that came out of the little known Memphis-based label Designer Records has been described as “soul without the sex…”" />
+    <ShowRow date="2014-11-01" title="Rosanne Returns" trackCount={13} description="Singer Rosanne Cash has established herself as a major artist who's not limited to a single musical genre." />
+  </ShowList>
+  <div style={{display:'grid',gridTemplateColumns:'1.4fr 1fr',gap:24}}>
+    <ShowCard variant="feature" eyebrow="This week, 2014" date="2014-11-01" title="Rosanne Returns" description="The range and depth of her amazing talents are on display in this edition of Cyprus Avenue." />
+    <ShowCard date="2015-01-03" title="2014 Favorites" trackCount={11} description="One last listen to Cyprus Avenue’s music of 2014 with Bill Shapiro’s favorites." artists={['Rosanne Cash','Jerry Lee Lewis','Leonard Cohen','Bob Dylan','Willie Nelson']} />
+  </div>
+  <div style={{borderTop:'2px solid var(--border-ink)'}}>
+    <ArtistRow name="Rosanne Cash" songs={14} shows={3} tags={['country','americana','singer-songwriter']} />
+    <ArtistRow name="Willie Nelson" songs={11} shows={4} tags={['country','outlaw country']} />
+  </div>
+  <PlayerBar staticPos track={{song:'Modern Blues',artist:'Rosanne Cash'}} playing progress={0.34} showTitle="Rosanne Returns" />
+</div>); }
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+</script>
+</body></html>

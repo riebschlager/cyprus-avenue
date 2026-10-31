@@ -1,0 +1,19 @@
+<!-- @dsCard group="Components" viewport="700x260" name="Navigation" subtitle="Site header, tabs, A–Z index" -->
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<style>body{padding:24px;background:var(--bg-page)} .row{display:flex;flex-wrap:wrap;gap:12px;align-items:center} .stack{display:flex;flex-direction:column;gap:16px}</style>
+</head><body><div id="root"></div>
+<script src="../../assets/ds-loader.js"></script>
+<script type="text/ca-jsx">
+function Demo(){ const [c,setC]=React.useState('shows'); const [t,setT]=React.useState('all'); const [l,setL]=React.useState('R'); return (
+<div className="stack" style={{gap:24, margin:-24}}>
+  <SiteHeader current={c} onNavigate={setC} />
+  <div className="stack" style={{padding:'0 24px'}}>
+    <Tabs value={t} onChange={setT} items={[{value:'all',label:'All',count:31},{value:'shows',label:'Shows',count:3},{value:'artists',label:'Artists',count:1},{value:'tracks',label:'Tracks',count:27}]} />
+    <AlphaIndex value={l} onChange={setL} available={'#ABCDEFGHIJKLMNOPRSTVWY'.split('')} />
+  </div>
+</div>); }
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+</script>
+</body></html>

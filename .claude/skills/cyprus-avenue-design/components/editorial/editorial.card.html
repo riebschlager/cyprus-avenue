@@ -1,0 +1,18 @@
+<!-- @dsCard group="Components" viewport="700x420" name="Editorial" subtitle="Section header, stats, pull quote" -->
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<style>body{padding:24px;background:var(--bg-page)} .row{display:flex;flex-wrap:wrap;gap:12px;align-items:center} .stack{display:flex;flex-direction:column;gap:16px}</style>
+</head><body><div id="root"></div>
+<script src="../../assets/ds-loader.js"></script>
+<script type="text/ca-jsx">
+function Demo(){  return (
+<div className="stack" style={{gap:32}}>
+  <SectionHeader kicker="01" title="This week in history" action={<Button variant="link" iconRight="arrow-right">All shows</Button>} />
+  <SectionHeader size="sm" title="Appears in" action={<Label>3 shows</Label>} />
+  <StatRow><Stat value="125" label="Shows" /><Stat value="1,506" label="Tracks" /><Stat value="277" label="Artists" /><Stat value="40" label="Years on air" /></StatRow>
+  <PullQuote cite="KCUR show description">The world of popular music from gospel to rock, from country to reggae, from a different point of view.</PullQuote>
+</div>); }
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+</script>
+</body></html>

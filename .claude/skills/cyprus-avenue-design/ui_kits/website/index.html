@@ -1,0 +1,42 @@
+<!-- @dsCard group="Website" viewport="1280x900" name="Website UI kit" subtitle="Home, shows, show detail, artists, search, about + player" -->
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cyprus Avenue Archive</title>
+<link rel="stylesheet" href="../../styles.css">
+<style>
+main { min-height: 60vh; }
+.kit-page { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--gutter); }
+.kit-h1 { font: 850 clamp(44px, 7vw, 80px)/0.92 var(--font-display); letter-spacing: -0.045em; margin: 0; }
+.kit-back { display: inline-flex; align-items: center; gap: 6px; margin-top: 28px; font: 500 12px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--fg-2); text-decoration: none; }
+.kit-back:hover { color: var(--fg-1); }
+.kit-filters { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; padding: 16px 0; border-top: var(--rule-hair); border-bottom: var(--rule-hair); }
+.kit-rank { display: flex; align-items: baseline; gap: 16px; padding: 12px 0; border-bottom: var(--rule-hair); color: var(--fg-1); text-decoration: none; }
+.kit-rank:hover { color: var(--fg-accent); }
+.kit-toast { position: fixed; left: 50%; bottom: calc(var(--player-h) + 16px); transform: translateX(-50%); z-index: var(--z-toast); animation: ca-rise var(--dur-slow) var(--ease-out); }
+.kit-mobilemenu { position: sticky; top: 56px; z-index: 49; display: flex; flex-direction: column; background: var(--bg-page); border-bottom: var(--rule-ink); padding: 0 var(--gutter-mobile); }
+.kit-mobilemenu a { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: var(--rule-hair); font: 800 26px/1 var(--font-display); letter-spacing: -0.025em; text-decoration: none; color: var(--fg-1); }
+.kit-mobilemenu a:last-child { border-bottom: 0; }
+.kit-mobilemenu a[aria-current="page"] { color: var(--fg-accent); }
+@media (max-width: 760px) {
+  .kit-page { padding: 0 var(--gutter-mobile); }
+  .kit-hero, .kit-split, .kit-grid3 { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .kit-hero { padding: 32px 0 !important; }
+  .kit-letter { grid-template-columns: 44px minmax(0,1fr) !important; }
+  .kit-letter > div:first-child { font-size: 28px !important; }
+  .kit-toast { width: calc(100% - 32px); }
+  .kit-toast .ca-toast { min-width: 0; max-width: none; }
+}
+@media (min-width: 761px) { .kit-mobilemenu { display: none; } }
+</style>
+</head><body>
+<div id="root"></div>
+<script src="data.js"></script>
+<script src="../../assets/ds-loader.js"></script>
+<script type="text/ca-jsx" src="Home.jsx"></script>
+<script type="text/ca-jsx" src="Shows.jsx"></script>
+<script type="text/ca-jsx" src="ShowDetail.jsx"></script>
+<script type="text/ca-jsx" src="Artists.jsx"></script>
+<script type="text/ca-jsx" src="Search.jsx"></script>
+<script type="text/ca-jsx" src="About.jsx"></script>
+<script type="text/ca-jsx" src="App.jsx"></script>
+</body></html>
