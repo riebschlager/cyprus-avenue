@@ -209,7 +209,7 @@ def main():
             missing_playlists = gap_data.get('missing', [])
     except FileNotFoundError:
         print("Error: data/gap_analysis.json not found. Run discover_playlists.py first.")
-        return
+        raise SystemExit(1)
 
     if not missing_playlists:
         print("No missing playlists found!")
@@ -257,6 +257,8 @@ def main():
     print(f"Successfully fetched: {fetched}")
     print(f"Failed: {failed}")
     print("Run ./update-playlists.sh to validate all exports.")
+    if failed:
+        raise SystemExit(1)
 
 
 if __name__ == '__main__':

@@ -33,13 +33,12 @@ A Single Page Application (SPA) built with:
     *   `discovery/`: Scrapers to find missing playlists on KCUR.org.
     *   `spotify/`: Node.js scripts for Spotify API integration.
     *   `lastfm/`: Node.js scripts for fetching artist bios.
-*   `docker/`: Dockerfiles for containerized execution of scripts.
 *   `data/`: Reports and intermediate analysis files (e.g., gaps, discovered content).
 
 ## Development Workflow
 
 ### Prerequisites
-*   **Python 3:** Required for offline assembly (`./update-playlists.sh`); standard library only. Docker is optional for parsing and used by the discovery launcher.
+*   **Python 3:** Required for offline assembly (`./update-playlists.sh`); standard library only. Local execution is supported; install scraper dependencies from `requirements.txt` in a virtual environment.
 *   **Node.js:** Required for the web app and API enrichment scripts.
 *   **Environment Variables:** Create a `.env` file for API keys (see `.env.example`).
     *   `SPOTIFY_CLIENT_ID` / `SPOTIFY_CLIENT_SECRET`
@@ -75,5 +74,5 @@ To fully enrich the archive with artist images and bios:
 *   **Type Safety:** Strict TypeScript interfaces for all data models (Playlist, Track, Artist).
 
 ## Infrastructure
-*   **Dockerized Scripts:** Python scripts run inside Docker containers (`cyprus-avenue-parser`, etc.) to ensure consistent dependencies without polluting the host machine.
+*   **Maintenance commands:** Use the root npm scripts described in `WORKFLOW.md`; Python and Node scripts resolve inputs relative to the repository. Docker modes have been removed.
 *   **GitHub Pages:** The web app deploys via `.github/workflows/deploy.yml`.

@@ -32,6 +32,9 @@ That's it! Your changes are now in the JSON files and ready for the web app.
 
 ## Key Commands
 
+See [WORKFLOW.md](WORKFLOW.md) for Node/Python requirements, scraper virtual
+environment setup, credentials, and all root npm commands.
+
 ```bash
 # Data Pipeline
 ./update-playlists.sh   # Parse txt → json (fast - ~1 sec)
@@ -41,7 +44,8 @@ That's it! Your changes are now in the JSON files and ready for the web app.
 # Artist Metadata (optional - enriches artist pages)
 node scripts/lastfm/fetch-artist-bios.js      # Fetch artist bios
 node scripts/spotify/enrich-artist-images.js  # Add artist images
-node scripts/consolidate-genres.js            # Merge tags
+npm run refresh:genres                      # Fetch and retain Spotify genres
+npm run data:tags                             # Merge tags offline
 ```
 
 ## Next Steps

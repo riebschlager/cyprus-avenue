@@ -4,7 +4,9 @@ Current data ownership: see [the source contract](../../data/source/README.md). 
 now update retained snapshots in `data/source/metadata/` and rebuild web exports.
 
 
-This script fetches artist biographies, images, and metadata from the Last.fm API for all artists in the Cyprus Avenue archive.
+This script fetches artist biographies, images, and metadata from the Last.fm API for artists in the Cyprus Avenue archive. The default fetches missing bios;
+`npm run refresh:bios -- --refresh` revisits current artists. See
+[maintenance setup and request policy](../../WORKFLOW.md).
 
 ## Setup
 
@@ -42,7 +44,7 @@ node scripts/lastfm/fetch-artist-bios.js
 The script will:
 1. Read all unique artists from `web/public/playlists.json`
 2. Fetch bio data for each artist from Last.fm API
-3. Save results to `web/public/artist-bios.json`
+3. Merge successful provider fields into `data/source/metadata/artist-bios.json` and rebuild exports
 
 ## Output Format
 

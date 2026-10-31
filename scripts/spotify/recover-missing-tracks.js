@@ -15,47 +15,12 @@
  *   node scripts/spotify/recover-missing-tracks.js
  */
 
-import sourceData from '../lib/source-data.cjs'
+const sourceData = require('../lib/source-data.cjs')
 const { root, sourcePath, readJSON, writeJSON, rebuild } = sourceData
-import fs from 'fs'
-import https from 'https'
-import { URL } from 'url'
-import path from 'path'
-import readline from 'readline'
+const path = require('path')
+const readline = require('readline')
 
-// Load .env file if it exists
-function loadEnv() {
-  let currentDir = process.cwd()
-  let envPath = path.join(currentDir, '.env')
-
-  if (!fs.existsSync(envPath)) {
-    const parentDir = path.dirname(currentDir)
-    const parentEnvPath = path.join(parentDir, '.env')
-    if (fs.existsSync(parentEnvPath)) {
-      envPath = parentEnvPath
-    }
-  }
-
-  if (fs.existsSync(envPath)) {
-    const envContent = fs.readFileSync(envPath, 'utf-8')
-    const lines = envContent.split('\n')
-
-    for (const line of lines) {
-      const trimmed = line.trim()
-      if (!trimmed || trimmed.startsWith('#')) continue
-
-      const [key, ...valueParts] = trimmed.split('=')
-      const value = valueParts.join('=').trim()
-      const cleanValue = value.replace(/^["']|["']$/g, '')
-
-      if (key && !process.env[key]) {
-        process.env[key] = cleanValue
-      }
-    }
-    console.log(`✓ Loaded credentials from .env file\n`)
-  }
-}
-
+const { loadEnv } = require('../lib/maintenance.cjs')
 loadEnv()
 
 const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID || ''
@@ -68,55 +33,10 @@ if (!CLIENT_ID || !CLIENT_SECRET) {
   process.exit(1)
 }
 
-// Helper: Make HTTPS request
-function httpsRequest(url, options = {}) {
-  return new Promise((resolve, reject) => {
-    const urlObj = new URL(url)
-    const reqOptions = {
-      hostname: urlObj.hostname,
-      path: urlObj.pathname + urlObj.search,
-      method: options.method || 'GET',
-      headers: options.headers || {}
-    }
-
-    const req = https.request(reqOptions, (res) => {
-      let data = ''
-      res.on('data', chunk => data += chunk)
-      res.on('end', () => {
-        if (res.statusCode >= 200 && res.statusCode < 300) {
-          resolve(JSON.parse(data))
-        } else {
-          reject(new Error(`HTTP ${res.statusCode}: ${data}`))
-        }
-      })
-    })
-
-    req.on('error', reject)
-    if (options.body) {
-      req.write(options.body)
-    }
-    req.end()
-  })
-}
-
-// Get Spotify access token
-async function getAccessToken() {
-  const credentials = Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')
-
-  const response = await httpsRequest('https://accounts.spotify.com/api/token', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Basic ${credentials}`,
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    body: 'grant_type=client_credentials'
-  })
-
-  return response.access_token
-}
-
+const { createSpotifyClient } = require('../lib/maintenance.cjs')
+const spotify = createSpotifyClient()
 // Search Spotify with different strategies
-async function searchSpotify(token, artist, song, strategy = 'default') {
+async function searchSpotify(artist, song, strategy = 'default') {
   let query = ''
 
   switch (strategy) {
@@ -155,13 +75,11 @@ async function searchSpotify(token, artist, song, strategy = 'default') {
   const url = `https://api.spotify.com/v1/search?q=${encodedQuery}&type=track&limit=5`
 
   try {
-    const response = await httpsRequest(url, {
-      headers: { 'Authorization': `Bearer ${token}` }
-    })
+    const response = await spotify.json(url)
     return response.tracks.items
   } catch (error) {
     console.error(`Search error: ${error.message}`)
-    return []
+    throw error
   }
 }
 
@@ -189,7 +107,7 @@ async function recoverMissingTracks() {
 
   // Load missing tracks
   const notFoundPath = path.join(root, 'data', 'spotify-not-found.json')
-  const notFoundTracks = JSON.parse(fs.readFileSync(notFoundPath, 'utf-8'))
+  const notFoundTracks = readJSON(notFoundPath)
 
   console.log(`Found ${notFoundTracks.length} missing tracks\n`)
 
@@ -199,7 +117,6 @@ async function recoverMissingTracks() {
   const correctionsPath = sourcePath('corrections.json')
   const corrections = readJSON(correctionsPath)
 
-  const token = await getAccessToken()
   console.log('✓ Authenticated with Spotify\n')
 
   const recovered = []
@@ -219,7 +136,7 @@ async function recoverMissingTracks() {
     for (const strategy of strategies) {
       if (found) break
 
-      const results = await searchSpotify(token, track.artist, track.song, strategy)
+      const results = await searchSpotify(track.artist, track.song, strategy)
 
       if (results.length > 0) {
         console.log(`\n  Strategy: ${strategy}`)

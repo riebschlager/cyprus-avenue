@@ -92,7 +92,7 @@ node scripts/spotify/index-spotify-tracks.js --missing-only
 node scripts/consolidate-genres.js
 ```
 
-These commands require their existing provider credentials. They update retained
+Network refresh commands require provider credentials; tag consolidation is offline. They update retained
 snapshots, then run offline assembly. Last.fm owns `bio`, `bioSummary`, `url`,
 `listeners`, `playcount`, and `lastfmTags`. It retains prior successful values on
 request failure or empty text, preserves artists outside the current archive, and
@@ -100,20 +100,10 @@ keeps Spotify fields and consolidated display `tags`/`tagSources`. For a new,
 unconsolidated entry it also initializes display tags and a missing image.
 Rerun consolidation explicitly when refreshed raw tags should change display tags.
 Spotify image enrichment owns the existing Spotify fields and image. Tag
-consolidation owns display `tags` and `tagSources`; it still needs network access.
+consolidation owns display `tags` and `tagSources`; it runs offline using retained inputs. See [the maintenance guide](../../WORKFLOW.md)
+for `refresh:genres`, raw `spotifyGenres`, and preservation of historical combined tags.
 
 `data/{discovered_playlists,gap_analysis,spotify-not-found}.json` and recovery
 reports are operational reports, not archive inputs. The scraper saves new records
 in `imported-playlists/` and rebuilds; it refuses to overwrite an existing source.
 Discovery reports may be regenerated independently.
-
-Optional parser container, with the whole repository mounted for declared inputs:
-
-```bash
-docker build -f docker/Dockerfile.parse -t cyprus-avenue-parser .
-docker run --rm -v "$PWD:/app" cyprus-avenue-parser
-docker run --rm -v "$PWD:/app" cyprus-avenue-parser python scripts/parsing/validate_playlists.py
-```
-
-Local Python is the supported default. Container execution has not been verified
-as part of this source migration.

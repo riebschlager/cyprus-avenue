@@ -1,5 +1,0 @@
-FROM python:3.11-slim
-WORKDIR /app
-COPY scripts/parsing/ scripts/parsing/
-# Mount the repository at /app (including archive/, data/source/, and exports).
-CMD ["python", "scripts/parsing/parse_playlists.py"]

@@ -37,7 +37,7 @@ async function runLastfm(flags, fetchResponse) {
     readFileSync: () => JSON.stringify([{ tracks: ['Existing', 'Failed', 'New'].map(artist => ({ artist })) }]),
     statSync: () => ({ size: 100 }) }
   const context = {
-    require: name => name === 'fs' ? fakeFS : name === 'path' ? path : {
+    require: name => name === '../lib/maintenance.cjs' ? { loadEnv() {}, request: (...args) => context.fetch(...args) } : name === 'fs' ? fakeFS : name === 'path' ? path : {
       ...helper, readJSON: () => structuredClone(previous), saveSnapshot: (_name, bios) => { saved = bios }
     },
     __dirname: path.join(__dirname, '../lastfm'), URLSearchParams,

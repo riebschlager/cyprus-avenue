@@ -1,0 +1,23 @@
+{
+  "name": "cyprus-avenue-maintenance",
+  "private": true,
+  "type": "commonjs",
+  "engines": {
+    "node": ">=22.16.0"
+  },
+  "scripts": {
+    "data:build": "./update-playlists.sh",
+    "data:validate": "python3 scripts/parsing/validate_playlists.py",
+    "data:tags": "node scripts/consolidate-genres.js",
+    "refresh:genres": "node scripts/spotify/fetch-artist-genres.js",
+    "refresh:spotify": "node scripts/spotify/index-spotify-tracks.js",
+    "refresh:images": "node scripts/spotify/enrich-artist-images.js",
+    "refresh:bios": "node scripts/lastfm/fetch-artist-bios.js",
+    "recover:spotify": "node scripts/spotify/recover-missing-tracks.js",
+    "discover": "python3 scripts/discovery/discover_playlists.py",
+    "fetch:playlists": "python3 scripts/discovery/fetch_missing_playlists.py",
+    "test": "node --test scripts/tests/*.test.cjs && python3 -m unittest discover -s scripts/tests -v",
+    "build:web": "npm --prefix web run build",
+    "build:mcp": "npm --prefix mcp run build"
+  }
+}

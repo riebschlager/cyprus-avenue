@@ -4,6 +4,9 @@ Current data ownership: see [the source contract](../../data/source/README.md). 
 now update retained snapshots in `data/source/metadata/` and rebuild web exports.
 
 
+See [maintenance setup and request policy](../../WORKFLOW.md) for Node/Python
+requirements, root commands, shared credentials, timeouts, retries and token refresh.
+
 This script indexes all tracks from the Cyprus Avenue archive with Spotify's API, creating direct links to tracks on Spotify.
 
 ## Setup
@@ -52,10 +55,10 @@ node scripts/spotify/index-spotify-tracks.js
 ```
 
 The script will:
-- Index all 1,449 unique tracks
+- Index the current unique artist/song pairs
 - Take approximately 7-10 minutes to complete
 - Show progress as it runs
-- Save results to `web/public/spotify-index.json`
+- Merge successful results into `data/source/metadata/spotify-index.json` and rebuild exports
 
 ### 3. What You'll See
 
@@ -191,7 +194,7 @@ The recovery tool:
 5. **Updates the index** automatically with your selections
 
 6. **Saves results**:
-   - Updates `web/public/spotify-index.json` with recovered tracks
+   - Saves reviewed mappings/corrections under `data/source/` and rebuilds exports
    - Updates `data/spotify-not-found.json` with remaining missing tracks
    - Creates `data/spotify-recovery-report.json` with recovery details
 
@@ -304,7 +307,7 @@ node scripts/spotify/enrich-artist-images.js
 
 ### What It Does
 
-1. **Reads** `web/public/artist-bios.json` created by the Last.fm script
+1. **Reads** the retained `data/source/metadata/artist-bios.json` snapshot
 2. **Skips** artists that already have images
 3. **Searches** Spotify for each artist
 4. **Fetches** the largest available artist image

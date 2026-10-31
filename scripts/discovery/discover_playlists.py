@@ -13,14 +13,14 @@ from pathlib import Path
 import time
 
 
+REPO_ROOT = Path(__file__).resolve().parents[2]
+
 def fetch_page_playlists(url):
     """Fetch playlists from a single page"""
     discovered = []
 
-    response = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'})
-    if response.status_code != 200:
-        print(f"  Error fetching {url} (status {response.status_code})")
-        return discovered
+    response = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'}, timeout=30)
+    response.raise_for_status()
 
     soup = BeautifulSoup(response.content, 'html.parser')
 
@@ -136,7 +136,7 @@ def fetch_kcur_playlists():
     return all_discovered
 
 
-def analyze_gaps(discovered_playlists, archive_dir='json/individual'):
+def analyze_gaps(discovered_playlists, archive_dir=REPO_ROOT / 'json/individual'):
     """
     Compare discovered playlists against existing archive.
     """
@@ -216,10 +216,11 @@ def main():
 
     if not discovered:
         print("No playlists discovered. Check your internet connection or the site may have changed.")
-        return
+        raise SystemExit(1)
 
     # Save discovered playlists
-    with open('data/discovered_playlists.json', 'w') as f:
+    (REPO_ROOT / "data").mkdir(parents=True, exist_ok=True)
+    with open(REPO_ROOT / 'data/discovered_playlists.json', 'w') as f:
         json.dump(discovered, f, indent=2)
 
     print(f"✓ Saved discovered playlists to data/discovered_playlists.json")
@@ -229,7 +230,7 @@ def main():
 
     # Save gap analysis
     if results:
-        with open('data/gap_analysis.json', 'w') as f:
+        with open(REPO_ROOT / 'data/gap_analysis.json', 'w') as f:
             json.dump(results, f, indent=2)
         print(f"\n✓ Saved gap analysis to data/gap_analysis.json")
 

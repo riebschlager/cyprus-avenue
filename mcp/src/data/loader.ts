@@ -11,36 +11,9 @@ import type {
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-// Determine data directory - works in both dev and Docker
-function getDataDir(): string {
-  // In Docker, data is at /app/data
-  // In dev, data is at project root
-  const dockerPath = '/app/data';
-  const devPlaylistsPath = join(__dirname, '..', '..', '..', 'json', 'playlists.json');
-
-  try {
-    readFileSync(join(dockerPath, 'playlists.json'));
-    return dockerPath;
-  } catch {
-    // Dev mode - return paths relative to project
-    return '';
-  }
-}
-
-function loadJSON<T>(filename: string, fallbackPath?: string): T {
-  const dataDir = getDataDir();
-
-  let filePath: string;
-  if (dataDir) {
-    filePath = join(dataDir, filename);
-  } else if (fallbackPath) {
-    filePath = join(__dirname, '..', '..', '..', fallbackPath);
-  } else {
-    throw new Error(`Cannot find data file: ${filename}`);
-  }
-
-  const content = readFileSync(filePath, 'utf-8');
-  return JSON.parse(content);
+function loadJSON<T>(_filename: string, relativePath: string): T {
+  const filePath = join(__dirname, '..', '..', '..', relativePath);
+  return JSON.parse(readFileSync(filePath, 'utf-8'));
 }
 
 // Build artist-to-playlists index

@@ -37,18 +37,9 @@ Add to your Claude Code MCP settings:
 }
 ```
 
-Or with Docker:
-
-```json
-{
-  "mcpServers": {
-    "cyprus-avenue": {
-      "command": "/path/to/cyprus-avenue/mcp-server.sh",
-      "args": ["--docker"]
-    }
-  }
-}
-```
+The launcher uses local Node 22.16+ and rebuilds TypeScript on every launch.
+It installs locked dependencies if absent and sends build output to stderr.
+Docker mode has been removed. See [maintenance setup](../WORKFLOW.md).
 
 ## Available Tools
 

@@ -388,7 +388,7 @@ def assemble_metadata(root=REPO_ROOT):
     for artist, bio in bios.items():
         if not isinstance(bio, dict):
             raise ValueError(f"Invalid biography: {artist}")
-        for field in ('tags', 'lastfmTags'):
+        for field in ('tags', 'lastfmTags', 'spotifyGenres'):
             if field in bio and (not isinstance(bio[field], list) or
                                  not all(isinstance(tag, str) for tag in bio[field])):
                 raise ValueError(f"Invalid {field}: {artist}")

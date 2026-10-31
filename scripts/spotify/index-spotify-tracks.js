@@ -10,61 +10,18 @@
  * 1. Go to https://developer.spotify.com/dashboard
  * 2. Create an app (name: "Cyprus Avenue Archive")
  * 3. Get your Client ID and Client Secret
- * 4. Set environment variables or update the constants below
+ * 4. Set environment variables or the repository .env file
  *
  * Usage:
- *   SPOTIFY_CLIENT_ID=xxx SPOTIFY_CLIENT_SECRET=yyy node scripts/index-spotify-tracks.js
+ *   SPOTIFY_CLIENT_ID=xxx SPOTIFY_CLIENT_SECRET=yyy node scripts/spotify/index-spotify-tracks.js
  */
 
-import sourceData from '../lib/source-data.cjs'
-const { root, sourcePath, readJSON, saveSnapshot } = sourceData
-import fs from 'fs'
-import https from 'https'
-import { URL } from 'url'
-import path from 'path'
+const sourceData = require('../lib/source-data.cjs')
+const { root, sourcePath, readJSON, writeJSON, saveSnapshot } = sourceData
+const fs = require('fs')
+const path = require('path')
 
-// Load .env file if it exists
-function loadEnv() {
-  // Try to find .env in the project root
-  // Look in current directory first, then parent directories
-  let currentDir = process.cwd()
-  let envPath = path.join(currentDir, '.env')
-
-  // If not found in cwd, check if we're in a subdirectory and look one level up
-  if (!fs.existsSync(envPath)) {
-    const parentDir = path.dirname(currentDir)
-    const parentEnvPath = path.join(parentDir, '.env')
-    if (fs.existsSync(parentEnvPath)) {
-      envPath = parentEnvPath
-    }
-  }
-
-  if (fs.existsSync(envPath)) {
-    const envContent = fs.readFileSync(envPath, 'utf-8')
-    const lines = envContent.split('\n')
-
-    for (const line of lines) {
-      const trimmed = line.trim()
-      // Skip comments and empty lines
-      if (!trimmed || trimmed.startsWith('#')) continue
-
-      const [key, ...valueParts] = trimmed.split('=')
-      const value = valueParts.join('=').trim()
-
-      // Remove quotes if present
-      const cleanValue = value.replace(/^["']|["']$/g, '')
-
-      // Only set if not already in environment
-      if (key && !process.env[key]) {
-        process.env[key] = cleanValue
-      }
-    }
-
-    console.log(`✓ Loaded credentials from .env file (${envPath})\n`)
-  }
-}
-
-// Load environment variables
+const { loadEnv } = require('../lib/maintenance.cjs')
 loadEnv()
 
 // Configuration
@@ -88,97 +45,32 @@ if (!CLIENT_ID || !CLIENT_SECRET) {
   process.exit(1)
 }
 
-// Helper: Make HTTPS request
-function httpsRequest(url, options = {}) {
-  return new Promise((resolve, reject) => {
-    const urlObj = new URL(url)
-    const reqOptions = {
-      hostname: urlObj.hostname,
-      path: urlObj.pathname + urlObj.search,
-      method: options.method || 'GET',
-      headers: options.headers || {}
-    }
-
-    const req = https.request(reqOptions, (res) => {
-      let data = ''
-      res.on('data', (chunk) => data += chunk)
-      res.on('end', () => {
-        try {
-          resolve(JSON.parse(data))
-        } catch (e) {
-          resolve(data)
-        }
-      })
-    })
-
-    req.on('error', reject)
-
-    if (options.body) {
-      req.write(options.body)
-    }
-
-    req.end()
-  })
-}
-
-// Step 1: Get Spotify access token
-async function getSpotifyToken() {
-  console.log('🔑 Obtaining Spotify access token...')
-
-  const auth = Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')
-
-  const data = await httpsRequest('https://accounts.spotify.com/api/token', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': `Basic ${auth}`
-    },
-    body: 'grant_type=client_credentials'
-  })
-
-  if (data.access_token) {
-    console.log('✓ Token obtained successfully\n')
-    return data.access_token
-  } else {
-    throw new Error('Failed to obtain access token: ' + JSON.stringify(data))
-  }
-}
-
+const { createSpotifyClient } = require('../lib/maintenance.cjs')
+const spotify = createSpotifyClient()
 // Cache for artist genres to avoid redundant API calls
 const artistGenreCache = new Map()
 
 // Helper: Get artist genres
-async function getArtistGenres(token, artistId) {
+async function getArtistGenres(artistId) {
   if (artistGenreCache.has(artistId)) {
     return artistGenreCache.get(artistId)
   }
 
-  try {
-    // slight delay to be safe with rate limits since this adds a call
-    await new Promise(resolve => setTimeout(resolve, 100))
-    
-    const data = await httpsRequest(`https://api.spotify.com/v1/artists/${artistId}`, {
-      headers: { 'Authorization': `Bearer ${token}` }
-    })
-
-    const genres = data.genres || []
-    artistGenreCache.set(artistId, genres)
-    return genres
-  } catch (e) {
-    // If it fails, just return empty array and don't cache (or cache empty?)
-    // Let's return empty for now
-    return []
+  await new Promise(resolve => setTimeout(resolve, 100))
+  const data = await spotify.json(`https://api.spotify.com/v1/artists/${artistId}`)
+  if (!Array.isArray(data.genres) || !data.genres.every(genre => typeof genre === 'string')) {
+    throw new Error('Invalid Spotify artist genres response')
   }
+  artistGenreCache.set(artistId, data.genres)
+  return data.genres
 }
 
 // Step 2: Search for a track on Spotify
-async function searchSpotifyTrack(token, artist, song) {
+async function searchSpotifyTrack(artist, song) {
   const query = encodeURIComponent(`track:"${song}" artist:"${artist}"`)
   const url = `https://api.spotify.com/v1/search?q=${query}&type=track&limit=3`
 
-  const data = await httpsRequest(url, {
-    headers: { 'Authorization': `Bearer ${token}` }
-  })
+  const data = await spotify.json(url)
 
   if (data.tracks?.items?.length > 0) {
     // Get best match
@@ -188,7 +80,7 @@ async function searchSpotifyTrack(token, artist, song) {
     // Fetch genres for the primary artist
     let genres = []
     if (track.artists && track.artists.length > 0 && track.artists[0].id) {
-      genres = await getArtistGenres(token, track.artists[0].id)
+      genres = await getArtistGenres(track.artists[0].id)
     }
 
     return {
@@ -239,7 +131,12 @@ function calculateConfidence(originalArtist, originalSong, spotifyTrack) {
 
 // Step 4: Index all unique tracks
 async function indexAllTracks() {
-  const missingOnly = process.argv.includes('--missing-only')
+  const flags = process.argv.slice(2)
+  if (flags.some(flag => !['--missing-only', '--refresh'].includes(flag)) ||
+      (flags.includes('--missing-only') && flags.includes('--refresh'))) {
+    throw new Error('Use --missing-only or --refresh (default)')
+  }
+  const missingOnly = flags.includes('--missing-only')
 
   console.log('📀 Cyprus Avenue Spotify Track Indexer')
   if (missingOnly) {
@@ -254,7 +151,7 @@ async function indexAllTracks() {
     process.exit(1)
   }
 
-  const playlists = JSON.parse(fs.readFileSync(playlistsPath, 'utf-8'))
+  const playlists = readJSON(playlistsPath)
 
   // Get unique tracks
   const uniqueTracks = new Map()
@@ -269,8 +166,6 @@ async function indexAllTracks() {
 
   console.log(`Found ${uniqueTracks.size} unique tracks total\n`)
 
-  // Get Spotify token
-  const token = await getSpotifyToken()
 
   // Load existing index
   const outputPath = sourcePath('metadata', 'spotify-index.json')
@@ -322,7 +217,7 @@ async function indexAllTracks() {
     process.stdout.write(`${progress} Searching: ${track.artist} - ${track.song}...`)
 
     try {
-      const result = await searchSpotifyTrack(token, track.artist, track.song)
+      const result = await searchSpotifyTrack(track.artist, track.song)
 
       if (result) {
         trackIndex[key] = result
@@ -353,13 +248,15 @@ async function indexAllTracks() {
     }
   }
 
+  if (notFoundTracks.some(track => track.error)) process.exitCode = 1
+
   // Save index
   saveSnapshot('spotify-index.json', trackIndex)
 
   // Save not-found tracks
   const notFoundPath = path.join(root, 'data/spotify-not-found.json')
   fs.mkdirSync(path.join(root, 'data'), { recursive: true })
-  fs.writeFileSync(notFoundPath, JSON.stringify(notFoundTracks, null, 2))
+  writeJSON(notFoundPath, notFoundTracks)
 
   // Print summary
   console.log('\n=====================================')

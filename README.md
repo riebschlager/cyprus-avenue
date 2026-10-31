@@ -158,10 +158,6 @@ cyprus-avenue/
 │   ├── lastfm/              # Last.fm integration
 │   │   └── fetch-artist-bios.js
 │   └── consolidate-genres.js # Tag consolidation from multiple sources
-├── docker/                  # Docker environments
-│   ├── Dockerfile.parse     # Parser environment
-│   ├── Dockerfile.discover  # Discovery environment
-│   └── Dockerfile.fetch     # Fetcher environment
 ├── data/                    # Retained source inputs and analysis reports
 │   ├── source/              # Imported shows, dates, corrections, mappings, metadata
 │   ├── discovered_playlists.json
@@ -173,6 +169,17 @@ cyprus-avenue/
 ```
 
 ## Workflow - Maintaining the Archive
+
+Use Node 22.16+ and Python 3.11+. Root maintenance commands require no npm
+dependencies; only scrapers need `requirements.txt`. See [WORKFLOW.md](WORKFLOW.md)
+for virtual environment setup, credentials, retry behavior and the full command list.
+
+```bash
+npm run data:build       # Offline assembly and validation
+npm run data:tags        # Offline tag consolidation
+npm run refresh:genres  # Optional online Spotify genre refresh
+npm test
+```
 
 **New to the project?** See [WORKFLOW.md](WORKFLOW.md) for detailed instructions.
 
@@ -194,7 +201,7 @@ node scripts/lastfm/fetch-artist-bios.js
 # Enrich artist images from Spotify (~2 minutes)
 node scripts/spotify/enrich-artist-images.js
 
-# Consolidate tags from all sources (~1 minute)
+# Consolidate tags from retained sources (offline)
 node scripts/consolidate-genres.js
 ```
 
@@ -265,7 +272,7 @@ node scripts/spotify/enrich-artist-images.js
 ```
 
 #### Tag Consolidation (`scripts/consolidate-genres.js`)
-Merges tags from multiple sources (Last.fm tags, Spotify artist genres, track genres) into a unified tag system.
+Merges retained Last.fm tags, Spotify artist genres, and track genres offline. Use `npm run refresh:genres` separately to fetch artist genres.
 
 ```bash
 node scripts/consolidate-genres.js
@@ -291,7 +298,7 @@ This archive is particularly valuable because:
 - **Backend Scripts**: Python 3, Node.js
 - **APIs**: Spotify Web API, Last.fm API
 - **Deployment**: GitHub Pages (via GitHub Actions)
-- **Data assembly**: Local Python 3; Docker is optional
+- **Data assembly**: Local Python 3 and Node.js
 
 ## License
 
