@@ -23,7 +23,7 @@ export function usePlaylists() {
 
     fetchPromise = (async () => {
       try {
-        const response = await fetch('/playlists.json')
+        const response = await fetch(`${import.meta.env.BASE_URL}playlists.json`)
         if (!response.ok) {
           throw new Error('Failed to fetch playlists')
         }

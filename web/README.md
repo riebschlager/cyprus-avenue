@@ -133,7 +133,7 @@ SPOTIFY_CLIENT_SECRET=your_client_secret
 
 ## Deployment
 
-Deployed on Netlify with SPA redirects configured in `netlify.toml`.
+Deployed to GitHub Pages by `.github/workflows/deploy.yml` on every push to `master`. The build uses base path `/cyprus-avenue/` (override with `BASE_PATH`) and copies `index.html` to `404.html` for SPA deep links.
 
 ```bash
 npm run build

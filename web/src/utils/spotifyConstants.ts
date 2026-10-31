@@ -4,7 +4,7 @@ export const SPOTIFY_CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID || 'b25e
 
 export const SPOTIFY_REDIRECT_URI = isDevelopment
   ? 'http://localhost:5173/auth/callback'
-  : 'https://cyprus-avenue.netlify.app/auth/callback'
+  : 'https://riebschlager.github.io/cyprus-avenue/auth/callback'
 
 export const SPOTIFY_AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize'
 export const SPOTIFY_TOKEN_ENDPOINT = 'https://accounts.spotify.com/api/token'

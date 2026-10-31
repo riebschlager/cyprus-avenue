@@ -44,7 +44,10 @@
       "Bash(gtimeout 5 node:*)",
       "Bash(node:*)",
       "Bash(wc:*)",
-      "Bash(volta which:*)"
+      "Bash(volta which:*)",
+      "Bash(grep -rn \"netlify\\\\|BASE_URL\\\\|createWebHistory\\\\|redirect_uri\\\\|REDIRECT\\\\|fetch\\(['\\\\`]/\\\\|'/[a-z-]*\\\\.json\" web/src web/index.html web/package.json README.md)",
+      "Bash(npm ci *)",
+      "Bash(npm run *)"
     ]
   }
 }

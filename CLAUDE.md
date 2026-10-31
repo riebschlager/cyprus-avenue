@@ -189,7 +189,7 @@ This project was created entirely through a collaborative session with **Claude 
    - Responsive filtering with instant results
 
 8. **Deployment**
-   - Netlify configuration with SPA redirects
+   - GitHub Pages deployment via GitHub Actions (404.html SPA fallback)
    - Build optimization with Vite
    - Public asset management for Spotify index
    - Environment-based routing
@@ -201,7 +201,7 @@ This project was created entirely through a collaborative session with **Claude 
 - `web/src/composables/` - 6 reusable composables
 - `web/src/utils/` - Utility functions (slug generation)
 - `web/src/types/` - TypeScript type definitions
-- `web/netlify.toml` - Deployment configuration
+- `.github/workflows/deploy.yml` - GitHub Pages deployment workflow
 - `web/vite.config.ts` - Build configuration
 - `web/tailwind.config.js` - Styling configuration
 
@@ -705,7 +705,7 @@ Every step validated results:
 
 **Infrastructure**:
 - Docker - Containerized tooling
-- Netlify - Web hosting and deployment
+- GitHub Pages - Web hosting and deployment
 
 **AI Assistant**: Claude Code (Sonnet 4.5, Opus 4.5)
 
@@ -744,7 +744,7 @@ Every step validated results:
 
 **Infrastructure & Config**:
 - Dockerfiles: 4 files
-- Vite/Tailwind/Netlify configs: ~200 lines
+- Vite/Tailwind/deploy configs: ~200 lines
 - Shell scripts: ~100 lines
 
 **Documentation**:
@@ -792,7 +792,7 @@ Completed across multiple collaborative sessions, including:
 - **Tag-based artist filtering** with normalized tags
 - **100% TypeScript coverage** (no build errors)
 - **Responsive design** (mobile & desktop)
-- **Production deployed** on Netlify
+- **Production deployed** on GitHub Pages
 
 ## What Claude Code Did Well
 
@@ -950,7 +950,7 @@ Many of these playlists are no longer easily accessible on KCUR's website, makin
 - ✓ Sticky navigation with compact scroll mode
 - ✓ Real-time search and filtering
 - ✓ Smart scrolling with auto-expand for deep links
-- ✓ Production deployment on Netlify
+- ✓ Production deployment on GitHub Pages
 - ✓ One-click Spotify playlist creation from any archive show
 - ✓ Complete Archive mega-playlist with all unique tracks
 - ✓ Client-side OAuth 2.0 authentication (no backend required)

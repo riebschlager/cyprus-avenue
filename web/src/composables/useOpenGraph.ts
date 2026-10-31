@@ -10,7 +10,7 @@ export interface OpenGraphData {
   publishDate?: string
 }
 
-const BASE_URL = 'https://cyprus-avenue.netlify.app'
+const BASE_URL = 'https://riebschlager.github.io/cyprus-avenue'
 const DEFAULT_IMAGE = `${BASE_URL}/cyprus-avenue.jpg`
 const DEFAULT_DESCRIPTION = 'A searchable archive of Cyprus Avenue radio show playlists from KCUR, featuring over 1,500 tracks across 125 shows.'
 

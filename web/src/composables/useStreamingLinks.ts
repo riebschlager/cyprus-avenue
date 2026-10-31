@@ -69,7 +69,7 @@ export function useStreamingLinks() {
     indexLoading.value = true
 
     try {
-      const response = await fetch('/spotify-index.json')
+      const response = await fetch(`${import.meta.env.BASE_URL}spotify-index.json`)
       if (response.ok) {
         spotifyIndex.value = await response.json()
         indexLoaded.value = true

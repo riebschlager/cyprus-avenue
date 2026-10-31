@@ -10,7 +10,7 @@ Cyprus Avenue was a Saturday night institution on KCUR 89.3 FM in Kansas City, f
 
 The archive includes a full-featured Vue 3 web application:
 
-**Live Demo**: [cyprus-avenue.netlify.app](https://cyprus-avenue.netlify.app) *(if deployed)*
+**Live Demo**: [riebschlager.github.io/cyprus-avenue](https://riebschlager.github.io/cyprus-avenue)
 
 ### Features
 
@@ -274,7 +274,7 @@ This archive is particularly valuable because:
 - **Web Application**: Vue 3, TypeScript, Vite, Tailwind CSS
 - **Backend Scripts**: Python 3, Node.js
 - **APIs**: Spotify Web API, Last.fm API
-- **Deployment**: Netlify (SPA mode)
+- **Deployment**: GitHub Pages (via GitHub Actions)
 - **Containerization**: Docker for reproducible parsing
 
 ## License

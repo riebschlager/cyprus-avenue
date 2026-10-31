@@ -21,7 +21,7 @@ A Single Page Application (SPA) built with:
 *   **Build Tool:** Vite
 *   **Styling:** Tailwind CSS
 *   **Routing:** Vue Router (History mode)
-*   **Hosting:** Netlify
+*   **Hosting:** GitHub Pages
 
 ## Key Directories
 
@@ -76,4 +76,4 @@ To fully enrich the archive with artist images and bios:
 
 ## Infrastructure
 *   **Dockerized Scripts:** Python scripts run inside Docker containers (`cyprus-avenue-parser`, etc.) to ensure consistent dependencies without polluting the host machine.
-*   **Netlify:** The web app is configured for Netlify deployment via `netlify.toml`.
+*   **GitHub Pages:** The web app deploys via `.github/workflows/deploy.yml`.

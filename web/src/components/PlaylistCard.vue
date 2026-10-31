@@ -94,7 +94,7 @@ const scrollToCard = () => {
 
 const copyTrackLink = async (song: string, index: number) => {
   const slug = generatePlaylistSlug(props.playlist.title, props.playlist.date)
-  const url = `${window.location.origin}/playlist/${slug}?track=${encodeURIComponent(song)}`
+  const url = `${window.location.origin}${import.meta.env.BASE_URL}playlist/${slug}?track=${encodeURIComponent(song)}`
   try {
     await navigator.clipboard.writeText(url)
     copiedTrackIndex.value = index

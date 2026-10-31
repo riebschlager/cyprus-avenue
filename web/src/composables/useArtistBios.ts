@@ -33,7 +33,7 @@ export function useArtistBios() {
     isLoading.value = true
 
     try {
-      const response = await fetch('/artist-bios.json')
+      const response = await fetch(`${import.meta.env.BASE_URL}artist-bios.json`)
       if (!response.ok) {
         console.warn('Artist bios file not found, using empty index')
         biosIndex.value = {}
