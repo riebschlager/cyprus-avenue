@@ -1,5 +1,9 @@
 # Spotify Track Indexing
 
+Current data ownership: see [the source contract](../../data/source/README.md). Enrichment commands
+now update retained snapshots in `data/source/metadata/` and rebuild web exports.
+
+
 This script indexes all tracks from the Cyprus Avenue archive with Spotify's API, creating direct links to tracks on Spotify.
 
 ## Setup
@@ -270,7 +274,7 @@ This helps improve the overall data quality of the archive by:
 - Standardizing capitalization and formatting
 - Replacing album names with actual track names
 
-**Important**: Source corrections update `json/playlists.json`, which is the canonical data source. Individual playlist files in `json/individual/` are not modified by this tool.
+**Important**: Reviewed corrections and mappings are stored in `data/source/corrections.json` and `data/source/spotify-overrides.json`. Each approval rebuilds individual, consolidated and public exports together.
 
 ### Protection Against Re-indexing
 

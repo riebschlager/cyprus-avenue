@@ -1,3 +1,4 @@
+const { sourcePath, saveSnapshot } = require('../lib/source-data.cjs')
 const fs = require('fs')
 const path = require('path')
 
@@ -149,7 +150,7 @@ async function getArtistImage(artistName, token) {
  */
 async function main() {
   // Read existing artist bios
-  const biosPath = path.join(__dirname, '../../web/public/artist-bios.json')
+  const biosPath = sourcePath('metadata', 'artist-bios.json')
 
   if (!fs.existsSync(biosPath)) {
     console.error('❌ artist-bios.json not found')
@@ -244,7 +245,7 @@ async function main() {
   }
 
   // Write updated data back to file
-  fs.writeFileSync(biosPath, JSON.stringify(bios, null, 2))
+  saveSnapshot('artist-bios.json', bios)
 
   // Summary
   console.log(`\n${'='.repeat(60)}`)

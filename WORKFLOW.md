@@ -2,6 +2,14 @@
 
 This document explains how to maintain and update the Cyprus Avenue playlist archive.
 
+## Source ownership
+
+Read [data/source/README.md](data/source/README.md) for the authoritative input
+formats, offline rebuild command, refresh modes and preservation rules. Text is
+one input alongside imported JSON shows, archival dates, reviewed corrections,
+manual Spotify mappings and retained metadata snapshots. Network scripts update
+snapshots in `data/source/metadata/` and rebuild the public exports.
+
 ## Quick Reference
 
 ```bash
@@ -24,7 +32,7 @@ The Cyprus Avenue archive uses a multi-stage data pipeline:
 
 ```
 ┌─────────────┐
-│  TXT Files  │  archive/txt/*.txt (119 files)
+│   Sources   │  archive/txt/*.txt + data/source/ (see ownership guide)
 └──────┬──────┘
        │ Step 1: ./update-playlists.sh
        ↓
@@ -61,7 +69,9 @@ The Cyprus Avenue archive uses a multi-stage data pipeline:
 - Creates consolidated `json/playlists.json`
 - Copies to `web/public/playlists.json` for the web app
 - Validates data quality and shows report
-- Preserves JSON files without txt sources (fetched playlists)
+- Loads JSON-only shows from `data/source/imported-playlists/`
+- Applies reviewed corrections and Spotify overrides, preserving declared archival dates
+- Rebuilds metadata exports from retained snapshots; no API calls or Docker required
 
 **Usage:**
 ```bash
@@ -71,27 +81,9 @@ The Cyprus Avenue archive uses a multi-stage data pipeline:
 **Time:** < 1 second
 
 **Example output:**
-```
-🔄 Cyprus Avenue - Update Playlists
-====================================
-
-📝 Parsing playlist files...
-
-Found 119 playlist files to parse...
-Parsing 2009-12-12.txt... ✓ (10 tracks)
-...
-✓ Preserved 6 existing JSON files without txt sources
-✓ Copied to web app: web/public/playlists.json
-
-============================================================
-Parsing complete!
-============================================================
-Total playlists parsed: 125
-Total tracks: 1449
-
-🔍 Running validation...
-
-✅ Validation PASSED - Data is ready to use!
+```text
+Built 125 shows, 1448 tracks
+Validation PASSED: 125 shows; all exports match declared inputs
 ```
 
 ### Editing TXT Files

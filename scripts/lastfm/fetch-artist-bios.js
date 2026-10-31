@@ -1,3 +1,4 @@
+const { sourcePath, readJSON, saveSnapshot, mergeLastfm } = require('../lib/source-data.cjs')
 const fs = require('fs')
 const path = require('path')
 
@@ -49,7 +50,7 @@ loadEnv()
 
 // Configuration
 const LASTFM_API_KEY = process.env.LASTFM_API_KEY
-const LASTFM_BASE_URL = 'http://ws.audioscrobbler.com/2.0/'
+const LASTFM_BASE_URL = 'https://ws.audioscrobbler.com/2.0/'
 const RATE_LIMIT_DELAY = 1100 // 60 requests/minute = ~1 per second + buffer
 
 if (!LASTFM_API_KEY) {
@@ -88,6 +89,7 @@ async function fetchArtistBio(artistName) {
 
   try {
     const response = await fetch(`${LASTFM_BASE_URL}?${params}`)
+    if (!response.ok) return { error: `HTTP ${response.status}` }
     const data = await response.json()
 
     if (data.error) {
@@ -156,7 +158,14 @@ async function fetchArtistBio(artistName) {
  * Main execution
  */
 async function main() {
-  const bios = {}
+  const flags = process.argv.slice(2)
+  if (flags.some(flag => !['--missing-only', '--refresh'].includes(flag)) ||
+      (flags.includes('--missing-only') && flags.includes('--refresh'))) {
+    throw new Error('Use --missing-only (default) or --refresh')
+  }
+  const refresh = flags.includes('--refresh')
+  const outputPath = sourcePath('metadata', 'artist-bios.json')
+  const bios = readJSON(outputPath)
   const artistList = Array.from(artists).sort()
   let processed = 0
   let found = 0
@@ -167,6 +176,7 @@ async function main() {
   console.log(`   Rate limit: ${Math.round(60000 / RATE_LIMIT_DELAY)} requests/minute\n`)
 
   for (const artist of artistList) {
+    if (!refresh && bios[artist]?.bio) continue
     // Rate limiting: wait before each request
     if (processed > 0) {
       await new Promise(resolve => setTimeout(resolve, RATE_LIMIT_DELAY))
@@ -179,7 +189,7 @@ async function main() {
       errors.push({ artist, error: bio.error })
       console.log(`  ✗ ${artist}: ${bio.error}`)
     } else {
-      bios[artist] = bio
+      bios[artist] = mergeLastfm(bios[artist], bio)
       found++
 
       // Show progress with bio snippet
@@ -200,8 +210,7 @@ async function main() {
   }
 
   // Write to file
-  const outputPath = path.join(__dirname, '../../web/public/artist-bios.json')
-  fs.writeFileSync(outputPath, JSON.stringify(bios, null, 2))
+  saveSnapshot('artist-bios.json', bios)
 
   // Summary
   console.log(`\n${'='.repeat(60)}`)

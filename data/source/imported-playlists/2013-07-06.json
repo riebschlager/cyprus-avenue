@@ -1,0 +1,53 @@
+{
+  "date": "2013-07-06",
+  "title": "Jimmy and Bob",
+  "description": "A celebration of reggae legends Jimmy Cliff and Bob Marley, featuring their most beloved songs.",
+  "tracks": [
+    {
+      "artist": "Jimmy Cliff",
+      "song": "Trapped"
+    },
+    {
+      "artist": "Bob Marley",
+      "song": "Three Little Birds"
+    },
+    {
+      "artist": "Bob Marley",
+      "song": "No Woman No Cry"
+    },
+    {
+      "artist": "Jimmy Cliff",
+      "song": "You Can Get It If You Really Want"
+    },
+    {
+      "artist": "Bob Marley",
+      "song": "Stir It Up"
+    },
+    {
+      "artist": "Jimmy Cliff",
+      "song": "World Upside Down"
+    },
+    {
+      "artist": "Bob Marley",
+      "song": "I Shot the Sheriff"
+    },
+    {
+      "artist": "Jimmy Cliff",
+      "song": "One More"
+    },
+    {
+      "artist": "Bob Marley",
+      "song": "Could You Be Loved"
+    },
+    {
+      "artist": "Jimmy Cliff",
+      "song": "Many Rivers to Cross"
+    },
+    {
+      "artist": "Bob Marley",
+      "song": "Redemption Song"
+    }
+  ],
+  "source_url": "https://www.kcur.org/music-shows/2013-07-06/jimmy-and-bob",
+  "archived_date": "2025-12-31"
+}

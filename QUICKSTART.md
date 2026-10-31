@@ -17,13 +17,13 @@ Open http://localhost:5173 in your browser.
 
 - **Browse Playlists** - 125 shows with expandable track lists
 - **Discover Artists** - 277+ artists with bios, images, and tags
-- **Search Tracks** - Instant search across 1,506 tracks
+- **Search Tracks** - Instant search across 1,448 tracks
 - **Spotify Integration** - Listen in-browser, create playlists with one click
 - **Tag Filtering** - Explore artists by genre/tag
 
 ## Update Playlists
 
-After editing any `.txt` file:
+With Python 3 installed, after editing a retained input (see [data ownership](data/source/README.md)):
 ```bash
 ./update-playlists.sh
 ```

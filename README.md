@@ -15,8 +15,8 @@ The archive includes a full-featured Vue 3 web application:
 ### Features
 
 - **Browse Playlists** - View all 125 shows with expandable track lists
-- **Artist Discovery** - Explore 277+ artists with bios, images, and tag filtering
-- **Track Search** - Search across all 1,506 tracks instantly
+- **Artist Discovery** - Explore 304 artists with bios, images, and tag filtering
+- **Track Search** - Search across all 1,448 tracks instantly
 - **Spotify Integration**:
   - 🎧 **Web Player** - Listen to tracks directly in the browser
   - 📋 **Playlist Creation** - Create Spotify playlists with one click
@@ -39,10 +39,24 @@ npm run dev
 This archive preserves **125 Cyprus Avenue playlists** spanning nearly 8 years:
 
 - **Total Playlists**: 125
-- **Total Tracks**: 1,506
-- **Unique Artists**: 277+
+- **Total Tracks**: 1,448
+- **Unique Artists**: 304 (277 biography entries)
 - **Date Range**: December 12, 2009 to July 14, 2017
 - **Spotify Coverage**: 89.9% of tracks found on Spotify
+
+## Data ownership and rebuilding
+
+The archive inputs are historical text plus explicit imported JSON sources,
+archival dates, reviewed corrections/Spotify overrides, and retained enrichment
+snapshots under `data/source/`. Generated exports never supply missing sources.
+See [the ownership contract](data/source/README.md) for formats and refresh rules.
+
+```bash
+./update-playlists.sh  # Python 3 only; offline assembly and full export validation
+```
+
+Keep both inputs and exports in version control. A clean rebuild preserves all
+125 shows and retained metadata; unchanged builds produce identical output.
 
 ## Data Format
 
@@ -148,7 +162,8 @@ cyprus-avenue/
 │   ├── Dockerfile.parse     # Parser environment
 │   ├── Dockerfile.discover  # Discovery environment
 │   └── Dockerfile.fetch     # Fetcher environment
-├── data/                    # Generated analysis data
+├── data/                    # Retained source inputs and analysis reports
+│   ├── source/              # Imported shows, dates, corrections, mappings, metadata
 │   ├── discovered_playlists.json
 │   └── gap_analysis.json
 ├── QUICKSTART.md            # Quick start guide
@@ -192,8 +207,9 @@ node scripts/consolidate-genres.js
 
 **Add a new playlist:**
 1. Create a new `.txt` file in `archive/txt/` (format: `YYYY-MM-DD.txt`)
-2. Run `./update-playlists.sh`
-3. Optionally run `./index-spotify.sh` for Spotify links
+2. Add its archival date to `data/source/archived-dates.json`
+3. Run `./update-playlists.sh`
+4. Optionally run `./index-spotify.sh` for Spotify links
 
 See [WORKFLOW.md](WORKFLOW.md) for complete documentation.
 
@@ -275,7 +291,7 @@ This archive is particularly valuable because:
 - **Backend Scripts**: Python 3, Node.js
 - **APIs**: Spotify Web API, Last.fm API
 - **Deployment**: GitHub Pages (via GitHub Actions)
-- **Containerization**: Docker for reproducible parsing
+- **Data assembly**: Local Python 3; Docker is optional
 
 ## License
 

@@ -15,6 +15,8 @@
  *   node scripts/spotify/recover-missing-tracks.js
  */
 
+import sourceData from '../lib/source-data.cjs'
+const { root, sourcePath, readJSON, writeJSON, rebuild } = sourceData
 import fs from 'fs'
 import https from 'https'
 import { URL } from 'url'
@@ -186,14 +188,16 @@ async function recoverMissingTracks() {
   console.log('🎵 Spotify Missing Track Recovery Tool\n')
 
   // Load missing tracks
-  const notFoundPath = path.join(process.cwd(), 'data', 'spotify-not-found.json')
+  const notFoundPath = path.join(root, 'data', 'spotify-not-found.json')
   const notFoundTracks = JSON.parse(fs.readFileSync(notFoundPath, 'utf-8'))
 
   console.log(`Found ${notFoundTracks.length} missing tracks\n`)
 
   // Load existing index
-  const indexPath = path.join(process.cwd(), 'web', 'public', 'spotify-index.json')
-  const existingIndex = JSON.parse(fs.readFileSync(indexPath, 'utf-8'))
+  const overridesPath = sourcePath('spotify-overrides.json')
+  const overrides = readJSON(overridesPath)
+  const correctionsPath = sourcePath('corrections.json')
+  const corrections = readJSON(correctionsPath)
 
   const token = await getAccessToken()
   console.log('✓ Authenticated with Spotify\n')
@@ -204,11 +208,13 @@ async function recoverMissingTracks() {
 
   for (let i = 0; i < notFoundTracks.length; i++) {
     const track = notFoundTracks[i]
+    if (overrides[`${track.artist}|${track.song}`]) continue
     console.log(`\n[${i + 1}/${notFoundTracks.length}] ${track.artist} - ${track.song}`)
 
     // Try multiple search strategies
     const strategies = ['default', 'simplified', 'artist-only', 'album', 'loose']
     let found = false
+    let skipTrack = false
 
     for (const strategy of strategies) {
       if (found) break
@@ -234,13 +240,14 @@ async function recoverMissingTracks() {
         } else if (answer === 's') {
           console.log('  ⏭️  Skipped')
           skipped++
+          skipTrack = true
           found = true
           break
         } else if (['1', '2', '3'].includes(answer)) {
           const selectedIndex = parseInt(answer) - 1
           if (results[selectedIndex]) {
             const selected = results[selectedIndex]
-            const key = `${track.artist}|||${track.song}`
+            const key = `${track.artist}|${track.song}`
 
             // Check if data differs from original
             const spotifyArtist = selected.artists[0].name
@@ -256,13 +263,29 @@ async function recoverMissingTracks() {
               updateSource = updateAnswer === 'y' || updateAnswer === 'yes'
             }
 
-            existingIndex[key] = {
-              url: selected.external_urls.spotify,
+            const mapping = {
+              spotifyId: selected.id,
+              spotifyUrl: selected.external_urls.spotify,
+              previewUrl: selected.preview_url,
+              albumArt: selected.album.images[0]?.url || null,
               confidence: 'medium', // Manual confirmation = medium confidence
               manual: true, // Mark as manually recovered to prevent re-indexing
-              track_name: selected.name,
+              trackName: selected.name,
+              artistName: selected.artists[0].name,
               artists: selected.artists.map(a => a.name)
             }
+
+            if (updateSource) {
+              corrections.push({ from: { artist: track.artist, song: track.song },
+                to: { artist: spotifyArtist, song: spotifyTrack } })
+            }
+            // Keep both lookup keys when editorial spelling changes are approved.
+            overrides[key] = mapping
+            if (updateSource) overrides[`${spotifyArtist}|${spotifyTrack}`] = mapping
+            // Persist each approval so quitting does not discard reviewed work.
+            writeJSON(correctionsPath, corrections)
+            writeJSON(overridesPath, overrides)
+            rebuild()
 
             recovered.push({
               original: track,
@@ -284,49 +307,12 @@ async function recoverMissingTracks() {
       await delay(RATE_LIMIT_DELAY)
     }
 
-    if (!found && skipped === 0) {
+    if (!found || skipTrack) {
       stillMissing.push(track)
     }
   }
 
-  // Update source playlists if any corrections were requested
-  const correctionsToApply = recovered.filter(r => r.updateSource && r.correctedData)
-  let updatedPlaylists = 0
-  let updatedTracks = 0
-
-  if (correctionsToApply.length > 0) {
-    console.log(`\n\n📝 Updating source playlists...`)
-
-    // Load all playlists
-    const playlistsPath = path.join(process.cwd(), 'json', 'playlists.json')
-    const playlists = JSON.parse(fs.readFileSync(playlistsPath, 'utf-8'))
-
-    // Apply corrections
-    for (const correction of correctionsToApply) {
-      for (const playlist of playlists) {
-        let playlistUpdated = false
-        for (const track of playlist.tracks) {
-          if (track.artist === correction.original.artist &&
-              track.song === correction.original.song) {
-            track.artist = correction.correctedData.artist
-            track.song = correction.correctedData.song
-            playlistUpdated = true
-            updatedTracks++
-          }
-        }
-        if (playlistUpdated) {
-          updatedPlaylists++
-        }
-      }
-    }
-
-    // Save updated playlists
-    fs.writeFileSync(playlistsPath, JSON.stringify(playlists, null, 2))
-    console.log(`   ✓ Updated ${updatedTracks} tracks across ${updatedPlaylists} playlists`)
-  }
-
-  // Save updated index
-  fs.writeFileSync(indexPath, JSON.stringify(existingIndex, null, 2))
+  const correctionsToApply = recovered.filter(r => r.updateSource)
   console.log(`\n\n✅ Recovery complete!`)
   console.log(`   Recovered: ${recovered.length}`)
   console.log(`   Skipped: ${skipped}`)
@@ -336,15 +322,13 @@ async function recoverMissingTracks() {
   }
 
   // Update spotify-not-found.json with remaining missing tracks
-  if (stillMissing.length > 0) {
-    fs.writeFileSync(notFoundPath, JSON.stringify(stillMissing, null, 2))
-    console.log(`\n   Updated spotify-not-found.json with ${stillMissing.length} remaining tracks`)
-  }
+  writeJSON(notFoundPath, stillMissing)
+  console.log(`\n   Updated spotify-not-found.json with ${stillMissing.length} remaining tracks`)
 
   // Save recovery report
   if (recovered.length > 0) {
-    const reportPath = path.join(process.cwd(), 'data', 'spotify-recovery-report.json')
-    fs.writeFileSync(reportPath, JSON.stringify(recovered, null, 2))
+    const reportPath = path.join(root, 'data', 'spotify-recovery-report.json')
+    writeJSON(reportPath, recovered)
     console.log(`   Saved recovery report to data/spotify-recovery-report.json`)
   }
 }

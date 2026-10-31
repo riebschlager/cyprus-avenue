@@ -10,9 +10,9 @@ The system consists of a **Data Processing Pipeline** (Python/Node.js) that tran
 ### 1. Data Pipeline
 The archive is built on a "Text-to-JSON" pipeline:
 1.  **Ingestion:** Raw playlists are stored as text files in `archive/txt/` (format: `YYYY-MM-DD.txt`).
-2.  **Parsing:** Python scripts parse these text files into structured JSON (`json/individual/` and `json/playlists.json`).
+2.  **Parsing:** Python scripts assemble text plus `data/source/` inputs into structured JSON (`json/individual/` and `json/playlists.json`).
 3.  **Enrichment:** Node.js scripts fetch metadata from Spotify (links, images) and Last.fm (bios, tags).
-4.  **Consolidation:** Finalized data is copied to `web/public/` for the frontend.
+4.  **Consolidation:** Snapshots are retained in `data/source/metadata/`; offline assembly publishes validated data to `web/public/` for the frontend.
 
 ### 2. Web Application (`web/`)
 A Single Page Application (SPA) built with:
@@ -25,7 +25,7 @@ A Single Page Application (SPA) built with:
 
 ## Key Directories
 
-*   `archive/txt/`: **Source of Truth.** Raw text files for each playlist.
+*   `archive/txt/` and `data/source/`: **Retained inputs.** Text, JSON-only shows, archival dates, reviewed corrections/mappings, and enrichment snapshots. See [data ownership](data/source/README.md).
 *   `json/`: Generated JSON data. `playlists.json` is the consolidated database.
 *   `web/`: The Vue 3 frontend application source code.
 *   `scripts/`: Automation scripts.
@@ -39,7 +39,7 @@ A Single Page Application (SPA) built with:
 ## Development Workflow
 
 ### Prerequisites
-*   **Docker:** Required for running parsing and discovery scripts safely.
+*   **Python 3:** Required for offline assembly (`./update-playlists.sh`); standard library only. Docker is optional for parsing and used by the discovery launcher.
 *   **Node.js:** Required for the web app and API enrichment scripts.
 *   **Environment Variables:** Create a `.env` file for API keys (see `.env.example`).
     *   `SPOTIFY_CLIENT_ID` / `SPOTIFY_CLIENT_SECRET`

@@ -7,7 +7,9 @@ Converts raw copy/pasted text into structured JSON format.
 import re
 import json
 import os
-from datetime import datetime
+import argparse
+import tempfile
+from datetime import date
 from pathlib import Path
 
 
@@ -88,7 +90,7 @@ def clean_song_title(song):
     return re.sub(r'^[^a-zA-Z0-9]+', '', song).strip()
 
 
-def parse_playlist_file(filepath):
+def parse_playlist_file(filepath, archived_date=None):
     """Parse a single playlist text file into structured data"""
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
@@ -290,112 +292,156 @@ def parse_playlist_file(filepath):
         "description": description,
         "tracks": tracks,
         "source_url": f"https://www.kcur.org/tags/cyprus-avenue",  # Generic for now
-        "archived_date": datetime.now().strftime("%Y-%m-%d")
+        "archived_date": archived_date
     }
 
     return playlist
 
 
-def parse_all_playlists(txt_dir, output_dir):
-    """Parse all playlist files and convert to JSON"""
-    txt_path = Path(txt_dir)
-    output_path = Path(output_dir)
-    output_path.mkdir(parents=True, exist_ok=True)
+REPO_ROOT = Path(__file__).resolve().parents[2]
 
-    all_playlists = []
 
-    # Get all .txt files
-    txt_files = sorted(txt_path.glob('*.txt'))
+def read_json(path):
+    return json.loads(Path(path).read_text(encoding="utf-8"))
 
-    print(f"Found {len(txt_files)} playlist files to parse...")
 
-    # Track which JSON files we're creating from txt
-    parsed_json_files = set()
+def require_date(value):
+    if not isinstance(value, str) or date.fromisoformat(value).isoformat() != value:
+        raise ValueError(f"Invalid ISO date: {value!r}")
 
-    for txt_file in txt_files:
-        try:
-            print(f"Parsing {txt_file.name}...", end=' ')
-            playlist = parse_playlist_file(txt_file)
 
-            # Save individual JSON file
-            json_filename = txt_file.stem + '.json'
-            json_filepath = output_path / json_filename
-            parsed_json_files.add(json_filename)
+def validate_records(playlists):
+    if not isinstance(playlists, list) or not playlists:
+        raise ValueError("Expected a nonempty playlist list")
+    seen = set()
+    for playlist in playlists:
+        require_date(playlist['date'])
+        require_date(playlist['archived_date'])
+        if playlist['date'] in seen:
+            raise ValueError(f"Duplicate show: {playlist['date']}")
+        seen.add(playlist['date'])
+        for field in ('title', 'description', 'source_url'):
+            if not isinstance(playlist[field], str) or (field != 'description' and not playlist[field].strip()):
+                raise ValueError(f"{playlist['date']}: invalid {field}")
+        if not isinstance(playlist['tracks'], list) or not playlist['tracks']:
+            raise ValueError(f"{playlist['date']}: no tracks")
+        for track in playlist['tracks']:
+            for field in ('artist', 'song'):
+                if not isinstance(track[field], str) or not track[field].strip():
+                    raise ValueError(f"{playlist['date']}: invalid track {field}")
 
-            with open(json_filepath, 'w', encoding='utf-8') as f:
-                json.dump(playlist, f, indent=2, ensure_ascii=False)
 
-            all_playlists.append(playlist)
-            print(f"✓ ({len(playlist['tracks'])} tracks)")
+def assemble_playlists(root=REPO_ROOT):
+    """Read only declared inputs. Never recover records from export directories."""
+    root = Path(root)
+    source = root / 'data/source'
+    archived_dates = read_json(source / 'archived-dates.json')
+    playlists = []
+    text_files = sorted((root / 'archive/txt').glob('*.txt'))
+    if not text_files:
+        raise ValueError("No text sources found")
+    for txt in text_files:
+        # New sources must declare their archival date explicitly.
+        playlists.append(parse_playlist_file(txt, archived_dates[txt.stem]))
+    for imported in sorted((source / 'imported-playlists').glob('*.json')):
+        record = read_json(imported)
+        if imported.stem != record['date']:
+            raise ValueError(f"Imported filename/date mismatch: {imported}")
+        playlists.append(record)
+    validate_records(playlists)
+    corrections = read_json(source / 'corrections.json')
+    if not isinstance(corrections, list):
+        raise ValueError("corrections.json must be a list")
+    for correction in corrections:
+        original, replacement = correction['from'], correction['to']
+        if correction.get('date'):
+            require_date(correction['date'])
+        for field in ('artist', 'song'):
+            if not isinstance(original[field], str) or not isinstance(replacement[field], str):
+                raise ValueError("Corrections require artist/song pairs")
+        matches = 0
+        for playlist in playlists:
+            if correction.get('date') and playlist['date'] != correction['date']:
+                continue
+            for track in playlist['tracks']:
+                if all(track[k] == original[k] for k in ('artist', 'song')):
+                    track.update({field: replacement[field] for field in ('artist', 'song')})
+                    matches += 1
+        if not matches:
+            raise ValueError(f"Correction no longer matches any source: {correction}")
+    playlists.sort(key=lambda p: p['date'])
+    validate_records(playlists)
+    return playlists
 
-        except Exception as e:
-            print(f"✗ Error: {e}")
 
-    # Load any existing JSON files that don't have txt sources
-    # (These are playlists fetched from KCUR or manually created)
-    existing_json_files = sorted(output_path.glob('*.json'))
-    preserved_count = 0
+def assemble_metadata(root=REPO_ROOT):
+    source = Path(root) / 'data/source'
+    bios = read_json(source / 'metadata/artist-bios.json')
+    index = read_json(source / 'metadata/spotify-index.json')
+    overrides = read_json(source / 'spotify-overrides.json')
+    if not all(isinstance(obj, dict) for obj in (bios, index, overrides)):
+        raise ValueError("Metadata and overrides must be objects")
+    index.update(overrides)
+    for key, entry in index.items():
+        if not isinstance(entry, dict) or not isinstance(entry.get('spotifyUrl'), str) or not entry['spotifyUrl'].startswith('https://open.spotify.com/track/'):
+            raise ValueError(f"Invalid Spotify mapping: {key}")
+    for artist, bio in bios.items():
+        if not isinstance(bio, dict):
+            raise ValueError(f"Invalid biography: {artist}")
+        for field in ('tags', 'lastfmTags'):
+            if field in bio and (not isinstance(bio[field], list) or
+                                 not all(isinstance(tag, str) for tag in bio[field])):
+                raise ValueError(f"Invalid {field}: {artist}")
+    return {'artist-bios.json': bios, 'spotify-index.json': index}
 
-    for json_file in existing_json_files:
-        if json_file.name not in parsed_json_files:
-            try:
-                with open(json_file, 'r', encoding='utf-8') as f:
-                    playlist = json.load(f)
-                    all_playlists.append(playlist)
-                    preserved_count += 1
-            except Exception as e:
-                print(f"⚠️  Warning: Could not load {json_file.name}: {e}")
 
-    if preserved_count > 0:
-        print(f"\n✓ Preserved {preserved_count} existing JSON files without txt sources")
+def publish_json(outputs):
+    """Serialize and stage every file before replacing any validated export."""
+    staged = []
+    try:
+        for target, value in outputs.items():
+            encoded = json.dumps(value, indent=2, ensure_ascii=False)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            with tempfile.NamedTemporaryFile(mode='w', encoding='utf-8', dir=target.parent,
+                                             prefix='.' + target.name, delete=False) as handle:
+                staged.append((Path(handle.name), target))
+                handle.write(encoded)
+        for temporary, target in staged:
+            os.replace(temporary, target)
+    finally:
+        for temporary, _ in staged:
+            temporary.unlink(missing_ok=True)
 
-    # Sort all playlists by date
-    all_playlists.sort(key=lambda x: x['date'] if x['date'] else '0000-00-00')
 
-    return all_playlists
+def build(root=REPO_ROOT, output_root=None):
+    root = Path(root)
+    output_root = Path(output_root) if output_root else root
+    playlists = assemble_playlists(root)
+    metadata = assemble_metadata(root)
+    individual = output_root / 'json/individual'
+    outputs = {individual / (p['date'] + '.json'): p for p in playlists}
+    outputs[output_root / 'json/playlists.json'] = playlists
+    outputs[output_root / 'web/public/playlists.json'] = playlists
+    for filename, value in metadata.items():
+        outputs[output_root / 'web/public' / filename] = value
+    publish_json(outputs)
+    # A deleted source must not be resurrected by a stale individual export.
+    for stale in individual.glob('*.json'):
+        if stale not in outputs:
+            stale.unlink()
+    return playlists
 
 
 def main():
-    """Main execution function"""
-    # Paths
-    txt_dir = 'txt'
-    individual_json_dir = 'json/individual'
-    consolidated_json_path = 'json/playlists.json'
-    web_public_path = 'web/public/playlists.json'
-
-    # Parse all playlists
-    all_playlists = parse_all_playlists(txt_dir, individual_json_dir)
-
-    # Create consolidated JSON
-    os.makedirs('json', exist_ok=True)
-    with open(consolidated_json_path, 'w', encoding='utf-8') as f:
-        json.dump(all_playlists, f, indent=2, ensure_ascii=False)
-
-    # Copy to web/public for web app
-    web_public_dir = os.path.dirname(web_public_path)
-    if os.path.exists(web_public_dir):
-        with open(web_public_path, 'w', encoding='utf-8') as f:
-            json.dump(all_playlists, f, indent=2, ensure_ascii=False)
-        print(f"✓ Copied to web app: {web_public_path}")
-    else:
-        print(f"⚠️  Warning: {web_public_dir} not found, skipping web app copy")
-
-    # Print summary
-    print(f"\n{'='*60}")
-    print(f"Parsing complete!")
-    print(f"{'='*60}")
-    print(f"Total playlists parsed: {len(all_playlists)}")
-    print(f"Individual JSON files: {individual_json_dir}/")
-    print(f"Consolidated JSON: {consolidated_json_path}")
-
-    # Calculate some stats
-    total_tracks = sum(len(p['tracks']) for p in all_playlists)
-    avg_tracks = total_tracks / len(all_playlists) if all_playlists else 0
-
-    print(f"\nStatistics:")
-    print(f"  Total tracks: {total_tracks}")
-    print(f"  Average tracks per show: {avg_tracks:.1f}")
-    print(f"  Date range: {all_playlists[0]['date']} to {all_playlists[-1]['date']}")
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--root', type=Path, default=REPO_ROOT, help='Repository input root')
+    parser.add_argument('--output-root', type=Path, help='Export to a separate clean directory')
+    args = parser.parse_args()
+    try:
+        playlists = build(args.root, args.output_root)
+    except (OSError, ValueError, KeyError, TypeError) as error:
+        parser.exit(1, f"Build failed; check declared inputs: {error}\n")
+    print(f"Built {len(playlists)} shows, {sum(len(p['tracks']) for p in playlists)} tracks")
 
 
 if __name__ == '__main__':

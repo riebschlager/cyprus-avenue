@@ -11,6 +11,9 @@ import re
 from datetime import datetime
 from pathlib import Path
 import time
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "parsing"))
+from parse_playlists import REPO_ROOT, build, publish_json, validate_records
 
 
 def fetch_playlist_page(url):
@@ -174,45 +177,24 @@ def extract_playlist_from_html(html_content, url):
     }
 
 
-def save_playlist(playlist_data, output_dir='json/individual', raw_dir='archive/txt'):
-    """Save playlist as JSON and optionally save raw content"""
-    # Create directories
-    Path(output_dir).mkdir(parents=True, exist_ok=True)
-    Path(raw_dir).mkdir(parents=True, exist_ok=True)
-
-    date = playlist_data['date']
-    if not date:
-        print("  Warning: No date found, skipping save")
-        return False
-
-    # Save individual JSON
-    json_path = Path(output_dir) / f"{date}.json"
-    with open(json_path, 'w', encoding='utf-8') as f:
-        json.dump(playlist_data, f, indent=2, ensure_ascii=False)
-
-    print(f"  ✓ Saved {json_path} ({len(playlist_data['tracks'])} tracks)")
+def save_playlist(playlist_data, output_dir=None):
+    """Fetched JSON is a source input, never a generated individual export."""
+    validate_records([playlist_data])
+    show_date = playlist_data['date']
+    if (REPO_ROOT / 'archive/txt' / f'{show_date}.txt').exists():
+        raise ValueError(f'{show_date} already has a text source; review it manually')
+    output = Path(output_dir) if output_dir else REPO_ROOT / 'data/source/imported-playlists'
+    target = output / f'{show_date}.json'
+    if target.exists():
+        raise ValueError(f'Refusing to overwrite retained source: {target}')
+    publish_json({target: playlist_data})
+    print(f"  Saved source: {target}")
     return True
 
 
-def update_consolidated_json(json_dir='json/individual', output_file='json/playlists.json'):
-    """Rebuild the consolidated playlists.json file"""
-    json_path = Path(json_dir)
-    all_playlists = []
-
-    for json_file in json_path.glob('*.json'):
-        with open(json_file, 'r', encoding='utf-8') as f:
-            playlist = json.load(f)
-            all_playlists.append(playlist)
-
-    # Sort by date
-    all_playlists.sort(key=lambda x: x['date'] if x['date'] else '0000-00-00')
-
-    # Save consolidated file
-    with open(output_file, 'w', encoding='utf-8') as f:
-        json.dump(all_playlists, f, indent=2, ensure_ascii=False)
-
-    print(f"\n✓ Updated consolidated file: {output_file}")
-    print(f"  Total playlists: {len(all_playlists)}")
+def update_consolidated_json():
+    """Rebuild all exports from declared inputs after a successful import."""
+    build(REPO_ROOT)
 
 
 def main():
@@ -222,7 +204,7 @@ def main():
 
     # Load gap analysis to get missing playlists
     try:
-        with open('data/gap_analysis.json', 'r') as f:
+        with open(REPO_ROOT / 'data/gap_analysis.json', 'r') as f:
             gap_data = json.load(f)
             missing_playlists = gap_data.get('missing', [])
     except FileNotFoundError:
@@ -274,7 +256,7 @@ def main():
     print(f"{'=' * 70}")
     print(f"Successfully fetched: {fetched}")
     print(f"Failed: {failed}")
-    print(f"\nArchive now contains {119 + fetched} playlists")
+    print("Run ./update-playlists.sh to validate all exports.")
 
 
 if __name__ == '__main__':

@@ -1,5 +1,9 @@
 # Last.fm Artist Bios
 
+Current data ownership: see [the source contract](../../data/source/README.md). Enrichment commands
+now update retained snapshots in `data/source/metadata/` and rebuild web exports.
+
+
 This script fetches artist biographies, images, and metadata from the Last.fm API for all artists in the Cyprus Avenue archive.
 
 ## Setup

@@ -16,6 +16,8 @@
  *   SPOTIFY_CLIENT_ID=xxx SPOTIFY_CLIENT_SECRET=yyy node scripts/index-spotify-tracks.js
  */
 
+import sourceData from '../lib/source-data.cjs'
+const { root, sourcePath, readJSON, saveSnapshot } = sourceData
 import fs from 'fs'
 import https from 'https'
 import { URL } from 'url'
@@ -246,7 +248,7 @@ async function indexAllTracks() {
   console.log('=====================================\n')
 
   // Read playlists
-  const playlistsPath = 'json/playlists.json'
+  const playlistsPath = path.join(root, 'json/playlists.json')
   if (!fs.existsSync(playlistsPath)) {
     console.error(`❌ Error: ${playlistsPath} not found`)
     process.exit(1)
@@ -271,35 +273,11 @@ async function indexAllTracks() {
   const token = await getSpotifyToken()
 
   // Load existing index
-  const outputPath = 'web/public/spotify-index.json'
-  let trackIndex = {}
-  let preservedCount = 0
-
-  if (fs.existsSync(outputPath)) {
-    try {
-      const existing = JSON.parse(fs.readFileSync(outputPath, 'utf-8'))
-      
-      if (missingOnly) {
-        // In missing-only mode, we keep everything that's already indexed
-        trackIndex = existing
-        preservedCount = Object.keys(existing).length
-        console.log(`✓ Loaded ${preservedCount} existing tracks from index\n`)
-      } else {
-        // Normal mode: only preserve manually confirmed tracks
-        for (const [key, value] of Object.entries(existing)) {
-          if (value.confidence === 'medium' && value.manual === true) {
-            trackIndex[key] = value
-            preservedCount++
-          }
-        }
-        if (preservedCount > 0) {
-          console.log(`✓ Preserving ${preservedCount} manually-recovered tracks\n`)
-        }
-      }
-    } catch (err) {
-      console.log('⚠ Could not load existing index, starting fresh\n')
-    }
-  }
+  const outputPath = sourcePath('metadata', 'spotify-index.json')
+  // Retain prior successes when an API refresh fails or finds no replacement.
+  const trackIndex = readJSON(outputPath)
+  const overrides = readJSON(sourcePath('spotify-overrides.json'))
+  const preservedCount = Object.keys(trackIndex).length
 
   const notFoundTracks = []
   const stats = {
@@ -318,11 +296,11 @@ async function indexAllTracks() {
   
   // Filter unique tracks down to what we actually need to search
   for (const [key, track] of uniqueTracks) {
-    if (trackIndex[key]) {
+    if (overrides[key] || (missingOnly && trackIndex[key])) {
       stats.found++
       stats.skipped++
       // If we already have it, count its confidence for stats
-      const existing = trackIndex[key]
+      const existing = overrides[key] || trackIndex[key]
       if (existing.confidence) {
         stats[`${existing.confidence}Confidence`]++
       }
@@ -376,12 +354,11 @@ async function indexAllTracks() {
   }
 
   // Save index
-  fs.mkdirSync('web/public', { recursive: true })
-  fs.writeFileSync(outputPath, JSON.stringify(trackIndex, null, 2))
+  saveSnapshot('spotify-index.json', trackIndex)
 
   // Save not-found tracks
-  const notFoundPath = 'data/spotify-not-found.json'
-  fs.mkdirSync('data', { recursive: true })
+  const notFoundPath = path.join(root, 'data/spotify-not-found.json')
+  fs.mkdirSync(path.join(root, 'data'), { recursive: true })
   fs.writeFileSync(notFoundPath, JSON.stringify(notFoundTracks, null, 2))
 
   // Print summary

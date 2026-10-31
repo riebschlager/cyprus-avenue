@@ -1,5 +1,9 @@
 # Tag Consolidation
 
+Current data ownership: see [the source contract](../data/source/README.md). Enrichment commands
+now update retained snapshots in `data/source/metadata/` and rebuild web exports.
+
+
 This script consolidates tag information from multiple sources (Last.fm tags + Spotify genres) to create a unified, comprehensive tag classification for each artist.
 
 ## Data Sources

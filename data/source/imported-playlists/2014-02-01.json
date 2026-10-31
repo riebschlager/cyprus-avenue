@@ -1,0 +1,57 @@
+{
+  "date": "2014-02-01",
+  "title": "The Beatles' 12 Greatest Hits",
+  "description": "A curated selection of The Beatles' greatest hits featured on Cyprus Avenue following the Grammy Awards recognition of Paul McCartney and Ringo Starr.",
+  "tracks": [
+    {
+      "artist": "The Beatles",
+      "song": "Norwegian Wood"
+    },
+    {
+      "artist": "The Beatles",
+      "song": "A Hard Day's Night"
+    },
+    {
+      "artist": "The Beatles",
+      "song": "While My Guitar Gently Weeps"
+    },
+    {
+      "artist": "The Beatles",
+      "song": "Come Together"
+    },
+    {
+      "artist": "The Beatles",
+      "song": "Let It Be"
+    },
+    {
+      "artist": "The Beatles",
+      "song": "Hey Jude"
+    },
+    {
+      "artist": "The Beatles",
+      "song": "Something"
+    },
+    {
+      "artist": "The Beatles",
+      "song": "In My Life"
+    },
+    {
+      "artist": "The Beatles",
+      "song": "Yesterday"
+    },
+    {
+      "artist": "The Beatles",
+      "song": "Strawberry Fields Forever"
+    },
+    {
+      "artist": "The Beatles",
+      "song": "I Wanna Hold Your Hand"
+    },
+    {
+      "artist": "The Beatles",
+      "song": "A Day In The Life"
+    }
+  ],
+  "source_url": "https://www.kcur.org/arts-life/2014-02-01/the-beatles-12-greatest-hits",
+  "archived_date": "2025-12-31"
+}

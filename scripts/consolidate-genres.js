@@ -1,3 +1,4 @@
+const { sourcePath, saveSnapshot } = require('lib/source-data.cjs')
 const fs = require('fs')
 const path = require('path')
 
@@ -190,8 +191,8 @@ async function main() {
   console.log('\n🎵 Genre/Tag Consolidation Tool\n')
 
   // Load data files
-  const biosPath = path.join(__dirname, '../web/public/artist-bios.json')
-  const indexPath = path.join(__dirname, '../web/public/spotify-index.json')
+  const biosPath = sourcePath('metadata', 'artist-bios.json')
+  const indexPath = sourcePath('metadata', 'spotify-index.json')
 
   if (!fs.existsSync(biosPath)) {
     console.error('❌ artist-bios.json not found')
@@ -282,7 +283,7 @@ async function main() {
   }
 
   // Write updated data
-  fs.writeFileSync(biosPath, JSON.stringify(bios, null, 2))
+  saveSnapshot('artist-bios.json', bios)
 
   // Summary
   console.log(`\n${'='.repeat(60)}`)
