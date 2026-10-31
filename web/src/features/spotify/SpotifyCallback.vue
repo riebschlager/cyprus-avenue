@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { useSpotifyAuth } from '../composables/useSpotifyAuth'
-import { useToast } from '../composables/useToast'
+import { useSpotifyAuth } from './useSpotifyAuth'
+import { useToast } from '../../composables/useToast'
 
 const router = useRouter()
 const { handleOAuthCallback, restorePendingAction, clearReturnContext } = useSpotifyAuth()

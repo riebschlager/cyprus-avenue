@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { computed, watch } from 'vue'
-import type { Playlist } from '../types/playlist'
-import { useSpotifyAuth } from '../composables/useSpotifyAuth'
-import { useSpotifyPlaylistCreation } from '../composables/useSpotifyPlaylistCreation'
-import { usePlaylists } from '../composables/usePlaylists'
-import { useToast } from '../composables/useToast'
+import type { PlaylistAction } from './pendingAction'
+import type { Playlist } from '../../types/playlist'
+import { useSpotifyAuth } from './useSpotifyAuth'
+import { useSpotifyPlaylistCreation } from './useSpotifyPlaylistCreation'
+import { usePlaylists } from '../../composables/usePlaylists'
+import { useToast } from '../../composables/useToast'
 import SpotifyAuthButton from './SpotifyAuthButton.vue'
 import PlaylistCreationProgress from './PlaylistCreationProgress.vue'
 import TrackMatchingSummary from './TrackMatchingSummary.vue'
@@ -13,6 +14,7 @@ export type ModalMode = 'closed' | 'authenticated' | 'playlist-selection' | 'cre
 
 const props = defineProps<{
   isOpen: boolean
+  resume?: boolean
   playlist?: Playlist
   tag?: string
   artistName?: string
@@ -43,52 +45,13 @@ const isSuccess = computed(() => creationState.value === 'completed')
 const isError = computed(() => creationState.value === 'error')
 
 // Create modal state object to preserve context through OAuth flow
-const modalState = computed(() => ({
-  action: 'create-playlist',
-  mode: props.mode,
-  playlistSlug: props.playlist?.date,
-  tag: props.tag,
-  artistName: props.artistName
-}))
-
-const getPendingAction = () => {
-  const raw = sessionStorage.getItem('spotify_pending_action')
-  if (!raw) return null
-  try {
-    return JSON.parse(raw)
-  } catch (err) {
-    sessionStorage.removeItem('spotify_pending_action')
-    return null
-  }
-}
-
-const matchesPendingAction = (action: any): boolean => {
-  if (!action || action.action !== 'create-playlist' || action.mode !== props.mode) {
-    return false
-  }
-
-  if (props.mode === 'single') {
-    return action.playlistSlug && action.playlistSlug === props.playlist?.date
-  }
-  if (props.mode === 'tag') {
-    return action.tag && action.tag === props.tag
-  }
-  if (props.mode === 'artist') {
-    return action.artistName && action.artistName === props.artistName
-  }
-  return props.mode === 'all-tracks'
-}
-
-const consumePendingAction = async () => {
-  const action = getPendingAction()
-  if (!matchesPendingAction(action)) return
-  try {
-    await handleCreatePlaylist()
-    sessionStorage.removeItem('spotify_pending_action')
-  } catch (err) {
-    console.error('Failed to consume pending playlist action', err)
-  }
-}
+const modalState = computed<PlaylistAction | undefined>(() => {
+  if (props.mode === 'single' && props.playlist) return { action: 'create-playlist', mode: 'single', playlistSlug: props.playlist.date }
+  if (props.mode === 'tag' && props.tag) return { action: 'create-playlist', mode: 'tag', tag: props.tag }
+  if (props.mode === 'artist' && props.artistName) return { action: 'create-playlist', mode: 'artist', artistName: props.artistName }
+  if (props.mode === 'all-tracks') return { action: 'create-playlist', mode: 'all-tracks' }
+  return undefined
+})
 
 const handleCreatePlaylist = async () => {
   if (!props.playlist && props.mode !== 'all-tracks' && props.mode !== 'tag' && props.mode !== 'artist') {
@@ -96,51 +59,17 @@ const handleCreatePlaylist = async () => {
     return
   }
 
-  if (props.mode === 'single' && props.playlist) {
-    const result = await createPlaylistFromArchivePlaylist(props.playlist)
-    if (result) {
-      success(`Playlist created with ${result.tracksAdded} tracks!`)
-      if (result.tracksFailed > 0) {
-        warning(`${result.tracksFailed} tracks not found on Spotify`)
-      }
-    } else {
-      showError(creationError.value || 'Failed to create playlist')
-    }
-  } else if (props.mode === 'all-tracks') {
-    if (playlists.value.length === 0) {
-      showError('No playlists available')
-      return
-    }
-    const result = await createPlaylistFromAllTracks(playlists.value)
-    if (result) {
-      success(`Playlist created with ${result.tracksAdded} tracks!`)
-      if (result.tracksFailed > 0) {
-        warning(`${result.tracksFailed} tracks not found on Spotify`)
-      }
-    } else {
-      showError(creationError.value || 'Failed to create playlist')
-    }
-  } else if (props.mode === 'tag' && props.tag) {
-    const result = await createPlaylistFromTag(props.tag, playlists.value)
-    if (result) {
-      success(`Playlist created with ${result.tracksAdded} tracks!`)
-      if (result.tracksFailed > 0) {
-        warning(`${result.tracksFailed} tracks not found on Spotify`)
-      }
-    } else {
-      showError(creationError.value || 'Failed to create playlist')
-    }
-  } else if (props.mode === 'artist' && props.artistName) {
-    const result = await createPlaylistFromArtist(props.artistName, playlists.value)
-    if (result) {
-      success(`Playlist created with ${result.tracksAdded} tracks!`)
-      if (result.tracksFailed > 0) {
-        warning(`${result.tracksFailed} tracks not found on Spotify`)
-      }
-    } else {
-      showError(creationError.value || 'Failed to create playlist')
-    }
-  }
+  let result = null
+  if (props.mode === 'single' && props.playlist) result = await createPlaylistFromArchivePlaylist(props.playlist)
+  else if (props.mode === 'all-tracks') result = await createPlaylistFromAllTracks(playlists.value)
+  else if (props.mode === 'tag' && props.tag) result = await createPlaylistFromTag(props.tag, playlists.value)
+  else if (props.mode === 'artist' && props.artistName) result = await createPlaylistFromArtist(props.artistName, playlists.value)
+  else { showError('No source selected'); return }
+
+  if (result) {
+    success(`Playlist created with ${result.tracksAdded} tracks!`)
+    if (result.tracksFailed > 0) warning(`${result.tracksFailed} tracks not found on Spotify`)
+  } else showError(creationError.value || 'Failed to create playlist')
 }
 
 const handleClose = () => {
@@ -148,22 +77,16 @@ const handleClose = () => {
   if (creationState.value !== 'idle') {
     resetState()
   }
-  const pendingAction = getPendingAction()
-  if (matchesPendingAction(pendingAction)) {
-    sessionStorage.removeItem('spotify_pending_action')
-  }
   emit('close')
 }
 
-watch(
-  [() => props.isOpen, isAuthenticated, creationState],
-  ([isOpen, authenticated, state]) => {
-    if (!isOpen || !authenticated || state !== 'idle') return
-    consumePendingAction().catch((err) => {
-      console.error('Failed to resume pending playlist action', err)
-    })
+let resumed = false
+watch([() => props.isOpen, isAuthenticated], ([open, authenticated]) => {
+  if (open && authenticated && props.resume && !resumed) {
+    resumed = true
+    void handleCreatePlaylist()
   }
-)
+}, { immediate: true })
 </script>
 
 <template>

@@ -1,6 +1,6 @@
-import type { Track } from '../types/playlist'
-import type { SpotifyTrackMatch } from '../types/spotify'
-import type { SpotifyIndex } from '../composables/useStreamingLinks'
+import type { Track } from '../../types/playlist'
+import type { SpotifyTrackMatch } from './spotify'
+import type { SpotifyIndex } from '../../composables/useStreamingLinks'
 import { SpotifyApiClient } from './spotifyApi'
 
 interface TrackMatcherType {
@@ -43,20 +43,13 @@ export function TrackMatcher(
       }
     }
 
-    // Fallback to API search
-    try {
-      const result = await apiClient.searchTrack(track.artist, track.song)
-      if (result) {
-        return {
-          artist: track.artist,
-          song: track.song,
-          spotifyId: result.id,
-          spotifyUri: result.uri,
-          confidence: 'low'
-        }
+    // Search failures must reach the runner rather than masquerade as missing tracks.
+    const result = await apiClient.searchTrack(track.artist, track.song)
+    if (result) {
+      return {
+        artist: track.artist, song: track.song, spotifyId: result.id,
+        spotifyUri: result.uri, confidence: 'low'
       }
-    } catch (error) {
-      console.warn(`Failed to search for ${track.artist} - ${track.song}`, error)
     }
 
     return {

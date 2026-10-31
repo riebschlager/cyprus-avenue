@@ -4,7 +4,7 @@ import { ref, watch, nextTick, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import type { Playlist } from '../types/playlist'
 import StreamingLinks from './StreamingLinks.vue'
-import SpotifyPlaylistModal from './SpotifyPlaylistModal.vue'
+import SpotifyPlaylistModal from '../features/spotify/SpotifyPlaylistModal.vue'
 import { useStreamingLinks } from '../composables/useStreamingLinks'
 import { generateArtistSlug, generatePlaylistSlug } from '../utils/slug'
 import { getPublicUrl } from '../utils/urls'
@@ -38,20 +38,6 @@ onMounted(() => {
       scrollToTrack()
     }
 
-    // Check if we should auto-reopen the Spotify modal after OAuth redirect
-    const pendingAction = sessionStorage.getItem('spotify_pending_action')
-    if (pendingAction) {
-      try {
-        const action = JSON.parse(pendingAction)
-        // Check if this is the playlist that should have the modal opened
-        if (action.mode === 'single' && action.playlistSlug === props.playlist.date) {
-          showSpotifyModal.value = true
-        }
-      } catch (err) {
-        console.error('Failed to parse pending Spotify action', err)
-        sessionStorage.removeItem('spotify_pending_action')
-      }
-    }
   }
 })
 

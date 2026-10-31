@@ -1,32 +1,19 @@
 <script setup lang="ts">
 import { computed, onMounted, watch } from 'vue'
 import SpotifyAuthButton from './SpotifyAuthButton.vue'
-import { useSpotifyAuth } from '../composables/useSpotifyAuth'
-import { useSpotifyPlayback } from '../composables/useSpotifyPlayback'
+import { useSpotifyAuth } from './useSpotifyAuth'
+import { useSpotifyPlayback } from './useSpotifyPlayback'
 
 const { isAuthenticated } = useSpotifyAuth()
-const { isReady, isPaused, currentTrack, initializePlayer, togglePlay, playTrack } = useSpotifyPlayback()
-
-const consumePendingPlayback = async () => {
-  const raw = sessionStorage.getItem('spotify_pending_action')
-  if (!raw) return
-  try {
-    const action = JSON.parse(raw)
-    if (action?.action !== 'playback' || !action.spotifyUri) return
-    await playTrack(action.spotifyUri)
-    sessionStorage.removeItem('spotify_pending_action')
-  } catch (err) {
-    console.error('Failed to consume pending playback action', err)
-  }
-}
+const { isReady, isPaused, currentTrack, initializePlayer, togglePlay, playbackError, resetPlayer } = useSpotifyPlayback()
 
 const initializeIfAuthenticated = async () => {
   if (!isAuthenticated.value) return
   try {
     await initializePlayer()
-    await consumePendingPlayback()
+
   } catch (err) {
-    console.error('Failed to initialize Spotify playback', err)
+    // The playback composable exposes initialization errors in the player.
   }
 }
 
@@ -57,6 +44,9 @@ const albumArt = computed(() => {
 
 <template>
   <div class="bg-gray-900 border border-gray-800 rounded-lg px-4 py-3">
+    <p v-if="playbackError" role="alert" class="text-sm text-red-300 mb-2">{{ playbackError }}
+      <button class="underline" @click="resetPlayer(); initializeIfAuthenticated()">Retry connection</button>
+    </p>
     <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
       <div class="flex items-center gap-3 min-w-0 flex-1">
         <div class="w-10 h-10 rounded bg-gray-800 flex items-center justify-center overflow-hidden text-xs font-semibold text-gray-400">

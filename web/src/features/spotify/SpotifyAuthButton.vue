@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import type { PendingSpotifyAction } from './pendingAction'
+import { computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { useSpotifyAuth } from '../composables/useSpotifyAuth'
-import { useToast } from '../composables/useToast'
+import { useSpotifyAuth } from './useSpotifyAuth'
+import { useToast } from '../../composables/useToast'
 
 const props = defineProps<{
-  modalState?: any
+  modalState?: PendingSpotifyAction
 }>()
 
 const router = useRouter()
@@ -21,7 +23,7 @@ const handleLogin = async () => {
   }
 }
 
-const buttonText = isAuthenticated.value ? 'Connected to Spotify ✓' : 'Connect to Spotify'
+const buttonText = computed(() => isAuthenticated.value ? 'Connected to Spotify ✓' : 'Connect to Spotify')
 </script>
 
 <template>

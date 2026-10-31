@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { ToastNotification } from '../types/spotify'
+import type { ToastNotification } from '../types/toast'
 
 const props = defineProps<{
   toast: ToastNotification

@@ -3,7 +3,7 @@ import HomePage from '../components/HomePage.vue'
 import PlaylistsView from '../views/PlaylistsView.vue'
 import TracksViewWrapper from '../views/TracksViewWrapper.vue'
 import ArtistsViewWrapper from '../views/ArtistsViewWrapper.vue'
-import SpotifyCallback from '../views/SpotifyCallback.vue'
+import SpotifyCallback from '../features/spotify/SpotifyCallback.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

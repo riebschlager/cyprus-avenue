@@ -3,7 +3,7 @@ import { isWithinArchiveWeek } from '../utils/archiveDate'
 import { ref, computed, watch, onMounted } from 'vue'
 import { usePlaylists } from '../composables/usePlaylists'
 import { useRouter } from 'vue-router'
-import SpotifyPlaylistModal from './SpotifyPlaylistModal.vue'
+import SpotifyPlaylistModal from '../features/spotify/SpotifyPlaylistModal.vue'
 import PlaylistCard from './PlaylistCard.vue'
 import { generatePlaylistSlug, generateArtistSlug } from '../utils/slug'
 import { useArtistBios } from '../composables/useArtistBios'
@@ -61,20 +61,7 @@ onMounted(async () => {
     refreshSuggestions()
   }
 
-  // Check for pending Spotify action after OAuth redirect
-  const pendingAction = sessionStorage.getItem('spotify_pending_action')
-  if (pendingAction) {
-    try {
-      const action = JSON.parse(pendingAction)
-      // Check if this was the all-tracks modal
-      if (action.mode === 'all-tracks') {
-        showAllTracksModal.value = true
-      }
-    } catch (err) {
-      console.error('Failed to parse pending Spotify action', err)
-      sessionStorage.removeItem('spotify_pending_action')
-    }
-  }
+
 })
 
 const navigateToSuggestedPlaylist = () => {

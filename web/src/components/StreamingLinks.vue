@@ -3,8 +3,9 @@ import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStreamingLinks } from '../composables/useStreamingLinks'
 import { useDropdownState } from '../composables/useDropdownState'
-import { useSpotifyAuth } from '../composables/useSpotifyAuth'
-import { useSpotifyPlayback } from '../composables/useSpotifyPlayback'
+import { useToast } from '../composables/useToast'
+import { useSpotifyAuth } from '../features/spotify/useSpotifyAuth'
+import { useSpotifyPlayback } from '../features/spotify/useSpotifyPlayback'
 
 const props = defineProps<{
   artist: string
@@ -12,6 +13,7 @@ const props = defineProps<{
   compact?: boolean
 }>()
 
+const { error: showError } = useToast()
 const router = useRouter()
 const { platforms, openTrack, indexLoaded, getTrackData } = useStreamingLinks()
 const { isAuthenticated, initiateLogin } = useSpotifyAuth()
@@ -31,13 +33,6 @@ const spotifyTrackUri = computed(() => {
   return `spotify:track:${trackData.spotifyId}`
 })
 
-const filteredPlatforms = computed(() => {
-  if (spotifyTrackUri.value) {
-    return platforms.filter(platform => platform.name !== 'Spotify')
-  }
-  return platforms
-})
-
 const toggleDropdown = () => {
   toggle()
 }
@@ -49,22 +44,22 @@ const handlePlatformClick = (platform: typeof platforms[0]) => {
 
 const handleSpotifyPlay = async () => {
   if (!spotifyTrackUri.value) return
-  if (!isAuthenticated.value) {
-    await initiateLogin(router.currentRoute.value.fullPath, {
-      action: 'playback',
-      spotifyUri: spotifyTrackUri.value,
-      artist: props.artist,
-      song: props.song
-    })
-    return
-  }
-
   try {
+    if (!isAuthenticated.value) {
+      await initiateLogin(router.currentRoute.value.fullPath, {
+        action: 'playback',
+        spotifyUri: spotifyTrackUri.value,
+        artist: props.artist,
+        song: props.song
+      })
+      return
+    }
+
     await initializePlayer()
     await playTrack(spotifyTrackUri.value)
     close()
   } catch (err) {
-    console.error('Failed to start Spotify playback', err)
+    showError(err instanceof Error ? err.message : 'Could not start Spotify playback')
   }
 }
 
@@ -140,7 +135,7 @@ onUnmounted(() => {
           </button>
 
           <button
-            v-for="platform in filteredPlatforms"
+            v-for="platform in platforms"
             :key="platform.name"
             @click.stop="handlePlatformClick(platform)"
             class="flex items-center justify-between w-full px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition-colors"

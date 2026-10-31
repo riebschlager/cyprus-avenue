@@ -1,6 +1,6 @@
 import { ref, computed } from 'vue'
-import type { ToastNotification } from '../types/spotify'
-import { TOAST_DURATION } from '../utils/spotifyConstants'
+import type { ToastNotification } from '../types/toast'
+const TOAST_DURATION = 5000
 
 const toasts = ref<ToastNotification[]>([])
 

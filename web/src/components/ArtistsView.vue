@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { ref, watch, computed, onMounted, nextTick } from 'vue'
+import { ref, watch, computed, nextTick } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useArtists, type Artist } from '../composables/useArtists'
 import type { Playlist } from '../types/playlist'
 import ArtistCard from './ArtistCard.vue'
 import SearchBar from './SearchBar.vue'
-import SpotifyPlaylistModal from './SpotifyPlaylistModal.vue'
+import SpotifyPlaylistModal from '../features/spotify/SpotifyPlaylistModal.vue'
 import { generateArtistSlug } from '../utils/slug'
 import { useKeyboardNavigation } from '../composables/useKeyboardNavigation'
 
@@ -21,26 +21,6 @@ const expandedArtistIndex = ref<number | null>(null)
 const showTagPlaylistModal = ref(false)
 const bannerRef = ref<HTMLElement | null>(null)
 const cardRefs = ref<InstanceType<typeof ArtistCard>[]>([])
-
-// Check for pending Spotify action after OAuth redirect
-onMounted(() => {
-  const pendingAction = sessionStorage.getItem('spotify_pending_action')
-  if (pendingAction) {
-    try {
-      const action = JSON.parse(pendingAction)
-      // Check if this was a tag modal
-      if (action.mode === 'tag' && action.tag) {
-        // Set the tag filter
-        selectedTag.value = action.tag
-        // Open the modal
-        showTagPlaylistModal.value = true
-      }
-    } catch (err) {
-      console.error('Failed to parse pending Spotify action', err)
-      sessionStorage.removeItem('spotify_pending_action')
-    }
-  }
-})
 
 // Pagination
 const itemsPerPage = 20

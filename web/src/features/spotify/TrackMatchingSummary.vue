@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { PlaylistCreationResult } from '../types/spotify'
+import type { PlaylistCreationResult } from './spotify'
 
 defineProps<{
   result: PlaylistCreationResult

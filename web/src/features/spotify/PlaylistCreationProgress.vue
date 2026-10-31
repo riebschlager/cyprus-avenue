@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { CreationProgress } from '../types/spotify'
+import type { CreationProgress } from './spotify'
 
 const props = defineProps<{
   progress: CreationProgress

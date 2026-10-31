@@ -4,9 +4,10 @@ import { useRoute } from 'vue-router'
 import { usePlaylists } from './composables/usePlaylists'
 import { useOpenGraph } from './composables/useOpenGraph'
 import { useMobileMenu } from './composables/useMobileMenu'
-import { useSpotifyAuth } from './composables/useSpotifyAuth'
+import { useSpotifyAuth } from './features/spotify/useSpotifyAuth'
 import ToastContainer from './components/ToastContainer.vue'
-import SpotifyWebPlayer from './components/SpotifyWebPlayer.vue'
+import SpotifyActionHost from './features/spotify/SpotifyActionHost.vue'
+import SpotifyWebPlayer from './features/spotify/SpotifyWebPlayer.vue'
 
 const { fetchPlaylists } = usePlaylists()
 useOpenGraph()
@@ -275,6 +276,8 @@ onUnmounted(() => {
         </div>
       </div>
     </footer>
+
+    <SpotifyActionHost />
 
     <!-- Toast Notifications -->
     <ToastContainer />

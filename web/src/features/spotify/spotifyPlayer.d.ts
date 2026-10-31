@@ -27,10 +27,20 @@ declare global {
       volume?: number
     }
 
+    interface PlayerEvents {
+      ready: { device_id: string }
+      not_ready: { device_id: string }
+      player_state_changed: PlaybackState | null
+      initialization_error: { message: string }
+      authentication_error: { message: string }
+      account_error: { message: string }
+      playback_error: { message: string }
+    }
+
     interface Player {
       connect(): Promise<boolean>
       disconnect(): void
-      addListener(event: string, cb: (arg?: any) => void): boolean
+      addListener<K extends keyof PlayerEvents>(event: K, cb: (arg: PlayerEvents[K]) => void): boolean
       togglePlay(): Promise<void>
       nextTrack(): Promise<void>
       previousTrack(): Promise<void>

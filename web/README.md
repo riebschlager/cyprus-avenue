@@ -44,61 +44,11 @@ npm run preview
 
 ## Project Structure
 
-```
-src/
-├── components/              # 17 Vue components
-│   ├── HomePage.vue            # Landing page with suggestions
-│   ├── PlaylistCard.vue        # Expandable playlist card
-│   ├── PlaylistList.vue        # Paginated playlist grid
-│   ├── ArtistCard.vue          # Artist with bio, tags, image
-│   ├── ArtistsView.vue         # Artists list with tag filtering
-│   ├── TracksView.vue          # Searchable tracks table
-│   ├── TracksTable.vue         # Track listing component
-│   ├── SearchBar.vue           # Search input
-│   ├── StatsPanel.vue          # Archive statistics
-│   ├── StreamingLinks.vue      # Multi-platform dropdown
-│   ├── SpotifyAuthButton.vue   # OAuth login button
-│   ├── SpotifyWebPlayer.vue    # In-browser music player
-│   ├── SpotifyPlaylistModal.vue # Playlist creation modal
-│   ├── PlaylistCreationProgress.vue # Creation progress indicator
-│   ├── TrackMatchingSummary.vue    # Results display
-│   ├── Toast.vue               # Notification component
-│   └── ToastContainer.vue      # Notification container
-├── composables/             # 12 reusable composables
-│   ├── usePlaylists.ts         # Singleton playlist data
-│   ├── useArtists.ts           # Artist aggregation
-│   ├── useTracks.ts            # Track aggregation
-│   ├── useArtistBios.ts        # Artist metadata
-│   ├── useStreamingLinks.ts    # Platform URLs
-│   ├── useDropdownState.ts     # Dropdown coordination
-│   ├── useSpotifyAuth.ts       # OAuth 2.0 PKCE flow
-│   ├── useSpotifyPlayback.ts   # Web player state
-│   ├── useSpotifyPlaylistCreation.ts # Playlist creation
-│   ├── useToast.ts             # Notifications
-│   ├── useOpenGraph.ts         # Meta tags
-│   └── useMobileMenu.ts        # Mobile nav state
-├── views/                   # Route components
-│   └── SpotifyCallback.vue     # OAuth callback handler
-├── utils/                   # Utility functions
-│   ├── slugs.ts                # URL slug generation
-│   ├── spotifyApi.ts           # Spotify API client
-│   ├── spotifyConstants.ts     # OAuth config
-│   ├── trackMatching.ts        # Track matching logic
-│   └── tagFilters.ts           # Tag normalization
-├── types/                   # TypeScript types
-│   ├── playlist.ts             # Playlist data types
-│   └── spotify.ts              # Spotify API types
-├── router/
-│   └── index.ts                # Vue Router config
-├── App.vue                  # Main app with sticky header
-├── main.ts                  # Entry point
-└── style.css                # Global styles
-
-public/
-├── playlists.json           # Playlist data (~180 KB)
-├── spotify-index.json       # Spotify track mappings (~460 KB)
-└── artist-bios.json         # Artist metadata (~1.4 MB)
-```
+Archive components, data composables, and URL helpers live in `src/components/`,
+`src/composables/`, and `src/utils/`. Spotify components, OAuth, playback, API
+transport, track selection/matching, callback view, and types live together in
+`src/features/spotify/`. `SpotifyActionHost.vue` owns resuming OAuth actions;
+cards and the web player do not read pending storage.
 
 ## Routes
 
@@ -124,12 +74,35 @@ To update data, run the scripts in the parent directory's `scripts/` folder.
 
 ## Environment Variables
 
-For Spotify Web Player and playlist creation, set these in the parent `.env`:
+Browsing and external streaming links work without Spotify configuration.
+For optional playback and playlist creation, put the public client ID in
+`web/.env.local` (or provide it in the build environment):
 
 ```bash
-SPOTIFY_CLIENT_ID=your_client_id
-SPOTIFY_CLIENT_SECRET=your_client_secret
+VITE_SPOTIFY_CLIENT_ID=your_public_client_id
+# Optional canonical origin; otherwise use the current browser origin:
+# VITE_SITE_URL=https://riebschlager.github.io
+# Optional exact registered callback override:
+# VITE_SPOTIFY_REDIRECT_URI=http://localhost:5173/auth/callback
 ```
+
+Register the exact callback URL with your Spotify application. By default it is
+`<site origin><Vite base>/auth/callback`: local development uses `/auth/callback`,
+and the default production build uses `/cyprus-avenue/auth/callback`.
+`BASE_PATH=/` also changes the default callback for custom-domain deployments.
+`SPOTIFY_CLIENT_ID` remains supported as a build-environment alias for existing CI.
+There is no built-in client ID fallback. Never put a client secret in browser
+configuration; secrets belong only to the separate archive maintenance scripts.
+
+All playlist modes share one creation runner. Individual shows preserve repeats;
+archive, artist, and tag modes deduplicate exact artist/song pairs. Show and artist
+modes may search Spotify; archive and tag modes use only indexed matches. Each
+API request obtains a valid token, and simultaneous refreshes share one request.
+Successful batches are never automatically replayed after a failure; the error
+identifies the created playlist and confirmed track count so it can be reviewed.
+
+`npm test` runs offline regression checks with mocked Spotify and SDK responses.
+Live OAuth and playback still require a configured Spotify application/account.
 
 ## Deployment
 

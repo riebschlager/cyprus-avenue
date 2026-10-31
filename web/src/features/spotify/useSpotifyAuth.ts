@@ -1,14 +1,21 @@
 import { ref, computed } from 'vue'
-import type { SpotifyAuthState } from '../types/spotify'
+import { readPendingAction } from './pendingAction'
+import type { PendingSpotifyAction } from './pendingAction'
+import type { SpotifyAuthState } from './spotify'
 import {
   SPOTIFY_CLIENT_ID,
   SPOTIFY_REDIRECT_URI,
   SPOTIFY_AUTH_ENDPOINT,
   SPOTIFY_TOKEN_ENDPOINT,
   SPOTIFY_SCOPES
-} from '../utils/spotifyConstants'
+} from './spotifyConstants'
 
 // Singleton state
+let refreshPromise: Promise<string> | null = null
+let authGeneration = 0
+const logoutListeners = new Set<() => void>()
+export const onSpotifyLogout = (listener: () => void) => { logoutListeners.add(listener) }
+
 const authState = ref<SpotifyAuthState>({
   isAuthenticated: false,
   isAuthenticating: false,
@@ -20,12 +27,8 @@ const authState = ref<SpotifyAuthState>({
 
 // Helper functions for PKCE
 function generateRandomString(length: number): string {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~'
-  let result = ''
-  for (let i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * characters.length))
-  }
-  return result
+  return Array.from(crypto.getRandomValues(new Uint8Array(length)), byte =>
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_'[byte & 63]).join('')
 }
 
 async function generateCodeChallenge(codeVerifier: string): Promise<string> {
@@ -40,10 +43,10 @@ async function generateCodeChallenge(codeVerifier: string): Promise<string> {
 }
 
 export function useSpotifyAuth() {
-  const initiateLogin = async (returnPath?: string, modalState?: any) => {
+  const initiateLogin = async (returnPath?: string, modalState?: PendingSpotifyAction) => {
     if (!SPOTIFY_CLIENT_ID) {
       authState.value.error = 'Spotify Client ID not configured'
-      return
+      throw new Error(authState.value.error)
     }
 
     authState.value.isAuthenticating = true
@@ -59,6 +62,8 @@ export function useSpotifyAuth() {
       sessionStorage.setItem('spotify_code_verifier', codeVerifier)
       sessionStorage.setItem('spotify_state', stateRandom)
 
+      clearReturnContext()
+      sessionStorage.removeItem('spotify_pending_action')
       // Store return path and modal state if provided
       if (returnPath) {
         sessionStorage.setItem('spotify_return_path', returnPath)
@@ -84,12 +89,14 @@ export function useSpotifyAuth() {
       authState.value.error =
         error instanceof Error ? error.message : 'Failed to initiate login'
       authState.value.isAuthenticating = false
+      throw error
     }
   }
 
   const handleOAuthCallback = async (code: string, state: string) => {
     authState.value.isAuthenticating = true
     authState.value.error = null
+    const generation = authGeneration
 
     try {
       // Verify state parameter (CSRF protection)
@@ -126,6 +133,7 @@ export function useSpotifyAuth() {
       }
 
       const data = await response.json()
+      if (generation !== authGeneration) throw new Error('Spotify session ended. Connect again.')
       authState.value.accessToken = data.access_token
       if (data.refresh_token) {
         authState.value.refreshToken = data.refresh_token
@@ -152,6 +160,10 @@ export function useSpotifyAuth() {
   }
 
   const logout = () => {
+    authGeneration++
+    refreshPromise = null
+    logoutListeners.forEach(listener => listener())
+    sessionStorage.removeItem('spotify_pending_action')
     authState.value.accessToken = null
     authState.value.refreshToken = null
     authState.value.tokenExpiresAt = null
@@ -168,9 +180,8 @@ export function useSpotifyAuth() {
     return sessionStorage.getItem('spotify_return_path')
   }
 
-  const getModalState = (): any | null => {
-    const state = sessionStorage.getItem('spotify_modal_state')
-    return state ? JSON.parse(state) : null
+  const getModalState = (): PendingSpotifyAction | null => {
+    return readPendingAction('spotify_modal_state')
   }
 
   const clearReturnContext = () => {
@@ -190,7 +201,8 @@ export function useSpotifyAuth() {
     return authState.value.accessToken
   }
 
-  const refreshAccessToken = async (): Promise<string> => {
+  const performRefresh = async (): Promise<string> => {
+    const generation = authGeneration
     if (!authState.value.refreshToken) {
       throw new Error('Spotify refresh token not available')
     }
@@ -215,6 +227,7 @@ export function useSpotifyAuth() {
     }
 
     const data = await response.json()
+    if (generation !== authGeneration) throw new Error('Spotify session ended. Connect again.')
     authState.value.accessToken = data.access_token
     if (data.refresh_token) {
       authState.value.refreshToken = data.refresh_token
@@ -225,6 +238,14 @@ export function useSpotifyAuth() {
     authState.value.isAuthenticated = true
 
     return data.access_token
+  }
+
+  const refreshAccessToken = (): Promise<string> => {
+    if (!refreshPromise) {
+      const pending = performRefresh().finally(() => { if (refreshPromise === pending) refreshPromise = null })
+      refreshPromise = pending
+    }
+    return refreshPromise
   }
 
   const getValidAccessToken = async (): Promise<string> => {
@@ -257,6 +278,7 @@ export function useSpotifyAuth() {
     logout,
     getAccessToken,
     getValidAccessToken,
+    refreshAccessToken,
     getReturnPath,
     getModalState,
     clearReturnContext,
