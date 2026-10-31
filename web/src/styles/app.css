@@ -9,7 +9,6 @@ html { overflow-y: scroll; scroll-behavior: smooth; }
 .ca-page-title { font: var(--fw-black) var(--fs-display-m)/var(--lh-tight) var(--font-display); letter-spacing: var(--tracking-display); color: var(--fg-1); text-wrap: balance; }
 .ca-display { font: var(--type-display); letter-spacing: -0.045em; color: var(--fg-1); text-wrap: balance; }
 .ca-lede { font: var(--type-lede); color: var(--fg-2); max-width: var(--container-text); }
-.ca-section + .ca-section { margin-top: var(--space-20); }
 
 /* Mobile nav sheet */
 .ca-mobilenav { border-top: var(--rule-hair); padding: var(--space-2) var(--gutter-mobile) var(--space-4); animation: ca-rise var(--dur-base) var(--ease-out); }
@@ -25,7 +24,6 @@ html { overflow-y: scroll; scroll-behavior: smooth; }
   .ca-main { padding-top: var(--space-8); }
   .ca-page-title { font-size: 34px; }
   .ca-display { font-size: 44px; }
-  .ca-section + .ca-section { margin-top: var(--space-16); }
   /* Stats wrap to a 2-up grid; only the right column keeps its divider */
   .ca-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ca-stat + .ca-stat { padding-left: 0; border-left: 0; }

@@ -13,6 +13,8 @@
   --space-16: 64px;
   --space-20: 80px;
   --space-24: 96px;
+  --space-section: var(--space-24);         /* gap above every .ca-section */
+  --space-section-mobile: var(--space-16);
 
   /* Layout */
   --container-max: 1240px;

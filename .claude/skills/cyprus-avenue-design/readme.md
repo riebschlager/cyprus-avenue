@@ -52,7 +52,7 @@ This is a ground-up visual system that replaces the current dark, gradient-heavy
 - **Layout.**
   - Container is 1240px with a 24px gutter (16px on mobile). Text measure is capped at 680px.
   - Pages use asymmetric two-column grids (1.4fr / 1fr, or content plus a 240–300px aside).
-  - Section spacing is 80px. The 4px spacing scale lives in `layout.css`.
+  - Section spacing is 96px (64px on mobile), set by `--space-section` / `--space-section-mobile`. Wrap every top-level page section in `.ca-section`, which owns that gap. Never add top margin to `SectionHeader`. The 4px spacing scale lives in `layout.css`.
   - The header is sticky, 64px, on paper with a hairline. The player is fixed to the bottom at 64px in ink.
 - **Backgrounds.** Backgrounds are flat paper: no gradients, no blur blobs, no textures. The PlayerBar is the only dark surface (`data-theme="dark"` scope); dark tokens exist for a future dark mode.
 - **Imagery.** The site is text-led. Album art appears only at 40px in the player. The single brand photo is the OG turntable image (warm, slightly faded).

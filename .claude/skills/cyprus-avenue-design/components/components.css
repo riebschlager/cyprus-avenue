@@ -225,8 +225,11 @@
 @keyframes ca-fade { from { opacity: 0; } }
 @keyframes ca-rise { from { opacity: 0; transform: translateY(8px); } }
 
+/* ---------- Section (owns the vertical rhythm between page sections) ---------- */
+.ca-section { margin-top: var(--space-section); }
+
 /* ---------- SectionHeader ---------- */
-.ca-sechead { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-top: 12px; border-top: var(--rule-heavy); margin-bottom: 24px; }
+.ca-sechead { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-top: 12px; border-top: var(--rule-heavy); margin-bottom: 32px; }
 .ca-sechead__left { display: flex; align-items: baseline; gap: 14px; min-width: 0; }
 .ca-sechead__title { font: 800 28px/1.1 var(--font-display); letter-spacing: -0.025em; }
 .ca-sechead--sm { border-top: var(--rule-ink); padding-top: 10px; margin-bottom: 16px; }
@@ -312,6 +315,7 @@
 
 /* ---------- Responsive ---------- */
 @media (max-width: 760px) {
+  .ca-section { margin-top: var(--space-section-mobile); }
   .ca-alpha { grid-template-columns: repeat(9, minmax(0, 1fr)); }
   .ca-header__inner { gap: 12px; padding: 0 var(--gutter-mobile); height: 56px; }
   .ca-nav { display: none; }

@@ -60,7 +60,9 @@
       "Read(//Users/criebschlager/Library/Caches/ms-playwright/**)",
       "Bash(npx -y playwright@1.56.0 screenshot http://localhost:5199/ /dev/null)",
       "Bash(npx playwright *)",
-      "Read(//Users/criebschlager/.npm/_npx/**)"
+      "Read(//Users/criebschlager/.npm/_npx/**)",
+      "Bash(cd /Users/criebschlager/Projects/cyprus-avenue; grep -rn \"ca-sechead\\\\|ca-stats\\\\|--ca-space\\\\|--space\" --include=*.css --include=*.tsx --include=*.ts --include=*.md --include=*.jsx --include=*.vue --include=*.astro . 2>/dev/null | grep -v node_modules | head -60; ls ~/.claude/skills .claude/skills 2>/dev/null)",
+      "Read(//Users/criebschlager/.claude/skills/**)"
     ]
   }
 }
