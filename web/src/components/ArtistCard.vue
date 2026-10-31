@@ -58,12 +58,12 @@ const scrollToCard = () => {
       const header = document.querySelector('header')
       const collapsedHeaderHeight = 100 // Target offset for collapsed state
       const currentHeaderHeight = header?.clientHeight || collapsedHeaderHeight
-      
+
       // Calculate how much the content will shift if header collapses
       const heightDifference = Math.max(0, currentHeaderHeight - collapsedHeaderHeight)
-      
+
       const elementPosition = cardRef.value!.getBoundingClientRect().top + window.scrollY
-      
+
       // Adjust target: remove the extra height that will disappear upon scrolling
       const offsetPosition = elementPosition - heightDifference - collapsedHeaderHeight
 
@@ -157,12 +157,10 @@ watch(() => props.isExpanded, (newVal) => {
               class="text-xs text-gray-400 hover:text-blue-400 transition-colors"
               title="View on Last.fm"
             >
-              <svg class="w-3.5 h-3.5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
+              Biography from Last.fm
             </a>
           </h4>
-          
+
           <button
             @click="showSpotifyModal = true"
             class="inline-flex items-center gap-2 px-2.5 py-1 rounded-lg bg-green-500/10 hover:bg-green-500/20 text-green-400 border border-green-500/20 text-[10px] font-bold uppercase tracking-wider transition-colors"
@@ -171,7 +169,7 @@ watch(() => props.isExpanded, (newVal) => {
             Create {{ artist.name }} Playlist on Spotify
           </button>
         </div>
-        
+
         <div class="flex gap-4">
           <!-- Artist Image -->
           <div v-if="artistBio.image" class="flex-shrink-0">
@@ -184,7 +182,7 @@ watch(() => props.isExpanded, (newVal) => {
           </div>
           <!-- Bio Text -->
           <div class="flex-1 min-w-0">
-            <p class="text-sm text-gray-300 leading-relaxed lastfm-bio" v-html="artistBio.bioSummary"></p>
+            <p class="text-sm text-gray-300 leading-relaxed lastfm-bio">{{ artistBio.bioSummary }}</p>
           </div>
         </div>
       </div>
@@ -214,7 +212,7 @@ watch(() => props.isExpanded, (newVal) => {
         <div class="space-y-2">
           <div
             v-for="(song, index) in artist.uniqueSongs"
-            :key="index"
+            :key="song"
             class="flex items-center gap-3 py-2 px-3 rounded hover:bg-gray-700/50"
           >
             <span class="text-sm text-gray-500 font-mono min-w-[2rem]">{{ index + 1 }}.</span>
@@ -233,8 +231,8 @@ watch(() => props.isExpanded, (newVal) => {
         <h4 class="text-sm font-semibold text-white mb-3">Appears In</h4>
         <div class="space-y-3">
           <div
-            v-for="(playlist, index) in playlistsWithTracks"
-            :key="index"
+            v-for="playlist in playlistsWithTracks"
+            :key="playlist.date"
             class="py-2 px-3 rounded hover:bg-gray-700/50"
           >
             <router-link
@@ -269,36 +267,3 @@ watch(() => props.isExpanded, (newVal) => {
     />
   </div>
 </template>
-
-<style scoped>
-/* Style the Last.fm "Read more" link that comes in the v-html */
-:deep(.lastfm-bio a) {
-  color: #60a5fa; /* blue-400 */
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  font-weight: 500;
-  transition: color 0.2s;
-  display: inline-flex;
-  items-center: center;
-  gap: 0.25rem;
-}
-
-:deep(.lastfm-bio a:hover) {
-  color: #93c5fd; /* blue-300 */
-}
-
-/* Add an external link icon after the link */
-:deep(.lastfm-bio a::after) {
-  content: "";
-  display: inline-block;
-  width: 0.75rem;
-  height: 0.75rem;
-  margin-left: 0.25rem;
-  background-color: currentColor;
-  mask-image: url('../assets/external-link.svg');
-  -webkit-mask-image: url('../assets/external-link.svg');
-  mask-size: contain;
-  mask-repeat: no-repeat;
-  vertical-align: middle;
-}
-</style>

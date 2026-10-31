@@ -29,7 +29,7 @@ afterEach(() => { vi.useRealTimers(); vi.unstubAllGlobals() })
 it('shares index readiness across concurrent callers and retries a failed load', async () => {
   let resolve!: (value: Response) => void
   const fetchMock = vi.fn().mockReturnValueOnce(new Promise<Response>(r => { resolve = r }))
-    .mockResolvedValueOnce(response({ 'Artist|Song': { spotifyId: 'indexed', confidence: 'high' } }))
+    .mockResolvedValueOnce(response({ 'Artist|Song': { spotifyId: 'indexed', confidence: 'high', artistName: 'Artist', trackName: 'Song', spotifyUrl: 'https://open.spotify.com/track/indexed' } }))
   vi.stubGlobal('fetch', fetchMock)
   const { useStreamingLinks } = await import('../src/composables/useStreamingLinks')
   const first = useStreamingLinks()
@@ -132,7 +132,7 @@ it('playlist creation waits for a cold index and uses the refreshed token', asyn
   })
   await vi.waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(2)) // OAuth and index; API waits for readiness
   expect(fetchMock.mock.calls.some(([url]) => url.endsWith('/me'))).toBe(false)
-  resolveIndex(response({ 'Artist|Song': { spotifyId: 'indexed', confidence: 'high' } }))
+  resolveIndex(response({ 'Artist|Song': { spotifyId: 'indexed', confidence: 'high', artistName: 'Artist', trackName: 'Song', spotifyUrl: 'https://open.spotify.com/track/indexed' } }))
   await vi.runAllTimersAsync()
   expect(await result).toMatchObject({ success: true, tracksAdded: 1, tracksFailed: 0 })
 })

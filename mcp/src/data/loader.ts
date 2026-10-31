@@ -1,3 +1,4 @@
+import { parsePlaylists, parseArtistBios, parseSpotifyIndex } from '../../../shared/archive.mjs';
 import { normalizeTags } from '../../../shared/tagFilters.mjs';
 import { readFileSync } from 'fs';
 import { join, dirname } from 'path';
@@ -12,7 +13,7 @@ import type {
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-function loadJSON<T>(_filename: string, relativePath: string): T {
+function loadJSON(relativePath: string): unknown {
   const filePath = join(__dirname, '..', '..', '..', relativePath);
   return JSON.parse(readFileSync(filePath, 'utf-8'));
 }
@@ -137,9 +138,13 @@ export function loadArchiveData(): ArchiveData {
   console.error('Loading Cyprus Avenue archive data...');
 
   // Load raw data
-  const playlists = loadJSON<Playlist[]>('playlists.json', 'json/playlists.json');
-  const artistBios = loadJSON<Record<string, ArtistBio>>('artist-bios.json', 'web/public/artist-bios.json');
-  const spotifyIndex = loadJSON<Record<string, SpotifyTrack>>('spotify-index.json', 'web/public/spotify-index.json');
+  const playlists = parsePlaylists(loadJSON('json/playlists.json'));
+  const rawBios = parseArtistBios(loadJSON('web/public/artist-bios.json'));
+  // Normalize the in-memory discovery labels once so analysis and similarity
+  // use the same categories as browsing. Retained provider JSON stays untouched.
+  const artistBios = Object.fromEntries(Object.entries(rawBios).map(([artist, bio]) =>
+    [artist, { ...bio, tags: normalizeTags(bio.tags || bio.lastfmTags || []) }]));
+  const spotifyIndex = parseSpotifyIndex(loadJSON('web/public/spotify-index.json'));
 
   console.error(`Loaded ${playlists.length} playlists`);
   console.error(`Loaded ${Object.keys(artistBios).length} artist bios`);

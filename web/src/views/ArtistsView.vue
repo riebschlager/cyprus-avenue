@@ -1,78 +1,38 @@
 <script setup lang="ts">
-import { ref, watch, computed, nextTick } from 'vue'
+import { usePagination } from '../composables/usePagination'
+import PaginationControls from '../components/PaginationControls.vue'
+import ArchiveState from '../components/ArchiveState.vue'
+import { usePlaylists } from '../composables/usePlaylists'
+import { ref, watch, computed, nextTick, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { useArtists, type Artist } from '../composables/useArtists'
-import type { Playlist } from '../types/playlist'
-import ArtistCard from './ArtistCard.vue'
-import SearchBar from './SearchBar.vue'
+import { useArtistBios } from '../composables/useArtistBios'
+import { useArtists } from '../composables/useArtists'
+import ArtistCard from '../components/ArtistCard.vue'
+import SearchBar from '../components/SearchBar.vue'
 import SpotifyPlaylistModal from '../features/spotify/SpotifyPlaylistModal.vue'
-import { generateArtistSlug } from '../utils/slug'
+import { findArtistBySlug, generateArtistSlug } from '../utils/slug'
+import { normalizeAndFilterTag } from '../utils/tagFilters'
 import { useKeyboardNavigation } from '../composables/useKeyboardNavigation'
 
-const props = defineProps<{
-  playlists: Playlist[]
-  autoExpandArtist?: Artist | null
-}>()
+const { playlists } = usePlaylists()
 
+const { loadBiosIndex } = useArtistBios()
+onMounted(loadBiosIndex)
 const router = useRouter()
 const route = useRoute()
-const { searchQuery, searchFilters, selectedTag, filteredArtists, availableTags } = useArtists(() => props.playlists)
-const expandedArtistIndex = ref<number | null>(null)
+const { artists, searchQuery, searchFilters, selectedTag, filteredArtists, availableTags } = useArtists(playlists)
+const expandedArtistName = ref<string | null>(null)
 const showTagPlaylistModal = ref(false)
 const bannerRef = ref<HTMLElement | null>(null)
 const cardRefs = ref<InstanceType<typeof ArtistCard>[]>([])
 
-// Pagination
-const itemsPerPage = 20
-const currentPage = ref(1)
-
-const totalArtists = computed(() => filteredArtists.value.length)
-const totalPages = computed(() => Math.ceil(totalArtists.value / itemsPerPage))
-
-const paginatedArtists = computed(() => {
-  const start = (currentPage.value - 1) * itemsPerPage
-  const end = start + itemsPerPage
-  return filteredArtists.value.slice(start, end)
-})
-
-const displayedRange = computed(() => {
-  const start = (currentPage.value - 1) * itemsPerPage + 1
-  const end = Math.min(currentPage.value * itemsPerPage, totalArtists.value)
-  if (totalArtists.value === 0) return '0'
-  return `${start}-${end}`
-})
-
-const changePage = (page: number) => {
-  if (page >= 1 && page <= totalPages.value) {
-    currentPage.value = page
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-}
-
-// Watch for auto-expand artist from URL
-watch(() => props.autoExpandArtist, (artist) => {
-  if (artist) {
-    const index = filteredArtists.value.findIndex(a => a.name === artist.name)
-    if (index !== -1) {
-      expandedArtistIndex.value = index
-      currentPage.value = Math.floor(index / itemsPerPage) + 1
-    }
-  }
-}, { immediate: true })
+const { currentPage, itemsPerPage, totalItems: totalArtists, totalPages,
+  paginatedItems: paginatedArtists, displayedRange, changePage } = usePagination(filteredArtists)
 
 // Sync URL query to selectedTag
 watch(() => route.query.tag, (tag) => {
   if (typeof tag === 'string') {
-    // Standardize: replace plus signs with spaces if they exist
-    const normalizedTag = tag.replace(/\+/g, ' ')
-    
-    // Convert to Title Case to match normalized data
-    const titleCasedTag = normalizedTag
-      .split(' ')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-      .join(' ')
-      
-    selectedTag.value = titleCasedTag
+    selectedTag.value = normalizeAndFilterTag(tag.replace(/\+/g, ' ')) || ''
   } else {
     selectedTag.value = ''
   }
@@ -83,13 +43,21 @@ watch([searchQuery, selectedTag], () => {
   currentPage.value = 1
 })
 
+const artistToExpand = computed(() => typeof route.params.slug === 'string'
+  ? findArtistBySlug(artists.value, route.params.slug) : null)
+watch([artistToExpand, filteredArtists], ([artist]) => {
+  expandedArtistName.value = artist?.name ?? null
+  const index = filteredArtists.value.findIndex(a => a.name === artist?.name)
+  if (index >= 0) currentPage.value = Math.floor(index / itemsPerPage) + 1
+}, { immediate: true })
+
 const handleTagSelect = (tag: string) => {
   // Collapse currently expanded artist
-  expandedArtistIndex.value = null
+  expandedArtistName.value = null
 
   // Update URL to reflect tag state
   router.push({ query: { ...route.query, tag } })
-  
+
   // Wait for banner to render and scroll to it
   nextTick(() => {
     if (bannerRef.value) {
@@ -113,8 +81,10 @@ const clearTag = () => {
 }
 
 const toggleArtist = (index: number) => {
-  const wasExpanded = expandedArtistIndex.value === index
-  expandedArtistIndex.value = wasExpanded ? null : index
+  const artist = filteredArtists.value[index]
+  if (!artist) return
+  const wasExpanded = expandedArtistName.value === artist.name
+  expandedArtistName.value = wasExpanded ? null : artist.name
 
   // Update URL without triggering scroll behavior
   if (wasExpanded) {
@@ -163,7 +133,7 @@ watch(focusedIndex, async (index) => {
 </script>
 
 <template>
-  <div>
+  <ArchiveState>
     <!-- Stats -->
     <div class="bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-700">
       <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -193,7 +163,7 @@ watch(focusedIndex, async (index) => {
           placeholder="Search artists or songs..."
         />
       </div>
-      
+
       <div class="sm:w-64">
         <select
           :value="selectedTag"
@@ -242,7 +212,7 @@ watch(focusedIndex, async (index) => {
       </div>
 
       <div v-else>
-        <div class="flex items-center justify-between text-sm text-gray-400 mb-4">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-sm text-gray-400 mb-4">
           <div class="flex items-center gap-3">
             <p>
               Showing {{ displayedRange }} of {{ totalArtists.toLocaleString() }} artists
@@ -253,25 +223,8 @@ watch(focusedIndex, async (index) => {
               to navigate
             </span>
           </div>
-          
-          <!-- Pagination Controls (Top) -->
-          <div v-if="totalPages > 1" class="flex gap-2">
-            <button 
-              @click="changePage(currentPage - 1)" 
-              :disabled="currentPage === 1"
-              class="px-3 py-1 rounded bg-gray-800 hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              Previous
-            </button>
-            <span class="px-2 py-1">Page {{ currentPage }} of {{ totalPages }}</span>
-            <button 
-              @click="changePage(currentPage + 1)" 
-              :disabled="currentPage === totalPages"
-              class="px-3 py-1 rounded bg-gray-800 hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              Next
-            </button>
-          </div>
+
+          <PaginationControls :current-page="currentPage" :total-pages="totalPages" compact @change="changePage" />
         </div>
 
         <div class="space-y-4">
@@ -280,33 +233,14 @@ watch(focusedIndex, async (index) => {
             :ref="(el) => { if (el) cardRefs[i] = el as InstanceType<typeof ArtistCard> }"
             :key="artist.name"
             :artist="artist"
-            :is-expanded="expandedArtistIndex === ((currentPage - 1) * itemsPerPage + i)"
+            :is-expanded="expandedArtistName === artist.name"
             :is-focused="focusedIndex === i"
             @toggle="toggleArtist((currentPage - 1) * itemsPerPage + i)"
             @select-tag="handleTagSelect"
           />
         </div>
 
-        <!-- Pagination Controls (Bottom) -->
-        <div v-if="totalPages > 1" class="mt-6 flex justify-center gap-2 text-sm text-gray-400">
-          <button 
-            @click="changePage(currentPage - 1)" 
-            :disabled="currentPage === 1"
-            class="px-4 py-2 rounded bg-gray-800 hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-          >
-            Previous
-          </button>
-          <div class="flex items-center px-2">
-            Page {{ currentPage }} of {{ totalPages }}
-          </div>
-          <button 
-            @click="changePage(currentPage + 1)" 
-            :disabled="currentPage === totalPages"
-            class="px-4 py-2 rounded bg-gray-800 hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-          >
-            Next
-          </button>
-        </div>
+        <PaginationControls :current-page="currentPage" :total-pages="totalPages" class="mt-6" @change="changePage" />
       </div>
     </div>
 
@@ -317,7 +251,7 @@ watch(focusedIndex, async (index) => {
       mode="tag"
       @close="showTagPlaylistModal = false"
     />
-  </div>
+  </ArchiveState>
 </template>
 
 <style scoped>

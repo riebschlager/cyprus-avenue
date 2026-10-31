@@ -2,30 +2,6 @@
 
 A Vue 3 web application for browsing and searching the Cyprus Avenue radio show playlist archive with integrated Spotify playback.
 
-## Features
-
-- **Browse Playlists** - 125 shows with expandable track lists
-- **Discover Artists** - 277+ artists with bios, images, and tags
-- **Search Tracks** - Instant search across 1,506 tracks
-- **Spotify Integration**:
-  - In-browser playback (Premium required)
-  - One-click playlist creation
-  - 4 modes: individual shows, complete archive, by artist, by tag
-- **Tag Filtering** - Explore artists by genre/tag
-- **Multi-Platform Streaming** - Links to Spotify, Apple Music, YouTube Music
-- **"This Week in History"** - See playlists from the same date in past years
-- **Responsive Design** - Works on mobile and desktop
-
-## Tech Stack
-
-- **Vue 3.4** with Composition API (`<script setup>`)
-- **TypeScript 5** for type safety
-- **Vite 5** for fast development
-- **Vue Router 4** for client-side routing
-- **Tailwind CSS 3** for styling
-- **Spotify Web API** for track linking and playlist creation
-- **Spotify Web Playback SDK** for in-browser playback
-
 ## Development
 
 ```bash
@@ -44,23 +20,11 @@ npm run preview
 
 ## Project Structure
 
-Archive components, data composables, and URL helpers live in `src/components/`,
+Route pages live in `src/views/`. Archive components, data composables, and URL helpers live in `src/components/`,
 `src/composables/`, and `src/utils/`. Spotify components, OAuth, playback, API
 transport, track selection/matching, callback view, and types live together in
 `src/features/spotify/`. `SpotifyActionHost.vue` owns resuming OAuth actions;
 cards and the web player do not read pending storage.
-
-## Routes
-
-| Path | Component | Description |
-|------|-----------|-------------|
-| `/` | HomePage | Landing page with suggestions |
-| `/playlists` | PlaylistList | Browse all playlists |
-| `/playlist/:slug` | PlaylistCard | Individual playlist |
-| `/artists` | ArtistsView | Browse artists with tag filtering |
-| `/artist/:slug` | ArtistCard | Individual artist |
-| `/tracks` | TracksView | Searchable track listing |
-| `/auth/callback` | SpotifyCallback | OAuth callback |
 
 ## Data Files
 
@@ -70,7 +34,8 @@ The application loads data from three JSON files in `/public/`:
 - **spotify-index.json** - Track → Spotify URL mappings
 - **artist-bios.json** - Artist bios, images, tags, and stats
 
-To update data, run the scripts in the parent directory's `scripts/` folder.
+Use the [maintenance guide](../WORKFLOW.md) to update data. The browser and MCP
+validate these files against `shared/archive.mjs` before using them.
 
 ## Environment Variables
 

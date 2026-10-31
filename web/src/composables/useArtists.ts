@@ -1,7 +1,7 @@
 import { computed, ref, toValue, type MaybeRefOrGetter } from 'vue'
 import type { Playlist } from '../types/playlist'
 import { useArtistBios } from './useArtistBios'
-import { normalizeAndFilterTag } from '../utils/tagFilters'
+import { normalizeTags } from '../utils/tagFilters'
 
 export interface ArtistTrack {
   song: string
@@ -56,15 +56,7 @@ export function useArtists(playlists: MaybeRefOrGetter<Playlist[]>) {
       const bio = biosIndex.value[name]
       const rawTags = bio?.tags || bio?.lastfmTags || []
       
-      // Normalize and filter tags
-      const tagSet = new Set<string>()
-      rawTags.forEach(rawTag => {
-        const normalized = normalizeAndFilterTag(rawTag)
-        if (normalized) {
-          tagSet.add(normalized)
-        }
-      })
-      const tags = Array.from(tagSet).sort()
+      const tags = normalizeTags(rawTags).sort()
 
       artistList.push({
         name,

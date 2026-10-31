@@ -134,6 +134,10 @@ export function useKeyboardNavigation(options: KeyboardNavigationOptions) {
     // Don't handle if focus is in an input element
     if (isInputElement(document.activeElement)) return
 
+    // Native links and buttons keep their own Enter activation, including
+    // pagination and download controls after using the list shortcuts.
+    if (event.key === 'Enter' && document.activeElement?.closest('button, a, [role="button"]')) return
+
     // Don't handle if modifier keys are pressed (except shift for G)
     if (event.ctrlKey || event.altKey || event.metaKey) return
 

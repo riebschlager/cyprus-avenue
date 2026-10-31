@@ -3,6 +3,7 @@ import { formatArchiveDate } from '../utils/archiveDate'
 import { ref, watch, nextTick, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import type { Playlist } from '../types/playlist'
+import DownloadMenu from './DownloadMenu.vue'
 import StreamingLinks from './StreamingLinks.vue'
 import SpotifyPlaylistModal from '../features/spotify/SpotifyPlaylistModal.vue'
 import { useStreamingLinks } from '../composables/useStreamingLinks'
@@ -28,7 +29,6 @@ const { getTrackData } = useStreamingLinks()
 const cardRef = ref<HTMLElement | null>(null)
 const showSpotifyModal = ref(false)
 const copiedTrackIndex = ref<number | null>(null)
-const showDownloadMenu = ref(false)
 
 // Check for pending Spotify action on mount
 onMounted(() => {
@@ -62,12 +62,12 @@ const scrollToCard = () => {
       const header = document.querySelector('header')
       const collapsedHeaderHeight = 100 // Target offset for collapsed state
       const currentHeaderHeight = header?.clientHeight || collapsedHeaderHeight
-      
+
       // Calculate how much the content will shift if header collapses
       const heightDifference = Math.max(0, currentHeaderHeight - collapsedHeaderHeight)
-      
+
       const elementPosition = cardRef.value!.getBoundingClientRect().top + window.scrollY
-      
+
       // Adjust target: remove the extra height that will disappear upon scrolling
       const offsetPosition = elementPosition - heightDifference - collapsedHeaderHeight
 
@@ -149,7 +149,7 @@ watch(() => props.isExpanded, (newVal) => {
             {{ playlist.title }}
           </h3>
         </div>
-        
+
         <!-- Standard Layout (Responsive) -->
         <div v-else class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-3">
           <div class="flex items-center gap-3 min-w-0">
@@ -185,10 +185,10 @@ watch(() => props.isExpanded, (newVal) => {
       <!-- Track List -->
       <div class="mt-4">
         <h4 class="text-sm font-semibold text-white mb-3">Track List</h4>
-        <div 
+        <div
           class="space-y-2"
-          :class="{ 
-            'max-h-80 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-black/20': compact 
+          :class="{
+            'max-h-80 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-black/20': compact
           }"
         >
           <div
@@ -201,7 +201,7 @@ watch(() => props.isExpanded, (newVal) => {
               compact ? 'gap-2 py-2 px-2' : 'gap-2 sm:gap-3 py-2 px-2 sm:px-3'
             ]"
           >
-            <span 
+            <span
               class="text-gray-500 font-mono"
               :class="[
                 compact ? 'min-w-[1.5rem] text-xs mt-0.5' : 'min-w-[1.25rem] sm:min-w-[2rem] text-xs sm:text-sm mt-0.5 sm:mt-0'
@@ -236,7 +236,7 @@ watch(() => props.isExpanded, (newVal) => {
                 {{ track.artist }}
               </router-link>
             </div>
-            
+
             <!-- Actions: Share & Stream -->
             <div class="flex items-center gap-1 sm:gap-2 flex-shrink-0">
               <button
@@ -251,10 +251,10 @@ watch(() => props.isExpanded, (newVal) => {
                 <svg v-else class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
                 </svg>
-                
+
                 <!-- Tooltip -->
-                <span 
-                  v-if="copiedTrackIndex === index" 
+                <span
+                  v-if="copiedTrackIndex === index"
                   class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white bg-black rounded shadow whitespace-nowrap z-10"
                 >
                   Copied!
@@ -279,44 +279,7 @@ watch(() => props.isExpanded, (newVal) => {
             {{ compact ? 'Add to Spotify' : 'Add this Playlist to Spotify' }}
           </button>
 
-          <!-- Download Button with Dropdown -->
-          <div class="relative">
-            <button
-              @click="showDownloadMenu = !showDownloadMenu"
-              class="w-full sm:w-auto bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 border border-blue-500/50 font-semibold py-2 px-4 rounded-lg text-sm transition-colors flex items-center justify-center gap-2"
-            >
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-              </svg>
-              Download
-            </button>
-
-            <!-- Download Format Menu -->
-            <div
-              v-if="showDownloadMenu"
-              @click="showDownloadMenu = false"
-              class="absolute right-0 mt-2 w-40 bg-gray-900 border border-gray-700 rounded-lg shadow-lg z-10"
-            >
-              <button
-                @click="downloadPlaylist(playlist, 'json')"
-                class="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 transition-colors rounded-t-lg"
-              >
-                JSON
-              </button>
-              <button
-                @click="downloadPlaylist(playlist, 'csv')"
-                class="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 transition-colors"
-              >
-                CSV
-              </button>
-              <button
-                @click="downloadPlaylist(playlist, 'txt')"
-                class="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 transition-colors rounded-b-lg"
-              >
-                Text
-              </button>
-            </div>
-          </div>
+          <DownloadMenu @download="format => downloadPlaylist(playlist, format)" />
         </div>
 
         <!-- Footer -->

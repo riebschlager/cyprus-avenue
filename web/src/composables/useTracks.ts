@@ -2,6 +2,7 @@ import { computed, ref, toValue, type MaybeRefOrGetter } from 'vue'
 import type { Playlist } from '../types/playlist'
 
 export interface TrackWithPlaylist {
+  id: string
   artist: string
   song: string
   playlistTitle: string
@@ -23,8 +24,9 @@ export function useTracks(playlists: MaybeRefOrGetter<Playlist[]>) {
     const playlistsValue = toValue(playlists)
 
     playlistsValue.forEach(playlist => {
-      playlist.tracks.forEach(track => {
+      playlist.tracks.forEach((track, trackIndex) => {
         tracks.push({
+          id: `${playlist.date}:${trackIndex}`,
           artist: track.artist,
           song: track.song,
           playlistTitle: playlist.title,

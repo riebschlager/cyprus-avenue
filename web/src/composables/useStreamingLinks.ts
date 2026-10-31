@@ -1,3 +1,4 @@
+import { parseSpotifyIndex, type SpotifyTrackData, type SpotifyIndex } from '../../../shared/archive.mjs'
 import { ref } from 'vue'
 
 export interface StreamingPlatform {
@@ -6,18 +7,7 @@ export interface StreamingPlatform {
   getUrl: (artist: string, song: string, spotifyIndex?: SpotifyIndex) => string
 }
 
-export interface SpotifyTrackData {
-  spotifyId: string
-  spotifyUrl: string
-  previewUrl: string | null
-  albumArt: string | null
-  artistName: string
-  trackName: string
-  genres?: string[]
-  confidence: 'high' | 'medium' | 'low'
-}
-
-export type SpotifyIndex = Record<string, SpotifyTrackData>
+export type { SpotifyTrackData, SpotifyIndex } from '../../../shared/archive.mjs'
 
 // Spotify index loaded from JSON
 const spotifyIndex = ref<SpotifyIndex>({})
@@ -74,7 +64,7 @@ export function useStreamingLinks() {
       try {
         const response = await fetch(`${import.meta.env.BASE_URL}spotify-index.json`)
         if (!response.ok) throw new Error(`Spotify index: HTTP ${response.status}`)
-        spotifyIndex.value = await response.json()
+        spotifyIndex.value = parseSpotifyIndex(await response.json())
         indexLoaded.value = true
       } catch (error) {
         indexError.value = error instanceof Error ? error.message : 'Spotify index unavailable'

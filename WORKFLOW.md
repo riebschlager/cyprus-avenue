@@ -132,3 +132,36 @@ nonzero on invalid schema, dates, missing records, or content drift. Its biograp
 and Spotify coverage counts are informational; missing enrichment does not make
 an otherwise valid archive fail. Spotify coverage uses unique exact artist/song
 pairs in the current archive and counts high/medium matches only.
+
+## Source organization
+
+Route pages live in `web/src/views/`; reusable display components live in
+`web/src/components/`. Use Vue Composition API with `<script setup lang="ts">`,
+module-level composables for shared datasets, and Tailwind utilities. Spotify
+OAuth/playback/creation stays under `web/src/features/spotify/`.
+
+`shared/archive.mjs` and its TypeScript declarations define the browser/MCP JSON
+contract. Both consumers validate complete datasets before replacing loaded
+state. `shared/tagFilters.mjs` defines discovery labels and aliases for both;
+raw provider tags remain in retained metadata for provenance. Consolidation keeps
+provider labels; consumers apply the shared discovery normalization. Biographies
+are converted to inert plain text at browser ingestion and displayed with explicit
+Last.fm attribution links.
+
+The browser shares pagination state/controls, archive loading/error presentation,
+and download menus. Preserve keyboard navigation and independent enrichment loads
+when extending them. Track row IDs use the show date and original track position,
+so repeated songs remain distinct after filtering or sorting.
+
+Tailwind 4 runs through `@tailwindcss/postcss`, including Lightning CSS prefixing.
+`web/src/style.css` imports Tailwind; no JavaScript Tailwind config or separate
+Autoprefixer pass is needed. Keep PostCSS itself: it runs the Tailwind plugin.
+
+## Discovery and recovery reports
+
+`data/discovered_playlists.json` and `data/gap_analysis.json` are dated discovery
+outputs, not archive sources. The fetcher reads `data/gap_analysis.json`; regenerate
+both with `npm run discover` before importing newly discovered shows with
+`npm run fetch:playlists`. Retain these snapshots while that workflow uses them.
+`data/spotify-not-found.json` is still consumed by interactive recovery. Neither
+report replaces reviewed corrections or canonical mappings in `data/source/`.

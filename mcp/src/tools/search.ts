@@ -116,7 +116,7 @@ export function getPlaylist(
           artist: t.artist,
           song: t.song,
           spotifyUrl: spotify?.spotifyUrl,
-          albumArt: spotify?.albumArt,
+          albumArt: spotify?.albumArt ?? undefined,
         };
       }),
     },
@@ -395,7 +395,7 @@ export function searchTracks(
         playlistDate: t.playlistDate,
         playlistTitle: t.playlistTitle,
         spotifyUrl: spotify?.spotifyUrl,
-        albumArt: spotify?.albumArt,
+        albumArt: spotify?.albumArt ?? undefined,
         genres: spotify?.genres,
       };
     }),
@@ -456,8 +456,8 @@ export function getTrack(
       artist,
       song,
       spotifyUrl: spotify?.spotifyUrl,
-      previewUrl: spotify?.previewUrl,
-      albumArt: spotify?.albumArt,
+      previewUrl: spotify?.previewUrl ?? undefined,
+      albumArt: spotify?.albumArt ?? undefined,
       genres: spotify?.genres,
       confidence: spotify?.confidence,
       appearances,

@@ -1,3 +1,7 @@
+> Historical development narrative. Commands, dependency versions, file paths, and
+> counts below describe earlier versions. Use [README](../../README.md) and
+> [WORKFLOW](../../WORKFLOW.md) for current setup and maintenance.
+
 # Built with Claude Code
 
 This project was created entirely through a collaborative session with **Claude Code**, Anthropic's AI coding assistant. This document chronicles the development process and demonstrates Claude Code's capabilities in data extraction, parsing, and automation.

@@ -7,10 +7,6 @@ export function useDropdownState(dropdownId: string) {
   const isOpen = ref(false)
 
   const open = () => {
-    // Close any previously open dropdown
-    if (currentOpenDropdownId.value && currentOpenDropdownId.value !== dropdownId) {
-      // The previous dropdown will close itself via the watcher
-    }
     currentOpenDropdownId.value = dropdownId
     isOpen.value = true
   }

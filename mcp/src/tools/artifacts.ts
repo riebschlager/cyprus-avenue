@@ -60,7 +60,7 @@ export function generatePlaylistDocument(
         artist: t.artist,
         song: t.song,
         spotifyUrl: includeSpotifyLinks ? spotify?.spotifyUrl : undefined,
-        albumArt: spotify?.albumArt,
+        albumArt: spotify?.albumArt ?? undefined,
       };
     }),
   };

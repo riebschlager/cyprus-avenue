@@ -184,6 +184,30 @@ Centralize tag normalization and the archive data contract. The browser currentl
 
 Replace `any` at the boundaries implicated above, including slug lookups, modal context, API responses, and track matches. Validate external JSON at ingestion. For biographies rendered through `v-html`, either publish plain text with an explicit attribution link or sanitize permitted markup during ingestion.
 
+### Item 6 implementation — October 31, 2026
+
+- Removed the verified starter assets, duplicate image, unused HTML-link icon,
+  default Tailwind config, and separate Autoprefixer dependency/pass. PostCSS stays
+  for Tailwind 4; inspected Lightning CSS prefixing and compared generated CSS.
+- Consolidated current root guidance into README and WORKFLOW, kept web/MCP setup
+  beside their applications, and moved the historical narrative to
+  `docs/history/development.md`. Removed redundant GEMINI/QUICKSTART guides.
+- Kept discovery/gap snapshots because the importer still consumes the gap report;
+  documented regeneration. Spotify recovery reports and all archive/source metadata
+  remain retained.
+- Moved archive route pages into `views/`, removed loading-only wrappers, and shared
+  loading/error presentation, pagination logic/controls, and download menus. Split
+  home discovery, project background, and export sections into components.
+- Desktop/mobile navigation uses one definition and shared classes. Artist expansion
+  follows names; track rows use original show/position identity. Kept keyboard and
+  dropdown helpers, added native Enter handling and Escape/outside menu dismissal.
+- Browser and MCP share archive types and runtime JSON validation. MCP normalizes
+  in-memory discovery tags with the existing shared browser policy; source provider
+  tags remain unchanged. Browser biographies render plain text with Last.fm links.
+- Verified production builds, offline archive/browser/MCP tests, and desktop/mobile
+  browsing, filtering, deep links, pagination, keyboard shortcuts, and downloads.
+  Live Spotify authentication/playback was not exercised for this cleanup.
+
 ## Proposed execution order
 
 | Pass | Scope | Done when |

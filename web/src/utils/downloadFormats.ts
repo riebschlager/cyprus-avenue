@@ -1,3 +1,10 @@
+export const DOWNLOAD_FORMATS = [
+  { value: 'json', label: 'JSON' },
+  { value: 'csv', label: 'CSV' },
+  { value: 'txt', label: 'Text' }
+] as const
+export type DownloadFormat = typeof DOWNLOAD_FORMATS[number]['value']
+
 import type { Playlist } from '../types/playlist'
 
 /**
@@ -140,7 +147,7 @@ function playlistsToText(playlists: Playlist[]): string {
 /**
  * Download a single playlist in the specified format
  */
-export function downloadPlaylist(playlist: Playlist, format: 'csv' | 'json' | 'txt') {
+export function downloadPlaylist(playlist: Playlist, format: DownloadFormat) {
   const safeName = playlist.date // Already in YYYY-MM-DD format
 
   switch (format) {
@@ -165,7 +172,7 @@ export function downloadPlaylist(playlist: Playlist, format: 'csv' | 'json' | 't
 /**
  * Download all playlists in the specified format
  */
-export function downloadAllPlaylists(playlists: Playlist[], format: 'csv' | 'json' | 'txt') {
+export function downloadAllPlaylists(playlists: Playlist[], format: DownloadFormat) {
   const timestamp = new Date().toISOString().split('T')[0] // YYYY-MM-DD
 
   switch (format) {

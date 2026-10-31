@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomePage from '../components/HomePage.vue'
+import HomePage from '../views/HomePage.vue'
 import PlaylistsView from '../views/PlaylistsView.vue'
-import TracksViewWrapper from '../views/TracksViewWrapper.vue'
-import ArtistsViewWrapper from '../views/ArtistsViewWrapper.vue'
+import TracksView from '../views/TracksView.vue'
+import ArtistsView from '../views/ArtistsView.vue'
 import SpotifyCallback from '../features/spotify/SpotifyCallback.vue'
 
 const router = createRouter({
@@ -30,19 +30,19 @@ const router = createRouter({
     {
       path: '/tracks',
       name: 'tracks',
-      component: TracksViewWrapper,
+      component: TracksView,
       meta: { title: 'All Tracks - Cyprus Avenue Archive' }
     },
     {
       path: '/artists',
       name: 'artists',
-      component: ArtistsViewWrapper,
+      component: ArtistsView,
       meta: { title: 'Artists - Cyprus Avenue Archive' }
     },
     {
       path: '/artist/:slug',
       name: 'artist',
-      component: ArtistsViewWrapper,
+      component: ArtistsView,
       props: true,
       meta: { title: 'Artist - Cyprus Avenue Archive' }
     },

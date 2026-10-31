@@ -92,7 +92,7 @@ const getPlaylistUrl = (title: string, date: string) => {
         <tbody class="bg-gray-800 divide-y divide-gray-700">
           <tr
             v-for="(track, index) in tracks"
-            :key="`${track.playlistDate}-${index}`"
+            :key="track.id"
             :data-index="index"
             class="transition-colors"
             :class="[

@@ -1,3 +1,5 @@
+import { parseArtistBios } from '../../../shared/archive.mjs'
+import { biographyText } from '../utils/biographyText'
 import { ref } from 'vue'
 import type { ArtistBio, ArtistBiosIndex } from '../types/artistBio'
 
@@ -28,7 +30,12 @@ export function useArtistBios() {
       try {
         const response = await fetch(`${import.meta.env.BASE_URL}artist-bios.json`)
         if (!response.ok) throw new Error(`Artist bios: HTTP ${response.status}`)
-        biosIndex.value = await response.json()
+        const rawBios = parseArtistBios(await response.json())
+        biosIndex.value = Object.fromEntries(Object.entries(rawBios).map(([artist, bio]) => [artist, {
+          ...bio,
+          ...(bio.bio !== undefined ? { bio: biographyText(bio.bio) } : {}),
+          ...(bio.bioSummary !== undefined ? { bioSummary: biographyText(bio.bioSummary) } : {})
+        }]))
         indexLoaded.value = true
         cacheTimestamp.value = Date.now()
       } catch (err) {

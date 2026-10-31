@@ -1,3 +1,4 @@
+import { parsePlaylists } from '../../../shared/archive.mjs'
 import { ref, computed } from 'vue'
 import type { Playlist } from '../types/playlist'
 
@@ -28,7 +29,7 @@ export function usePlaylists() {
         if (!response.ok) {
           throw new Error('Failed to fetch playlists')
         }
-        playlists.value = await response.json()
+        playlists.value = parsePlaylists(await response.json())
         loaded.value = true
       } catch (err) {
         error.value = err instanceof Error ? err.message : 'An error occurred'

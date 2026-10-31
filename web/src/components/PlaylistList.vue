@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { ref, watch, computed, nextTick } from 'vue'
+import { usePagination } from '../composables/usePagination'
+import PaginationControls from '../components/PaginationControls.vue'
+import { ref, watch, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import type { Playlist } from '../types/playlist'
 import PlaylistCard from './PlaylistCard.vue'
@@ -16,32 +18,8 @@ const router = useRouter()
 const expandedPlaylist = ref<string | null>(null)
 const cardRefs = ref<InstanceType<typeof PlaylistCard>[]>([])
 
-// Pagination
-const itemsPerPage = 20
-const currentPage = ref(1)
-
-const totalPlaylists = computed(() => props.playlists.length)
-const totalPages = computed(() => Math.ceil(totalPlaylists.value / itemsPerPage))
-
-const paginatedPlaylists = computed(() => {
-  const start = (currentPage.value - 1) * itemsPerPage
-  const end = start + itemsPerPage
-  return props.playlists.slice(start, end)
-})
-
-const displayedRange = computed(() => {
-  const start = (currentPage.value - 1) * itemsPerPage + 1
-  const end = Math.min(currentPage.value * itemsPerPage, totalPlaylists.value)
-  if (totalPlaylists.value === 0) return '0'
-  return `${start}-${end}`
-})
-
-const changePage = (page: number) => {
-  if (page >= 1 && page <= totalPages.value) {
-    currentPage.value = page
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-}
+const { currentPage, itemsPerPage, totalItems: totalPlaylists, totalPages,
+  paginatedItems: paginatedPlaylists, displayedRange, changePage } = usePagination(() => props.playlists)
 
 // Watch for auto-expand playlist from URL
 watch(() => props.autoExpandPlaylist, (playlist) => {
@@ -124,7 +102,7 @@ watch(focusedIndex, async (index) => {
     </div>
 
     <div v-else class="space-y-4">
-      <div class="flex items-center justify-between text-sm text-gray-400">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-sm text-gray-400">
         <div class="flex items-center gap-3">
           <p>
             Showing {{ displayedRange }} of {{ playlists.length }} playlist{{ playlists.length === 1 ? '' : 's' }}
@@ -136,24 +114,7 @@ watch(focusedIndex, async (index) => {
           </span>
         </div>
 
-        <!-- Pagination Controls (Top) -->
-        <div v-if="totalPages > 1" class="flex gap-2">
-          <button
-            @click="changePage(currentPage - 1)"
-            :disabled="currentPage === 1"
-            class="px-3 py-1 rounded bg-gray-800 hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-          >
-            Previous
-          </button>
-          <span class="px-2 py-1">Page {{ currentPage }} of {{ totalPages }}</span>
-          <button
-            @click="changePage(currentPage + 1)"
-            :disabled="currentPage === totalPages"
-            class="px-3 py-1 rounded bg-gray-800 hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-          >
-            Next
-          </button>
-        </div>
+        <PaginationControls :current-page="currentPage" :total-pages="totalPages" compact @change="changePage" />
       </div>
 
       <div class="space-y-3">
@@ -169,26 +130,7 @@ watch(focusedIndex, async (index) => {
         />
       </div>
 
-      <!-- Pagination Controls (Bottom) -->
-      <div v-if="totalPages > 1" class="mt-6 flex justify-center gap-2 text-sm text-gray-400">
-        <button
-          @click="changePage(currentPage - 1)"
-          :disabled="currentPage === 1"
-          class="px-4 py-2 rounded bg-gray-800 hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-        >
-          Previous
-        </button>
-        <div class="flex items-center px-2">
-          Page {{ currentPage }} of {{ totalPages }}
-        </div>
-        <button
-          @click="changePage(currentPage + 1)"
-          :disabled="currentPage === totalPages"
-          class="px-4 py-2 rounded bg-gray-800 hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-        >
-          Next
-        </button>
-      </div>
+      <PaginationControls :current-page="currentPage" :total-pages="totalPages" class="mt-6" @change="changePage" />
     </div>
   </div>
 </template>

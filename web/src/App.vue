@@ -15,6 +15,12 @@ const { isMenuOpen, toggleMenu, closeMenu } = useMobileMenu()
 const { isAuthenticated } = useSpotifyAuth()
 const route = useRoute()
 const scrollY = ref(0)
+const navigation = [
+  { to: '/', label: 'Home' },
+  { to: '/playlists', label: 'Playlists' },
+  { to: '/tracks', label: 'All Tracks' },
+  { to: '/artists', label: 'Artists' }
+]
 
 const isScrolled = computed(() => scrollY.value > 20)
 
@@ -60,14 +66,14 @@ onUnmounted(() => {
           <!-- Logo/Title -->
           <div class="flex items-baseline gap-4 flex-1 min-w-0">
             <h1
-              class="font-bold text-white whitespace-nowrap"
-              :style="{ fontSize: isScrolled ? '1.25rem' : '1.875rem', transition: 'font-size 300ms cubic-bezier(0.4, 0, 0.2, 1)' }"
+              class="font-bold text-white whitespace-nowrap transition-[font-size] duration-300"
+              :class="isScrolled ? 'text-xl' : 'text-xl sm:text-3xl'"
             >
               Cyprus Avenue Archive
             </h1>
             <p
               class="text-sm text-gray-400 whitespace-nowrap hidden sm:block transition-opacity duration-300"
-              :style="{ opacity: isScrolled ? '0' : '1' }"
+              :class="isScrolled ? 'opacity-0' : 'opacity-100'"
             >
               Browse playlists from KCUR's Cyprus Avenue radio show
             </p>
@@ -76,78 +82,8 @@ onUnmounted(() => {
           <!-- Desktop Navigation (hidden on mobile) -->
           <div class="hidden md:block border-b border-gray-800">
             <nav class="flex space-x-8 -mb-px" aria-label="Tabs">
-              <router-link
-                to="/"
-                custom
-                v-slot="{ navigate, isActive }"
-              >
-                <button
-                  @click="navigate"
-                  :style="{
-                    color: isActive ? '#60a5fa' : '#9ca3af',
-                    borderBottomColor: isActive ? '#3b82f6' : 'transparent',
-                    borderBottomWidth: isActive ? '2px' : '2px',
-                    transition: 'color 300ms cubic-bezier(0.4, 0, 0.2, 1), border-color 300ms cubic-bezier(0.4, 0, 0.2, 1)'
-                  }"
-                  class="whitespace-nowrap font-medium text-sm py-4 px-1"
-                >
-                  Home
-                </button>
-              </router-link>
-              <router-link
-                to="/playlists"
-                custom
-                v-slot="{ navigate, isActive }"
-              >
-                <button
-                  @click="navigate"
-                  :style="{
-                    color: isActive ? '#60a5fa' : '#9ca3af',
-                    borderBottomColor: isActive ? '#3b82f6' : 'transparent',
-                    borderBottomWidth: isActive ? '2px' : '2px',
-                    transition: 'color 300ms cubic-bezier(0.4, 0, 0.2, 1), border-color 300ms cubic-bezier(0.4, 0, 0.2, 1)'
-                  }"
-                  class="whitespace-nowrap font-medium text-sm py-4 px-1"
-                >
-                  Playlists
-                </button>
-              </router-link>
-              <router-link
-                to="/tracks"
-                custom
-                v-slot="{ navigate, isActive }"
-              >
-                <button
-                  @click="navigate"
-                  :style="{
-                    color: isActive ? '#60a5fa' : '#9ca3af',
-                    borderBottomColor: isActive ? '#3b82f6' : 'transparent',
-                    borderBottomWidth: isActive ? '2px' : '2px',
-                    transition: 'color 300ms cubic-bezier(0.4, 0, 0.2, 1), border-color 300ms cubic-bezier(0.4, 0, 0.2, 1)'
-                  }"
-                  class="whitespace-nowrap font-medium text-sm py-4 px-1"
-                >
-                  All Tracks
-                </button>
-              </router-link>
-              <router-link
-                to="/artists"
-                custom
-                v-slot="{ navigate, isActive }"
-              >
-                <button
-                  @click="navigate"
-                  :style="{
-                    color: isActive ? '#60a5fa' : '#9ca3af',
-                    borderBottomColor: isActive ? '#3b82f6' : 'transparent',
-                    borderBottomWidth: isActive ? '2px' : '2px',
-                    transition: 'color 300ms cubic-bezier(0.4, 0, 0.2, 1), border-color 300ms cubic-bezier(0.4, 0, 0.2, 1)'
-                  }"
-                  class="whitespace-nowrap font-medium text-sm py-4 px-1"
-                >
-                  Artists
-                </button>
-              </router-link>
+              <router-link v-for="item in navigation" :key="item.to" :to="item.to"
+                class="desktop-nav-link" active-class="nav-active">{{ item.label }}</router-link>
             </nav>
           </div>
 
@@ -156,6 +92,8 @@ onUnmounted(() => {
             @click="toggleMenu"
             class="md:hidden p-2 rounded text-gray-400 hover:text-gray-300 transition-colors"
             aria-label="Toggle menu"
+            :aria-expanded="isMenuOpen"
+            aria-controls="mobile-navigation"
           >
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path v-if="!isMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -170,59 +108,9 @@ onUnmounted(() => {
           class="md:hidden mt-4 pb-4 border-t border-gray-800"
           style="animation: slideDown 300ms cubic-bezier(0.4, 0, 0.2, 1);"
         >
-          <nav class="flex flex-col space-y-2" aria-label="Mobile Tabs">
-            <router-link
-              to="/"
-              custom
-              v-slot="{ navigate, isActive }"
-            >
-              <button
-                @click="navigate"
-                :style="{ color: isActive ? '#60a5fa' : '#9ca3af' }"
-                class="w-full text-left px-4 py-2 rounded font-medium text-sm hover:bg-gray-800/50 transition-colors"
-              >
-                Home
-              </button>
-            </router-link>
-            <router-link
-              to="/playlists"
-              custom
-              v-slot="{ navigate, isActive }"
-            >
-              <button
-                @click="navigate"
-                :style="{ color: isActive ? '#60a5fa' : '#9ca3af' }"
-                class="w-full text-left px-4 py-2 rounded font-medium text-sm hover:bg-gray-800/50 transition-colors"
-              >
-                Playlists
-              </button>
-            </router-link>
-            <router-link
-              to="/tracks"
-              custom
-              v-slot="{ navigate, isActive }"
-            >
-              <button
-                @click="navigate"
-                :style="{ color: isActive ? '#60a5fa' : '#9ca3af' }"
-                class="w-full text-left px-4 py-2 rounded font-medium text-sm hover:bg-gray-800/50 transition-colors"
-              >
-                All Tracks
-              </button>
-            </router-link>
-            <router-link
-              to="/artists"
-              custom
-              v-slot="{ navigate, isActive }"
-            >
-              <button
-                @click="navigate"
-                :style="{ color: isActive ? '#60a5fa' : '#9ca3af' }"
-                class="w-full text-left px-4 py-2 rounded font-medium text-sm hover:bg-gray-800/50 transition-colors"
-              >
-                Artists
-              </button>
-            </router-link>
+          <nav class="flex flex-col space-y-2" id="mobile-navigation" aria-label="Mobile Tabs">
+            <router-link v-for="item in navigation" :key="item.to" :to="item.to"
+              class="mobile-nav-link" active-class="nav-active">{{ item.label }}</router-link>
           </nav>
         </div>
       </div>
@@ -268,7 +156,7 @@ onUnmounted(() => {
             Back to top
           </button>
           <p class="text-sm text-gray-500">
-            Created by 
+            Created by
             <a href="https://the816.com" target="_blank" rel="noopener" class="text-gray-400 hover:text-blue-400 transition-colors font-medium">
               Chris Riebschlager
             </a>
@@ -285,6 +173,12 @@ onUnmounted(() => {
 </template>
 
 <style>
+@reference "./style.css";
+.desktop-nav-link { @apply whitespace-nowrap font-medium text-sm py-4 px-1 text-gray-400 border-b-2 border-transparent transition-colors duration-300; }
+.desktop-nav-link.nav-active { @apply text-blue-400 border-blue-500; }
+.mobile-nav-link { @apply w-full text-left px-4 py-2 rounded font-medium text-sm text-gray-400 hover:bg-gray-800/50 transition-colors; }
+.mobile-nav-link.nav-active { @apply text-blue-400; }
+
 /* Prevent horizontal layout jump by always reserving scrollbar space */
 html {
   overflow-y: scroll;
