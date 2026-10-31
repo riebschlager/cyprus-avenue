@@ -23,6 +23,8 @@ export type SpotifyIndex = Record<string, SpotifyTrackData>
 const spotifyIndex = ref<SpotifyIndex>({})
 const indexLoaded = ref(false)
 const indexLoading = ref(false)
+const indexError = ref<string | null>(null)
+let indexPromise: Promise<void> | null = null
 
 export const streamingPlatforms: StreamingPlatform[] = [
   {
@@ -63,27 +65,30 @@ export const streamingPlatforms: StreamingPlatform[] = [
 
 export function useStreamingLinks() {
   // Load Spotify index on first use
-  const loadSpotifyIndex = async () => {
-    if (indexLoaded.value || indexLoading.value) return
-
+  const loadSpotifyIndex = (): Promise<void> => {
+    if (indexLoaded.value) return Promise.resolve()
+    if (indexPromise) return indexPromise
     indexLoading.value = true
-
-    try {
-      const response = await fetch(`${import.meta.env.BASE_URL}spotify-index.json`)
-      if (response.ok) {
+    indexError.value = null
+    indexPromise = (async () => {
+      try {
+        const response = await fetch(`${import.meta.env.BASE_URL}spotify-index.json`)
+        if (!response.ok) throw new Error(`Spotify index: HTTP ${response.status}`)
         spotifyIndex.value = await response.json()
         indexLoaded.value = true
-        console.log(`✓ Loaded Spotify index with ${Object.keys(spotifyIndex.value).length} tracks`)
+      } catch (error) {
+        indexError.value = error instanceof Error ? error.message : 'Spotify index unavailable'
+        throw error
+      } finally {
+        indexLoading.value = false
+        indexPromise = null
       }
-    } catch (err) {
-      console.warn('Spotify index not available, using search fallback')
-    } finally {
-      indexLoading.value = false
-    }
+    })()
+    return indexPromise
   }
 
   // Load index immediately
-  loadSpotifyIndex()
+  void loadSpotifyIndex().catch(() => {})
 
   const openTrack = (platform: StreamingPlatform, artist: string, song: string) => {
     const url = platform.getUrl(artist, song, spotifyIndex.value)
@@ -107,6 +112,9 @@ export function useStreamingLinks() {
     openTrack,
     hasDirectLink,
     getTrackData,
+    loadSpotifyIndex,
+    indexLoading,
+    indexError,
     indexLoaded,
     spotifyIndex
   }

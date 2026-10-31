@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { formatArchiveDate } from '../utils/archiveDate'
 import { ref, watch, nextTick, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import type { Playlist } from '../types/playlist'
@@ -54,8 +55,7 @@ onMounted(() => {
 })
 
 const formatDate = (dateStr: string) => {
-  const date = new Date(dateStr)
-  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+  return formatArchiveDate(dateStr, 'long')
 }
 
 const getAlbumArt = (artist: string, song: string): string | null => {

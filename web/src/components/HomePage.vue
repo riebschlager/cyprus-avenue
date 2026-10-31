@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { parseArchiveDate } from '../utils/archiveDate'
 import { ref, computed, watch, onMounted } from 'vue'
 import { usePlaylists } from '../composables/usePlaylists'
 import { useRouter } from 'vue-router'
@@ -97,11 +98,11 @@ const thisWeekPlaylists = computed(() => {
   // Define "This Week" as +/- 3 days from today
   return playlists.value.filter(p => {
     if (!p.date) return false
-    const pDate = new Date(p.date)
+    const pDate = parseArchiveDate(p.date)
     
     // Normalize both dates to the same leap year (2000) to handle Feb 29 correctly
     const target = new Date(2000, currentMonth, currentDate)
-    const check = new Date(2000, pDate.getMonth(), pDate.getDate())
+    const check = new Date(2000, pDate.getUTCMonth(), pDate.getUTCDate())
     
     // Calculate difference in days
     const diffTime = Math.abs(target.getTime() - check.getTime())

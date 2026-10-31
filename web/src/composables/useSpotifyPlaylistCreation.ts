@@ -21,8 +21,8 @@ const creationResult = ref<PlaylistCreationResult | null>(null)
 const creationError = ref<string | null>(null)
 
 export function useSpotifyPlaylistCreation() {
-  const { getAccessToken } = useSpotifyAuth()
-  const { spotifyIndex } = useStreamingLinks()
+  const { getValidAccessToken } = useSpotifyAuth()
+  const { spotifyIndex, loadSpotifyIndex } = useStreamingLinks()
   const { biosIndex } = useArtistBios()
 
   const resetState = () => {
@@ -41,17 +41,12 @@ export function useSpotifyPlaylistCreation() {
   const createPlaylistFromArchivePlaylist = async (
     playlist: Playlist
   ): Promise<PlaylistCreationResult | null> => {
-    const accessToken = getAccessToken()
-    if (!accessToken) {
-      creationError.value = 'Not authenticated with Spotify'
-      creationState.value = 'error'
-      return null
-    }
-
-    const apiClient = SpotifyApiClient(accessToken)
-    const matcher = TrackMatcher(spotifyIndex.value, apiClient)
-
     try {
+      const accessToken = await getValidAccessToken()
+      await loadSpotifyIndex()
+      const apiClient = SpotifyApiClient(accessToken)
+      const matcher = TrackMatcher(spotifyIndex.value, apiClient)
+
       creationState.value = 'creating'
       const playlistName = PLAYLIST_NAME_INDIVIDUAL(playlist.date)
       creationProgress.value.playlistName = playlistName
@@ -111,19 +106,14 @@ export function useSpotifyPlaylistCreation() {
     playlists: Playlist[]
   ): Promise<PlaylistCreationResult | null> => {
     resetState()
-    const accessToken = getAccessToken()
-    if (!accessToken) {
-      creationError.value = 'Not authenticated with Spotify'
-      creationState.value = 'error'
-      return null
-    }
-
-    const apiClient = SpotifyApiClient(accessToken)
-    // For mega-playlist, skip API searches and use only pre-indexed tracks
-    // This dramatically reduces request count and time (from 4-5 min to 30-60 sec)
-    const matcher = TrackMatcher(spotifyIndex.value, apiClient, true)
-
     try {
+      const accessToken = await getValidAccessToken()
+      await loadSpotifyIndex()
+      const apiClient = SpotifyApiClient(accessToken)
+      // For mega-playlist, skip API searches and use only pre-indexed tracks
+      // This dramatically reduces request count and time (from 4-5 min to 30-60 sec)
+      const matcher = TrackMatcher(spotifyIndex.value, apiClient, true)
+
       creationState.value = 'creating'
       const playlistName = PLAYLIST_NAME_ALL_TRACKS
       creationProgress.value.playlistName = playlistName
@@ -189,18 +179,13 @@ export function useSpotifyPlaylistCreation() {
     playlists: Playlist[]
   ): Promise<PlaylistCreationResult | null> => {
     resetState()
-    const accessToken = getAccessToken()
-    if (!accessToken) {
-      creationError.value = 'Not authenticated with Spotify'
-      creationState.value = 'error'
-      return null
-    }
-
-    const apiClient = SpotifyApiClient(accessToken)
-    // Use only index lookups for tag playlists
-    const matcher = TrackMatcher(spotifyIndex.value, apiClient, true)
-
     try {
+      const accessToken = await getValidAccessToken()
+      await loadSpotifyIndex()
+      const apiClient = SpotifyApiClient(accessToken)
+      // Use only index lookups for tag playlists
+      const matcher = TrackMatcher(spotifyIndex.value, apiClient, true)
+
       creationState.value = 'creating'
       const playlistName = PLAYLIST_NAME_TAG(tag)
       creationProgress.value.playlistName = playlistName
@@ -272,17 +257,12 @@ export function useSpotifyPlaylistCreation() {
     playlists: Playlist[]
   ): Promise<PlaylistCreationResult | null> => {
     resetState()
-    const accessToken = getAccessToken()
-    if (!accessToken) {
-      creationError.value = 'Not authenticated with Spotify'
-      creationState.value = 'error'
-      return null
-    }
-
-    const apiClient = SpotifyApiClient(accessToken)
-    const matcher = TrackMatcher(spotifyIndex.value, apiClient)
-
     try {
+      const accessToken = await getValidAccessToken()
+      await loadSpotifyIndex()
+      const apiClient = SpotifyApiClient(accessToken)
+      const matcher = TrackMatcher(spotifyIndex.value, apiClient)
+
       creationState.value = 'creating'
       const playlistName = PLAYLIST_NAME_ARTIST(artistName)
       creationProgress.value.playlistName = playlistName

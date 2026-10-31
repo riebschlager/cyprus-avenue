@@ -43,6 +43,12 @@ class DataOwnershipTests(unittest.TestCase):
         self.assertEqual(first, contents(self.output))
         self.assertTrue(validate_playlists(self.root, self.output))
 
+    def test_missing_enrichment_is_informational(self):
+        self.write('metadata/artist-bios.json', {})
+        self.write('metadata/spotify-index.json', {})
+        build(self.root, self.output)
+        self.assertTrue(validate_playlists(self.root, self.output))
+
     def test_corrections_overrides_and_stale_exports(self):
         original = assemble_playlists(self.root)[0]['tracks'][0]
         self.write('corrections.json', [{'date': '2009-12-12', 'from': original,

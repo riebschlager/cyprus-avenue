@@ -39,7 +39,7 @@ Direct script paths and the shell launchers work from any working directory.
 | `npm run refresh:bios -- --refresh` | Revisit all current artists | Last.fm |
 | `npm run refresh:images` | Fill missing artist images | Spotify |
 | `npm run refresh:genres` | Persist Spotify artist genres | Spotify |
-| `npm test` | Maintenance regression checks | Offline; none |
+| `npm test` | Archive, browser, and MCP regression checks | Offline; none |
 | `npm run build:web` | Build browser independently | Installed web dependencies |
 | `npm run build:mcp` | Build MCP independently | Installed MCP dependencies |
 
@@ -111,3 +111,24 @@ Configure an MCP client to execute the absolute path to `mcp-server.sh` with no
 arguments. The launcher installs locked dependencies if absent and compiles on
 every launch before starting Node, so source edits cannot leave stale compiled
 code. Installation/build messages go to stderr to preserve the stdio protocol.
+
+## Regression baseline
+
+After installing application dependencies with `npm --prefix web ci` and
+`npm --prefix mcp ci`, run `npm test` from the root. It runs maintenance/parser
+checks, browser utility and mocked Spotify checks in both UTC and America/Chicago,
+and a built MCP server smoke test over stdio. No provider credentials or live API
+requests are needed. Run `npm run build:web` to check TypeScript and the production
+bundle. Pull requests run all these checks in `.github/workflows/validate.yml`.
+
+For focused work, use `npm run test:maintenance`, `npm run test:web`, or
+`npm run test:mcp`. Archive checks rebuild into temporary directories and verify
+complete record parity, all six imported shows, reviewed corrections, retained
+metadata, deterministic bytes, parser formats, and invalid-input failures. Keep
+new tests focused on preservation, links, or integration behavior.
+
+`npm run data:validate` compares every export against declared sources and exits
+nonzero on invalid schema, dates, missing records, or content drift. Its biography
+and Spotify coverage counts are informational; missing enrichment does not make
+an otherwise valid archive fail. Spotify coverage uses unique exact artist/song
+pairs in the current archive and counts high/medium matches only.

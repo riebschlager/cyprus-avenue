@@ -1,3 +1,4 @@
+import { normalizeTags } from '../../../shared/tagFilters.mjs';
 import { readFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -48,7 +49,7 @@ function buildTagIndex(artistBios: Record<string, ArtistBio>): Map<string, Set<s
   const index = new Map<string, Set<string>>();
 
   for (const [artist, bio] of Object.entries(artistBios)) {
-    const tags = bio.tags || [];
+    const tags = normalizeTags(bio.tags || []);
     for (const tag of tags) {
       const normalizedTag = tag.toLowerCase();
       const artists = index.get(normalizedTag) || new Set();
@@ -119,7 +120,7 @@ function extractAllArtists(playlists: Playlist[]): string[] {
 function extractAllTags(artistBios: Record<string, ArtistBio>): string[] {
   const tags = new Set<string>();
   for (const bio of Object.values(artistBios)) {
-    for (const tag of bio.tags || []) {
+    for (const tag of normalizeTags(bio.tags || [])) {
       tags.add(tag.toLowerCase());
     }
   }

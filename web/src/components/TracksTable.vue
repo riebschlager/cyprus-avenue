@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { formatArchiveDate } from '../utils/archiveDate'
 import type { TrackWithPlaylist, SortField, SortDirection } from '../composables/useTracks'
 import StreamingLinks from './StreamingLinks.vue'
 import { generatePlaylistSlug, generateArtistSlug } from '../utils/slug'
@@ -15,8 +16,7 @@ const emit = defineEmits<{
 }>()
 
 const formatDate = (dateStr: string) => {
-  const date = new Date(dateStr)
-  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+  return formatArchiveDate(dateStr, 'short')
 }
 
 const getSortIcon = (field: SortField, currentField: SortField, direction: SortDirection) => {

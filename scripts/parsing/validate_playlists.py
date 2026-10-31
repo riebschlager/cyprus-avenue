@@ -21,14 +21,23 @@ def validate_playlists(root=REPO_ROOT, output_root=None):
             ('consolidated', read_json(output / 'json/playlists.json')),
             ('public', read_json(output / 'web/public/playlists.json')),
         ):
+            validate_records(records)
             if records != expected:
                 raise ValueError(f'{label} records differ from declared sources')
-        for filename, metadata in assemble_metadata(root).items():
-            if read_json(output / 'web/public' / filename) != metadata:
+        metadata = assemble_metadata(root)
+        for filename, entries in metadata.items():
+            if read_json(output / 'web/public' / filename) != entries:
                 raise ValueError(f'{filename} differs from retained snapshot and overrides')
     except (OSError, ValueError, KeyError, TypeError) as error:
         print(f'Validation FAILED: {error}')
         return False
+    artists = {t['artist'] for p in expected for t in p['tracks']}
+    pairs = {t['artist'] + '|' + t['song'] for p in expected for t in p['tracks']}
+    bios = metadata['artist-bios.json']
+    index = metadata['spotify-index.json']
+    matched = sum(index.get(key, {}).get('confidence') in ('high', 'medium') for key in pairs)
+    print(f'Coverage (informational): {len(artists & bios.keys())}/{len(artists)} artists with biography entries; '
+          f'{matched}/{len(pairs)} unique tracks with high/medium Spotify matches')
     print(f'Validation PASSED: {len(expected)} shows; all exports match declared inputs')
     return True
 

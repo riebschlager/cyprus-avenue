@@ -1,13 +1,16 @@
+import { parseArchiveDate } from './archiveDate'
+import type { Playlist } from '../types/playlist'
+
 /**
  * Generates a URL-friendly slug from a playlist title and date
  * Example: "Cyprus Avenue: March 25, 2017" + "2017-03-25" -> "cyprus-avenue-march-25-2017"
  */
 export function generatePlaylistSlug(title: string, date: string): string {
   // Parse the date
-  const dateObj = new Date(date)
-  const month = dateObj.toLocaleDateString('en-US', { month: 'long' }).toLowerCase()
-  const day = dateObj.getDate()
-  const year = dateObj.getFullYear()
+  const dateObj = parseArchiveDate(date)
+  const month = dateObj.toLocaleDateString('en-US', { month: 'long', timeZone: 'UTC' }).toLowerCase()
+  const day = dateObj.getUTCDate()
+  const year = dateObj.getUTCFullYear()
 
   // Clean the title: remove "Cyprus Avenue:" prefix if present
   let cleanTitle = title.replace(/^Cyprus Avenue:?\s*/i, '').trim()
@@ -27,8 +30,14 @@ export function generatePlaylistSlug(title: string, date: string): string {
 /**
  * Finds a playlist by its slug
  */
-export function findPlaylistBySlug(playlists: any[], slug: string): any | null {
-  return playlists.find(p => generatePlaylistSlug(p.title, p.date) === slug) || null
+export function findPlaylistBySlug(playlists: Playlist[], slug: string): Playlist | null {
+  // Prefer canonical URLs; retain links previously generated west of UTC.
+  return playlists.find(p => generatePlaylistSlug(p.title, p.date) === slug) ||
+    playlists.find(p => {
+      const previousDay = parseArchiveDate(p.date)
+      previousDay.setUTCDate(previousDay.getUTCDate() - 1)
+      return generatePlaylistSlug(p.title, previousDay.toISOString().slice(0, 10)) === slug
+    }) || null
 }
 
 /**

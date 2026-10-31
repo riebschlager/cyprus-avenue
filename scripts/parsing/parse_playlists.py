@@ -315,6 +315,8 @@ def validate_records(playlists):
         raise ValueError("Expected a nonempty playlist list")
     seen = set()
     for playlist in playlists:
+        if not isinstance(playlist, dict):
+            raise ValueError('Each playlist must be an object')
         require_date(playlist['date'])
         require_date(playlist['archived_date'])
         if playlist['date'] in seen:
@@ -326,6 +328,8 @@ def validate_records(playlists):
         if not isinstance(playlist['tracks'], list) or not playlist['tracks']:
             raise ValueError(f"{playlist['date']}: no tracks")
         for track in playlist['tracks']:
+            if not isinstance(track, dict):
+                raise ValueError(f"{playlist['date']}: each track must be an object")
             for field in ('artist', 'song'):
                 if not isinstance(track[field], str) or not track[field].strip():
                     raise ValueError(f"{playlist['date']}: invalid track {field}")

@@ -16,8 +16,11 @@
     "recover:spotify": "node scripts/spotify/recover-missing-tracks.js",
     "discover": "python3 scripts/discovery/discover_playlists.py",
     "fetch:playlists": "python3 scripts/discovery/fetch_missing_playlists.py",
-    "test": "node --test scripts/tests/*.test.cjs && python3 -m unittest discover -s scripts/tests -v",
+    "test": "npm run test:maintenance && npm run test:web && npm run test:mcp",
     "build:web": "npm --prefix web run build",
-    "build:mcp": "npm --prefix mcp run build"
+    "build:mcp": "npm --prefix mcp run build",
+    "test:maintenance": "node --test scripts/tests/*.test.cjs && python3 -m unittest discover -s scripts/tests -v",
+    "test:web": "TZ=UTC npm --prefix web test && TZ=America/Chicago npm --prefix web test",
+    "test:mcp": "npm run build:mcp && npm --prefix mcp test"
   }
 }

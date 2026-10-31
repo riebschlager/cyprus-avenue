@@ -178,6 +178,14 @@ export function useSpotifyAuth() {
     sessionStorage.removeItem('spotify_modal_state')
   }
 
+  const restorePendingAction = (): string => {
+    const path = getReturnPath() || '/'
+    const action = getModalState()
+    if (action) sessionStorage.setItem('spotify_pending_action', JSON.stringify(action))
+    clearReturnContext()
+    return path
+  }
+
   const getAccessToken = (): string | null => {
     return authState.value.accessToken
   }
@@ -251,6 +259,7 @@ export function useSpotifyAuth() {
     getValidAccessToken,
     getReturnPath,
     getModalState,
-    clearReturnContext
+    clearReturnContext,
+    restorePendingAction
   }
 }

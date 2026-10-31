@@ -1,3 +1,4 @@
+import { normalizeTags } from '../../../shared/tagFilters.mjs';
 // Discovery tools (7-12)
 
 import type { ArchiveData, PlaylistSuggestion } from '../types.js';
@@ -29,7 +30,7 @@ export function discoverByTag(
   }[];
 } {
   const { tags, matchAll = false, limit = 30 } = params;
-  const normalizedTags = tags.map((t) => t.toLowerCase());
+  const normalizedTags = normalizeTags(tags).map((t) => t.toLowerCase());
 
   // Find matching artists
   const matchingArtists: {
@@ -39,12 +40,12 @@ export function discoverByTag(
   }[] = [];
 
   for (const [artist, bio] of Object.entries(data.artistBios)) {
-    const artistTags = (bio.tags || []).map((t) => t.toLowerCase());
+    const artistTags = normalizeTags(bio.tags || []).map((t) => t.toLowerCase());
     const matching = normalizedTags.filter((t) => artistTags.includes(t));
 
     if (matchAll) {
       // All tags must match
-      if (matching.length === normalizedTags.length) {
+      if (normalizedTags.length > 0 && matching.length === normalizedTags.length) {
         matchingArtists.push({
           name: artist,
           matchingTags: matching,
@@ -413,7 +414,7 @@ export function suggestByMoodOrEra(
 
     for (const track of playlist.tracks) {
       const bio = data.artistBios[track.artist];
-      const artistTags = (bio?.tags || []).map((t) => t.toLowerCase());
+      const artistTags = normalizeTags(bio?.tags || []).map((t) => t.toLowerCase());
 
       const hasMatch = normalizedTags.some((tag) =>
         artistTags.some((at) => at.includes(tag) || tag.includes(at))

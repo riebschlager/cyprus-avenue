@@ -5,7 +5,7 @@ import { useSpotifyAuth } from '../composables/useSpotifyAuth'
 import { useToast } from '../composables/useToast'
 
 const router = useRouter()
-const { handleOAuthCallback, getReturnPath, getModalState, clearReturnContext } = useSpotifyAuth()
+const { handleOAuthCallback, restorePendingAction, clearReturnContext } = useSpotifyAuth()
 const { success, error: showError } = useToast()
 
 onMounted(async () => {
@@ -34,18 +34,7 @@ onMounted(async () => {
     await handleOAuthCallback(code, state)
     success('Connected to Spotify!')
 
-    // Get stored return path and modal state
-    const returnPath = getReturnPath() || '/'
-    const modalState = getModalState()
-
-    // Store modal state in a URL parameter if it exists
-    // This will be picked up by the destination component
-    if (modalState) {
-      sessionStorage.setItem('spotify_pending_action', JSON.stringify(modalState))
-    }
-
-    // Clear the return context from session storage
-    clearReturnContext()
+    const returnPath = restorePendingAction()
 
     // Redirect to the page the user was on
     setTimeout(() => router.push(returnPath), 1500)
