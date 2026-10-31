@@ -6,6 +6,7 @@ import { useDropdownState } from '../composables/useDropdownState'
 import { useToast } from '../composables/useToast'
 import { useSpotifyAuth } from '../features/spotify/useSpotifyAuth'
 import { useSpotifyPlayback } from '../features/spotify/useSpotifyPlayback'
+import Icon from './Icon.vue'
 
 const props = defineProps<{
   artist: string
@@ -32,6 +33,12 @@ const spotifyTrackUri = computed(() => {
   }
   return `spotify:track:${trackData.spotifyId}`
 })
+
+const brandColors: Record<string, string> = {
+  'Spotify': 'var(--brand-spotify)',
+  'Apple Music': 'var(--brand-apple)',
+  'YouTube Music': 'var(--brand-youtube)'
+}
 
 const toggleDropdown = () => {
   toggle()
@@ -87,73 +94,61 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div ref="dropdownRef" class="relative inline-block text-left">
+  <span ref="dropdownRef" class="ca-stream">
     <button
+      type="button"
       @click.stop="toggleDropdown"
-      :class="[
-        'inline-flex items-center text-xs font-medium text-gray-300 bg-gray-700 border border-gray-600 rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500',
-        compact ? 'p-1' : 'px-2 py-1'
-      ]"
-      title="Listen on streaming platforms"
+      class="ca-iconbtn ca-iconbtn--sm"
+      :class="isOpen ? 'ca-iconbtn--active' : 'ca-reveal'"
+      :aria-expanded="isOpen"
+      aria-label="Listen elsewhere"
+      title="Listen elsewhere"
     >
-      <svg :class="[compact ? 'w-4 h-4' : 'w-4 h-4 mr-1']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-      <span v-if="!compact">Listen</span>
+      <Icon name="audio-lines" />
     </button>
 
-    <transition
-      enter-active-class="transition ease-out duration-100"
-      enter-from-class="transform opacity-0 scale-95"
-      enter-to-class="transform opacity-100 scale-100"
-      leave-active-class="transition ease-in duration-75"
-      leave-from-class="transform opacity-100 scale-100"
-      leave-to-class="transform opacity-0 scale-95"
-    >
-      <div
-        v-if="isOpen"
-        class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-gray-800 shadow-xl ring-1 ring-gray-700 focus:outline-none border border-gray-700"
-      >
-        <div class="py-1">
-          <button
-            v-if="spotifyTrackUri"
-            @click.stop="handleSpotifyPlay"
-            class="flex items-center justify-between w-full px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition-colors"
-          >
-            <div class="flex items-center">
-              <span class="mr-2">▶️</span>
-              Spotify
-            </div>
-            <span
-              v-if="isAuthenticated"
-              class="text-xs bg-green-500 text-white px-2 py-0.5 rounded font-semibold"
-              title="Plays in this app"
-            >
-              App
-            </span>
-          </button>
+    <transition name="stream-menu">
+      <div v-if="isOpen" class="ca-menu stream-menu" role="menu">
+        <div class="ca-menu__label"><span class="ca-label ca-label--sm">Listen on</span></div>
+        <button
+          v-if="spotifyTrackUri"
+          type="button"
+          role="menuitem"
+          @click.stop="handleSpotifyPlay"
+          class="ca-menu__item"
+        >
+          <Icon name="play" />
+          Play here
+          <span class="ca-menu__hint" :title="isAuthenticated ? 'Plays in this app' : 'Connect Spotify to play'">
+            {{ isAuthenticated ? 'Spotify' : 'Connect' }}
+          </span>
+        </button>
+        <div v-if="spotifyTrackUri" class="ca-menu__sep"></div>
 
-          <button
-            v-for="platform in platforms"
-            :key="platform.name"
-            @click.stop="handlePlatformClick(platform)"
-            class="flex items-center justify-between w-full px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition-colors"
-          >
-            <div class="flex items-center">
-              <span class="mr-2">{{ platform.icon }}</span>
-              {{ platform.name }}
-            </div>
-            <span
-              v-if="!spotifyTrackUri && platform.name === 'Spotify'"
-              class="text-[10px] bg-gray-700 text-gray-300 px-2 py-0.5 rounded font-semibold"
-              title="Spotify match not found; opens search"
-            >
-              Search
-            </span>
-          </button>
-        </div>
+        <button
+          v-for="platform in platforms"
+          :key="platform.name"
+          type="button"
+          role="menuitem"
+          @click.stop="handlePlatformClick(platform)"
+          class="ca-menu__item"
+        >
+          <span class="ca-stream__dot" :style="{ background: brandColors[platform.name] ?? 'var(--fg-3)' }"></span>
+          {{ platform.name }}
+          <span
+            class="ca-menu__hint"
+            :title="!spotifyTrackUri && platform.name === 'Spotify' ? 'Spotify match not found; opens search' : undefined"
+          >{{ !spotifyTrackUri && platform.name === 'Spotify' ? 'Search ↗' : '↗' }}</span>
+        </button>
       </div>
     </transition>
-  </div>
+  </span>
 </template>
+
+<style scoped>
+.stream-menu { position: absolute; right: 0; top: calc(100% + 4px); text-align: left; }
+.stream-menu-enter-active { transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
+.stream-menu-leave-active { transition: opacity 80ms var(--ease-out); }
+.stream-menu-enter-from { opacity: 0; transform: translateY(-4px); }
+.stream-menu-leave-to { opacity: 0; }
+</style>

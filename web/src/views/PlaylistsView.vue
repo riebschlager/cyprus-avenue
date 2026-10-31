@@ -9,6 +9,7 @@ import StatsPanel from '../components/StatsPanel.vue'
 import PlaylistList from '../components/PlaylistList.vue'
 import { findPlaylistBySlug } from '../utils/slug'
 import { downloadAllPlaylists } from '../utils/downloadFormats'
+import { parseArchiveDate } from '../utils/archiveDate'
 
 const route = useRoute()
 const { playlists, searchQuery, filteredPlaylists, stats } = usePlaylists()
@@ -22,27 +23,35 @@ const playlistToExpand = computed(() => {
   const slug = route.params.slug
   return typeof slug === 'string' ? findPlaylistBySlug(playlists.value, slug) : null
 })
+
+const monthYear = (value: string) =>
+  parseArchiveDate(value).toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' })
 </script>
 
 <template>
   <ArchiveState>
-      <StatsPanel :stats="stats" />
-
-      <!-- Download Archive Button -->
-      <div class="mt-6 flex justify-center">
-        <DownloadMenu label="Download Complete Archive" @download="format => downloadAllPlaylists(playlists, format)" />
+    <header class="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 pb-10">
+      <div class="flex flex-col gap-3">
+        <span class="ca-label ca-label--accent">Archive</span>
+        <h1 class="ca-page-title">Shows</h1>
+        <p v-if="stats.dateRange" class="ca-lede">
+          Every recovered playlist, {{ monthYear(stats.dateRange.start) }} to {{ monthYear(stats.dateRange.end) }}.
+          Each show aired Saturday night on KCUR 89.3.
+        </p>
       </div>
+      <DownloadMenu label="Download archive" @download="format => downloadAllPlaylists(playlists, format)" />
+    </header>
 
-      <div class="mt-8">
-        <SearchBar v-model="searchQuery" />
-      </div>
+    <StatsPanel :stats="stats" />
 
-      <div class="mt-8">
-        <PlaylistList
-          :playlists="filteredPlaylists"
-          :search-query="searchQuery"
-          :auto-expand-playlist="playlistToExpand"
-        />
-      </div>
+    <div class="mt-12 mb-8">
+      <SearchBar v-model="searchQuery" />
+    </div>
+
+    <PlaylistList
+      :playlists="filteredPlaylists"
+      :search-query="searchQuery"
+      :auto-expand-playlist="playlistToExpand"
+    />
   </ArchiveState>
 </template>

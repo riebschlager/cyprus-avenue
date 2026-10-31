@@ -18,45 +18,34 @@ const remainingTracks = computed(() => {
 </script>
 
 <template>
-  <div v-if="isCreating" class="space-y-4">
-    <!-- Playlist Name -->
+  <div v-if="isCreating" class="progress">
     <div>
-      <h3 class="text-sm font-semibold text-white mb-2">Creating playlist:</h3>
-      <p class="text-sm text-gray-300">{{ progress.playlistName }}</p>
+      <span class="ca-label">Creating playlist</span>
+      <p class="progress__name">{{ progress.playlistName }}</p>
     </div>
 
-    <!-- Current Track -->
     <div>
-      <h4 class="text-xs font-medium text-gray-400 mb-2">Now processing:</h4>
-      <p class="text-sm text-white">{{ progress.currentArtist }} - {{ progress.currentTrackName }}</p>
+      <span class="ca-label">Now matching</span>
+      <p class="progress__track">{{ progress.currentArtist }} &mdash; {{ progress.currentTrackName }}</p>
     </div>
 
-    <!-- Progress Bar -->
     <div>
-      <div class="flex items-center justify-between mb-2">
-        <span class="text-xs text-gray-400">Progress</span>
-        <span class="text-xs text-gray-400">
-          {{ progress.currentTrackIndex }} / {{ progress.totalTracks }} ({{ progressPercent }}%)
-        </span>
+      <div class="progress__bar" role="progressbar" :aria-valuenow="progressPercent" aria-valuemin="0" aria-valuemax="100">
+        <span :style="{ width: `${progressPercent}%` }"></span>
       </div>
-      <div class="w-full bg-gray-700 rounded-full h-2 overflow-hidden">
-        <div
-          class="bg-gradient-to-r from-green-500 to-emerald-500 h-full transition-all duration-300"
-          :style="{ width: `${progressPercent}%` }"
-        />
+      <div class="progress__counts">
+        <span class="ca-label ca-label--sm">{{ progress.currentTrackIndex }} / {{ progress.totalTracks }} &middot; {{ progressPercent }}%</span>
+        <span class="ca-label ca-label--sm">{{ remainingTracks }} remaining</span>
       </div>
-    </div>
-
-    <!-- Remaining Tracks Estimate -->
-    <p class="text-xs text-gray-400 text-center">
-      {{ remainingTracks }} track{{ remainingTracks !== 1 ? 's' : '' }} remaining
-    </p>
-
-    <!-- Loading Animation -->
-    <div class="flex justify-center">
-      <svg class="w-6 h-6 animate-spin text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-      </svg>
     </div>
   </div>
 </template>
+
+<style scoped>
+.progress { display: flex; flex-direction: column; gap: var(--space-5); }
+.progress__name { margin-top: 4px; font: 700 18px/1.2 var(--font-display); letter-spacing: -0.015em; color: var(--fg-1); }
+.progress__track { margin-top: 4px; font: var(--type-ui); color: var(--fg-1); }
+.progress__bar { height: 4px; background: var(--paper-200); overflow: hidden; }
+.progress__bar span { display: block; height: 100%; background: var(--orange-500); transition: width var(--dur-slow) var(--ease-out); }
+.progress__counts { display: flex; justify-content: space-between; margin-top: 8px; }
+</style>

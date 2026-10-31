@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { formatArchiveDate } from '../utils/archiveDate'
+import { stampArchiveDate } from '../utils/archiveDate'
 import type { TrackWithPlaylist, SortField, SortDirection } from '../composables/useTracks'
 import StreamingLinks from './StreamingLinks.vue'
+import Icon from './Icon.vue'
 import { generatePlaylistSlug, generateArtistSlug } from '../utils/slug'
 
 defineProps<{
@@ -15,15 +16,16 @@ const emit = defineEmits<{
   sort: [field: SortField]
 }>()
 
-const formatDate = (dateStr: string) => {
-  return formatArchiveDate(dateStr, 'short')
-}
+const columns: { field: SortField; label: string }[] = [
+  { field: 'artist', label: 'Artist' },
+  { field: 'song', label: 'Song' },
+  { field: 'playlistTitle', label: 'Show' },
+  { field: 'playlistDate', label: 'Date' }
+]
 
-const getSortIcon = (field: SortField, currentField: SortField, direction: SortDirection) => {
-  if (field !== currentField) {
-    return '↕'
-  }
-  return direction === 'asc' ? '↑' : '↓'
+const ariaSort = (field: SortField, currentField: SortField, direction: SortDirection) => {
+  if (field !== currentField) return 'none'
+  return direction === 'asc' ? 'ascending' : 'descending'
 }
 
 const getArtistUrl = (name: string) => {
@@ -36,94 +38,58 @@ const getPlaylistUrl = (title: string, date: string) => {
 </script>
 
 <template>
-  <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden border border-gray-700">
-    <div class="overflow-x-auto">
-      <table class="min-w-full divide-y divide-gray-700">
-        <thead class="bg-gray-900">
+  <div class="tracks">
+    <div class="tracks__scroll">
+      <table class="tracks__table">
+        <thead>
           <tr>
             <th
+              v-for="col in columns"
+              :key="col.field"
               scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider cursor-pointer hover:bg-gray-800 select-none"
-              @click="emit('sort', 'artist')"
+              :class="`tracks__col--${col.field}`"
+              :aria-sort="ariaSort(col.field, sortField, sortDirection)"
             >
-              <div class="flex items-center gap-2">
-                Artist
-                <span class="text-gray-500">{{ getSortIcon('artist', sortField, sortDirection) }}</span>
-              </div>
+              <button
+                type="button"
+                class="tracks__sort ca-label"
+                :class="{ 'ca-label--ink': sortField === col.field }"
+                @click="emit('sort', col.field)"
+              >
+                {{ col.label }}
+                <Icon
+                  v-if="sortField === col.field"
+                  name="arrow-up"
+                  :class="{ 'tracks__sort-icon--desc': sortDirection === 'desc' }"
+                />
+              </button>
             </th>
-            <th
-              scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider cursor-pointer hover:bg-gray-800 select-none"
-              @click="emit('sort', 'song')"
-            >
-              <div class="flex items-center gap-2">
-                Song
-                <span class="text-gray-500">{{ getSortIcon('song', sortField, sortDirection) }}</span>
-              </div>
-            </th>
-            <th
-              scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider cursor-pointer hover:bg-gray-800 select-none"
-              @click="emit('sort', 'playlistTitle')"
-            >
-              <div class="flex items-center gap-2">
-                Playlist
-                <span class="text-gray-500">{{ getSortIcon('playlistTitle', sortField, sortDirection) }}</span>
-              </div>
-            </th>
-            <th
-              scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider cursor-pointer hover:bg-gray-800 select-none"
-              @click="emit('sort', 'playlistDate')"
-            >
-              <div class="flex items-center gap-2">
-                Date
-                <span class="text-gray-500">{{ getSortIcon('playlistDate', sortField, sortDirection) }}</span>
-              </div>
-            </th>
-            <th
-              scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
-            >
-              Actions
+            <th scope="col" class="tracks__col--actions">
+              <span class="ca-label">Listen</span>
             </th>
           </tr>
         </thead>
-        <tbody class="bg-gray-800 divide-y divide-gray-700">
+        <tbody>
           <tr
             v-for="(track, index) in tracks"
             :key="track.id"
             :data-index="index"
-            class="transition-colors"
-            :class="[
-              focusedIndex === index
-                ? 'bg-blue-900/40 ring-1 ring-inset ring-blue-500/50'
-                : 'hover:bg-gray-700/50'
-            ]"
+            class="tracks__row"
+            :class="{ 'tracks__row--focused': focusedIndex === index }"
           >
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-              <router-link
-                :to="getArtistUrl(track.artist)"
-                class="text-blue-400 hover:text-blue-300 transition-colors"
-              >
-                {{ track.artist }}
-              </router-link>
+            <td class="tracks__artist">
+              <router-link :to="getArtistUrl(track.artist)">{{ track.artist }}</router-link>
             </td>
-            <td class="px-6 py-4 text-sm text-gray-200">
-              {{ track.song }}
-            </td>
-            <td class="px-6 py-4 text-sm">
-              <router-link
-                :to="getPlaylistUrl(track.playlistTitle, track.playlistDate)"
-                class="text-blue-400 hover:text-blue-300 transition-colors"
-              >
+            <td class="tracks__song">{{ track.song }}</td>
+            <td class="tracks__show">
+              <router-link :to="getPlaylistUrl(track.playlistTitle, track.playlistDate)">
                 {{ track.playlistTitle }}
               </router-link>
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
-              {{ formatDate(track.playlistDate) }}
+            <td class="tracks__date">
+              <span class="ca-date">{{ stampArchiveDate(track.playlistDate) }}</span>
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
+            <td class="tracks__actions">
               <StreamingLinks :artist="track.artist" :song="track.song" />
             </td>
           </tr>
@@ -131,14 +97,43 @@ const getPlaylistUrl = (title: string, date: string) => {
       </table>
     </div>
 
-    <div v-if="tracks.length === 0" class="text-center py-12">
-      <svg class="mx-auto h-12 w-12 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-      </svg>
-      <h3 class="mt-2 text-sm font-medium text-white">No tracks found</h3>
-      <p class="mt-1 text-sm text-gray-400">
-        Try adjusting your search query
-      </p>
+    <div v-if="tracks.length === 0" class="tracks__empty">
+      <h3 class="ca-sechead__title">No tracks found</h3>
+      <p>Try an artist name or a song title.</p>
     </div>
   </div>
 </template>
+
+<style scoped>
+.tracks__scroll { overflow-x: auto; }
+.tracks__table { width: 100%; border-collapse: collapse; border-top: var(--rule-ink); }
+.tracks__table th { padding: 12px 12px 8px 0; text-align: left; border-bottom: var(--rule-hair); white-space: nowrap; }
+.tracks__sort { gap: 4px; padding: 0; border: 0; background: none; cursor: pointer; transition: color var(--dur-fast) var(--ease-out); }
+.tracks__sort:hover { color: var(--fg-1); }
+.tracks__sort .ca-icon { font-size: 12px; transition: transform var(--dur-fast) var(--ease-out); }
+.tracks__sort-icon--desc { transform: rotate(180deg); }
+.tracks__col--actions { text-align: right; padding-right: 0; }
+
+.tracks__row { transition: background var(--dur-fast) var(--ease-out); }
+.tracks__row:hover { background: var(--bg-sunken); }
+.tracks__row--focused { background: var(--bg-highlight); box-shadow: inset 3px 0 0 var(--orange-500); }
+.tracks__row--focused:hover { background: var(--orange-100); }
+.tracks__row td { height: var(--row-h); padding: 6px 12px 6px 0; border-bottom: var(--rule-hair); vertical-align: middle; }
+.tracks__row td:first-child { padding-left: 8px; }
+
+.tracks__artist a { font: 600 15px/1.3 var(--font-ui); letter-spacing: -0.01em; color: var(--fg-1); text-decoration: none; }
+.tracks__song { font: 400 15px/1.3 var(--font-ui); color: var(--fg-1); }
+.tracks__show a { font: 400 14px/1.3 var(--font-ui); color: var(--fg-2); text-decoration: none; }
+.tracks__artist a:hover, .tracks__show a:hover { color: var(--fg-accent); text-decoration: underline; }
+.tracks__date { white-space: nowrap; }
+.tracks__actions { text-align: right; white-space: nowrap; }
+.tracks__row td.tracks__actions { padding-right: 4px; }
+
+.tracks__empty { display: flex; flex-direction: column; gap: 8px; padding: var(--space-12) 0; border-bottom: var(--rule-hair); }
+.tracks__empty p { font: var(--type-body); color: var(--fg-2); }
+
+@media (max-width: 760px) {
+  .tracks__col--playlistTitle, .tracks__show,
+  .tracks__col--playlistDate, .tracks__date { display: none; }
+}
+</style>

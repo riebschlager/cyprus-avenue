@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { isWithinArchiveWeek } from '../utils/archiveDate'
+import { isWithinArchiveWeek, stampArchiveDate } from '../utils/archiveDate'
 import { ref, computed, watch, onMounted } from 'vue'
 import { useArtists } from '../composables/useArtists'
 import { usePlaylists } from '../composables/usePlaylists'
@@ -8,6 +8,7 @@ import PlaylistCard from './PlaylistCard.vue'
 import { generatePlaylistSlug, generateArtistSlug } from '../utils/slug'
 import { useArtistBios } from '../composables/useArtistBios'
 import type { Playlist } from '../types/playlist'
+import Icon from './Icon.vue'
 
 const { playlists } = usePlaylists()
 const { loadBiosIndex, getBio } = useArtistBios()
@@ -118,123 +119,145 @@ const navigateToRandomArtist = () => {
 
   router.push({ name: 'artist', params: { slug } })
 }
+
+const todayStamp = new Date()
+  .toLocaleDateString('en-GB', { day: '2-digit', month: 'short' })
+  .toUpperCase()
+
+const suggestedPlaylistHref = computed(() => suggestedPlaylist.value
+  ? router.resolve({ name: 'playlist', params: { slug: generatePlaylistSlug(suggestedPlaylist.value.title, suggestedPlaylist.value.date) } }).href
+  : '#')
+
+const suggestedArtistHref = computed(() => suggestedArtist.value
+  ? router.resolve({ name: 'artist', params: { slug: generateArtistSlug(suggestedArtist.value) } }).href
+  : '#')
 </script>
 
 <template>
-      <!-- Right Column: This Week in History -->
-      <div v-if="thisWeekPlaylists.length > 0" class="lg:col-span-1 h-full">
-        <div class="bg-gray-900/40 rounded-lg shadow-lg p-6 border border-blue-900/30 relative overflow-hidden h-full">
-          <!-- Decorative background element -->
-          <div class="absolute top-0 right-0 -mt-4 -mr-4 w-16 h-16 bg-blue-500/10 rounded-full blur-xl"></div>
+  <aside v-if="thisWeekPlaylists.length > 0" class="discovery">
+    <!-- This week in history -->
+    <section>
+      <div class="ca-sechead ca-sechead--sm">
+        <div class="ca-sechead__left">
+          <h2 class="ca-sechead__title">This week in history</h2>
+        </div>
+        <span class="ca-label ca-label--sm">Near {{ todayStamp }}</span>
+      </div>
 
-          <div class="relative z-10 flex flex-col h-full">
-            <div class="flex items-center gap-3 mb-4">
-              <span class="text-xl">📅</span>
-              <h2 class="text-2xl font-bold text-white leading-tight">This Week in History</h2>
-            </div>
+      <p class="discovery__note">Shows broadcast during this week in years past.</p>
 
-            <p class="text-gray-300 text-sm mb-6">
-              Shows broadcast during this week in years past.
-            </p>
+      <div class="flex flex-col gap-4">
+        <PlaylistCard
+          v-for="playlist in thisWeekPlaylists"
+          :key="playlist.date"
+          :playlist="playlist"
+          :search-query="''"
+          :is-expanded="expandedHistoryId === playlist.date"
+          :compact="true"
+          :disable-scroll="true"
+          @toggle="toggleHistoryCard(playlist.date)"
+        />
+      </div>
+    </section>
 
-                    <div class="space-y-4 flex-grow">
-                      <PlaylistCard
-                        v-for="playlist in thisWeekPlaylists"
-                        :key="playlist.date"
-                        :playlist="playlist"
-                        :search-query="''"
-                        :is-expanded="expandedHistoryId === playlist.date"
-                        :compact="true"
-                        :disable-scroll="true"
-                        @toggle="toggleHistoryCard(playlist.date)"
-                      />
-                    </div>
-            <div class="mt-8 pt-6 border-t border-white/10">
-              <h3 class="text-lg font-semibold text-white mb-4">From the Archive</h3>
+    <!-- From the archive -->
+    <section>
+      <div class="ca-sechead ca-sechead--sm">
+        <div class="ca-sechead__left">
+          <h2 class="ca-sechead__title">From the archive</h2>
+        </div>
+        <button type="button" class="ca-btn ca-btn--link discovery__refresh" @click="refreshSuggestions">
+          <Icon name="shuffle" /> Refresh
+        </button>
+      </div>
 
-              <div class="space-y-4 mb-6">
-                                        <!-- Suggested Playlist -->
-                                        <div
-                                          v-if="suggestedPlaylist"
-                                          @click="navigateToSuggestedPlaylist"
-                                          class="bg-white/5 p-4 rounded-lg hover:bg-white/10 transition cursor-pointer border border-white/5 hover:border-blue-500/30 group relative"
-                                        >
-                                          <div class="text-xs text-blue-300 uppercase tracking-wider mb-2">Suggested Playlist</div>
-                                          <div class="flex gap-3">
-                                            <div class="flex-shrink-0 w-12 h-12 bg-blue-900/30 rounded-lg flex items-center justify-center border border-blue-500/20">
-                                              <span class="text-xl">💿</span>
-                                            </div>
-                                            <div class="flex-1 min-w-0 pr-6">
-                                              <div class="font-medium text-white group-hover:text-blue-200 transition-colors leading-tight">{{ suggestedPlaylist.title }}</div>
-                                              <div class="text-[10px] text-gray-400 mt-1">{{ suggestedPlaylist.date }} &middot; {{ suggestedPlaylist.tracks.length }} tracks</div>
-                                            </div>
-                                          </div>
-                                          <div class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                                            <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                            </svg>
-                                          </div>
-                                        </div>
-
-                                        <!-- Suggested Artist -->
-                                        <div
-                                          v-if="suggestedArtist"
-                                          @click="navigateToSuggestedArtist"
-                                          class="bg-white/5 p-4 rounded-lg hover:bg-white/10 transition cursor-pointer border border-white/5 hover:border-purple-500/30 group relative"
-                                        >
-                                          <div class="text-xs text-purple-300 uppercase tracking-wider mb-2">Suggested Artist</div>
-
-                                          <div class="flex gap-3">
-                                            <div v-if="suggestedArtistBio?.image" class="flex-shrink-0">
-                                              <img :src="suggestedArtistBio.image" :alt="suggestedArtist" class="w-12 h-12 rounded-lg object-cover shadow-md" />
-                                            </div>
-                                            <div v-else class="flex-shrink-0 w-12 h-12 bg-gray-700 rounded-lg flex items-center justify-center">
-                                              <span class="text-xl">🎤</span>
-                                            </div>
-
-                                            <div class="flex-1 min-w-0 pr-6">
-                                              <div class="font-medium text-white group-hover:text-purple-200 transition-colors text-lg leading-tight">{{ suggestedArtist }}</div>
-                                              <p v-if="suggestedArtistBio?.bioSummary" class="text-[10px] text-gray-400 mt-1 line-clamp-2 leading-normal">{{ suggestedArtistBio.bioSummary }}</p>
-                                              <p v-else class="text-[10px] text-gray-400 mt-1">Explore their tracks in the archive</p>
-                                              <a v-if="suggestedArtistBio?.url" :href="suggestedArtistBio.url" target="_blank" rel="noopener noreferrer" @click.stop class="text-[10px] text-blue-400 hover:underline">Biography from Last.fm</a>
-                                            </div>
-                                          </div>
-                                          <div class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                                            <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                            </svg>
-                                          </div>
-                                        </div>
-
-              </div>
-
-              <div class="space-y-4">
-                <div class="flex flex-wrap gap-2 justify-center">
-                  <button
-                    @click="navigateToRandomPlaylist"
-                    class="flex-1 px-3 py-2 bg-blue-600/50 hover:bg-blue-600 text-white text-xs font-medium rounded-lg transition-colors border border-blue-500/30 whitespace-nowrap"
-                  >
-                    🎲 Surprise Playlist
-                  </button>
-                  <button
-                    @click="navigateToRandomArtist"
-                    class="flex-1 px-3 py-2 bg-purple-600/50 hover:bg-purple-600 text-white text-xs font-medium rounded-lg transition-colors border border-purple-500/30 whitespace-nowrap"
-                  >
-                    🎤 Surprise Artist
-                  </button>
-                </div>
-                <button
-                  @click="refreshSuggestions"
-                  class="w-full text-xs text-gray-400 hover:text-white flex items-center justify-center gap-2 transition-colors"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                  </svg>
-                  Refresh Suggestions
-                </button>
-              </div>
-            </div>
+      <div class="flex flex-col gap-6">
+        <a
+          v-if="suggestedPlaylist"
+          :href="suggestedPlaylistHref"
+          class="ca-showcard ca-showcard--feature"
+          @click.prevent="navigateToSuggestedPlaylist"
+        >
+          <div class="ca-showcard__top">
+            <span class="ca-label ca-label--ink">Suggested show</span>
+            <span class="ca-date">{{ stampArchiveDate(suggestedPlaylist.date) }}</span>
           </div>
+          <div class="ca-showcard__title discovery__feature-title">{{ suggestedPlaylist.title }}</div>
+          <div class="flex items-center justify-between gap-3">
+            <span class="ca-label ca-label--ink ca-label--sm">{{ suggestedPlaylist.tracks.length }} tracks</span>
+            <Icon name="arrow-right" class="discovery__go" />
+          </div>
+        </a>
+
+        <div v-if="suggestedArtist" class="discovery__artist">
+          <span class="ca-label ca-label--accent">Suggested artist</span>
+          <a
+            :href="suggestedArtistHref"
+            class="discovery__artist-name"
+            @click.prevent="navigateToSuggestedArtist"
+          >{{ suggestedArtist }}</a>
+          <p v-if="suggestedArtistBio?.bioSummary" class="discovery__artist-bio">{{ suggestedArtistBio.bioSummary }}</p>
+          <p v-else class="discovery__artist-bio">Explore their tracks in the archive.</p>
+          <a
+            v-if="suggestedArtistBio?.url"
+            :href="suggestedArtistBio.url"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="ca-label ca-label--sm discovery__source"
+          >Biography from Last.fm &nearr;</a>
+        </div>
+
+        <div class="flex flex-wrap gap-2">
+          <button type="button" class="ca-btn ca-btn--secondary ca-btn--sm" @click="navigateToRandomPlaylist">
+            <Icon name="shuffle" /> Surprise show
+          </button>
+          <button type="button" class="ca-btn ca-btn--secondary ca-btn--sm" @click="navigateToRandomArtist">
+            <Icon name="shuffle" /> Surprise artist
+          </button>
         </div>
       </div>
+    </section>
+  </aside>
 </template>
+
+<style scoped>
+.discovery {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+.discovery__note {
+  margin-bottom: var(--space-4);
+  font: 400 15px/1.5 var(--font-text);
+  color: var(--fg-2);
+}
+.discovery__refresh { font-size: 13px; }
+.discovery__feature-title { font-size: 32px; }
+.discovery__go { font-size: 18px; transition: transform var(--dur-base) var(--ease-out); }
+.ca-showcard--feature:hover .discovery__go { transform: translateX(3px); }
+
+.discovery__artist {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-top: var(--space-4);
+  border-top: var(--rule-ink);
+}
+.discovery__artist-name {
+  font: 800 26px/1.08 var(--font-display);
+  letter-spacing: -0.025em;
+  color: var(--fg-1);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.discovery__artist-name:hover { color: var(--fg-accent); }
+.discovery__artist-bio {
+  font: 400 16px/1.5 var(--font-text);
+  color: var(--fg-2);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.discovery__source { align-self: flex-start; }
+</style>

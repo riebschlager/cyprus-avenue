@@ -4,6 +4,7 @@ import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useSpotifyAuth } from './useSpotifyAuth'
 import { useToast } from '../../composables/useToast'
+import Icon from '../../components/Icon.vue'
 
 const props = defineProps<{
   modalState?: PendingSpotifyAction
@@ -23,28 +24,29 @@ const handleLogin = async () => {
   }
 }
 
-const buttonText = computed(() => isAuthenticated.value ? 'Connected to Spotify ✓' : 'Connect to Spotify')
+const buttonText = computed(() => isAuthenticated.value ? 'Connected to Spotify' : 'Connect Spotify')
 </script>
 
 <template>
   <button
+    type="button"
     @click="handleLogin"
     :disabled="isAuthenticating"
-    :class="[
-      'px-3 py-2 rounded-md text-sm font-medium transition-all duration-300',
-      isAuthenticated
-        ? 'bg-green-500/20 text-green-300 border border-green-500/50 hover:bg-green-500/30'
-        : 'bg-blue-500/20 text-blue-300 border border-blue-500/50 hover:bg-blue-500/30',
-      isAuthenticating && 'opacity-50 cursor-not-allowed'
-    ]"
+    :class="['ca-btn', isAuthenticated ? 'ca-btn--secondary' : 'ca-btn--accent']"
     :aria-label="buttonText"
   >
-    <span v-if="isAuthenticating" class="flex items-center gap-2">
-      <svg class="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-      </svg>
-      Connecting...
-    </span>
-    <span v-else>{{ buttonText }}</span>
+    <template v-if="isAuthenticating">
+      <Icon name="loader-circle" class="spin" />
+      Connecting&hellip;
+    </template>
+    <template v-else>
+      <Icon v-if="isAuthenticated" name="check" />
+      {{ buttonText }}
+    </template>
   </button>
 </template>
+
+<style scoped>
+.spin { animation: spin 900ms linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+</style>

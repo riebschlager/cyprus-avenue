@@ -91,25 +91,20 @@ watch(focusedIndex, async (index) => {
 
 <template>
   <div>
-    <div v-if="playlists.length === 0" class="text-center py-12">
-      <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M12 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-      <h3 class="mt-2 text-sm font-medium text-gray-900">No playlists found</h3>
-      <p class="mt-1 text-sm text-gray-500">
-        Try adjusting your search query
-      </p>
-    </div>
+    <p v-if="playlists.length === 0" class="empty">
+      <template v-if="searchQuery">No shows match &ldquo;{{ searchQuery }}&rdquo;. Try an artist name.</template>
+      <template v-else>No shows found.</template>
+    </p>
 
-    <div v-else class="space-y-4">
-      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-sm text-gray-400">
-        <div class="flex items-center gap-3">
-          <p>
-            Showing {{ displayedRange }} of {{ playlists.length }} playlist{{ playlists.length === 1 ? '' : 's' }}
-          </p>
-          <span class="hidden sm:inline-flex items-center gap-1 text-xs text-gray-500">
-            <kbd class="px-1.5 py-0.5 bg-gray-700 rounded text-gray-400 font-mono text-[10px]">j</kbd>
-            <kbd class="px-1.5 py-0.5 bg-gray-700 rounded text-gray-400 font-mono text-[10px]">k</kbd>
+    <div v-else>
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3">
+        <div class="flex items-center gap-4">
+          <span class="ca-label">
+            Showing {{ displayedRange }} of {{ playlists.length.toLocaleString() }} show{{ playlists.length === 1 ? '' : 's' }}
+          </span>
+          <span class="hidden sm:inline-flex items-center gap-1 ca-label ca-label--sm">
+            <kbd class="ca-search__kbd">J</kbd>
+            <kbd class="ca-search__kbd">K</kbd>
             to navigate
           </span>
         </div>
@@ -117,7 +112,7 @@ watch(focusedIndex, async (index) => {
         <PaginationControls :current-page="currentPage" :total-pages="totalPages" compact @change="changePage" />
       </div>
 
-      <div class="space-y-3">
+      <div class="ca-showlist">
         <PlaylistCard
           v-for="(playlist, index) in paginatedPlaylists"
           :ref="(el) => { if (el) cardRefs[index] = el as InstanceType<typeof PlaylistCard> }"
@@ -130,7 +125,12 @@ watch(focusedIndex, async (index) => {
         />
       </div>
 
-      <PaginationControls :current-page="currentPage" :total-pages="totalPages" class="mt-6" @change="changePage" />
+      <PaginationControls :current-page="currentPage" :total-pages="totalPages" class="mt-10" @change="changePage" />
     </div>
   </div>
 </template>
+
+<style scoped>
+.empty { padding: var(--space-12) 0; border-top: var(--rule-ink); font: var(--type-body); font-size: 18px; color: var(--fg-2); }
+.ca-search__kbd { margin-right: 0; }
+</style>

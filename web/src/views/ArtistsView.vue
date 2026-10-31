@@ -8,6 +8,7 @@ import { useRouter, useRoute } from 'vue-router'
 import { useArtistBios } from '../composables/useArtistBios'
 import { useArtists } from '../composables/useArtists'
 import ArtistCard from '../components/ArtistCard.vue'
+import Icon from '../components/Icon.vue'
 import SearchBar from '../components/SearchBar.vue'
 import SpotifyPlaylistModal from '../features/spotify/SpotifyPlaylistModal.vue'
 import { findArtistBySlug, generateArtistSlug } from '../utils/slug'
@@ -28,6 +29,8 @@ const cardRefs = ref<InstanceType<typeof ArtistCard>[]>([])
 
 const { currentPage, itemsPerPage, totalItems: totalArtists, totalPages,
   paginatedItems: paginatedArtists, displayedRange, changePage } = usePagination(filteredArtists)
+
+const totalSongs = computed(() => filteredArtists.value.reduce((sum, a) => sum + a.uniqueSongs.length, 0))
 
 // Sync URL query to selectedTag
 watch(() => route.query.tag, (tag) => {
@@ -134,25 +137,26 @@ watch(focusedIndex, async (index) => {
 
 <template>
   <ArchiveState>
-    <!-- Stats -->
-    <div class="bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-700">
-      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-        <div class="bg-gray-900 rounded-lg p-6 border-l-4 border-purple-500">
-          <p class="text-sm text-gray-400 mb-2">Total Artists</p>
-          <p class="text-4xl font-bold text-white">{{ filteredArtists.length }}</p>
-        </div>
-        <div class="bg-gray-900 rounded-lg p-6 border-l-4 border-blue-500">
-          <p class="text-sm text-gray-400 mb-2">Total Songs</p>
-          <p class="text-4xl font-bold text-white">
-            {{ filteredArtists.reduce((sum, a) => sum + a.uniqueSongs.length, 0).toLocaleString() }}
-          </p>
-        </div>
+    <header class="page-head">
+      <span class="ca-label ca-label--accent">Index</span>
+      <h1 class="ca-page-title">Artists</h1>
+      <p class="ca-lede">Everyone Bill Shapiro played on the recovered shows. Tags come from Last.fm and Spotify.</p>
+    </header>
+
+    <div class="ca-stats">
+      <div class="ca-stat">
+        <span class="ca-stat__value">{{ filteredArtists.length.toLocaleString() }}</span>
+        <span class="ca-label">Artists</span>
+      </div>
+      <div class="ca-stat">
+        <span class="ca-stat__value">{{ totalSongs.toLocaleString() }}</span>
+        <span class="ca-label">Songs</span>
       </div>
     </div>
 
     <!-- Search & Filter -->
-    <div class="mt-8 flex flex-col sm:flex-row gap-4">
-      <div class="flex-1">
+    <div class="filters">
+      <div class="flex-1 min-w-0">
         <SearchBar
           v-model="searchQuery"
           v-model:filters="searchFilters"
@@ -160,66 +164,56 @@ watch(focusedIndex, async (index) => {
             { id: 'artist', label: 'Artists' },
             { id: 'song', label: 'Songs' }
           ]"
-          placeholder="Search artists or songs..."
+          placeholder="Search artists or songs"
         />
       </div>
 
-      <div class="sm:w-64">
+      <label class="ca-select filters__tag">
+        <span class="sr-only">Filter by tag</span>
         <select
           :value="selectedTag"
           @change="(e) => handleTagSelect((e.target as HTMLSelectElement).value)"
-          class="w-full bg-gray-800 border border-gray-700 text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none cursor-pointer select-chevron"
         >
-          <option value="">All Tags</option>
+          <option value="">All tags</option>
           <option v-for="tag in availableTags" :key="tag" :value="tag">
             {{ tag }}
           </option>
         </select>
-      </div>
+        <Icon name="chevron-down" />
+      </label>
     </div>
 
     <!-- Active Tag Indicator -->
-    <div v-if="selectedTag" ref="bannerRef" class="mt-6 bg-blue-900/40 border border-blue-500/30 rounded-lg p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-      <div class="flex items-center gap-3">
-        <span class="text-2xl">🏷️</span>
-        <div>
-          <p class="text-blue-200 text-sm font-medium uppercase tracking-wider">Viewing Tag</p>
-          <h2 class="text-xl font-bold text-white">{{ selectedTag }}</h2>
-        </div>
+    <section v-if="selectedTag" ref="bannerRef" class="tag-banner">
+      <div class="tag-banner__text">
+        <span class="ca-label">Tag</span>
+        <h2 class="tag-banner__title">{{ selectedTag }}</h2>
       </div>
-      <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
-        <button
-          @click="showTagPlaylistModal = true"
-          class="flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-green-500/20 hover:bg-green-500/30 text-green-300 hover:text-green-200 transition-colors text-sm font-medium border border-green-500/20 w-full sm:w-auto"
-        >
-          <span>🎧</span>
-          Create {{ selectedTag }} Playlist on Spotify
+      <div class="tag-banner__actions">
+        <button type="button" class="ca-btn ca-btn--secondary" @click="showTagPlaylistModal = true">
+          <Icon name="list-plus" />
+          Create Spotify playlist
         </button>
-        <button
-          @click="clearTag"
-          class="flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 hover:text-blue-200 transition-colors text-sm font-medium w-full sm:w-auto"
-        >
-          <span>✕</span>
-          Clear Filter
+        <button type="button" class="ca-btn ca-btn--ghost" @click="clearTag">
+          <Icon name="x" />
+          Clear tag
         </button>
       </div>
-    </div>
+    </section>
 
     <!-- Artists List -->
-    <div class="mt-8 space-y-4">
-      <div v-if="filteredArtists.length === 0" class="text-center py-12">
-        <p class="text-gray-400">No artists found matching your search.</p>
+    <div class="mt-10">
+      <div v-if="filteredArtists.length === 0" class="empty">
+        <p>No artists match your search. Try a different name or tag.</p>
       </div>
 
       <div v-else>
-        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-sm text-gray-400 mb-4">
-          <div class="flex items-center gap-3">
-            <p>
-              Showing {{ displayedRange }} of {{ totalArtists.toLocaleString() }} artists
-            </p>
-            <span class="hidden sm:inline-flex items-center gap-1 text-xs text-gray-500">
-              <kbd class="px-1.5 py-0.5 bg-gray-700 rounded text-gray-400 font-mono text-[10px]">j</kbd>
-              <kbd class="px-1.5 py-0.5 bg-gray-700 rounded text-gray-400 font-mono text-[10px]">k</kbd>
+        <div class="list-meta">
+          <div class="flex items-center gap-4">
+            <span class="ca-label">{{ displayedRange }} of {{ totalArtists.toLocaleString() }} artists</span>
+            <span class="ca-label ca-label--sm list-meta__keys">
+              <kbd class="ca-search__kbd">J</kbd>
+              <kbd class="ca-search__kbd">K</kbd>
               to navigate
             </span>
           </div>
@@ -227,7 +221,7 @@ watch(focusedIndex, async (index) => {
           <PaginationControls :current-page="currentPage" :total-pages="totalPages" compact @change="changePage" />
         </div>
 
-        <div class="space-y-4">
+        <div class="artist-list">
           <ArtistCard
             v-for="(artist, i) in paginatedArtists"
             :ref="(el) => { if (el) cardRefs[i] = el as InstanceType<typeof ArtistCard> }"
@@ -240,7 +234,7 @@ watch(focusedIndex, async (index) => {
           />
         </div>
 
-        <PaginationControls :current-page="currentPage" :total-pages="totalPages" class="mt-6" @change="changePage" />
+        <PaginationControls :current-page="currentPage" :total-pages="totalPages" class="mt-8" @change="changePage" />
       </div>
     </div>
 
@@ -255,11 +249,34 @@ watch(focusedIndex, async (index) => {
 </template>
 
 <style scoped>
-.select-chevron {
-  background-image: url('../assets/chevron-down.svg');
-  background-position: right 0.5rem center;
-  background-repeat: no-repeat;
-  background-size: 1.5em 1.5em;
-  padding-right: 2.5rem;
+.page-head { display: flex; flex-direction: column; gap: var(--space-3); padding-bottom: var(--space-8); }
+
+.filters { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--space-3); margin-top: var(--space-10); }
+.filters__tag { width: 240px; }
+.filters__tag select { width: 100%; }
+
+.tag-banner { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--space-4); margin-top: var(--space-8); padding: var(--space-6); background: var(--orange-500); color: var(--ink-900); }
+.tag-banner .ca-label { color: var(--ink-900); }
+.tag-banner__text { display: flex; flex-direction: column; gap: var(--space-2); }
+.tag-banner__title { font: var(--fw-black) var(--fs-display-m)/var(--lh-tight) var(--font-display); letter-spacing: var(--tracking-display); }
+.tag-banner__actions { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.tag-banner .ca-btn--secondary { border-color: var(--ink-900); color: var(--ink-900); }
+.tag-banner .ca-btn--secondary:hover { background: var(--ink-900); color: var(--orange-500); }
+.tag-banner .ca-btn--ghost:hover { background: var(--orange-600); }
+
+.list-meta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3); margin-bottom: var(--space-3); }
+.list-meta__keys { gap: 4px; color: var(--fg-3); }
+.list-meta__keys kbd { margin: 0; }
+
+.artist-list { border-top: var(--rule-ink); }
+
+.empty { padding: var(--space-12) 0; border-top: var(--rule-ink); }
+.empty p { font: var(--type-body); color: var(--fg-2); }
+
+@media (max-width: 760px) {
+  .filters__tag { width: 100%; }
+  .list-meta__keys { display: none; }
+  .tag-banner { padding: var(--space-5); }
+  .tag-banner__title { font-size: 32px; }
 }
 </style>

@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import { usePlaylists } from '../composables/usePlaylists'
 import SpotifyPlaylistModal from '../features/spotify/SpotifyPlaylistModal.vue'
 import { downloadAllPlaylists, DOWNLOAD_FORMATS } from '../utils/downloadFormats'
+import Icon from './Icon.vue'
 const { stats, playlists } = usePlaylists()
 const router = useRouter()
 const showAllTracksModal = ref(false)
@@ -17,118 +18,141 @@ const formats = DOWNLOAD_FORMATS.map(format => ({ ...format, description: descri
 </script>
 
 <template>
-  <div class="space-y-12">
-    <!-- Export to Spotify Section -->
-    <div class="bg-green-900/20 rounded-lg shadow-lg p-8 border border-green-700/50">
-      <h2 class="text-3xl font-bold text-white mb-6">Export to Spotify</h2>
-
-      <div class="space-y-6">
-        <p class="text-gray-300">
-          Connect your Spotify account to create playlists directly from the Cyprus Avenue archive.
-          You can create a playlist from any individual show or generate a single playlist containing
-          all {{ uniqueTrackCount.toLocaleString() }} unique tracks from the entire archive.
-        </p>
-
-        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <!-- Individual Playlist Card -->
-          <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-6">
-            <h3 class="text-lg font-semibold text-white mb-3">Create from Show</h3>
-            <p class="text-sm text-gray-300 mb-4">
-              Choose any Cyprus Avenue episode and create a Spotify playlist with all its tracks.
-            </p>
-            <button
-              @click="router.push('/playlists')"
-              class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors mt-auto"
-            >
-              Browse Shows →
-            </button>
-          </div>
-
-          <!-- Genre Card -->
-          <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-6 flex flex-col">
-            <h3 class="text-lg font-semibold text-white mb-3">Create from Genre</h3>
-            <p class="text-sm text-gray-300 mb-4">
-              Filter the archive by musical genre and create a collection of tracks from that style.
-            </p>
-            <button
-              @click="router.push('/artists')"
-              class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors mt-auto"
-            >
-              Browse Genres →
-            </button>
-          </div>
-
-          <!-- Complete Archive Card -->
-          <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-6">
-            <h3 class="text-lg font-semibold text-white mb-3">Complete Archive</h3>
-            <p class="text-sm text-gray-300 mb-4">
-              Create one mega-playlist with all unique tracks from the entire archive ({{ uniqueTrackCount.toLocaleString() }} tracks).
-            </p>
-            <button
-              @click="showAllTracksModal = true"
-              class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
-            >
-              Create Complete Playlist →
-            </button>
-          </div>
-        </div>
-
-        <div class="bg-green-500/10 border border-green-500/30 rounded-lg p-4 mt-6">
-          <p class="text-sm text-green-200">
-            💡 <strong>Tip:</strong> You can also add individual shows to Spotify by expanding any playlist
-            in the <router-link to="/playlists" class="text-green-300 hover:text-green-200 underline">Playlists</router-link> view,
-            or generate <strong>genre or artist-based collections</strong> from the <router-link to="/artists" class="text-green-300 hover:text-green-200 underline">Artists</router-link> page.
-          </p>
+  <div>
+    <!-- Export to Spotify -->
+    <section class="ca-section">
+      <div class="ca-sechead">
+        <div class="ca-sechead__left">
+          <span class="ca-label ca-label--accent">03</span>
+          <h2 class="ca-sechead__title">Export to Spotify</h2>
         </div>
       </div>
-    </div>
 
-    <!-- Modal for creating all tracks playlist -->
+      <p class="ca-lede exports__intro">
+        Connect your Spotify account to create playlists directly from the Cyprus Avenue archive.
+        You can create a playlist from any individual show or generate a single playlist containing
+        all {{ uniqueTrackCount.toLocaleString() }} unique tracks from the entire archive.
+      </p>
+
+      <div class="exports__grid">
+        <div class="exports__card">
+          <h3 class="exports__title">Create from show</h3>
+          <p class="exports__desc">
+            Choose any Cyprus Avenue episode and create a Spotify playlist with all its tracks.
+          </p>
+          <button type="button" class="ca-btn ca-btn--secondary" @click="router.push('/playlists')">
+            Browse shows <Icon name="arrow-right" />
+          </button>
+        </div>
+
+        <div class="exports__card">
+          <h3 class="exports__title">Create from genre</h3>
+          <p class="exports__desc">
+            Filter the archive by musical genre and create a collection of tracks from that style.
+          </p>
+          <button type="button" class="ca-btn ca-btn--secondary" @click="router.push('/artists')">
+            Browse genres <Icon name="arrow-right" />
+          </button>
+        </div>
+
+        <div class="exports__card">
+          <h3 class="exports__title">Complete archive</h3>
+          <p class="exports__desc">
+            Create one mega-playlist with all unique tracks from the entire archive ({{ uniqueTrackCount.toLocaleString() }} tracks).
+          </p>
+          <button type="button" class="ca-btn ca-btn--primary" @click="showAllTracksModal = true">
+            <Icon name="list-plus" /> Create complete playlist
+          </button>
+        </div>
+      </div>
+
+      <p class="exports__tip">
+        <span class="ca-label ca-label--accent">Tip</span>
+        You can also add individual shows to Spotify by expanding any playlist
+        in the <router-link to="/playlists">Shows</router-link> view,
+        or generate genre or artist-based collections from the <router-link to="/artists">Artists</router-link> page.
+      </p>
+    </section>
+
     <SpotifyPlaylistModal
       :is-open="showAllTracksModal"
       mode="all-tracks"
       @close="showAllTracksModal = false"
     />
 
-    <!-- Download Archive Section -->
-    <div class="bg-blue-900/20 rounded-lg shadow-lg p-8 border border-blue-700/50">
-      <h2 class="text-3xl font-bold text-white mb-6">Download Archive</h2>
-
-      <div class="space-y-6">
-        <p class="text-gray-300">
-          Download the complete Cyprus Avenue archive in various formats for offline use, analysis, or archival purposes.
-          All {{ (stats.totalPlaylists || 0).toLocaleString() }} playlists with {{ (stats.totalTracks || 0).toLocaleString() }} tracks included.
-        </p>
-
-        <div class="grid gap-6 md:grid-cols-3">
-          <div v-for="format in formats" :key="format.value" class="bg-gray-800/50 border border-gray-700 rounded-lg p-6 flex flex-col">
-            <h3 class="text-lg font-semibold text-white mb-3">{{ format.label }} Format</h3>
-            <p class="text-sm text-gray-300 mb-4 flex-grow">
-              {{ format.description }}
-            </p>
-            <button
-              @click="downloadAllPlaylists(playlists, format.value)"
-              class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors mt-auto flex items-center justify-center gap-2"
-            >
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-              </svg>
-              Download {{ format.value.toUpperCase() }}
-            </button>
-          </div>
-
-
-        </div>
-
-        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 mt-6">
-          <p class="text-sm text-blue-200">
-            💡 <strong>Note:</strong> You can also download individual playlists by expanding any show in the
-            <router-link to="/playlists" class="text-blue-300 hover:text-blue-200 underline">Playlists</router-link> view
-            and clicking the download button.
-          </p>
+    <!-- Download archive -->
+    <section class="ca-section">
+      <div class="ca-sechead">
+        <div class="ca-sechead__left">
+          <span class="ca-label ca-label--accent">04</span>
+          <h2 class="ca-sechead__title">Download the archive</h2>
         </div>
       </div>
-    </div>
 
+      <p class="ca-lede exports__intro">
+        Download the complete Cyprus Avenue archive in various formats for offline use, analysis, or archival purposes.
+        All {{ (stats.totalPlaylists || 0).toLocaleString() }} playlists with {{ (stats.totalTracks || 0).toLocaleString() }} tracks included.
+      </p>
+
+      <div class="exports__grid">
+        <div v-for="format in formats" :key="format.value" class="exports__card">
+          <div class="flex items-baseline justify-between gap-3">
+            <h3 class="exports__title">{{ format.label }}</h3>
+            <span class="ca-label ca-label--sm">.{{ format.value }}</span>
+          </div>
+          <p class="exports__desc">{{ format.description }}</p>
+          <button type="button" class="ca-btn ca-btn--secondary" @click="downloadAllPlaylists(playlists, format.value)">
+            <Icon name="download" /> Download {{ format.value.toUpperCase() }}
+          </button>
+        </div>
+      </div>
+
+      <p class="exports__tip">
+        <span class="ca-label ca-label--accent">Note</span>
+        You can also download individual playlists by expanding any show in the
+        <router-link to="/playlists">Shows</router-link> view
+        and clicking the download button.
+      </p>
+    </section>
   </div>
 </template>
+
+<style scoped>
+.exports__intro { margin-bottom: var(--space-8); }
+.exports__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-8);
+}
+.exports__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-top: var(--space-4);
+  border-top: var(--rule-ink);
+}
+.exports__card .ca-btn { align-self: flex-start; margin-top: auto; }
+.exports__title {
+  font: 800 22px/1.1 var(--font-display);
+  letter-spacing: -0.02em;
+  color: var(--fg-1);
+}
+.exports__desc {
+  flex: 1;
+  font: 400 16px/1.5 var(--font-text);
+  color: var(--fg-2);
+}
+.exports__tip {
+  margin-top: var(--space-8);
+  padding-top: var(--space-4);
+  border-top: var(--rule-hair);
+  max-width: var(--container-text);
+  font: 400 15px/1.5 var(--font-text);
+  color: var(--fg-2);
+}
+.exports__tip .ca-label { margin-right: var(--space-2); }
+
+@media (max-width: 900px) {
+  .exports__grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-6); }
+}
+</style>

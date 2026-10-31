@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { formatArchiveDate, parseArchiveDate, isWithinArchiveWeek } from '../src/utils/archiveDate'
+import { formatArchiveDate, parseArchiveDate, isWithinArchiveWeek, stampArchiveDate } from '../src/utils/archiveDate'
 import { generatePlaylistSlug, findPlaylistBySlug, generateArtistSlug } from '../src/utils/slug'
 import { normalizeAndFilterTag, normalizeTags } from '../src/utils/tagFilters'
 import type { Playlist } from '../src/types/playlist'
@@ -19,6 +19,12 @@ describe(`archive links and dates in ${process.env.TZ}`, () => {
     expect(generateArtistSlug('Booker T. & The MG’s')).toBe('booker-t-the-mgs')
     expect(() => parseArchiveDate('2015-02-29')).toThrow('Invalid archive date')
   })
+  it('stamps dates as DD MON YYYY regardless of timezone', () => {
+    expect(stampArchiveDate('2015-01-03')).toBe('03 JAN 2015')
+    expect(stampArchiveDate('2015-01-03', true)).toBe('SAT 03 JAN 2015')
+    expect(stampArchiveDate('2016-09-24')).toBe('24 SEP 2016')
+  })
+
   it('resolves canonical and previously shared Chicago links to the same record', () => {
     expect(findPlaylistBySlug([playlist], '2014-favorites-january-3-2015')).toBe(playlist)
     expect(findPlaylistBySlug([playlist], '2014-favorites-january-2-2015')).toBe(playlist)

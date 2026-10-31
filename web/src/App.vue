@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, computed, watch } from 'vue'
+import { onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { usePlaylists } from './composables/usePlaylists'
 import { useOpenGraph } from './composables/useOpenGraph'
@@ -8,32 +8,22 @@ import { useSpotifyAuth } from './features/spotify/useSpotifyAuth'
 import ToastContainer from './components/ToastContainer.vue'
 import SpotifyActionHost from './features/spotify/SpotifyActionHost.vue'
 import SpotifyWebPlayer from './features/spotify/SpotifyWebPlayer.vue'
+import Icon from './components/Icon.vue'
 
 const { fetchPlaylists } = usePlaylists()
 useOpenGraph()
 const { isMenuOpen, toggleMenu, closeMenu } = useMobileMenu()
 const { isAuthenticated } = useSpotifyAuth()
 const route = useRoute()
-const scrollY = ref(0)
 const navigation = [
-  { to: '/', label: 'Home' },
-  { to: '/playlists', label: 'Playlists' },
-  { to: '/tracks', label: 'All Tracks' },
-  { to: '/artists', label: 'Artists' }
+  { to: '/', label: 'Home', exact: true },
+  { to: '/playlists', label: 'Shows', match: ['/playlists', '/playlist/'] },
+  { to: '/artists', label: 'Artists', match: ['/artists', '/artist/'] },
+  { to: '/tracks', label: 'Tracks', match: ['/tracks'] }
 ]
 
-const isScrolled = computed(() => scrollY.value > 20)
-
-let rafId: number | null = null
-
-const handleScroll = () => {
-  if (rafId) return
-
-  rafId = requestAnimationFrame(() => {
-    scrollY.value = window.scrollY
-    rafId = null
-  })
-}
+const isCurrent = (item: typeof navigation[number]) =>
+  item.exact ? route.path === item.to : (item.match ?? []).some(prefix => route.path.startsWith(prefix))
 
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -46,80 +36,57 @@ watch(() => route.path, () => {
 
 onMounted(() => {
   fetchPlaylists()
-  window.addEventListener('scroll', handleScroll, { passive: true })
-})
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
-  if (rafId) cancelAnimationFrame(rafId)
 })
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-950">
-    <header
-      class="sticky top-0 z-50 bg-gray-900 shadow-lg border-b border-gray-800"
-      style="contain: layout style paint;"
-    >
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between gap-4 w-full h-16 sm:h-20">
-          <!-- Logo/Title -->
-          <div class="flex items-baseline gap-4 flex-1 min-w-0">
-            <h1
-              class="font-bold text-white whitespace-nowrap transition-[font-size] duration-300"
-              :class="isScrolled ? 'text-xl' : 'text-xl sm:text-3xl'"
-            >
-              Cyprus Avenue Archive
-            </h1>
-            <p
-              class="text-sm text-gray-400 whitespace-nowrap hidden sm:block transition-opacity duration-300"
-              :class="isScrolled ? 'opacity-0' : 'opacity-100'"
-            >
-              Browse playlists from KCUR's Cyprus Avenue radio show
-            </p>
-          </div>
+  <div>
+    <header class="ca-header">
+      <div class="ca-header__inner">
+        <router-link to="/" class="ca-wordmark">
+          <span class="ca-wordmark__name">Cyprus Avenue</span>
+          <span class="ca-wordmark__sub">KCUR 89.3 &middot; 1978&ndash;2018</span>
+        </router-link>
 
-          <!-- Desktop Navigation (hidden on mobile) -->
-          <div class="hidden md:block border-b border-gray-800">
-            <nav class="flex space-x-8 -mb-px" aria-label="Tabs">
-              <router-link v-for="item in navigation" :key="item.to" :to="item.to"
-                class="desktop-nav-link" active-class="nav-active">{{ item.label }}</router-link>
-            </nav>
-          </div>
+        <nav class="ca-nav" aria-label="Primary">
+          <router-link
+            v-for="item in navigation"
+            :key="item.to"
+            :to="item.to"
+            :aria-current="isCurrent(item) ? 'page' : undefined"
+          >{{ item.label }}</router-link>
+        </nav>
 
-          <!-- Mobile Hamburger Menu Button -->
+        <div class="ca-header__actions ca-header__burger" style="margin-left: auto;">
           <button
+            type="button"
+            class="ca-iconbtn"
             @click="toggleMenu"
-            class="md:hidden p-2 rounded text-gray-400 hover:text-gray-300 transition-colors"
-            aria-label="Toggle menu"
+            :aria-label="isMenuOpen ? 'Close menu' : 'Open menu'"
             :aria-expanded="isMenuOpen"
             aria-controls="mobile-navigation"
           >
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path v-if="!isMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-              <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            <Icon :name="isMenuOpen ? 'x' : 'menu'" />
           </button>
         </div>
-
-        <!-- Mobile Menu Dropdown -->
-        <div
-          v-if="isMenuOpen"
-          class="md:hidden mt-4 pb-4 border-t border-gray-800"
-          style="animation: slideDown 300ms cubic-bezier(0.4, 0, 0.2, 1);"
-        >
-          <nav class="flex flex-col space-y-2" id="mobile-navigation" aria-label="Mobile Tabs">
-            <router-link v-for="item in navigation" :key="item.to" :to="item.to"
-              class="mobile-nav-link" active-class="nav-active">{{ item.label }}</router-link>
-          </nav>
-        </div>
       </div>
+
+      <nav
+        v-if="isMenuOpen"
+        id="mobile-navigation"
+        class="ca-mobilenav"
+        aria-label="Mobile"
+      >
+        <router-link
+          v-for="item in navigation"
+          :key="item.to"
+          :to="item.to"
+          :aria-current="isCurrent(item) ? 'page' : undefined"
+        >{{ item.label }}</router-link>
+      </nav>
     </header>
 
-    <main
-      class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 min-h-[60vh]"
-      :class="{ 'pb-24': isAuthenticated }"
-    >
+    <main class="ca-container ca-main" :class="{ 'ca-main--with-player': isAuthenticated }">
       <router-view v-slot="{ Component }">
         <transition name="fade" mode="out-in">
           <component :is="Component" />
@@ -127,83 +94,36 @@ onUnmounted(() => {
       </router-view>
     </main>
 
-    <div v-if="isAuthenticated" class="fixed bottom-0 inset-x-0 z-40 bg-gray-950/90 border-t border-gray-800">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <SpotifyWebPlayer />
-      </div>
+    <div v-if="isAuthenticated" class="ca-player" data-theme="dark">
+      <SpotifyWebPlayer />
     </div>
 
-    <footer
-      class="bg-gray-900 border-t border-gray-800 mt-6"
-      :class="{ 'pb-24': isAuthenticated }"
-    >
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-          <p class="text-sm text-gray-400">
-            Cyprus Avenue Archive &middot;
-            <a href="https://www.kcur.org/tags/cyprus-avenue" target="_blank" rel="noopener" class="text-blue-400 hover:text-blue-300">
-              KCUR Cyprus Avenue
-            </a>
-          </p>
-          <button
-            type="button"
-            @click="scrollToTop"
-            class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider border border-blue-500/40 text-blue-300 hover:text-blue-200 hover:border-blue-400/70 hover:bg-blue-500/10 transition-colors"
-          >
-            <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
-            </svg>
-            Back to top
+    <footer class="ca-footer">
+      <div class="ca-footer__inner">
+        <div class="ca-footer__mark">Cyprus<br />Avenue</div>
+        <div class="ca-footer__col">
+          <span class="ca-label ca-label--sm">Archive</span>
+          <router-link v-for="item in navigation.slice(1)" :key="item.to" :to="item.to">{{ item.label }}</router-link>
+        </div>
+        <div class="ca-footer__col">
+          <span class="ca-label ca-label--sm">Elsewhere</span>
+          <a href="https://www.kcur.org/tags/cyprus-avenue" target="_blank" rel="noopener">KCUR</a>
+          <a href="https://github.com/riebschlager/cyprus-avenue/" target="_blank" rel="noopener">GitHub</a>
+          <button type="button" class="ca-btn ca-btn--link" style="align-self: flex-start;" @click="scrollToTop">
+            Back to top <Icon name="arrow-up" />
           </button>
-          <p class="text-sm text-gray-500">
-            Created by
-            <a href="https://the816.com" target="_blank" rel="noopener" class="text-gray-400 hover:text-blue-400 transition-colors font-medium">
-              Chris Riebschlager
-            </a>
-          </p>
+        </div>
+        <div class="ca-footer__fine">
+          <span class="ca-label ca-label--sm">Playlists &copy; KCUR Kansas City Public Radio</span>
+          <span class="ca-label ca-label--sm">
+            Archive by&nbsp;<a href="https://the816.com" target="_blank" rel="noopener">Chris Riebschlager</a>
+          </span>
         </div>
       </div>
     </footer>
 
     <SpotifyActionHost />
 
-    <!-- Toast Notifications -->
     <ToastContainer />
   </div>
 </template>
-
-<style>
-@reference "./style.css";
-.desktop-nav-link { @apply whitespace-nowrap font-medium text-sm py-4 px-1 text-gray-400 border-b-2 border-transparent transition-colors duration-300; }
-.desktop-nav-link.nav-active { @apply text-blue-400 border-blue-500; }
-.mobile-nav-link { @apply w-full text-left px-4 py-2 rounded font-medium text-sm text-gray-400 hover:bg-gray-800/50 transition-colors; }
-.mobile-nav-link.nav-active { @apply text-blue-400; }
-
-/* Prevent horizontal layout jump by always reserving scrollbar space */
-html {
-  overflow-y: scroll;
-  scroll-behavior: smooth;
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Page Transitions */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 200ms ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>

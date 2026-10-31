@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { stampArchiveDate } from '../utils/archiveDate'
+
 defineProps<{
   stats: {
     totalPlaylists: number
@@ -7,30 +9,30 @@ defineProps<{
     dateRange: { start: string; end: string } | null
   }
 }>()
+
 </script>
 
 <template>
-  <div class="bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-700">
-    <h2 class="text-lg font-semibold text-white mb-4">Archive Statistics</h2>
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      <div class="border-l-4 border-blue-500 pl-4">
-        <p class="text-sm text-gray-400">Total Playlists</p>
-        <p class="text-2xl font-bold text-white">{{ stats.totalPlaylists }}</p>
-      </div>
-      <div class="border-l-4 border-green-500 pl-4">
-        <p class="text-sm text-gray-400">Total Tracks</p>
-        <p class="text-2xl font-bold text-white">{{ stats.totalTracks.toLocaleString() }}</p>
-      </div>
-      <div class="border-l-4 border-purple-500 pl-4">
-        <p class="text-sm text-gray-400">Avg Tracks/Show</p>
-        <p class="text-2xl font-bold text-white">{{ stats.avgTracksPerShow.toFixed(1) }}</p>
-      </div>
-      <div v-if="stats.dateRange" class="border-l-4 border-orange-500 pl-4">
-        <p class="text-sm text-gray-400">Date Range</p>
-        <p class="text-sm font-semibold text-white">
-          {{ stats.dateRange.start }} to<br>{{ stats.dateRange.end }}
-        </p>
-      </div>
+  <div class="ca-stats stats-panel">
+    <div class="ca-stat">
+      <span class="ca-stat__value">{{ stats.totalPlaylists.toLocaleString() }}</span>
+      <span class="ca-label">Shows</span>
+    </div>
+    <div class="ca-stat">
+      <span class="ca-stat__value">{{ stats.totalTracks.toLocaleString() }}</span>
+      <span class="ca-label">Tracks</span>
+    </div>
+    <div class="ca-stat">
+      <span class="ca-stat__value">{{ stats.avgTracksPerShow.toFixed(1) }}</span>
+      <span class="ca-label">Avg tracks per show</span>
+    </div>
+    <div v-if="stats.dateRange" class="ca-stat">
+      <span class="ca-stat__value">{{ stats.dateRange.start.slice(0, 4) }}&ndash;{{ stats.dateRange.end.slice(2, 4) }}</span>
+      <span class="ca-label">{{ stampArchiveDate(stats.dateRange.start) }} &ndash; {{ stampArchiveDate(stats.dateRange.end) }}</span>
     </div>
   </div>
 </template>
+
+<style scoped>
+.stats-panel .ca-stat__value { font-size: 40px; }
+</style>

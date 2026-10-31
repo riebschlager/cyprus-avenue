@@ -1,18 +1,30 @@
+<script setup lang="ts">
+const features = [
+  { title: 'Browse playlists', text: 'View all archived playlists with full track listings and original air dates' },
+  { title: 'Artist biographies', text: 'Explore rich background info, images, and listener stats for archive artists' },
+  { title: 'Search & filter', text: 'Find anything by keyword or browse by smart tags and musical genres' },
+  { title: 'Spotify integration', text: 'Direct links to listen to tracks, complete with album artwork' },
+  { title: 'Flexible export', text: 'Generate Spotify playlists from shows, artists, genres, or the entire archive' },
+  { title: 'Random discovery', text: 'Explore the collection through suggested content and "I\'m feeling lucky" navigation' }
+]
+</script>
+
 <template>
-    <!-- About This Project -->
-    <div class="relative rounded-2xl overflow-hidden border border-gray-800/60 shadow-lg">
-      <div class="absolute inset-0 bg-gradient-to-b from-blue-600/10 to-transparent pointer-events-none"></div>
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[120px] pointer-events-none"></div>
+  <section class="ca-section about-split">
+    <div>
+      <div class="ca-sechead">
+        <div class="ca-sechead__left">
+          <span class="ca-label ca-label--accent">02</span>
+          <h2 class="ca-sechead__title">About this project</h2>
+        </div>
+      </div>
 
-      <div class="relative z-10 p-8">
-        <h2 class="text-3xl font-bold text-white mb-6">About This Project</h2>
-
-        <div class="space-y-4 text-gray-300">
+      <article class="ca-prose">
         <p>
           This project originally began in 2018 as a manual preservation effort. At the time, the work
           consisted primarily of copying and pasting as many playlists as possible from the KCUR website before they
           disappeared. You can read more about the original motivation in this 2018 blog post:
-          <a href="https://riebschlager.medium.com/the-cyprus-avenue-preservation-project-5fa0a3894c3a" target="_blank" rel="noopener" class="text-blue-400 hover:text-blue-300">The Cyprus Avenue Preservation Project</a>.
+          <a href="https://riebschlager.medium.com/the-cyprus-avenue-preservation-project-5fa0a3894c3a" target="_blank" rel="noopener">The Cyprus Avenue Preservation Project</a>.
         </p>
 
         <p>
@@ -29,58 +41,66 @@
           the curation of a true musicologist.
         </p>
 
-        <div class="bg-gray-900/70 rounded-lg p-6 mt-6 border border-gray-800">
-          <h3 class="text-xl font-semibold text-white mb-4">Features</h3>
-          <ul class="space-y-2 text-gray-300">
-            <li class="flex items-start">
-              <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <span><strong class="text-white">Browse Playlists:</strong> View all archived playlists with full track listings and original air dates</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <span><strong class="text-white">Artist Biographies:</strong> Explore rich background info, images, and listener stats for archive artists</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <span><strong class="text-white">Search & Filter:</strong> Find anything by keyword or browse by smart tags and musical genres</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <span><strong class="text-white">Spotify Integration:</strong> Direct links to listen to tracks, complete with album artwork</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <span><strong class="text-white">Flexible Export:</strong> Generate Spotify playlists from shows, artists, genres, or the entire archive</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <span><strong class="text-white">Random Discovery:</strong> Explore the collection through suggested content and "I'm feeling lucky" navigation</span>
-            </li>
-          </ul>
-        </div>
-
-        <div class="mt-8 p-6 bg-blue-900/20 border border-blue-800/50 rounded-lg">
-          <p class="text-gray-200">
-            This project is <strong class="text-white">open source</strong> and hosted on
-            <a href="https://github.com/riebschlager/cyprus-avenue/" target="_blank" rel="noopener" class="text-blue-400 hover:text-blue-300 font-medium underline-offset-4 hover:underline">GitHub</a>.
-            I welcome any edits, suggestions, or corrections to the archive. You can contact me directly at
-            <a href="mailto:chris@the816.com" class="text-blue-400 hover:text-blue-300 font-medium underline-offset-4 hover:underline">chris@the816.com</a>.
-          </p>
-        </div>
-        </div>
-      </div>
+        <p>
+          This project is <strong>open source</strong> and hosted on
+          <a href="https://github.com/riebschlager/cyprus-avenue/" target="_blank" rel="noopener">GitHub</a>.
+          I welcome any edits, suggestions, or corrections to the archive. You can contact me directly at
+          <a href="mailto:chris@the816.com">chris@the816.com</a>.
+        </p>
+      </article>
     </div>
 
+    <aside>
+      <div class="ca-sechead ca-sechead--sm">
+        <div class="ca-sechead__left">
+          <h3 class="ca-sechead__title">Features</h3>
+        </div>
+      </div>
+      <ol class="about-features">
+        <li v-for="(feature, index) in features" :key="feature.title" class="about-features__item">
+          <span class="ca-label">{{ String(index + 1).padStart(2, '0') }}</span>
+          <div>
+            <div class="about-features__title">{{ feature.title }}</div>
+            <p class="about-features__text">{{ feature.text }}</p>
+          </div>
+        </li>
+      </ol>
+    </aside>
+  </section>
 </template>
+
+<style scoped>
+.about-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: var(--space-12);
+  align-items: start;
+}
+.about-features {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.about-features__item {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  gap: var(--space-3);
+  align-items: baseline;
+  padding: var(--space-3) 0;
+  border-bottom: var(--rule-hair);
+}
+.about-features__title {
+  font: 700 17px/1.25 var(--font-display);
+  letter-spacing: -0.015em;
+  color: var(--fg-1);
+}
+.about-features__text {
+  margin-top: 2px;
+  font: 400 15px/1.45 var(--font-text);
+  color: var(--fg-2);
+}
+
+@media (max-width: 900px) {
+  .about-split { grid-template-columns: minmax(0, 1fr); gap: var(--space-8); }
+}
+</style>

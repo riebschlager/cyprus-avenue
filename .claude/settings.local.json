@@ -47,7 +47,20 @@
       "Bash(volta which:*)",
       "Bash(grep -rn \"netlify\\\\|BASE_URL\\\\|createWebHistory\\\\|redirect_uri\\\\|REDIRECT\\\\|fetch\\(['\\\\`]/\\\\|'/[a-z-]*\\\\.json\" web/src web/index.html web/package.json README.md)",
       "Bash(npm ci *)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(python3 -)",
+      "Bash(cd /Users/criebschlager/Projects/cyprus-avenue/web/src && grep -rn \"StatsPanel\" . | grep -v \"^./components/StatsPanel\"; grep -n \"dates = \" -B3 composables/usePlaylists.ts; cat ../../.claude/skills/cyprus-avenue-design/components/music/ShowCard.jsx)",
+      "Read(//Users/criebschlager/Projects/.claude/skills/cyprus-avenue-design/components/music/**)",
+      "Bash(cd /Users/criebschlager/Projects/cyprus-avenue/web/src/features/spotify *)",
+      "Read(//Users/criebschlager/Projects/components/**)",
+      "Read(//Users/criebschlager/Projects/types/**)",
+      "Bash(npx vite *)",
+      "Bash(npm test *)",
+      "Bash(git rm *)",
+      "Read(//Users/criebschlager/Library/Caches/ms-playwright/**)",
+      "Bash(npx -y playwright@1.56.0 screenshot http://localhost:5199/ /dev/null)",
+      "Bash(npx playwright *)",
+      "Read(//Users/criebschlager/.npm/_npx/**)"
     ]
   }
 }

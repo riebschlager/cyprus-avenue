@@ -1,0 +1,96 @@
+/* Cyprus Avenue — color tokens.
+   Palette pulled from the show's record label: paper, ink, label orange, ring blue. */
+:root {
+  /* Paper & ink (neutrals, warm) */
+  --paper-0: #FFFFFF;
+  --paper-50: #FAF8F4;   /* page */
+  --paper-100: #F3F0E9;  /* sunken / hover */
+  --paper-200: #E7E2D7;  /* hairline on paper */
+  --paper-300: #D3CCBE;  /* strong rule */
+  --ink-400: #9A9284;    /* disabled text */
+  --ink-500: #6E675C;    /* tertiary text */
+  --ink-600: #545048;    /* secondary text */
+  --ink-800: #2A2723;
+  --ink-900: #161513;    /* primary ink */
+  --ink-950: #0D0C0B;    /* player / inverse surface */
+
+  /* Label orange — the accent */
+  --orange-50: #FCF1E6;
+  --orange-100: #F8E0C6;
+  --orange-300: #EDB57E;
+  --orange-500: #DE8A3E;  /* label fill — use with ink text */
+  --orange-600: #C26F24;
+  --orange-700: #9C5516;  /* accent text on paper (AA) */
+  --orange-800: #743F12;
+
+  /* Ring blue — secondary, focus & links on inverse */
+  --blue-100: #DCE7F5;
+  --blue-400: #6F9BD8;
+  --blue-500: #3D73BF;
+  --blue-600: #2C5C9F;
+  --blue-700: #224A82;
+
+  /* Status */
+  --green-600: #2F7A4B;
+  --green-100: #DDEEE2;
+  --red-600: #B33A2E;
+  --red-100: #F6DEDA;
+
+  /* ---- Semantic aliases ---- */
+  --bg-page: var(--paper-50);
+  --bg-surface: var(--paper-0);
+  --bg-sunken: var(--paper-100);
+  --bg-inverse: var(--ink-950);
+  --bg-accent: var(--orange-500);
+  --bg-accent-soft: var(--orange-50);
+  --bg-highlight: var(--orange-50);
+
+  --fg-1: var(--ink-900);
+  --fg-2: var(--ink-600);
+  --fg-3: var(--ink-500);
+  --fg-disabled: var(--ink-400);
+  --fg-on-accent: var(--ink-900);
+  --fg-on-inverse: #F3F0E9;
+  --fg-on-inverse-2: #A8A194;
+  --fg-accent: var(--orange-700);
+  --fg-link: var(--ink-900);
+  --fg-link-hover: var(--orange-700);
+
+  --border-hairline: var(--paper-200);
+  --border-strong: var(--paper-300);
+  --border-ink: var(--ink-900);
+  --border-inverse: #2E2B27;
+
+  --focus-ring: var(--blue-500);
+  --status-success: var(--green-600);
+  --status-success-bg: var(--green-100);
+  --status-error: var(--red-600);
+  --status-error-bg: var(--red-100);
+
+  /* Streaming brands (only inside StreamingLinks) */
+  --brand-spotify: #1DB954;
+  --brand-apple: #FA2D48;
+  --brand-youtube: #FF0033;
+}
+
+/* Inverse scope — player bar, footer, dark mode */
+[data-theme="dark"] {
+  --bg-page: var(--ink-950);
+  --bg-surface: #1A1816;
+  --bg-sunken: #23201D;
+  --bg-inverse: var(--paper-50);
+  --bg-accent-soft: #2E2116;
+  --bg-highlight: #3A2817;
+  --fg-1: #F3F0E9;
+  --fg-2: #BDB6A8;
+  --fg-3: #8F887B;
+  --fg-disabled: #5E584F;
+  --fg-on-inverse: var(--ink-900);
+  --fg-accent: var(--orange-300);
+  --fg-link: #F3F0E9;
+  --fg-link-hover: var(--orange-300);
+  --border-hairline: #2E2B27;
+  --border-strong: #423E38;
+  --border-ink: #F3F0E9;
+  --focus-ring: var(--blue-400);
+}

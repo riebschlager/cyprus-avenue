@@ -24,3 +24,12 @@ export function isWithinArchiveWeek(value: string, today = new Date()): boolean 
   const days = Math.abs(target - check) / 86_400_000
   return Math.min(days, 366 - days) <= 3
 }
+
+/** Brand date stamp: `03 JAN 2015`, or `SAT 03 JAN 2015` with the weekday. */
+export function stampArchiveDate(value: string, weekday = false): string {
+  const date = parseArchiveDate(value)
+  const part = (opts: Intl.DateTimeFormatOptions) =>
+    date.toLocaleDateString('en-US', { ...opts, timeZone: 'UTC' }).toUpperCase()
+  const stamp = `${String(date.getUTCDate()).padStart(2, '0')} ${part({ month: 'short' })} ${date.getUTCFullYear()}`
+  return weekday ? `${part({ weekday: 'short' })} ${stamp}` : stamp
+}

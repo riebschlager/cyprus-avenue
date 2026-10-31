@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { formatArchiveDate } from '../utils/archiveDate'
+import { stampArchiveDate } from '../utils/archiveDate'
 import { ref, watch, nextTick, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import type { Playlist } from '../types/playlist'
 import DownloadMenu from './DownloadMenu.vue'
 import StreamingLinks from './StreamingLinks.vue'
 import SpotifyPlaylistModal from '../features/spotify/SpotifyPlaylistModal.vue'
-import { useStreamingLinks } from '../composables/useStreamingLinks'
+import Icon from './Icon.vue'
 import { generateArtistSlug, generatePlaylistSlug } from '../utils/slug'
 import { getPublicUrl } from '../utils/urls'
 import { downloadPlaylist } from '../utils/downloadFormats'
@@ -25,7 +25,6 @@ const emit = defineEmits<{
 }>()
 
 const route = useRoute()
-const { getTrackData } = useStreamingLinks()
 const cardRef = ref<HTMLElement | null>(null)
 const showSpotifyModal = ref(false)
 const copiedTrackIndex = ref<number | null>(null)
@@ -40,15 +39,6 @@ onMounted(() => {
 
   }
 })
-
-const formatDate = (dateStr: string) => {
-  return formatArchiveDate(dateStr, 'long')
-}
-
-const getAlbumArt = (artist: string, song: string): string | null => {
-  const trackData = getTrackData(artist, song)
-  return trackData?.albumArt || null
-}
 
 const scrollToCard = () => {
   if (props.disableScroll) return
@@ -122,188 +112,85 @@ watch(() => props.isExpanded, (newVal) => {
 <template>
   <div
     ref="cardRef"
-    class="bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-all border"
-    :class="[
-      isFocused
-        ? 'border-blue-500 ring-2 ring-blue-500/50 shadow-blue-500/20'
-        : 'border-gray-700'
-    ]"
+    class="show"
+    :class="{ 'show--expanded': isExpanded, 'show--focused': isFocused, 'show--compact': compact }"
   >
     <button
+      type="button"
       @click="emit('toggle')"
-      class="w-full text-left flex items-start justify-between focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg transition-colors"
-      :class="[compact ? 'px-4 py-3' : 'px-4 py-4 sm:px-6']"
+      class="ca-showrow show__row"
+      :class="{ 'ca-showrow--compact': compact }"
+      :aria-expanded="isExpanded"
     >
-      <div class="flex-1 min-w-0">
-        <!-- Compact or Mobile Layout -->
-        <div v-if="compact" class="flex flex-col gap-1">
-          <div class="flex items-center justify-between">
-            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-blue-500/20 text-blue-300">
-              {{ playlist.date }}
-            </span>
-            <span class="text-[10px] text-gray-400">
-              {{ playlist.tracks.length }} tracks
-            </span>
-          </div>
-          <h3 class="text-base font-semibold text-white leading-tight">
-            {{ playlist.title }}
-          </h3>
-        </div>
-
-        <!-- Standard Layout (Responsive) -->
-        <div v-else class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-3">
-          <div class="flex items-center gap-3 min-w-0">
-            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-medium bg-blue-500/20 text-blue-300 flex-shrink-0">
-              {{ playlist.date }}
-            </span>
-            <h3 class="text-base sm:text-lg font-semibold text-white leading-tight sm:truncate">
-              {{ playlist.title }}
-            </h3>
-          </div>
-          <span class="text-[10px] sm:text-xs text-gray-400 flex-shrink-0 hidden sm:block">
-            {{ playlist.tracks.length }} track{{ playlist.tracks.length === 1 ? '' : 's' }}
-          </span>
-        </div>
-      </div>
-      <svg
-        class="ml-2 h-5 w-5 text-gray-400 transition-transform flex-shrink-0 mt-1"
-        :class="{ 'rotate-180': isExpanded }"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-      </svg>
+      <span class="ca-date ca-showrow__date">{{ stampArchiveDate(playlist.date) }}</span>
+      <span class="block min-w-0">
+        <span class="ca-showrow__title">{{ playlist.title }}</span>
+        <span v-if="playlist.description && !compact && !isExpanded" class="ca-showrow__desc">{{ playlist.description }}</span>
+      </span>
+      <span class="ca-showrow__count">{{ playlist.tracks.length }} track{{ playlist.tracks.length === 1 ? '' : 's' }}</span>
+      <Icon name="chevron-down" class="ca-showrow__go show__chevron" />
     </button>
 
-    <div v-if="isExpanded" class="px-4 sm:px-6 pb-4 border-t border-gray-700">
-      <!-- Description -->
-      <div v-if="playlist.description" class="mt-4 mb-4 pb-4 border-b border-gray-700">
-        <p class="text-sm text-gray-300 leading-relaxed">{{ playlist.description }}</p>
+    <div v-if="isExpanded" class="show__panel">
+      <p v-if="playlist.description" class="show__notes">{{ playlist.description }}</p>
+
+      <div class="show__actions">
+        <button type="button" @click="showSpotifyModal = true" class="ca-btn ca-btn--secondary" :class="{ 'ca-btn--sm': compact }">
+          <Icon name="list-plus" />
+          Add to Spotify
+        </button>
+
+        <DownloadMenu @download="format => downloadPlaylist(playlist, format)" />
       </div>
 
-      <!-- Track List -->
-      <div class="mt-4">
-        <h4 class="text-sm font-semibold text-white mb-3">Track List</h4>
-        <div
-          class="space-y-2"
-          :class="{
-            'max-h-80 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-black/20': compact
-          }"
+      <ol class="ca-tracklist show__tracks" :class="{ 'show__tracks--scroll': compact }">
+        <li
+          v-for="(track, index) in playlist.tracks"
+          :key="index"
+          :id="`track-${playlist.date}-${index}`"
+          class="ca-track"
+          :class="{ 'ca-track--highlight': route.query.track === track.song }"
         >
-          <div
-            v-for="(track, index) in playlist.tracks"
-            :key="index"
-            :id="`track-${playlist.date}-${index}`"
-            class="flex items-start rounded transition-colors duration-300"
-            :class="[
-              route.query.track === track.song ? 'bg-blue-900/40 border border-blue-500/30' : 'hover:bg-gray-700/50',
-              compact ? 'gap-2 py-2 px-2' : 'gap-2 sm:gap-3 py-2 px-2 sm:px-3'
-            ]"
-          >
-            <span
-              class="text-gray-500 font-mono"
-              :class="[
-                compact ? 'min-w-[1.5rem] text-xs mt-0.5' : 'min-w-[1.25rem] sm:min-w-[2rem] text-xs sm:text-sm mt-0.5 sm:mt-0'
-              ]"
-            >
-              {{ index + 1 }}.
+          <span class="ca-track__num">
+            <span class="ca-track__n">{{ String(index + 1).padStart(2, '0') }}</span>
+          </span>
+
+          <div class="ca-track__main">
+            <span class="ca-track__title">{{ track.song }}</span>
+            <router-link :to="`/artist/${generateArtistSlug(track.artist)}`" class="ca-track__artist">
+              {{ track.artist }}
+            </router-link>
+          </div>
+
+          <div class="ca-track__actions">
+            <span v-if="!compact" class="ca-tip hidden sm:inline-flex" :class="{ 'ca-tip--open': copiedTrackIndex === index }">
+              <button
+                type="button"
+                @click.stop="copyTrackLink(track.song, index)"
+                class="ca-iconbtn ca-iconbtn--sm"
+                :class="{ 'ca-reveal': copiedTrackIndex !== index }"
+                aria-label="Copy link to track"
+              >
+                <Icon :name="copiedTrackIndex === index ? 'check' : 'link'" />
+              </button>
+              <span class="ca-tip__bubble" role="status">{{ copiedTrackIndex === index ? 'Link copied' : 'Copy link' }}</span>
             </span>
 
-            <!-- Album Art (only loads when expanded) -->
-            <div v-if="getAlbumArt(track.artist, track.song)" class="flex-shrink-0">
-              <img
-                :src="getAlbumArt(track.artist, track.song)!"
-                :alt="`${track.song} by ${track.artist}`"
-                class="rounded shadow-sm object-cover"
-                :class="[compact ? 'w-10 h-10' : 'w-10 h-10 sm:w-12 sm:h-12']"
-                loading="lazy"
-              />
-            </div>
-            <div v-else class="flex-shrink-0 bg-gray-700 rounded flex items-center justify-center" :class="[compact ? 'w-10 h-10' : 'w-10 h-10 sm:w-12 sm:h-12']">
-              <svg class="text-gray-500" :class="[compact ? 'w-5 h-5' : 'w-5 h-5 sm:w-6 sm:h-6']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-              </svg>
-            </div>
-
-            <div class="flex-1 min-w-0">
-              <p class="font-medium text-white break-words leading-tight" :class="[compact ? 'text-xs' : 'text-xs sm:text-sm']">{{ track.song }}</p>
-              <router-link
-                :to="`/artist/${generateArtistSlug(track.artist)}`"
-                class="text-gray-400 leading-tight mt-0.5 inline-block hover:text-blue-300 transition-colors"
-                :class="[compact ? 'text-[10px]' : 'text-[10px] sm:text-xs']"
-              >
-                {{ track.artist }}
-              </router-link>
-            </div>
-
-            <!-- Actions: Share & Stream -->
-            <div class="flex items-center gap-1 sm:gap-2 flex-shrink-0">
-              <button
-                v-if="!compact"
-                @click.stop="copyTrackLink(track.song, index)"
-                class="hidden sm:block p-1.5 text-gray-400 hover:text-white rounded hover:bg-gray-600 transition-colors relative"
-                title="Copy link to track"
-              >
-                <svg v-if="copiedTrackIndex === index" class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <svg v-else class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-                </svg>
-
-                <!-- Tooltip -->
-                <span
-                  v-if="copiedTrackIndex === index"
-                  class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white bg-black rounded shadow whitespace-nowrap z-10"
-                >
-                  Copied!
-                </span>
-              </button>
-
-              <StreamingLinks :artist="track.artist" :song="track.song" :compact="compact" />
-            </div>
+            <StreamingLinks :artist="track.artist" :song="track.song" :compact="compact" />
           </div>
-        </div>
-      </div>
+        </li>
+      </ol>
 
-      <div class="mt-4 pt-4 border-t border-gray-700 space-y-3">
-        <!-- Action Buttons -->
-        <div class="flex flex-col sm:flex-row gap-2">
-          <!-- Spotify Creation Button -->
-          <button
-            @click="showSpotifyModal = true"
-            class="flex-1 bg-green-500/20 hover:bg-green-500/30 text-green-300 border border-green-500/50 font-semibold py-2 px-4 rounded-lg text-sm transition-colors flex items-center justify-center gap-2"
-          >
-            <span>🎧</span>
-            {{ compact ? 'Add to Spotify' : 'Add this Playlist to Spotify' }}
-          </button>
-
-          <DownloadMenu @download="format => downloadPlaylist(playlist, format)" />
-        </div>
-
-        <!-- Footer -->
-        <div
-          :class="[
-            'flex gap-3',
-            compact
-              ? 'flex-col items-start'
-              : 'flex-col sm:flex-row sm:items-center sm:justify-between'
-          ]"
+      <div class="show__foot">
+        <span class="ca-label ca-label--sm">Original broadcast &middot; {{ stampArchiveDate(playlist.date, true) }}</span>
+        <a
+          :href="`mailto:chris@the816.com?subject=Cyprus Avenue Archive - Issue Report&body=Regarding playlist: ${playlist.title} (${playlist.date})%0D%0A%0D%0APlease describe the issue:%0D%0A`"
+          class="show__report"
         >
-          <p :class="[compact ? 'text-[10px]' : 'text-[10px] sm:text-xs', 'text-gray-400']">
-            Original broadcast: {{ formatDate(playlist.date) }}
-          </p>
-          <a
-            :href="`mailto:chris@the816.com?subject=Cyprus Avenue Archive - Issue Report&body=Regarding playlist: ${playlist.title} (${playlist.date})%0D%0A%0D%0APlease describe the issue:%0D%0A`"
-            :class="[compact ? 'text-[10px]' : 'text-[10px] sm:text-xs', 'text-blue-400 hover:text-blue-300 underline']"
-          >
-            Report an issue
-          </a>
-        </div>
+          Report an issue
+        </a>
       </div>
 
-      <!-- Spotify Playlist Modal -->
       <SpotifyPlaylistModal
         :is-open="showSpotifyModal"
         :playlist="playlist"
@@ -313,3 +200,36 @@ watch(() => props.isExpanded, (newVal) => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.show { position: relative; }
+.show__row { width: 100%; text-align: left; background: none; border-radius: 0; transition: background var(--dur-fast) var(--ease-out); }
+.show__row .ca-showrow__title { display: block; }
+.show--focused .show__row { background: var(--bg-sunken); box-shadow: inset 3px 0 0 var(--orange-500); }
+.show__chevron { transition: transform var(--dur-base) var(--ease-out), color var(--dur-fast); }
+.show__row:hover .show__chevron { transform: translateY(2px); }
+.show--expanded .show__chevron,
+.show--expanded .show__row:hover .show__chevron { transform: rotate(180deg); color: var(--fg-1); }
+.show--expanded .show__row { border-bottom-color: transparent; }
+.show--expanded .ca-showrow__title { color: var(--fg-accent); }
+
+.show__panel { display: flex; flex-direction: column; gap: var(--space-6); padding: 0 0 var(--space-10) calc(132px + 24px); border-bottom: var(--rule-hair); }
+.show--compact .show__panel { padding-left: 0; gap: var(--space-4); padding-bottom: var(--space-6); }
+.show__notes { max-width: var(--container-text); font: var(--type-body); font-size: 18px; color: var(--fg-1); text-wrap: pretty; }
+.show--compact .show__notes { font-size: 16px; color: var(--fg-2); }
+.show__actions { display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; }
+.show__tracks--scroll { max-height: 20rem; overflow-y: auto; }
+.show__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3); }
+.show__report { font: var(--type-ui-s); }
+
+/* The hover play button swap needs a playback handler; keep the track number visible. */
+.ca-track:hover .ca-track__num .ca-track__n { display: inline; }
+
+@media (hover: none) {
+  .ca-track__actions :deep(.ca-reveal) { opacity: 1; }
+}
+
+@media (max-width: 760px) {
+  .show__panel { padding-left: 0; }
+}
+</style>

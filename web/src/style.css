@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+/* Cyprus Avenue design system (source: .claude/skills/cyprus-avenue-design) */
+@import "./styles/design/colors.css" layer(theme);
+@import "./styles/design/typography.css" layer(theme);
+@import "./styles/design/layout.css" layer(theme);
+@import "./styles/design/base.css" layer(base);
+@import "./styles/design/components.css" layer(components);
+@import "./styles/app.css" layer(components);

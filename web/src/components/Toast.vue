@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { ToastNotification } from '../types/toast'
+import Icon, { type IconName } from './Icon.vue'
 
 const props = defineProps<{
   toast: ToastNotification
@@ -10,69 +11,43 @@ const emit = defineEmits<{
   close: []
 }>()
 
-const bgColor = computed(() => {
+const variantClass = computed(() => {
   switch (props.toast.type) {
     case 'success':
-      return 'bg-green-500/20 border-green-500/50'
+      return 'ca-toast--success'
     case 'error':
-      return 'bg-red-500/20 border-red-500/50'
-    case 'warning':
-      return 'bg-yellow-500/20 border-yellow-500/50'
-    case 'info':
+      return 'ca-toast--error'
     default:
-      return 'bg-blue-500/20 border-blue-500/50'
+      return ''
   }
 })
 
-const textColor = computed(() => {
+const icon = computed<IconName>(() => {
   switch (props.toast.type) {
     case 'success':
-      return 'text-green-300'
+      return 'check'
     case 'error':
-      return 'text-red-300'
+      return 'circle-alert'
     case 'warning':
-      return 'text-yellow-300'
+      return 'triangle-alert'
     case 'info':
     default:
-      return 'text-blue-300'
-  }
-})
-
-const icon = computed(() => {
-  switch (props.toast.type) {
-    case 'success':
-      return '✓'
-    case 'error':
-      return '✕'
-    case 'warning':
-      return '⚠'
-    case 'info':
-    default:
-      return 'ℹ'
+      return 'info'
   }
 })
 </script>
 
 <template>
-  <div
-    :class="[
-      'fixed bottom-4 right-4 p-4 rounded-lg border backdrop-blur-sm transition-all duration-300',
-      'flex items-center gap-3 max-w-md',
-      bgColor,
-      'animate-in fade-in slide-in-from-bottom-2'
-    ]"
-  >
-    <span :class="['flex-shrink-0 text-xl font-bold', textColor]">{{ icon }}</span>
-    <p :class="['flex-1 text-sm', textColor]">{{ toast.message }}</p>
+  <div :class="['ca-toast', variantClass]" :role="toast.type === 'error' ? 'alert' : 'status'">
+    <Icon :name="icon" />
+    <p class="ca-toast__msg">{{ toast.message }}</p>
     <button
+      type="button"
+      class="ca-iconbtn ca-iconbtn--sm"
       @click="emit('close')"
-      :class="[
-        'flex-shrink-0 text-lg font-bold transition-opacity hover:opacity-70',
-        textColor
-      ]"
-      aria-label="Close notification"
+      aria-label="Dismiss notification"
     >
-      ×
+      <Icon name="x" />
     </button>
   </div>
 </template>

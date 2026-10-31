@@ -5,6 +5,8 @@ import StreamingLinks from './StreamingLinks.vue'
 import SpotifyPlaylistModal from '../features/spotify/SpotifyPlaylistModal.vue'
 import { generatePlaylistSlug } from '../utils/slug'
 import { useArtistBios } from '../composables/useArtistBios'
+import { stampArchiveDate } from '../utils/archiveDate'
+import Icon from './Icon.vue'
 
 const props = defineProps<{
   artist: Artist
@@ -29,6 +31,8 @@ const getPlaylistUrl = (title: string, date: string) => {
   const slug = generatePlaylistSlug(title, date)
   return `/playlist/${slug}`
 }
+
+const plural = (n: number, word: string) => `${n.toLocaleString()} ${word}${n === 1 ? '' : 's'}`
 
 // Group tracks by playlist
 const playlistsWithTracks = computed(() => {
@@ -99,162 +103,110 @@ watch(() => props.isExpanded, (newVal) => {
 <template>
   <div
     ref="cardRef"
-    class="bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-all border"
-    :class="[
-      isFocused
-        ? 'border-blue-500 ring-2 ring-blue-500/50 shadow-blue-500/20'
-        : 'border-gray-700'
-    ]"
+    class="artist"
+    :class="{ 'artist--focused': isFocused, 'artist--open': isExpanded }"
   >
     <button
+      type="button"
+      class="ca-artistrow artist__row"
+      :aria-expanded="isExpanded"
       @click="emit('toggle')"
-      class="w-full px-6 py-4 text-left flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg"
     >
-      <div class="flex-1 min-w-0 flex items-center justify-between mr-4">
-        <h3 class="text-lg font-semibold text-white">
-          {{ artist.name }}
-        </h3>
-        <div class="flex gap-4 items-center">
-          <div class="hidden sm:flex gap-4 text-xs text-gray-400">
-            <span>{{ artist.uniqueSongs.length }} unique song{{ artist.uniqueSongs.length === 1 ? '' : 's' }}</span>
-            <span>{{ artist.playlistCount }} playlist{{ artist.playlistCount === 1 ? '' : 's' }}</span>
-          </div>
-        </div>
-      </div>
-      <svg
-        class="h-5 w-5 text-gray-400 transition-transform flex-shrink-0"
-        :class="{ 'rotate-180': isExpanded }"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-      </svg>
+      <span class="ca-artistrow__name">{{ artist.name }}</span>
+      <span class="ca-artistrow__stat">
+        {{ plural(artist.uniqueSongs.length, 'song') }} &middot; {{ plural(artist.playlistCount, 'show') }}
+      </span>
+      <Icon name="chevron-down" class="ca-artistrow__go artist__chevron" />
     </button>
 
-    <div v-if="isExpanded" class="px-6 pb-4 border-t border-gray-700">
-      <!-- Actions Section (Only shown if NO bio, otherwise it's in the bio header) -->
-      <div v-if="!artistBio || !artistBio.bioSummary" class="mt-4 pb-4 border-b border-gray-700 flex justify-end">
-        <button
-          @click="showSpotifyModal = true"
-          class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-green-500/10 hover:bg-green-500/20 text-green-400 border border-green-500/20 text-xs font-medium transition-colors"
-        >
-          <span>🎧</span>
-          Create {{ artist.name }} Playlist on Spotify
-        </button>
-      </div>
+    <div v-if="isExpanded" class="artist__detail">
+      <div class="artist__intro">
+        <div v-if="artist.tags && artist.tags.length > 0" class="artist__tags">
+          <button
+            v-for="tag in artist.tags.slice(0, 10)"
+            :key="tag"
+            type="button"
+            class="ca-tag ca-tag--sm"
+            @click.stop="emit('select-tag', tag)"
+          >
+            {{ tag.toLowerCase() }}
+          </button>
+        </div>
 
-      <!-- Artist Bio Section -->
-      <div v-if="artistBio && artistBio.bioSummary" class="mt-4 pb-4 border-b border-gray-700">
-        <div class="flex items-center justify-between mb-3 gap-4">
-          <h4 class="text-sm font-semibold text-white flex items-center gap-2">
-            <span>About</span>
+        <div v-if="artistBio && artistBio.bioSummary" class="artist__bio">
+          <img
+            v-if="artistBio.image"
+            :src="artistBio.image"
+            :alt="artist.name"
+            class="artist__image"
+            loading="lazy"
+          />
+          <div class="ca-prose">
+            <p class="lastfm-bio">{{ artistBio.bioSummary }}</p>
             <a
               v-if="artistBio.url"
               :href="artistBio.url"
               target="_blank"
               rel="noopener noreferrer"
-              class="text-xs text-gray-400 hover:text-blue-400 transition-colors"
-              title="View on Last.fm"
+              class="ca-label ca-label--sm artist__source"
             >
-              Biography from Last.fm
+              Biography from Last.fm &nearr;
             </a>
-          </h4>
+          </div>
+        </div>
 
-          <button
-            @click="showSpotifyModal = true"
-            class="inline-flex items-center gap-2 px-2.5 py-1 rounded-lg bg-green-500/10 hover:bg-green-500/20 text-green-400 border border-green-500/20 text-[10px] font-bold uppercase tracking-wider transition-colors"
-          >
-            <span>🎧</span>
-            Create {{ artist.name }} Playlist on Spotify
+        <div>
+          <button type="button" class="ca-btn ca-btn--secondary ca-btn--sm" @click="showSpotifyModal = true">
+            <Icon name="list-plus" />
+            Create Spotify playlist
           </button>
         </div>
-
-        <div class="flex gap-4">
-          <!-- Artist Image -->
-          <div v-if="artistBio.image" class="flex-shrink-0">
-            <img
-              :src="artistBio.image"
-              :alt="artist.name"
-              class="w-24 h-24 rounded-lg object-cover shadow-lg"
-              loading="lazy"
-            />
-          </div>
-          <!-- Bio Text -->
-          <div class="flex-1 min-w-0">
-            <p class="text-sm text-gray-300 leading-relaxed lastfm-bio">{{ artistBio.bioSummary }}</p>
-          </div>
-        </div>
       </div>
 
-
-
-      <!-- Tags Section (Consolidated from Last.fm + Spotify) -->
-      <div v-if="artist.tags && artist.tags.length > 0" class="mt-4 pb-4 border-b border-gray-700">
-        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-          <h4 class="text-sm font-semibold text-white shrink-0">Tags</h4>
-          <div class="flex flex-wrap gap-2">
-            <button
-              v-for="tag in artist.tags.slice(0, 10)"
-              :key="tag"
-              @click.stop="emit('select-tag', tag)"
-              class="px-3 py-1 rounded-full text-xs font-medium bg-gray-700 hover:bg-blue-600 text-gray-300 hover:text-white transition-colors"
+      <div class="artist__split">
+        <section>
+          <div class="ca-sechead ca-sechead--sm">
+            <h4 class="ca-sechead__title">Songs</h4>
+            <span class="ca-label">{{ artist.uniqueSongs.length.toLocaleString() }}</span>
+          </div>
+          <ol class="ca-tracklist">
+            <li
+              v-for="(song, index) in artist.uniqueSongs"
+              :key="song"
+              class="ca-track"
             >
-              {{ tag }}
-            </button>
-          </div>
-        </div>
-      </div>
+              <span class="ca-track__num">{{ index + 1 }}</span>
+              <div class="ca-track__main">
+                <span class="ca-track__title">{{ song }}</span>
+              </div>
+              <div class="ca-track__actions">
+                <StreamingLinks :artist="artist.name" :song="song" />
+              </div>
+            </li>
+          </ol>
+        </section>
 
-      <!-- Unique Songs Section -->
-      <div class="mt-4">
-        <h4 class="text-sm font-semibold text-white mb-3">Songs</h4>
-        <div class="space-y-2">
-          <div
-            v-for="(song, index) in artist.uniqueSongs"
-            :key="song"
-            class="flex items-center gap-3 py-2 px-3 rounded hover:bg-gray-700/50"
-          >
-            <span class="text-sm text-gray-500 font-mono min-w-[2rem]">{{ index + 1 }}.</span>
-            <div class="flex-1 min-w-0">
-              <p class="text-sm font-medium text-white">{{ song }}</p>
-            </div>
-            <div class="flex-shrink-0">
-              <StreamingLinks :artist="artist.name" :song="song" />
-            </div>
+        <section>
+          <div class="ca-sechead ca-sechead--sm">
+            <h4 class="ca-sechead__title">Appears in</h4>
+            <span class="ca-label">{{ plural(playlistsWithTracks.length, 'show') }}</span>
           </div>
-        </div>
-      </div>
-
-      <!-- Playlists Section -->
-      <div class="mt-6 pt-4 border-t border-gray-700">
-        <h4 class="text-sm font-semibold text-white mb-3">Appears In</h4>
-        <div class="space-y-3">
-          <div
-            v-for="playlist in playlistsWithTracks"
-            :key="playlist.date"
-            class="py-2 px-3 rounded hover:bg-gray-700/50"
-          >
-            <router-link
-              :to="getPlaylistUrl(playlist.title, playlist.date)"
-              class="flex items-baseline gap-2 mb-2 hover:opacity-80 transition-opacity"
-            >
-              <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-500/20 text-blue-300">
-                {{ playlist.date }}
-              </span>
-              <p class="text-sm text-blue-400 hover:text-blue-300 transition-colors">{{ playlist.title }}</p>
-            </router-link>
-            <ul class="ml-[4.5rem] space-y-1">
-              <li
-                v-for="(song, songIndex) in playlist.songs"
-                :key="songIndex"
-                class="text-xs text-gray-500"
+          <ul class="ca-showlist">
+            <li v-for="playlist in playlistsWithTracks" :key="playlist.date">
+              <router-link
+                :to="getPlaylistUrl(playlist.title, playlist.date)"
+                class="ca-showrow ca-showrow--compact"
               >
-                {{ song }}
-              </li>
-            </ul>
-          </div>
-        </div>
+                <span class="ca-date ca-showrow__date">{{ stampArchiveDate(playlist.date) }}</span>
+                <span>
+                  <span class="ca-showrow__title">{{ playlist.title }}</span>
+                  <span class="artist__played">{{ playlist.songs.join(' · ') }}</span>
+                </span>
+                <Icon name="arrow-right" class="ca-showrow__go" />
+              </router-link>
+            </li>
+          </ul>
+        </section>
       </div>
     </div>
 
@@ -267,3 +219,32 @@ watch(() => props.isExpanded, (newVal) => {
     />
   </div>
 </template>
+
+<style scoped>
+.artist { border-bottom: var(--rule-hair); }
+.artist__row { width: 100%; grid-template-columns: minmax(0,1fr) auto 24px; padding-left: 8px; padding-right: 8px; border: 0; background: none; text-align: left; font: inherit; transition: background var(--dur-fast) var(--ease-out); }
+.artist__row:hover { background: var(--bg-sunken); }
+.artist--focused .artist__row { background: var(--bg-highlight); box-shadow: inset 3px 0 0 var(--orange-500); }
+.artist--open .ca-artistrow__name { font-size: 28px; font-weight: 850; letter-spacing: -0.03em; }
+.artist__chevron { transition: transform var(--dur-base) var(--ease-out); }
+.artist--open .artist__chevron { transform: rotate(180deg); color: var(--fg-1); }
+
+.artist__detail { display: flex; flex-direction: column; gap: var(--space-8); padding: var(--space-2) 8px var(--space-10); animation: ca-rise var(--dur-base) var(--ease-out); }
+.artist__intro { display: flex; flex-direction: column; gap: var(--space-5); max-width: var(--container-text); }
+.artist__tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.artist__bio { display: flex; gap: var(--space-5); align-items: flex-start; }
+.artist__image { width: 80px; height: 80px; flex: none; object-fit: cover; }
+.artist__bio .ca-prose { font-size: 16px; color: var(--fg-2); }
+.artist__source { display: inline-flex; margin-top: var(--space-2); text-decoration: none; }
+.artist__source:hover { color: var(--fg-accent); }
+
+.artist__split { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: var(--space-12); align-items: start; }
+.artist__split .ca-sechead { justify-content: space-between; }
+.artist__played { display: block; margin-top: 4px; font: 400 14px/1.4 var(--font-text); font-style: italic; color: var(--fg-2); }
+
+@media (max-width: 760px) {
+  .artist__split { grid-template-columns: 1fr; gap: var(--space-10); }
+  .artist--open .ca-artistrow__name { font-size: 24px; }
+  .artist__bio { flex-direction: column; }
+}
+</style>

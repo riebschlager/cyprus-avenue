@@ -1,0 +1,39 @@
+/* App-level layout on top of the design system components. */
+
+html { overflow-y: scroll; scroll-behavior: smooth; }
+
+.ca-container { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--gutter); }
+.ca-main { padding-top: var(--space-12); min-height: 60vh; }
+.ca-main--with-player { padding-bottom: calc(var(--player-h) + var(--space-8)); }
+
+.ca-page-title { font: var(--fw-black) var(--fs-display-m)/var(--lh-tight) var(--font-display); letter-spacing: var(--tracking-display); color: var(--fg-1); text-wrap: balance; }
+.ca-display { font: var(--type-display); letter-spacing: -0.045em; color: var(--fg-1); text-wrap: balance; }
+.ca-lede { font: var(--type-lede); color: var(--fg-2); max-width: var(--container-text); }
+.ca-section + .ca-section { margin-top: var(--space-20); }
+
+/* Mobile nav sheet */
+.ca-mobilenav { border-top: var(--rule-hair); padding: var(--space-2) var(--gutter-mobile) var(--space-4); animation: ca-rise var(--dur-base) var(--ease-out); }
+.ca-mobilenav a { display: flex; align-items: center; height: 48px; border-bottom: var(--rule-hair); color: var(--fg-2); font: 700 20px/1 var(--font-display); letter-spacing: -0.02em; text-decoration: none; }
+.ca-mobilenav a[aria-current="page"] { color: var(--fg-1); box-shadow: inset 3px 0 0 var(--orange-500); padding-left: 12px; }
+
+/* Page transitions */
+.fade-enter-active, .fade-leave-active { transition: opacity var(--dur-base) var(--ease-out); }
+.fade-enter-from, .fade-leave-to { opacity: 0; }
+
+@media (max-width: 760px) {
+  .ca-container { padding: 0 var(--gutter-mobile); }
+  .ca-main { padding-top: var(--space-8); }
+  .ca-page-title { font-size: 34px; }
+  .ca-display { font-size: 44px; }
+  .ca-section + .ca-section { margin-top: var(--space-16); }
+  /* Stats wrap to a 2-up grid; only the right column keeps its divider */
+  .ca-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ca-stat + .ca-stat { padding-left: 0; border-left: 0; }
+  .ca-stat:nth-child(even) { padding-left: var(--space-4); border-left: var(--rule-hair); }
+  .ca-stat__value { white-space: nowrap; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .ca-eq span { animation: none; }
+}

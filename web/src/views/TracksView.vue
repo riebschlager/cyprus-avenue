@@ -61,23 +61,24 @@ watch(focusedIndex, async (index) => {
 
 <template>
   <ArchiveState>
-    <div class="mb-6">
-      <h2 class="text-2xl font-bold text-white mb-2">All Tracks</h2>
-      <p class="text-sm text-gray-400">
-        Browse and search all {{ totalTracks.toLocaleString() }} tracks from the archive
+    <header class="page-head">
+      <span class="ca-label ca-label--accent">Index</span>
+      <h1 class="ca-page-title">Tracks</h1>
+      <p class="ca-lede">
+        Every song played on the recovered shows, {{ totalTracks.toLocaleString() }} in all.
       </p>
-    </div>
+    </header>
 
     <div class="mb-6">
       <SearchBar v-model="searchQuery" />
     </div>
 
-    <div class="mb-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-sm text-gray-400">
-      <div class="flex items-center gap-3">
-        <span>Showing {{ displayedRange }} of {{ totalTracks.toLocaleString() }} tracks</span>
-        <span class="hidden sm:inline-flex items-center gap-1 text-xs text-gray-500">
-          <kbd class="px-1.5 py-0.5 bg-gray-700 rounded text-gray-400 font-mono text-[10px]">j</kbd>
-          <kbd class="px-1.5 py-0.5 bg-gray-700 rounded text-gray-400 font-mono text-[10px]">k</kbd>
+    <div class="list-meta">
+      <div class="flex items-center gap-4">
+        <span class="ca-label">{{ displayedRange }} of {{ totalTracks.toLocaleString() }} tracks</span>
+        <span class="ca-label ca-label--sm list-meta__keys">
+          <kbd class="ca-search__kbd">J</kbd>
+          <kbd class="ca-search__kbd">K</kbd>
           to navigate
         </span>
       </div>
@@ -94,6 +95,14 @@ watch(focusedIndex, async (index) => {
       @sort="setSortField"
     />
 
-    <PaginationControls :current-page="currentPage" :total-pages="totalPages" class="mt-6" @change="changePage" />
+    <PaginationControls :current-page="currentPage" :total-pages="totalPages" class="mt-8" @change="changePage" />
   </ArchiveState>
 </template>
+
+<style scoped>
+.page-head { display: flex; flex-direction: column; gap: var(--space-3); padding-bottom: var(--space-8); }
+.list-meta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3); margin-bottom: var(--space-3); }
+.list-meta__keys { gap: 4px; color: var(--fg-3); }
+.list-meta__keys kbd { margin: 0; }
+@media (max-width: 760px) { .list-meta__keys { display: none; } }
+</style>
